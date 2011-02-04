@@ -1,0 +1,146 @@
+# PdmArchive.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# PDM Archiver Messages
+
+.PS
+
+
+copy "sequence.pic";
+
+spacing = 2.0;
+# doc version
+move right;
+move right 40;
+move down 2;
+"PdmArchive.pic v2.0 2010-Jan-06 18:32:44 UTC"
+move left 40;
+# vertical spacing between messages
+arrowhead = 7;
+arrowwid = 0.5;
+arrowht = 1.0;
+awid = 1.0;
+dashwid = 1.0;
+
+step();
+# title
+step();
+move down;
+move down; move right; move right; 
+"PDM Activity Archive Messages" ljust
+move down;
+move down;
+move down;
+move down;
+step();
+step();
+move right;
+
+# move objects apart horizontally
+movewid = 3.5;
+
+#define the objects
+boxht = 4.0;
+
+
+# SseInput/OutputTask
+boxwid = 16.0;
+object(Sse,"SseSeeker");
+
+# PdmControlTask
+boxwid = 12.0;
+object(Control,"Control");
+
+boxwid = 11.0;
+object(Activity, "Activity");
+
+# PdmConfirmationTask
+boxwid = 14.0;
+object(Conf,"Confirmation");
+
+#PdmArchiveTask
+boxwid = 11.0;
+object(Archive,"Archiver");
+
+#PdmConfirmationChannel
+boxwid = 11.0;
+object(Channel,"Channel");
+
+# SseArchiverInput/OutputTask
+boxwid = 16.0;
+object(SseArch,"SseArchive");
+
+move down;
+step();
+step();
+step();
+
+# message sequences
+active(Control);
+lconstraint(Control, "   SIGNAL DETECTION COMPLETE");
+step();
+message(Control,Archive,"Start Archive");
+active(Conf);
+step();
+step();
+lconstraint(Control, "   PRIMARY CONFIRMATION");
+message(Conf,Archive,"PD Signal Confirmation Complete");
+step();
+message(Conf,Archive,"CWD Signal Confirmation Complete");
+step();
+step();
+lconstraint(Archive,"  Check if Archive Already Requested");
+message(Archive,Archive, "  If so, Archive as below.");
+step();
+step();
+lconstraint(Control, "   SECONDARY CONFIRMATION");
+step();
+message(Conf,Archive,"PD Signal Confirmation Complete");
+step();
+message(Conf,Archive,"CWD Signal Confirmation Complete");
+step();
+step();
+lconstraint(Archive,"  Check if Archive Already Requested");
+message(Archive,Archive, "  If so, Archive as below.");
+step();
+message(Conf,Control,"Confirmation Complete");
+step();
+message(Control,Archive,"Confirmation Complete");
+step();
+step();
+lconstraint(Sse,"For each Candidate ...");
+message(Sse,Control,"Request Archive Data");
+step();
+message(Control,Archive,"Request Archive Data for Candidate");
+step();
+message(Archive,Channel,"Read CD Data");
+step();
+message(Archive,SseArch,"Archive Signal Header");
+step();
+message(Archive,SseArch,"Begin Sending Archive Complex Amplitudes");
+step();
+message(Archive,SseArch,"Archive Complex Amplitudes");
+step();
+message(Archive,SseArch,"Done Sending Archive Complex Amplitudes");
+step();
+lconstraint(Sse,"  Or");
+step();
+message(Sse,Control,"Discard Archive Data");
+message(Control,Archive,"Discard Archive Data");
+message(Archive,Archive, "Discard Candidate");
+step();
+step();
+step();
+step();
+lconstraint(Archive,"When all Candidates Archived ...");
+message(Archive,Control,"Archive Complete");
+step();
+complete(Activity);
+complete(Control);
+complete(Conf);
+complete(Sse);
+complete(Archive);
+complete(Channel);
+complete(SseArch);
+.PE

@@ -1,0 +1,131 @@
+# pdmSseSigDetMsgs.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# PDM-SSE signal detection messages
+
+.PS
+
+
+copy "sequence.pic";
+
+# doc version
+move right;
+"pdmSseSigDetMsgs.pic v2.0 2010-Jan-06 18:21:10 UTC" ljust
+
+# title
+move down; move right; move right; 
+"PDM - SSE Signal Detection Messages" ljust
+move down;
+
+# vertical spacing between messages
+spacing = 0.30;
+
+# move objects apart horizontally
+movewid = 3.5;
+
+#define the objects
+# SSE
+boxwid = 1.2;
+object(SSE,"SSE: ActUnit");
+
+# PDM
+boxwid = 0.75;
+object(PDM,"PDM");
+
+step();
+
+# message sequences
+
+
+message(PDM,SSE,"signalDetectionStarted()");
+
+# --- CW Power, Pulse -----
+active(PDM);
+message(PDM,SSE,"beginSendingCandidates(Count)");
+lconstraint(PDM,"[CW Power Detect, Pulse Detect,");
+lconstraint(PDM,"Clustering, Candidate Selection]");
+
+message(PDM,SSE,"" "sendCandidateCwPowerSignal(CwPowerSignal)" "OR sendCandidatePulseSignal(PulseSignalHeader, Pulse[ ])");
+step();
+
+
+active(SSE);
+
+message(SSE,PDM,"" "requestArchiveData(ArchiveRequest)" "OR discardArchiveData(ArchiveRequest)");
+lconstraint(PDM,"[Send Pulse archive data to pdmArchiver]");
+
+inactive(SSE);
+
+step();
+message(PDM,SSE,"doneSendingCandidates()");
+
+inactive(PDM);
+step();
+
+# --- All signals ----
+
+active(PDM);
+message(PDM,SSE,"beginSendingSignals(DetectionStatistics)");
+lconstraint(PDM,"[Send all signals, including");
+lconstraint(PDM,"the candidates sent above]");
+
+message(PDM,SSE,"" "sendCwPowerSignal(CwPowerSignal)" "OR sendPulseSignal(PulseSignalHeader, Pulse[ ])");
+step();
+
+message(PDM,SSE,"doneSendingSignals()");
+inactive(PDM);
+step();
+
+# --- Bad Bands ------
+
+active(PDM)
+message(PDM,SSE,"beginSendingBadBands(Count)");
+lconstraint(PDM,"[Report Bad Bands]");
+
+message(PDM,SSE,"" "sendCwBadBand(CwBadBand)" "OR sendPulseBadBand(PulseBadBand)");
+step();
+
+message(PDM,SSE,"doneSendingBadBands()");
+inactive(PDM);
+
+# --- CW coherent ---
+
+step();
+active(PDM);
+message(PDM,SSE,"beginSendingCwCoherentSignals(Count)");
+lconstraint(PDM,"[CW Coherent Detection]");
+message(PDM,SSE,"sendCwCoherentSignal(CwCoherentSignal)");
+step();
+
+active(SSE);
+
+message(SSE,PDM,"" "requestArchiveData(ArchiveRequest)" "OR discardArchiveData(ArchiveRequest)");
+lconstraint(PDM,"[Send CW archive data to pdmArchiver]");
+
+
+step();
+inactive(SSE);
+
+message(PDM,SSE,"doneSendingCwCoherentSignals()");
+
+inactive(PDM)
+step();
+# -- wrap up ---
+
+active(PDM)
+message(PDM,SSE,"archiveComplete()");
+lconstraint(PDM,"[Activity wrapup]");
+message(PDM,SSE,"signalDetectionComplete()");
+message(PDM,SSE,"pdmActivityComplete(ActivityStatus)");
+
+inactive(PDM);
+step();
+
+
+
+complete(SSE);
+complete(PDM);
+
+.PE
+

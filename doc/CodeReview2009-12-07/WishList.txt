@@ -1,0 +1,85 @@
+Open SonATA future Functionality Wish List
+
+General:
+	- Fully Document System as Implemented
+
+Control System - SSE
+
+   - Scheduler:
+        - better algorithm for reobserving "fully observed" targets
+        - add rule: select second etc. beam targets that have
+              approximately the same unobserved freqs as the first target
+        - add rule: if first selected target has no nearby targets
+              for additional beams, then try another first target
+        - HPBW grid followup on candidate
+        - review/rework target merit factors
+             - review/implement suggestions from Habcat paper
+             - are new merit factors needed?
+             - are different merit factor weightings needed?
+        - add changes to support ecliptic search program
+        - add check to verify all targets are in the primary FOV
+        - adjust target visibility check to handle moving targets
+        - add satellite RFI "avoidance zones"
+        - fall back to single beam mode if that is all that's available
+    - Rework sse-pkg to use modern CppUnit
+    - Add wide null beams
+    - Verify use of nulls (and that null-depth factor is appropriate)
+    - implement commensal observing (Sonata as secondary observer,
+         partially done)
+    - Determine if there are any scaling issues handling hundreds of DXs
+    - Determine if there are any scaling issues handling > 42 ants
+    - Publicly viewable near-real-time observing info on targets etc.
+          (partially implemented)
+    - periodic automatic system tests (test signal, spacecraft)
+    - archive all candidates in followups
+    - email/texting/autodialing notice of potential ET candidates
+    - improve quality of frequency calibrations
+    - automatic recalibration after N hours without obs restart
+    - more efficient use of beams and DXs for followups (only use
+         as many as needed)
+    - automatically convert ATA observing schedule into automated
+         system startup & shutdown (use alternative to cron?)
+    - log all errors in the database
+    - log ants used in the database
+    - add watchdog to automatically restart SSE if it fails
+    - continue development of Web UI prototype to make it fully
+         functional, or develop other new remote interface
+    - Add mechanism for Sonata to be easily enabled/disabled by staff
+        at HC (mainly to control rogue actions)
+    - add circular pol beam calibration control code
+    - review and refine daily obs reports
+    - add mechanism to mark observations as invalid in the database
+    - rework how "bad ant pols" are specified - make a user parameter?
+    - document how to build & verify the sse-pkg using stlport
+    - consider sharing target catalogs among observing databases
+         to reduce space
+    - consider changing dark sky array pointing for bf autoatten
+        from az/el 330,30 to dark[0,6,12,18] hours RA
+    - use common prefix for all SSE env var names
+    - tscope minDishSuccessPercent (# dishs allowed to fail) should be
+         configurable
+    - create a utility program to convert equatorial/galactic coords
+    - add option to disable birdie masks in activities (e.g., for
+         observing spacecraft)
+    - change the calibration strategies so that the permanent RFI
+         mask is taken into account when selecting frequencies
+    - automatically verify calibration quality
+    - make order of followup sequences configurable at runtime
+        instead of being compiled into the seeker.
+
+Configuration
+    - determine appropriate thresholds & other configuration values for
+         all cw & pulse related observing parameters
+    - determine appropriate calibration integration times for entire
+       1 - 11 Ghz band
+    - validate minimum beam separation
+
+Signal Processing
+
+	- New types of signals for packetgen
+	- New algorithms for new signals
+	- Sum of polarizations for CW detection
+	- Wide band CW signals
+	- Full bandwidth Coherent Detector
+	  
+	

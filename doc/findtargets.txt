@@ -1,0 +1,75 @@
+Findtargets utility
+
+Usage: findtargets -dbhost <value> -dbname <value> -dbuser <value> -timeutc <value> -tzoffset <value> -type <value> 
+  -calfreqmhz <value> -calhours <value>
+
+  -dbhost: database host (default: localhost)
+  -dbname: database name (default: nss_iftest)
+  -dbuser: database user (default: )
+  -timeutc: obs time as 'yyyy-mm-dd hh:mm:ss' (default: current time)
+  -tzoffset: rise/set timezone offset in hours from UTC (default: 0.000000)
+  -type: target type: spacecraft | calphase | caldelay (default: spacecraft)
+  -calfreqmhz: cal freq for finding strongest source (default: 1420.000000)
+  -calhours: minimum cal uptime in hours (default: 0.500000)
+
+EXAMPLES
+
+nss@sse3% findtargets
+Obs time: 2010-03-04 21:01:33 UTC
+Rise/Set Timezone: UT
+   Id           Name    DistAu  Deldot  Xmit1MHz        Xmit2MHz        DopplerX1       DopplerX2
+  131       Voyager1    112.7     -7.4  8415.000        8420.432        8415.208        8420.640
+  144           Moon      0.0     -0.0     0.000           0.000           0.000           0.000
+  152           Mars      0.8     11.2     0.000           0.000           0.000           0.000
+  154         Saturn      8.6     -9.7     0.000           0.000           0.000           0.000
+  160        Rosetta      0.7     20.8  8421.790           0.000        8421.206           0.000
+  164       Stardust      2.5     -2.0  8415.000           0.000        8415.056           0.000
+  165           Dawn     92.1     -4.9  8435.370           0.000        8435.508           0.000
+  166     DeepImpact      0.1      1.5  8435.370           0.000        8435.327           0.000
+  167    NewHorizons     16.4    -10.6  8437.895        8438.182        8438.193        8438.480
+  169        Cassini      8.6    -10.6  8427.222        8429.938        8427.521        8430.237
+  170    MarsExpress      0.8     11.2  8420.432           0.000        8420.117           0.000
+  171         MarsRO      0.8     11.2  8439.444           0.000        8439.128           0.000
+  172    MarsOdyssey      0.8     11.2  8406.852           0.000        8406.538           0.000
+  173         Kepler      0.1      0.2  8424.506           0.000        8424.502           0.000
+
+   Id           Name    RaHours         DecDeg          Rise    Set     Visib   ToRise  HmLeft  TotUp
+  131       Voyager1    17.163308       12.094819       09:14   19:43   --      12:13     -     10:28
+  144           Moon    14.450261       -19.894885      08:47   14:45   --      11:45     -     05:57
+  152           Mars    8.230159        23.817139       23:39   11:26   --      02:37     -     11:47
+  154         Saturn    12.217192       1.358657        04:55   14:09   --      07:53     -     09:14
+  160        Rosetta    9.679470        24.524101       01:03   12:56   --      04:02     -     11:52
+  164       Stardust    23.412290       1.265604        16:07   01:20   Up        -     04:19   09:13
+  165           Dawn    19.931994       -54.321217      00:00   00:00   --        -       -       -
+  166     DeepImpact    18.239954       60.591638       06:12   00:55   Up        -     03:53   18:43
+  167    NewHorizons    18.636773       -21.494604      13:09   18:45   --      16:07     -     05:36
+  169        Cassini    12.214058       1.354387        04:55   14:09   --      07:53     -     09:14
+  170    MarsExpress    8.230159        23.817139       23:39   11:26   --      02:37     -     11:47
+  171         MarsRO    8.230159        23.817139       23:39   11:26   --      02:37     -     11:47
+  172    MarsOdyssey    8.230159        23.817139       23:39   11:26   --      02:37     -     11:47
+  173         Kepler    5.022532        23.247956       20:28   08:12   Up        -     11:10   11:43
+
+
+nss@sse3% findtargets -type caldelay
+Obs time: 2010-03-04 21:59:32 UTC
+Rise/Set Timezone: UT
+   Id           Name    FreqMhz: FluxJy
+  400           TauA    1400:  875
+  401           OriA    1400:  520
+  402           VirA    1400:  198
+  403          3C292    1400:  171
+  404          3C400    1400:  576
+  405           CygA    1400: 1495
+  406           CasA    1400: 2477
+
+   Id           Name    RaHours         DecDeg          Rise    Set     Visib   ToRise  HmLeft  TotUp
+  400           TauA    5.575547        22.014470       21:06   08:41   Up        -     10:41   11:35
+  401           OriA    5.588140        -5.391100       22:43   07:05   --      00:43     -     08:22
+  402           VirA    12.513729       12.391123       04:34   15:05   --      06:35     -     10:30
+  403          3C292    13.838000       64.650000       00:22   21:56   --      02:23     -     21:33
+  404          3C400    19.395000       14.509200       11:20   22:05   Up        -     00:05   10:45
+  405           CygA    19.991210       40.733920       10:20   00:16   Up        -     02:17   13:55
+  406           CasA    23.390000       58.815000       11:43   05:41   Up        -     07:42   17:58
+
+  Strongest cal target at 1420 MHz: Id# 406 (CasA)
+

@@ -1,0 +1,114 @@
+Generating an Ephemeris File
+
+Use the JPL Horizons web site <http://ssd.jpl.nasa.gov/horizons.cgi>
+
+There are six parameters that define the ephemeris to generate.
+
+Ephemeris Type [change] :  	OBSERVER
+
+    Click change and select VECTOR TABLE.  
+    This will give the xyz vectors for the spacecraft/object position
+
+Target Body [change] :  	Mars [499]
+
+    Click change and search for the spacecraft or body. 
+    (note: for some spacecraft the system may also have data for the 
+     booster rocket, or an asteroid with the same name)
+
+Observer Location [change] :  	Geocentric [500]
+
+    Change to:  Hat Creek Radio Observatory [-72] (enter location number -72)
+
+Time Span [change] :  	Start=2010-03-04, Stop=2010-04-03, Step=1 d
+
+    For most spacecraft we can generate the ephemeris for a year with one day steps.  
+    If the spacecraft is passing close to the Earth or another planet (as in getting a 
+    gravitational slingshot) a smaller step size (perhaps 1 hour) over a shorter interval 
+    (several days) may be necessary.  A similar smaller step size may be necessary for 
+    Cassini as it orbits Saturn amd makes close passes by its moons.
+
+Table Settings [change] :  	defaults
+
+    Change several settings as indicated:
+    outout units: km & km/s
+    quantities code: 3 (state vector, 1-way light time, range, range rate)
+    reference plane: Earth mean equator and equinox of reference epoch
+    reference system: ICRF/J2000
+    correction: LT (astrometric states).
+    labels: NO
+    CVS formet: NO
+    object page: NO
+
+Display/Output [change] :  	default (formatted HTML)
+
+    The default HTML output will let you see and review the file but change to 
+    "download/save" to save a copy of the file which can then be transferred to 
+    the sse_install/setup directory.  The filename shoud be objectname.xyz as in 
+    earth.xyz and kepler.xyz.
+
+
+You will have to edit the edit the downloaded file and rename it to object.xyz.
+
+The downloaded file will look like 
+
+*******************************************************************************
+Ephemeris / WWW_USER Thu Mar  4 14:59:56 2010  Pasadena, USA     / Horizons
+*******************************************************************************
+Target body name: Voyager I Spacecraft (-31)      {source: pfile_a54418u.nio}
+Center body name: Earth (399)                     {source: DE405}
+Center-site name: Hat Creek Radio Observatory
+*******************************************************************************
+Start time      : A.D. 2009-Aug-11 00:00:00.0000 CT
+Stop  time      : A.D. 2009-Aug-21 00:00:00.0000 CT
+Step-size       : 1440 minutes
+*******************************************************************************
+Center geodetic : 238.528197,40.8174087,1.0422666 {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 238.528197,4834.66240,4147.7764 {E-lon(deg),Dxy(km),Dz(km)}
+Center pole/equ : High-precision EOP model        {East-longitude +}
+Center radii    : 6378.1 x 6378.1 x 6356.8 km     {Equator, meridian, pole}
+Output units    : KM-S
+Output format   : 03
+Reference frame : ICRF/J2000.0
+EOP file        : eop.100304.p100526
+EOP coverage    : DATA-BASED 1962-JAN-20 TO 2010-MAR-04. PREDICTS-> 2010-MAY-25
+Output type     : LT CORRECTED cartesian states
+Coordinate systm: Earth Mean Equator and Equinox of Reference Epoch
+*******************************************************************************
+JDCT
+   X     Y     Z
+   VX    VY    VZ
+   LT    RG    RR
+*******************************************************************************
+$$SOE
+2455054.500000000 = A.D. 2009-Aug-11 00:00:00.0000 (CT)
+  -3.802397029235930E+09 -1.567365976399894E+10  3.525490924663788E+09
+  -2.151503893153444E+01 -3.651981116906804E+01 -5.158222387727095E+00
+   5.506848429194577E+04  1.650911626421681E+10  3.852553574838282E+01
+2455055.500000000 = A.D. 2009-Aug-12 00:00:00.0000 (CT)
+  -3.804230594180303E+09 -1.567685691482562E+10  3.525039517844102E+09
+  -2.114793380009136E+01 -3.682383110066872E+01 -5.289499521165768E+00
+   5.507969652683936E+04  1.651247760767523E+10  3.870332898123735E+01
+2455056.500000000 = A.D. 2009-Aug-13 00:00:00.0000 (CT)
+  -3.806031694228153E+09 -1.568007994619922E+10  3.524576864032420E+09
+  -2.077498851727354E+01 -3.712277846974342E+01 -5.418544200732343E+00
+   5.509095826234545E+04  1.651585379104395E+10  3.887539400452435E+01
+
+
+The file needs to look like this:
+
+
+
+Target body name: Voyager I Spacecraft (-31)      {source: pfile_a54418u.nio}
+Frame: J2000
+Corrected: LT
+Start time      : A.D. 2009-Aug-11 00:00:00.0000 CT
+Stop  time      : A.D. 2010-Aug-11 00:00:00.0000 CT
+
+Julian Date         X (km)         Y (km)         Z (km)     Vx (km/s)  Vy (km/s)  Vz (km/s) LT(sec) Range(km) RRate(km/s)
+================== ============== ============== ============== ========== ========== ========== ========== ========== ==========
+2455054.500000000  -3.802397029225410E+09  -1.567365976413112E+10   3.525490924628841E+09  -2.151502929236547E+01  -3.651981039944150E+01
+-5.158222397036393E+00   5.506848429233139E+04   1.650911626433242E+10   3.852553279563214E+01
+2455055.500000000  -3.804230594167511E+09  -1.567685691495760E+10   3.525039517809152E+09  -2.114792417578912E+01  -3.682383016546783E+01
+-5.289499530465443E+00   5.507969652722258E+04   1.651247760779012E+10   3.870332587410039E+01
+2455056.500000000  -3.806031694213094E+09  -1.568007994633095E+10   3.524576863997468E+09  -2.077497891072223E+01  -3.712277736920636E+01
+-5.418544210020290E+00   5.509095826272617E+04   1.651585379115809E+10   3.887539074391459E+01

@@ -1,0 +1,1055 @@
+PdmBWSDsp.cpp(444)[sendCommand]: Can't open DDC bit image file: ../data/ddc_cclk.bit errno: 2 board: /dev/pcic6600/node0
+PdmBWSDsp.cpp(444)[sendCommand]: Can't open DDC bit image file: ../data/ddc_cclk.bit errno: 2 board: /dev/pcic6600/node3
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 0, base 0x42601200, hostBufOfs = 0x0
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 1, base 0x42601200, hostBufOfs = 0x0
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 0, base 0x44603200, hostBufOfs = 0x0
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 1, base 0x44603200, hostBufOfs = 0x0
+PdmCWDInputTask.cpp(116)[setXferLayout]: cpu 0, base 0x46605200, hostBufOfs = 0x0
+PdmCWDInputTask.cpp(116)[setXferLayout]: cpu 1, base 0x46605200, hostBufOfs = 0x0
+PdmCWDInputTask.cpp(116)[setXferLayout]: cpu 0, base 0x48607200, hostBufOfs = 0x0
+PdmCWDInputTask.cpp(116)[setXferLayout]: cpu 1, base 0x48607200, hostBufOfs = 0x0
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 0, base 0x80f8000, hostBufOfs = 0x0
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 1, base 0x80fa000, hostBufOfs = 0x2000
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 0, base 0x8100400, hostBufOfs = 0x0
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 1, base 0x8102400, hostBufOfs = 0x2000
+PdmSseInputTask.cpp(121)[processIpFromFile]: 1/Standalone Config File Version: 2 , name SseInput 2HZ: 1 1Hz: 0
+PdmSseInputTask.cpp(141)[processIpFromFile]: 2/Standalone Config File Version: 2 hdr.code 40003
+PdmSseInputTask.cpp(343)[processIpFromFile]: next hdr.code id: 40010
+PdmSseInputTask.cpp(141)[processIpFromFile]: 2/Standalone Config File Version: 2 hdr.code 40010
+PdmSseInputTask.cpp(209)[processIpFromFile]: processIpFromFile: optParams = 27 <CD ONLY 1 CD+CW 17 PULSE 8>  PULSE_DETECTION/enum 3
+PdmSseInputTask.cpp(210)[processIpFromFile]: Either mode can be used with -s (simulated data)
+CD_ONLY mode can be used with -z (DDC)
+PdmSseInputTask.cpp(235)[processIpFromFile]: Got resolution of 0 from input file
+PdmSseInputTask.cpp(257)[processIpFromFile]: Using: maxPulsesPerHalfFrame = 5000 maxPulsesPerSubbandPerHalfFrame = 10
+PdmSseInputTask.cpp(304)[processIpFromFile]: processIpFromFile/SEND_PDM_ACTIVITY_PARAMETERS: actId: 100, obsLen: 32 params->scienceDataRequest.sendComplexAmplitudes: 0, ifcSkyFreq: 4
+PdmSseInputTask.cpp(343)[processIpFromFile]: next hdr.code id: 40013
+PdmControlTask.cpp(299)[defineActivity]: frames = 20, not a power of two, using 16 frames
+PdmSseInputTask.cpp(141)[processIpFromFile]: 2/Standalone Config File Version: 2 hdr.code 40013
+PdmSseInputTask.cpp(310)[processIpFromFile]: processIpFromFile/START_TIME
+PdmSseInputTask.cpp(343)[processIpFromFile]: next hdr.code id: 40013
+PdmSseInputTask.cpp(352)[processIpFromFile]: Start Alarm on stand alone version: 140 seconds. 32 frames 0 baseline delay
+
+PdmCollectionTask.cpp(364)[startTimer]: activity 100, current time = 1075503402.448778, start time = -1.000000
+PdmCollectionTask.cpp(929)[startDsp]: startDsp: nFrames 16
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 0, base 0x42c01200, hostBufOfs = 0x600000
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 1, base 0x42e01200, hostBufOfs = 0x800000
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 0, base 0x44c03200, hostBufOfs = 0x600000
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 1, base 0x44e03200, hostBufOfs = 0x800000
+PdmCWDInputTask.cpp(116)[setXferLayout]: cpu 0, base 0x46c05200, hostBufOfs = 0x600000
+PdmCWDInputTask.cpp(116)[setXferLayout]: cpu 1, base 0x46e05200, hostBufOfs = 0x800000
+PdmCWDInputTask.cpp(116)[setXferLayout]: cpu 0, base 0x48c07200, hostBufOfs = 0x600000
+PdmCWDInputTask.cpp(116)[setXferLayout]: cpu 1, base 0x48e07200, hostBufOfs = 0x800000
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 0, base 0x80f8000, hostBufOfs = 0x0
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 1, base 0x80fa000, hostBufOfs = 0x2000
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 0, base 0x8100400, hostBufOfs = 0x0
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 1, base 0x8102400, hostBufOfs = 0x2000
+PdmBWSDsp.cpp(444)[sendCommand]: Can't open DDC bit image file: ../data/ddc_cclk.bit errno: 2 board: /dev/pcic6600/node0
+PdmBWSDsp.cpp(444)[sendCommand]: Can't open DDC bit image file: ../data/ddc_cclk.bit errno: 2 board: /dev/pcic6600/node3
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:0:RSpectrometry:timeofday:secs 1075503403:usecs 220800:time outside doSpec:220800
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 0.000000, delta 712.000000, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 0
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:1:RSpectrometry:timeofday:secs 1075503403:usecs 253376:time inside doSpec :32576
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:0:LSpectrometry:timeofday:secs 1075503403:usecs 253615:time outside doSpec:253615
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 0.000000, delta 712.000000, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 0
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:1:LSpectrometry:timeofday:secs 1075503403:usecs 286157:time inside doSpec :32542
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40016 for SSE 
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:1:LSpectrometry:timeofday:secs 1075503403:usecs 882348:time outside doSpec:596191
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 840.750977, delta 712.500977, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 142
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:2:LSpectrometry:timeofday:secs 1075503403:usecs 968982:time inside doSpec :86634
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:1:RSpectrometry:timeofday:secs 1075503403:usecs 969172:time outside doSpec:715796
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 840.750977, delta 712.500977, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 142
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:2:RSpectrometry:timeofday:secs 1075503404:usecs 54779:time inside doSpec :85607
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:2:LSpectrometry:timeofday:secs 1075503404:usecs 500445:time outside doSpec:531463
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 914.502930, delta 713.001953, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 303
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:3:LSpectrometry:timeofday:secs 1075503404:usecs 586696:time inside doSpec :86251
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:2:RSpectrometry:timeofday:secs 1075503404:usecs 586941:time outside doSpec:532162
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 914.502930, delta 713.001953, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 303
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:3:RSpectrometry:timeofday:secs 1075503404:usecs 672255:time inside doSpec :85314
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:3:RSpectrometry:timeofday:secs 1075503405:usecs 101345:time outside doSpec:429090
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 221.255859, delta 713.502930, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 454
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:4:RSpectrometry:timeofday:secs 1075503405:usecs 187210:time inside doSpec :85865
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:3:LSpectrometry:timeofday:secs 1075503405:usecs 187250:time outside doSpec:600554
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 221.255859, delta 713.502930, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 454
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:4:LSpectrometry:timeofday:secs 1075503405:usecs 273554:time inside doSpec :86304
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:4:LSpectrometry:timeofday:secs 1075503405:usecs 740182:time outside doSpec:466628
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 809.009766, delta 714.003906, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 609
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:5:LSpectrometry:timeofday:secs 1075503405:usecs 826762:time inside doSpec :86580
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:4:RSpectrometry:timeofday:secs 1075503405:usecs 826802:time outside doSpec:639592
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 809.009766, delta 714.003906, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 609
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:5:RSpectrometry:timeofday:secs 1075503405:usecs 912111:time inside doSpec :85309
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:5:LSpectrometry:timeofday:secs 1075503406:usecs 340351:time outside doSpec:513589
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 629.764648, delta 714.504883, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 755
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:6:LSpectrometry:timeofday:secs 1075503406:usecs 426828:time inside doSpec :86477
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:5:RSpectrometry:timeofday:secs 1075503406:usecs 426869:time outside doSpec:514758
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 629.764648, delta 714.504883, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 755
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:6:RSpectrometry:timeofday:secs 1075503406:usecs 512155:time inside doSpec :85286
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:6:LSpectrometry:timeofday:secs 1075503406:usecs 960175:time outside doSpec:533347
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 707.520508, delta 715.005859, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 907
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:7:LSpectrometry:timeofday:secs 1075503407:usecs 46671:time inside doSpec :86496
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:6:RSpectrometry:timeofday:secs 1075503407:usecs 46787:time outside doSpec:534632
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 707.520508, delta 715.005859, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 907
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:7:RSpectrometry:timeofday:secs 1075503407:usecs 131934:time inside doSpec :85147
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:7:LSpectrometry:timeofday:secs 1075503407:usecs 541870:time outside doSpec:495199
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 18.277344, delta 715.506836, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x42e01200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LCD.0: write 16777216 bytes to base:ofs 0x0:0x0 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7d4c: ../xxx.LCD.0 write 16777216 bytes to 0x0:0x0 from 0x0:0x42601200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1058
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:8:LSpectrometry:timeofday:secs 1075503407:usecs 722920:time inside doSpec :181050
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:7:RSpectrometry:timeofday:secs 1075503407:usecs 723102:time outside doSpec:591168
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 18.277344, delta 715.506836, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x44e03200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RCD.0: write 16777216 bytes to base:ofs 0x0:0x0 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7d9c: ../xxx.RCD.0 write 16777216 bytes to 0x0:0x0 from 0x0:0x44603200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1058
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:8:RSpectrometry:timeofday:secs 1075503407:usecs 900714:time inside doSpec :177612
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:8:RSpectrometry:timeofday:secs 1075503408:usecs 161350:time outside doSpec:260636
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 610.035156, delta 716.007812, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1214
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:9:RSpectrometry:timeofday:secs 1075503408:usecs 255126:time inside doSpec :93776
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:8:LSpectrometry:timeofday:secs 1075503408:usecs 255167:time outside doSpec:532247
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 610.035156, delta 716.007812, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1214
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:9:LSpectrometry:timeofday:secs 1075503408:usecs 349699:time inside doSpec :94532
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:9:RSpectrometry:timeofday:secs 1075503408:usecs 761903:time outside doSpec:506777
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 434.793945, delta 716.508789, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1363
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:10:RSpectrometry:timeofday:secs 1075503408:usecs 848294:time inside doSpec :86391
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:9:LSpectrometry:timeofday:secs 1075503408:usecs 899801:time outside doSpec:550102
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 434.793945, delta 716.508789, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1363
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:10:LSpectrometry:timeofday:secs 1075503408:usecs 986231:time inside doSpec :86430
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:10:LSpectrometry:timeofday:secs 1075503409:usecs 381303:time outside doSpec:395072
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 516.553711, delta 717.009766, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1513
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:11:LSpectrometry:timeofday:secs 1075503409:usecs 468282:time inside doSpec :86979
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:10:RSpectrometry:timeofday:secs 1075503409:usecs 468321:time outside doSpec:620027
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 516.553711, delta 717.009766, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1513
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:11:RSpectrometry:timeofday:secs 1075503409:usecs 553490:time inside doSpec :85169
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:11:LSpectrometry:timeofday:secs 1075503410:usecs 20182:time outside doSpec:551900
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 855.314453, delta 717.510742, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1664
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:12:LSpectrometry:timeofday:secs 1075503410:usecs 106688:time inside doSpec :86506
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:11:RSpectrometry:timeofday:secs 1075503410:usecs 106727:time outside doSpec:553237
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 855.314453, delta 717.510742, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1664
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:12:RSpectrometry:timeofday:secs 1075503410:usecs 191993:time inside doSpec :85266
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:12:LSpectrometry:timeofday:secs 1075503410:usecs 620255:time outside doSpec:513567
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 427.076172, delta 718.011719, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1817
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:13:LSpectrometry:timeofday:secs 1075503410:usecs 706770:time inside doSpec :86515
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:12:RSpectrometry:timeofday:secs 1075503410:usecs 706811:time outside doSpec:514818
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 427.076172, delta 718.011719, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1817
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:13:RSpectrometry:timeofday:secs 1075503410:usecs 792036:time inside doSpec :85225
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:13:LSpectrometry:timeofday:secs 1075503411:usecs 240262:time outside doSpec:533492
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 255.838867, delta 718.512695, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1963
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:14:LSpectrometry:timeofday:secs 1075503411:usecs 326709:time inside doSpec :86447
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:13:RSpectrometry:timeofday:secs 1075503411:usecs 326749:time outside doSpec:534713
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 255.838867, delta 718.512695, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 1963
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:14:RSpectrometry:timeofday:secs 1075503411:usecs 412023:time inside doSpec :85274
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:14:LSpectrometry:timeofday:secs 1075503411:usecs 821304:time outside doSpec:494595
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 341.602539, delta 719.013672, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 2108
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:15:LSpectrometry:timeofday:secs 1075503411:usecs 908343:time inside doSpec :87039
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:14:RSpectrometry:timeofday:secs 1075503411:usecs 908401:time outside doSpec:496378
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 341.602539, delta 719.013672, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 2108
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:15:RSpectrometry:timeofday:secs 1075503411:usecs 993548:time inside doSpec :85147
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:15:LSpectrometry:timeofday:secs 1075503412:usecs 441304:time outside doSpec:532961
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 684.367188, delta 719.514648, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x43e02200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LCD.0: write 16777216 bytes to base:ofs 0x0:0x1000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7d70: ../xxx.LCD.0 write 16777216 bytes to 0x0:0x1000000 from 0x0:0x43602200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 2257
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:16:LSpectrometry:timeofday:secs 1075503412:usecs 624095:time inside doSpec :182791
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:15:RSpectrometry:timeofday:secs 1075503412:usecs 624131:time outside doSpec:630583
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 684.367188, delta 719.514648, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x45e04200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RCD.0: write 16777216 bytes to base:ofs 0x0:0x1000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7dc0: ../xxx.RCD.0 write 16777216 bytes to 0x0:0x1000000 from 0x0:0x45604200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 2257
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:16:RSpectrometry:timeofday:secs 1075503412:usecs 802005:time inside doSpec :177874
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:16:RSpectrometry:timeofday:secs 1075503413:usecs 41898:time outside doSpec:239893
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 260.132812, delta 720.015625, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x48e07200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RCWD.0: write 16777216 bytes to base:ofs 0x0:0x0 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7e3c: ../xxx.RCWD.0 write 16777216 bytes to 0x0:0x0 from 0x0:0x48607200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RCWD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 2408
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:17:RSpectrometry:timeofday:secs 1075503413:usecs 223302:time inside doSpec :181404
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:16:LSpectrometry:timeofday:secs 1075503413:usecs 279805:time outside doSpec:655710
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 260.132812, delta 720.015625, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x46e05200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LCWD.0: write 16777216 bytes to base:ofs 0x0:0x0 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7dec: ../xxx.LCWD.0 write 16777216 bytes to 0x0:0x0 from 0x0:0x46605200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LCWD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 2408
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:17:LSpectrometry:timeofday:secs 1075503413:usecs 461225:time inside doSpec :181420
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:17:LSpectrometry:timeofday:secs 1075503413:usecs 680335:time outside doSpec:219110
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 92.899414, delta 720.516602, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 2562
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:18:LSpectrometry:timeofday:secs 1075503413:usecs 766971:time inside doSpec :86636
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:17:RSpectrometry:timeofday:secs 1075503413:usecs 767011:time outside doSpec:543709
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 92.899414, delta 720.516602, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 2562
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:18:RSpectrometry:timeofday:secs 1075503413:usecs 852518:time inside doSpec :85507
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:18:LSpectrometry:timeofday:secs 1075503414:usecs 281302:time outside doSpec:514331
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 182.666992, delta 721.017578, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 2719
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:19:LSpectrometry:timeofday:secs 1075503414:usecs 368280:time inside doSpec :86978
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:18:RSpectrometry:timeofday:secs 1075503414:usecs 368320:time outside doSpec:515802
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 182.666992, delta 721.017578, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 2719
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:19:RSpectrometry:timeofday:secs 1075503414:usecs 453452:time inside doSpec :85132
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:19:RSpectrometry:timeofday:secs 1075503414:usecs 881341:time outside doSpec:427889
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 529.435547, delta 721.518555, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 2870
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:20:RSpectrometry:timeofday:secs 1075503414:usecs 967151:time inside doSpec :85810
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:19:LSpectrometry:timeofday:secs 1075503414:usecs 967190:time outside doSpec:598910
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 529.435547, delta 721.518555, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 2870
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:20:LSpectrometry:timeofday:secs 1075503415:usecs 53524:time inside doSpec :86334
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:20:LSpectrometry:timeofday:secs 1075503415:usecs 501851:time outside doSpec:448327
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 109.205078, delta 722.019531, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3023
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:21:LSpectrometry:timeofday:secs 1075503415:usecs 588213:time inside doSpec :86362
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:20:RSpectrometry:timeofday:secs 1075503415:usecs 588420:time outside doSpec:621269
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 109.205078, delta 722.019531, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3023
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:21:RSpectrometry:timeofday:secs 1075503415:usecs 673889:time inside doSpec :85469
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:21:RSpectrometry:timeofday:secs 1075503416:usecs 102035:time outside doSpec:428146
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 969.975586, delta 722.520508, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3173
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:22:RSpectrometry:timeofday:secs 1075503416:usecs 188439:time inside doSpec :86404
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:21:LSpectrometry:timeofday:secs 1075503416:usecs 219908:time outside doSpec:631695
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 969.975586, delta 722.520508, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3173
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:22:LSpectrometry:timeofday:secs 1075503416:usecs 306372:time inside doSpec :86464
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:22:RSpectrometry:timeofday:secs 1075503416:usecs 721346:time outside doSpec:532907
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 39.747070, delta 723.021484, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3325
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:23:RSpectrometry:timeofday:secs 1075503416:usecs 807175:time inside doSpec :85829
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:22:LSpectrometry:timeofday:secs 1075503416:usecs 807215:time outside doSpec:500843
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 39.747070, delta 723.021484, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3325
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:23:LSpectrometry:timeofday:secs 1075503416:usecs 893608:time inside doSpec :86393
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:23:LSpectrometry:timeofday:secs 1075503417:usecs 360167:time outside doSpec:466559
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 390.519531, delta 723.522461, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x42e01200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LCD.0: write 16777216 bytes to base:ofs 0x0:0x2000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7d4c: ../xxx.LCD.0 write 16777216 bytes to 0x0:0x2000000 from 0x0:0x42601200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3479
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:24:LSpectrometry:timeofday:secs 1075503417:usecs 537171:time inside doSpec :177004
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:23:RSpectrometry:timeofday:secs 1075503417:usecs 537206:time outside doSpec:730031
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 390.519531, delta 723.522461, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x44e03200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RCD.0: write 16777216 bytes to base:ofs 0x0:0x2000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7d9c: ../xxx.RCD.0 write 16777216 bytes to 0x0:0x2000000 from 0x0:0x44603200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3479
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:24:RSpectrometry:timeofday:secs 1075503417:usecs 711920:time inside doSpec :174714
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:24:RSpectrometry:timeofday:secs 1075503417:usecs 950374:time outside doSpec:238454
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 998.292969, delta 724.023438, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3632
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:25:RSpectrometry:timeofday:secs 1075503418:usecs 36079:time inside doSpec :85705
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:24:LSpectrometry:timeofday:secs 1075503418:usecs 36117:time outside doSpec:498946
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 998.292969, delta 724.023438, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3632
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:25:LSpectrometry:timeofday:secs 1075503418:usecs 122515:time inside doSpec :86398
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:25:LSpectrometry:timeofday:secs 1075503418:usecs 570361:time outside doSpec:447846
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 839.067383, delta 724.524414, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3785
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:26:LSpectrometry:timeofday:secs 1075503418:usecs 656839:time inside doSpec :86478
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:25:RSpectrometry:timeofday:secs 1075503418:usecs 656880:time outside doSpec:620801
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 839.067383, delta 724.524414, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3785
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:26:RSpectrometry:timeofday:secs 1075503418:usecs 742157:time inside doSpec :85277
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:26:LSpectrometry:timeofday:secs 1075503419:usecs 171831:time outside doSpec:514992
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 936.842773, delta 725.025391, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3939
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:27:LSpectrometry:timeofday:secs 1075503419:usecs 258291:time inside doSpec :86460
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:26:RSpectrometry:timeofday:secs 1075503419:usecs 258499:time outside doSpec:516342
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 936.842773, delta 725.025391, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 3939
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:27:RSpectrometry:timeofday:secs 1075503419:usecs 343949:time inside doSpec :85450
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:27:RSpectrometry:timeofday:secs 1075503419:usecs 771347:time outside doSpec:427398
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 267.619141, delta 725.526367, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4085
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:28:RSpectrometry:timeofday:secs 1075503419:usecs 857147:time inside doSpec :85800
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:27:LSpectrometry:timeofday:secs 1075503419:usecs 857187:time outside doSpec:598896
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 267.619141, delta 725.526367, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4085
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:28:LSpectrometry:timeofday:secs 1075503419:usecs 943494:time inside doSpec :86307
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:28:RSpectrometry:timeofday:secs 1075503420:usecs 391345:time outside doSpec:534198
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 879.396484, delta 726.027344, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4239
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:29:RSpectrometry:timeofday:secs 1075503420:usecs 477262:time inside doSpec :85917
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:28:LSpectrometry:timeofday:secs 1075503420:usecs 477301:time outside doSpec:533807
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 879.396484, delta 726.027344, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4239
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:29:LSpectrometry:timeofday:secs 1075503420:usecs 563709:time inside doSpec :86408
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:29:LSpectrometry:timeofday:secs 1075503421:usecs 29903:time outside doSpec:466194
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 724.174805, delta 726.528320, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4389
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:30:LSpectrometry:timeofday:secs 1075503421:usecs 116901:time inside doSpec :86998
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:29:RSpectrometry:timeofday:secs 1075503421:usecs 116942:time outside doSpec:639680
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 724.174805, delta 726.528320, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4389
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:30:RSpectrometry:timeofday:secs 1075503421:usecs 202231:time inside doSpec :85289
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:30:RSpectrometry:timeofday:secs 1075503421:usecs 611384:time outside doSpec:409153
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 825.954102, delta 727.029297, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4541
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:31:RSpectrometry:timeofday:secs 1075503421:usecs 697150:time inside doSpec :85766
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:30:LSpectrometry:timeofday:secs 1075503421:usecs 697188:time outside doSpec:580287
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 825.954102, delta 727.029297, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4541
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:31:LSpectrometry:timeofday:secs 1075503421:usecs 783536:time inside doSpec :86348
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:31:LSpectrometry:timeofday:secs 1075503422:usecs 250160:time outside doSpec:466624
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 160.734375, delta 727.530273, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x43e02200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LCD.0: write 16777216 bytes to base:ofs 0x0:0x3000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7d70: ../xxx.LCD.0 write 16777216 bytes to 0x0:0x3000000 from 0x0:0x43602200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe200, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4693
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:32:LSpectrometry:timeofday:secs 1075503422:usecs 427262:time inside doSpec :177102
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:31:RSpectrometry:timeofday:secs 1075503422:usecs 427297:time outside doSpec:730147
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 160.734375, delta 727.530273, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x45e04200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RCD.0: write 16777216 bytes to base:ofs 0x0:0x3000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7dc0: ../xxx.RCD.0 write 16777216 bytes to 0x0:0x3000000 from 0x0:0x45604200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106600, ofs = 0x2000
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4693
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:32:RSpectrometry:timeofday:secs 1075503422:usecs 601488:time inside doSpec :174191
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:32:RSpectrometry:timeofday:secs 1075503422:usecs 841684:time outside doSpec:240196
+PdmInputTask.cpp(543)[testHostBufWrite]: RCDInput: dspBuf = 66, dspBufs = 66
+PdmInputTask.cpp(543)[testHostBufWrite]: RCWDInput: dspBuf = 64, dspBufs = 64
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 776.515625, delta 728.031250, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x44e03200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RCD.0: write 16777216 bytes to base:ofs 0x0:0x4000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7d9c: ../xxx.RCD.0 write 16777216 bytes to 0x0:0x4000000 from 0x0:0x44603200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RCD.0: done writing, err = 0
+PdmInputTask.cpp(543)[testHostBufWrite]: RCDInput: dspBuf = 66, dspBufs = 66
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 17. Modified stop mask: 000003f7
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x49e08200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RCWD.0: write 16777216 bytes to base:ofs 0x0:0x1000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7e60: ../xxx.RCWD.0 write 16777216 bytes to 0x0:0x1000000 from 0x0:0x49608200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RCWD.0: done writing, err = 0
+PdmInputTask.cpp(543)[testHostBufWrite]: RCWDInput: dspBuf = 64, dspBufs = 64
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 19. Modified stop mask: 000003d7
+PdmInputTask.cpp(543)[testHostBufWrite]: RBaselineInput: dspBuf = 33, dspBufs = 33
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102400, ofs = 0x2000
+PdmInputTask.cpp(543)[testHostBufWrite]: RBaselineInput: dspBuf = 33, dspBufs = 33
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 23. Modified stop mask: 000001d7
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4845
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:33:RSpectrometry:timeofday:secs 1075503423:usecs 110434:time inside doSpec :268750
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:32:LSpectrometry:timeofday:secs 1075503423:usecs 110468:time outside doSpec:683206
+PdmInputTask.cpp(543)[testHostBufWrite]: LCDInput: dspBuf = 66, dspBufs = 66
+PdmInputTask.cpp(543)[testHostBufWrite]: LCWDInput: dspBuf = 64, dspBufs = 64
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 776.515625, delta 728.031250, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x42e01200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LCD.0: write 16777216 bytes to base:ofs 0x0:0x4000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7d4c: ../xxx.LCD.0 write 16777216 bytes to 0x0:0x4000000 from 0x0:0x42601200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LCD.0: done writing, err = 0
+PdmInputTask.cpp(543)[testHostBufWrite]: LCDInput: dspBuf = 66, dspBufs = 66
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 16. Modified stop mask: 000001d3
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x47e06200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LCWD.0: write 16777216 bytes to base:ofs 0x0:0x1000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7e10: ../xxx.LCWD.0 write 16777216 bytes to 0x0:0x1000000 from 0x0:0x47606200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LCWD.0: done writing, err = 0
+PdmInputTask.cpp(543)[testHostBufWrite]: LCWDInput: dspBuf = 64, dspBufs = 64
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 18. Modified stop mask: 000001c3
+PdmInputTask.cpp(543)[testHostBufWrite]: LBaselineInput: dspBuf = 33, dspBufs = 33
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa000, ofs = 0x2000
+PdmInputTask.cpp(543)[testHostBufWrite]: LBaselineInput: dspBuf = 33, dspBufs = 33
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 22. Modified stop mask: 000000c3
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4845
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:33:LSpectrometry:timeofday:secs 1075503423:usecs 382979:time inside doSpec :272511
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4845
+PdmPDInputTask.cpp(212)[testHostBufWrite]: no xfer, count = 4845
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 14. Modified stop mask: 000000c2
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 15. Modified stop mask: 000000c0
+PdmPDInputTask.cpp(184)[testHostBufWrite]: base = 0x4a609200, count = 4845
+PdmPDInputTask.cpp(184)[testHostBufWrite]: base = 0x4b60b200, count = 4845
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LPulse.0: write 77520 bytes to base:ofs 0x0:0x0 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7e8c: ../xxx.LPulse.0 write 77520 bytes to 0x0:0x0 from 0x0:0x4a609200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LPulse.0: done writing, err = 0
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 20. Modified stop mask: 00000080
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RPulse.0: write 77520 bytes to base:ofs 0x0:0x0 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f7edc: ../xxx.RPulse.0 write 77520 bytes to 0x0:0x0 from 0x0:0x4b60b200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RPulse.0: done writing, err = 0
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 21. Modified stop mask: 00000000
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40017 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40018 for SSE 
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108870: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x0 to 0x0:0x4de10200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x1c00e042, data[32767] = 0x14801304
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x52404, data[32767] = 0x51910101
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088e8: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x0 to 0x0:0x4f613200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x1c00e042, data[32767] = 0x14801304
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x52404, data[32767] = 0x51910101
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108894: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x20000 to 0x0:0x4e611200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x1411c, data[32767] = 0x8001145
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xd5070110, data[32767] = 0x80009080
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810890c: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x20000 to 0x0:0x4fe14200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x1411c, data[32767] = 0x8001145
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xd5070110, data[32767] = 0x80009080
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 0
+PdmDadd.cpp(357)[reportHits]: hit 1: bin 5376, drift 0, power 96
+
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810884c: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x40000 to 0x0:0x4d60f200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x9060004, data[32767] = 0x4448031
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x800cc100, data[32767] = 0x24090404
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 0
+PdmDadd.cpp(357)[reportHits]: hit 1: bin 5376, drift 0, power 96
+
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088c4: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x40000 to 0x0:0x4ee12200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x9060004, data[32767] = 0x4448031
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x800cc100, data[32767] = 0x24090404
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 1
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108870: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x60000 to 0x0:0x4de10200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x10620703, data[32767] = 0x1028937
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xc014052, data[32767] = 0x34400800
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 1
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088e8: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x60000 to 0x0:0x4f613200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x10620703, data[32767] = 0x1028937
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xc014052, data[32767] = 0x34400800
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 2
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108894: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x80000 to 0x0:0x4e611200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x450148, data[32767] = 0x4100a40
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x80420012, data[32767] = 0x30004820
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 2
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810890c: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x80000 to 0x0:0x4fe14200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x450148, data[32767] = 0x4100a40
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x80420012, data[32767] = 0x30004820
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 3
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810884c: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0xa0000 to 0x0:0x4d60f200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x45501480, data[32767] = 0x11804c
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x161642, data[32767] = 0x1290041c
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 3
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088c4: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0xa0000 to 0x0:0x4ee12200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x45501480, data[32767] = 0x11804c
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x161642, data[32767] = 0x1290041c
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 4
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108870: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0xc0000 to 0x0:0x4de10200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x2000153, data[32767] = 0x44050c6
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x5501ec08, data[32767] = 0x80131040
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 4
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088e8: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0xc0000 to 0x0:0x4f613200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x2000153, data[32767] = 0x44050c6
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x5501ec08, data[32767] = 0x80131040
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 5
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108894: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0xe0000 to 0x0:0x4e611200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x1800441, data[32767] = 0x840f1
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x10148444, data[32767] = 0x40044600
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 5
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810890c: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0xe0000 to 0x0:0x4fe14200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x1800441, data[32767] = 0x840f1
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x10148444, data[32767] = 0x40044600
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 6
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810884c: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x100000 to 0x0:0x4d60f200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xb002820, data[32767] = 0x98104548
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x60020050, data[32767] = 0x15220000
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 6
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088c4: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x100000 to 0x0:0x4ee12200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xb002820, data[32767] = 0x98104548
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x60020050, data[32767] = 0x15220000
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 7
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108870: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x120000 to 0x0:0x4de10200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x4c009454, data[32767] = 0x1401005d
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x11350004, data[32767] = 0x144340c
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 7
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088e8: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x120000 to 0x0:0x4f613200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x4c009454, data[32767] = 0x1401005d
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x11350004, data[32767] = 0x144340c
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 8
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108894: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x140000 to 0x0:0x4e611200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x1001210, data[32767] = 0x423800
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x14003160, data[32767] = 0x53100070
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 8
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810890c: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x140000 to 0x0:0x4fe14200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x1001210, data[32767] = 0x423800
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x14003160, data[32767] = 0x53100070
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 9
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810884c: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x160000 to 0x0:0x4d60f200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x5f041816, data[32767] = 0x10440c00
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x70240011, data[32767] = 0x2010414
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 9
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088c4: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x160000 to 0x0:0x4ee12200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x5f041816, data[32767] = 0x10440c00
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x70240011, data[32767] = 0x2010414
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 10
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108870: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x180000 to 0x0:0x4de10200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x200c4540, data[32767] = 0x50060701
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x23101000, data[32767] = 0x421001
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 10
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088e8: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x180000 to 0x0:0x4f613200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x200c4540, data[32767] = 0x50060701
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x23101000, data[32767] = 0x421001
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 11
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108894: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x1a0000 to 0x0:0x4e611200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x564c2004, data[32767] = 0x40040242
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x45002071, data[32767] = 0x5140cd40
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 11
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810890c: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x1a0000 to 0x0:0x4fe14200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x564c2004, data[32767] = 0x40040242
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x45002071, data[32767] = 0x5140cd40
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 12
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810884c: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x1c0000 to 0x0:0x4d60f200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x10000644, data[32767] = 0x5351640
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x40000008, data[32767] = 0x44034001
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 12
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088c4: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x1c0000 to 0x0:0x4ee12200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x10000644, data[32767] = 0x5351640
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x40000008, data[32767] = 0x44034001
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 13
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108870: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x1e0000 to 0x0:0x4de10200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x94518912, data[32767] = 0x96600404
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x80140816, data[32767] = 0x1600146
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 13
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088e8: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x1e0000 to 0x0:0x4f613200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x94518912, data[32767] = 0x96600404
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x80140816, data[32767] = 0x1600146
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 14
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108894: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x200000 to 0x0:0x4e611200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xd3044149, data[32767] = 0x34150100
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x68012112, data[32767] = 0x3e50014c
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 14
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810890c: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x200000 to 0x0:0x4fe14200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xd3044149, data[32767] = 0x34150100
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x68012112, data[32767] = 0x3e50014c
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 15
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810884c: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x220000 to 0x0:0x4d60f200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x15240360, data[32767] = 0x11514104
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x2104102, data[32767] = 0x40000142
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 15
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088c4: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x220000 to 0x0:0x4ee12200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x15240360, data[32767] = 0x11514104
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x2104102, data[32767] = 0x40000142
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 16
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108870: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x240000 to 0x0:0x4de10200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x15e02a30, data[32767] = 0x21524704
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x15001004, data[32767] = 0x67800848
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 16
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088e8: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x240000 to 0x0:0x4f613200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x15e02a30, data[32767] = 0x21524704
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x15001004, data[32767] = 0x67800848
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 17
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108894: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x260000 to 0x0:0x4e611200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x41044011, data[32767] = 0x800d0003
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xc000810, data[32767] = 0x861d0101
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 17
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810890c: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x260000 to 0x0:0x4fe14200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x41044011, data[32767] = 0x800d0003
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xc000810, data[32767] = 0x861d0101
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 18
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810884c: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x280000 to 0x0:0x4d60f200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x21000010, data[32767] = 0x94050400
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x83538, data[32767] = 0x3800500c
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 18
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088c4: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x280000 to 0x0:0x4ee12200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x21000010, data[32767] = 0x94050400
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x83538, data[32767] = 0x3800500c
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 19
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108870: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x2a0000 to 0x0:0x4de10200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x10000030, data[32767] = 0x50014ac0
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x24b11120, data[32767] = 0x1200d204
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 19
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088e8: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x2a0000 to 0x0:0x4f613200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x10000030, data[32767] = 0x50014ac0
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x24b11120, data[32767] = 0x1200d204
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 20
+PdmDadd.cpp(357)[reportHits]: hit 1: bin 682190, drift 7, power 66
+
+PdmDadd.cpp(357)[reportHits]: hit 2: bin 682192, drift 7, power 66
+
+PdmDadd.cpp(357)[reportHits]: hit 3: bin 682188, drift 8, power 67
+
+PdmDadd.cpp(357)[reportHits]: hit 4: bin 682190, drift 8, power 68
+
+PdmDadd.cpp(357)[reportHits]: hit 5: bin 682187, drift 9, power 73
+
+PdmDadd.cpp(357)[reportHits]: hit 6: bin 682188, drift 9, power 72
+
+PdmDadd.cpp(357)[reportHits]: hit 7: bin 682189, drift 9, power 69
+
+PdmDadd.cpp(357)[reportHits]: hit 8: bin 682190, drift 9, power 69
+
+PdmDadd.cpp(357)[reportHits]: hit 9: bin 682186, drift 10, power 68
+
+PdmDadd.cpp(357)[reportHits]: hit 10: bin 682187, drift 10, power 73
+
+PdmDadd.cpp(357)[reportHits]: hit 11: bin 682188, drift 10, power 72
+
+PdmDadd.cpp(357)[reportHits]: hit 12: bin 682189, drift 10, power 72
+
+PdmDadd.cpp(357)[reportHits]: hit 13: bin 682186, drift 11, power 78
+
+PdmDadd.cpp(357)[reportHits]: hit 14: bin 682187, drift 11, power 84
+
+PdmDadd.cpp(357)[reportHits]: hit 15: bin 682188, drift 11, power 78
+
+PdmDadd.cpp(357)[reportHits]: hit 16: bin 682189, drift 11, power 67
+
+PdmDadd.cpp(357)[reportHits]: hit 17: bin 682185, drift 12, power 75
+
+PdmDadd.cpp(357)[reportHits]: hit 18: bin 682186, drift 12, power 82
+
+PdmDadd.cpp(357)[reportHits]: hit 19: bin 682187, drift 12, power 84
+
+PdmDadd.cpp(357)[reportHits]: hit 20: bin 682188, drift 12, power 72
+
+PdmDadd.cpp(357)[reportHits]: hit 21: bin 682185, drift 13, power 83
+
+PdmDadd.cpp(357)[reportHits]: hit 22: bin 682186, drift 13, power 95
+
+PdmDadd.cpp(357)[reportHits]: hit 23: bin 682187, drift 13, power 81
+
+PdmDadd.cpp(357)[reportHits]: hit 24: bin 682188, drift 13, power 70
+
+PdmDadd.cpp(357)[reportHits]: hit 25: bin 682184, drift 14, power 76
+
+PdmDadd.cpp(357)[reportHits]: hit 26: bin 682185, drift 14, power 93
+
+PdmDadd.cpp(357)[reportHits]: hit 27: bin 682186, drift 14, power 95
+
+PdmDadd.cpp(357)[reportHits]: hit 28: bin 682187, drift 14, power 71
+
+PdmDadd.cpp(357)[reportHits]: hit 29: bin 682184, drift 15, power 91
+
+PdmDadd.cpp(357)[reportHits]: hit 30: bin 682185, drift 15, power 96
+
+PdmDadd.cpp(357)[reportHits]: hit 31: bin 682186, drift 15, power 92
+
+PdmDadd.cpp(357)[reportHits]: hit 32: bin 682184, drift 16, power 91
+
+PdmDadd.cpp(357)[reportHits]: hit 33: bin 682185, drift 16, power 96
+
+PdmDadd.cpp(357)[reportHits]: hit 34: bin 682186, drift 16, power 92
+
+PdmDadd.cpp(357)[reportHits]: hit 35: bin 682183, drift 17, power 74
+
+PdmDadd.cpp(357)[reportHits]: hit 36: bin 682184, drift 17, power 94
+
+PdmDadd.cpp(357)[reportHits]: hit 37: bin 682185, drift 17, power 93
+
+PdmDadd.cpp(357)[reportHits]: hit 38: bin 682186, drift 17, power 83
+
+PdmDadd.cpp(357)[reportHits]: hit 39: bin 682182, drift 18, power 67
+
+PdmDadd.cpp(357)[reportHits]: hit 40: bin 682183, drift 18, power 83
+
+PdmDadd.cpp(357)[reportHits]: hit 41: bin 682184, drift 18, power 94
+
+PdmDadd.cpp(357)[reportHits]: hit 42: bin 682185, drift 18, power 87
+
+PdmDadd.cpp(357)[reportHits]: hit 43: bin 682182, drift 19, power 70
+
+PdmDadd.cpp(357)[reportHits]: hit 44: bin 682183, drift 19, power 86
+
+PdmDadd.cpp(357)[reportHits]: hit 45: bin 682184, drift 19, power 85
+
+PdmDadd.cpp(357)[reportHits]: hit 46: bin 682185, drift 19, power 78
+
+PdmDadd.cpp(357)[reportHits]: hit 47: bin 682182, drift 20, power 80
+
+PdmDadd.cpp(357)[reportHits]: hit 48: bin 682183, drift 20, power 84
+
+PdmDadd.cpp(357)[reportHits]: hit 49: bin 682184, drift 20, power 82
+
+PdmDadd.cpp(357)[reportHits]: hit 50: bin 682181, drift 21, power 66
+
+PdmDadd.cpp(357)[reportHits]: hit 51: bin 682182, drift 21, power 78
+
+PdmDadd.cpp(357)[reportHits]: hit 52: bin 682183, drift 21, power 76
+
+PdmDadd.cpp(357)[reportHits]: hit 53: bin 682184, drift 21, power 70
+
+PdmDadd.cpp(357)[reportHits]: hit 54: bin 682181, drift 22, power 71
+
+PdmDadd.cpp(357)[reportHits]: hit 55: bin 682182, drift 22, power 74
+
+PdmDadd.cpp(357)[reportHits]: hit 56: bin 682183, drift 22, power 70
+
+PdmDadd.cpp(357)[reportHits]: hit 57: bin 682182, drift 23, power 67
+
+PdmDadd.cpp(357)[reportHits]: hit 58: bin 682182, drift 24, power 69
+
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108894: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x2c0000 to 0x0:0x4e611200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x48041d, data[32767] = 0x10105000
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x1554040, data[32767] = 0x28c04420
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 20
+PdmDadd.cpp(357)[reportHits]: hit 59: bin 682190, drift 7, power 66
+
+PdmDadd.cpp(357)[reportHits]: hit 60: bin 682192, drift 7, power 66
+
+PdmDadd.cpp(357)[reportHits]: hit 61: bin 682188, drift 8, power 67
+
+PdmDadd.cpp(357)[reportHits]: hit 62: bin 682190, drift 8, power 68
+
+PdmDadd.cpp(357)[reportHits]: hit 63: bin 682187, drift 9, power 73
+
+PdmDadd.cpp(357)[reportHits]: hit 64: bin 682188, drift 9, power 72
+
+PdmDadd.cpp(357)[reportHits]: hit 65: bin 682189, drift 9, power 69
+
+PdmDadd.cpp(357)[reportHits]: hit 66: bin 682190, drift 9, power 69
+
+PdmDadd.cpp(357)[reportHits]: hit 67: bin 682186, drift 10, power 68
+
+PdmDadd.cpp(357)[reportHits]: hit 68: bin 682187, drift 10, power 73
+
+PdmDadd.cpp(357)[reportHits]: hit 69: bin 682188, drift 10, power 72
+
+PdmDadd.cpp(357)[reportHits]: hit 70: bin 682189, drift 10, power 72
+
+PdmDadd.cpp(357)[reportHits]: hit 71: bin 682186, drift 11, power 78
+
+PdmDadd.cpp(357)[reportHits]: hit 72: bin 682187, drift 11, power 84
+
+PdmDadd.cpp(357)[reportHits]: hit 73: bin 682188, drift 11, power 78
+
+PdmDadd.cpp(357)[reportHits]: hit 74: bin 682189, drift 11, power 67
+
+PdmDadd.cpp(357)[reportHits]: hit 75: bin 682185, drift 12, power 75
+
+PdmDadd.cpp(357)[reportHits]: hit 76: bin 682186, drift 12, power 82
+
+PdmDadd.cpp(357)[reportHits]: hit 77: bin 682187, drift 12, power 84
+
+PdmDadd.cpp(357)[reportHits]: hit 78: bin 682188, drift 12, power 72
+
+PdmDadd.cpp(357)[reportHits]: hit 79: bin 682185, drift 13, power 83
+
+PdmDadd.cpp(357)[reportHits]: hit 80: bin 682186, drift 13, power 95
+
+PdmDadd.cpp(357)[reportHits]: hit 81: bin 682187, drift 13, power 81
+
+PdmDadd.cpp(357)[reportHits]: hit 82: bin 682188, drift 13, power 70
+
+PdmDadd.cpp(357)[reportHits]: hit 83: bin 682184, drift 14, power 76
+
+PdmDadd.cpp(357)[reportHits]: hit 84: bin 682185, drift 14, power 93
+
+PdmDadd.cpp(357)[reportHits]: hit 85: bin 682186, drift 14, power 95
+
+PdmDadd.cpp(357)[reportHits]: hit 86: bin 682187, drift 14, power 71
+
+PdmDadd.cpp(357)[reportHits]: hit 87: bin 682184, drift 15, power 91
+
+PdmDadd.cpp(357)[reportHits]: hit 88: bin 682185, drift 15, power 96
+
+PdmDadd.cpp(357)[reportHits]: hit 89: bin 682186, drift 15, power 92
+
+PdmDadd.cpp(357)[reportHits]: hit 90: bin 682184, drift 16, power 91
+
+PdmDadd.cpp(357)[reportHits]: hit 91: bin 682185, drift 16, power 96
+
+PdmDadd.cpp(357)[reportHits]: hit 92: bin 682186, drift 16, power 92
+
+PdmDadd.cpp(357)[reportHits]: hit 93: bin 682183, drift 17, power 74
+
+PdmDadd.cpp(357)[reportHits]: hit 94: bin 682184, drift 17, power 94
+
+PdmDadd.cpp(357)[reportHits]: hit 95: bin 682185, drift 17, power 93
+
+PdmDadd.cpp(357)[reportHits]: hit 96: bin 682186, drift 17, power 83
+
+PdmDadd.cpp(357)[reportHits]: hit 97: bin 682182, drift 18, power 67
+
+PdmDadd.cpp(357)[reportHits]: hit 98: bin 682183, drift 18, power 83
+
+PdmDadd.cpp(357)[reportHits]: hit 99: bin 682184, drift 18, power 94
+
+PdmDadd.cpp(357)[reportHits]: hit 100: bin 682185, drift 18, power 87
+
+PdmDadd.cpp(357)[reportHits]: hit 101: bin 682182, drift 19, power 70
+
+PdmDadd.cpp(357)[reportHits]: hit 102: bin 682183, drift 19, power 86
+
+PdmDadd.cpp(357)[reportHits]: hit 103: bin 682184, drift 19, power 85
+
+PdmDadd.cpp(357)[reportHits]: hit 104: bin 682185, drift 19, power 78
+
+PdmDadd.cpp(357)[reportHits]: hit 105: bin 682182, drift 20, power 80
+
+PdmDadd.cpp(357)[reportHits]: hit 106: bin 682183, drift 20, power 84
+
+PdmDadd.cpp(357)[reportHits]: hit 107: bin 682184, drift 20, power 82
+
+PdmDadd.cpp(357)[reportHits]: hit 108: bin 682181, drift 21, power 66
+
+PdmDadd.cpp(357)[reportHits]: hit 109: bin 682182, drift 21, power 78
+
+PdmDadd.cpp(357)[reportHits]: hit 110: bin 682183, drift 21, power 76
+
+PdmDadd.cpp(357)[reportHits]: hit 111: bin 682184, drift 21, power 70
+
+PdmDadd.cpp(357)[reportHits]: hit 112: bin 682181, drift 22, power 71
+
+PdmDadd.cpp(357)[reportHits]: hit 113: bin 682182, drift 22, power 74
+
+PdmDadd.cpp(357)[reportHits]: hit 114: bin 682183, drift 22, power 70
+
+PdmDadd.cpp(357)[reportHits]: hit 115: bin 682182, drift 23, power 67
+
+PdmDadd.cpp(357)[reportHits]: hit 116: bin 682182, drift 24, power 69
+
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810890c: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x2c0000 to 0x0:0x4fe14200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x48041d, data[32767] = 0x10105000
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x1554040, data[32767] = 0x28c04420
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 21
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810884c: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x2e0000 to 0x0:0x4d60f200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x34805004, data[32767] = 0x50114010
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x114100, data[32767] = 0x18004
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 21
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088c4: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x2e0000 to 0x0:0x4ee12200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x34805004, data[32767] = 0x50114010
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x114100, data[32767] = 0x18004
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 22
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108870: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x300000 to 0x0:0x4de10200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x8300524, data[32767] = 0x851140
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xc0311151, data[32767] = 0x1014e1
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 22
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088e8: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x300000 to 0x0:0x4f613200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x8300524, data[32767] = 0x851140
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xc0311151, data[32767] = 0x1014e1
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 23
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108894: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x320000 to 0x0:0x4e611200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x8301469, data[32767] = 0x11800094
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x401c2010, data[32767] = 0x2414100c
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 23
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810890c: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x320000 to 0x0:0x4fe14200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x8301469, data[32767] = 0x11800094
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x401c2010, data[32767] = 0x2414100c
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 24
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810884c: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x340000 to 0x0:0x4d60f200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x2d011200, data[32767] = 0x1901
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x10dc0c04, data[32767] = 0x44040121
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 24
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088c4: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x340000 to 0x0:0x4ee12200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x2d011200, data[32767] = 0x1901
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x10dc0c04, data[32767] = 0x44040121
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 25
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108870: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x360000 to 0x0:0x4de10200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xc080402, data[32767] = 0x8400c010
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x4485008, data[32767] = 0x50411e00
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 25
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088e8: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x360000 to 0x0:0x4f613200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xc080402, data[32767] = 0x8400c010
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x4485008, data[32767] = 0x50411e00
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 26
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108894: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x380000 to 0x0:0x4e611200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x1101c010, data[32767] = 0x5010c300
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x40833250, data[32767] = 0x300084
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 26
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810890c: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x380000 to 0x0:0x4fe14200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x1101c010, data[32767] = 0x5010c300
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x40833250, data[32767] = 0x300084
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 27
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810884c: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x3a0000 to 0x0:0x4d60f200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x80080007, data[32767] = 0xc5205640
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x13000130, data[32767] = 0x4821010
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 27
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088c4: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x3a0000 to 0x0:0x4ee12200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x80080007, data[32767] = 0xc5205640
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x13000130, data[32767] = 0x4821010
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 28
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108870: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x3c0000 to 0x0:0x4de10200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x101d0b41, data[32767] = 0x51691208
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xd019194c, data[32767] = 0x143540
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 28
+PdmDiskIO.cpp(53)[ReadDisk]: 0x81088e8: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x3c0000 to 0x0:0x4f613200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x101d0b41, data[32767] = 0x51691208
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0xd019194c, data[32767] = 0x143540
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 29
+PdmDiskIO.cpp(53)[ReadDisk]: 0x8108894: ../xxx.LCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x3e0000 to 0x0:0x4e611200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x2101908, data[32767] = 0x14400838
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x2001c04, data[32767] = 0x4c840040
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 29
+PdmDiskIO.cpp(53)[ReadDisk]: 0x810890c: ../xxx.RCWD.0 read blklen 131072, passes 1, blks 2 from base:ofs 0x600000:0x3e0000 to 0x0:0x4fe14200
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x2101908, data[32767] = 0x14400838
+PdmDiskIO.cpp(79)[ReadDisk]: data[0] = 0x2001c04, data[32767] = 0x4c840040
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 30
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 30
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 31
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 31
+PdmCWDTask.cpp(963)[processSlice]: processing left slice 32
+PdmCWDTask.cpp(968)[processSlice]: processing right slice 32
+PdmPDTask.cpp(226)[buildPulseList]: left pulses = 4845
+PdmPDTask.cpp(228)[buildPulseList]: right pulses = 4845
+PdmPDTask.cpp(230)[buildPulseList]: total pulses = 4845
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40024 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40025 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40027 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40028 for SSE 
+PdmConfirmationTask.cpp(255)[startActivity]: start activity, cwCount = 0, pdCount = 0

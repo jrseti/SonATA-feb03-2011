@@ -1,0 +1,5 @@
+This is a list of things we need to do:
+
+1) Improve/re-write the install instructions in doc/linux-install-options.txt
+2) Write instructions on how to demonstrate the system. How to run it on the voyager data and see the waterfalls and baseline.
+

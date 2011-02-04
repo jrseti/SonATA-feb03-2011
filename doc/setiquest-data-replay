@@ -1,0 +1,65 @@
+# setiquest-data-replay
+2010-12-09 jj
+
+Here are the instructions for replaying the data collected by 
+Setiquest/SetiData. 
+
+This test environment is set up to use haydn, handel, liszt, and brahms.
+The multicast addresses and port numbers have been set so they 
+do not conflict with the observing system.
+
+The Setiquest/SetiData files are created from a channel
+from the SonATA channelizer. The channelizer is configured to produce
+16 channels that have a bandwidth of 6.5 MHz. With oversampling the
+actual bandwidth of the channel is 8.7381333 MHz. But only 6.5 MHz 
+is usable. The data are in 
+channel packet format, i.e. 16 bit real and imaginary data values,
+1024 per packet plus a channel packet header. This data is posted
+on Amazon with the packet headers removed and the data values converted
+to 8 bit real and imaginary.
+
+In order to replay the data through SonATA, the data must be converted
+to beam format packets, i.e. 8 bit real and imaginary, 2048 per beam
+packet, with the appropriate adjustments to the packet header.
+
+**** I can't find the instructions on how to run Rob's program that
+does the conversion. Please insert here. ******
+
+At the moment, haydn has room on its disk, but it's not a big disk. 
+So the data files cannot be stored there permanently.
+
+
+-------------------------------------------
+
+In a window on your local computer:
+
+> ssh -X sonata@haydn.csr.seti.org
+
+haydn> scr
+
+haydn> source setiquest-env-vars
+
+haydn> runsse
+
+seeker> source setiquest-12dxs.tcl
+
+seeker> start obs
+
+-------------------------------------------
+In another window:
+
+>ssh -X sonata@haydn.csr.seti.org
+
+haydn> scr
+
+haydn> runpacketsend-setiquest
+
+-------------------------------------------
+=========================================================
+runpacketsend-setiquest is set up to run 
+~/2010-05-07-galanticenter-2-merged-1-of-3.dat 
+which is the only one stored on haydn at the moment.
+
+# runpacketsend-setiquest
+sudo packetsend -J 228.1.50.1 -j 50100 -f ~/2010-05-07-galanticenter-2-merged-1-of-3.dat -n 1 -i 1000 -b 10
+

@@ -1,0 +1,63 @@
+SonATA Database Overview
+2009-08-04
+jj
+
+DATABASE CREATION
+
+The database is created in mysql.
+
+	> mysql -h hostname
+	mysql> CREATE DATABASE <database name>
+
+Select the database.
+
+	mysql> use <database name>
+
+Load the table schema.
+
+	mysql> source sse-pkg/database/seeker.schema
+	
+Load the site information.
+
+	mysql> source sse-pkg/database/seeker.site.data
+
+Load the star catalog.
+
+	mysql> source sse-pkg/database/seeker.ao-starlist.data  
+
+
+PRIMING THE DATABASE WITH RFI SIGNALS
+
+We sample the RFI environment at the beginning of each run by pointing
+the antenna at zenith and running rfiscan Activities. There are
+two purposes for this. First we can find the regions where
+RFI is so dense that we choose not observe there. These frequency
+bands are entered into a permanent RFI mask. Second, all the signals
+detected during these activities are classified as RFI with the reason
+RFI_SCAN. We usually do 3 passes over the observing frequency range
+to collect enough signals for database lookups.
+
+OBSERVING PROTOCOL
+
+There are numerous parameters for the various subsystems that the 
+observer can specifiy via the user interface. In practice however,
+the parameters are fixed for the entire deployment. The system runs
+in automatic mode selecting the target stars and frequencies based
+on the observation history in the database. 
+
+When an Activity starts, all the associated parameters need to be recorded. 
+Rather than save the same parameters over and over again, we compare
+the activity parameters with the parameter sets that are already
+stored in the database. If there is a match, then the Id for the 
+matching parameter sets are used to link the Activities and 
+ActivityUnits tables to the appropriate parameters.
+If a parameter set is unique, then a new entry is made in the parameter
+table.
+
+During the observation status and detection results are stored in
+the various tables. See SonATA Database Tables.
+On the successful completion of an observation the validObservation
+field in the Activities and ActivityUnits table are set to 'Yes'.
+It is possible for the Activity to be valid even if some of the
+ActivityUnits fail to complete. However, if all ActivityUnits fails,
+the Activity fails.

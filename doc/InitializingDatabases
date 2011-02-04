@@ -1,0 +1,28 @@
+In mysql,
+
+CREATE DATABASE <dbname>
+
+use <dbname>
+
+source seeker.schema
+
+source seeker.spacecraft.data
+
+exit
+
+
+From the command line,
+
+mysql -h mozart sonata_test -e "load data infile '/home/sonata/OpenSonATA/sse-data/catalogs/observing/seeker.calphase.load-data' into table TargetCat fields ter minated by ',' ignore 2 lines; show warnings;"
+
+mysql -h mozart sonatadb -e "load data infile '/home/sonata/OpenSonATA/sse-data/catalogs/observing/seeker.caldelay.load-data' into table TargetCat fields terminated by ',' ignore 2 lines; show warnings;"
+
+mysql -h mozart sonatadb -e "load data infile '/home/sonata/OpenSonATA/sse-data/catalogs/observing/seeker.caldelay.fluxes.load-data' into table CalTargetFlux fields terminated by ',' ignore 2 lines; show warnings;"
+
+mysql -h mozart sonatadb -e "load data infile '/home/sonata/OpenSonATA/sse-data/catalogs/observing/seeker.calphase.fluxes.load-data' into table CalTargetFlux fields terminated by ',' ignore 2 lines; show warnings;"
+
+mysql -h mozart sonatadb -e "load data infile '/home/sonata/OpenSonATA/sse-pkg/database/seeker.bf.caldelay.times.load-data' into table BfCalDelayTime fields terminated by ',' ignore 2 lines; show warnings;"
+
+mysql -h mozart sonatadb -e "load data infile '/home/sonata/OpenSonATA/sse-pkg/database/seeker.bf.calphase.times.load-data' into table BfCalPhaseTime fields terminated by ',' ignore 2 lines; show warnings;"
+
+Then load the star catalogs you want.

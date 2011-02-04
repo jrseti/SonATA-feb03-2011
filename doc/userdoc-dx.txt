@@ -1,0 +1,50 @@
+% sudo dx [-H <sse host>] [-h <sse port>] [-j multicast_input_port ] \
+      [-J multicast input address] -Q dx_name -z <filter file>  \
+      [-p polarization] [-t] [-x ip.file]   \
+    -f [foldings] [-w channel_bandwidth] 
+delete	-a bin: insert a path at abs bin
+delete	-B bin: insert postBL signal at bin
+delete	-C subchannel: insert preBL signal at subchannel
+	-c cacheRows: use cacheRows for cache efficient DADD
+delete	-D drift: drift postBL signal a drift bins/spectrum
+delete	-d driftRate: drift at driftRate bins/spectrum
+	-E: suppress reporting of baselines 
+	-e: run timing tests at startup
+	-F frames: set maximum number of frames (64)
+	-f foldings: number of subchannel DFB foldings (10)
+	-H sse host: connect directly to host
+	-h sse port: connect to host port (8888)
+	-I: initialize buffers during allocation
+delete	-i bin: insert a path at bin within each subchannel
+	-J addr: multicast base address (239.1.1.1)
+	-j port: multicast port (10000)
+	-L: log hits
+	-M: log all messages from SSE
+	-N: load subchannel number into CD data
+delete	-n noise: set simulated noise level
+
+delete	-P power: postBL signal with power
+	-p [C|L|x|y|l|r]: polarization Circular, Linear, x, y, left or right
+	-Q dxName: name of this dx
+	-R: report CWD bin statistics
+	-r: use tagged data
+delete	-S subchannel: insert postBL signal at subchannel
+delete	-s: simulate input
+	-T subchannels: total # of subchannels to create
+	-t: run top-down DADD
+	-u: swap real and imaginary (false)
+	-U oversampling: oversampling percentage for subchannels
+	-V: load slice number into CWD data
+delete	-v val: insert val (0-3) for each bin
+	-W oversampling: oversampling percentage for channels (25)
+	-w bandwidth: nominal channel bandwidth
+delete	-X file: file that contains standalone observation parameters 
+	-x src: source
+delete	-Y onHF: make a pulse signal, have signal ON for on half frames
+delete	-y offHF: make a pulse signal, have signal OFF for off half frames
+	-z file: read filter specification from file
+	-Z: do not zero DC bin
+
+
+sudo ./dx -H <sse host> -Q dx001 -j 10000 -J 239.1.1.5 \
+	-f 10 -z ../../filters/LS256c10f25o -p x

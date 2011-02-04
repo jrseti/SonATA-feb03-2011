@@ -1,0 +1,86 @@
+Restarting the beamformer deamons
+
+ssh to boot2
+
+> ssh boot2 -l obs
+
+> cd /opt/bfu/bin/
+
+> bfudaemon start	# start daemons
+> spkdaemon start	# start packetizers
+
+> ps -ef | grep Beam
+
+FYI should see 3 packetizers, 3 master servers, 15 user servers.
+
+On tumulus as obs,
+    cd bbarott/bfu
+    bfspk.rb -b 1 --ip0 10.1.50.51:50000 --ip1 10.1.50.51:50001
+    bfspk.rb -b 2 --ip0 10.1.50.55:50002 --ip1 10.1.50.55:50003
+    bfspk.rb -b 3 --ip0 10.1.50.59:50004 --ip1 10.1.50.59:50005
+
+If only one beamformer is not sending packets, just do the appropriate one
+of the above without restarting the daemons and see if that fixes the problem.
+
+Ken
+
+Example Error:
+
+Beamfomer was giving bfinit error:
+
+***********
+Wed Oct 27 17:09:58 -0700 2010 >>  Writing initial configuration
+Wed Oct 27 17:09:58 -0700 2010 >>  Syncronizing hardware clock
+; stderr msg: (druby://boot2:7992) ./spk_sonataPacketizer.rb:572:in `getNTP': undefined method `[]' for nil:NilClass (NoMethodError)
+        from (druby://boot2:7992) /usr/lib64/ruby/1.8/drb/drb.rb:1552:in `perform_without_block'
+        from (druby://boot2:7992) /usr/lib64/ruby/1.8/drb/drb.rb:1512:in `perform'
+        from (druby://boot2:7992) /usr/lib64/ruby/1.8/drb/drb.rb:1586:in `main_loop'
+        from (druby://boot2:7992) /usr/lib64/ruby/1.8/drb/drb.rb:1582:in `main_loop'
+        from (druby://boot2:7992) /usr/lib64/ruby/1.8/drb/drb.rb:1578:in `main_loop'
+        from (druby://boot2:7992) /usr/lib64/ruby/1.8/drb/drb.rb:1427:in `run'
+        from (druby://boot2:7992) /usr/lib64/ruby/1.8/drb/drb.rb:1424:in `run'
+        from (druby://boot2:7992) /usr/lib64/ruby/1.8/drb/drb.rb:1344:in `initialize'
+         ... 8 levels...
+        from (druby://boot2:7992) ./spkdaemon:61
+        from (druby://boot2:7992) ./spkdaemon:61
+        from (druby://boot2:7992) ./spkdaemon:41
+        from /home/obs/bbarott/bfu/bfinit.rb:485
+*****************
+Billy told us how to possible fix such a problem.
+
+******
+This error means that bfantselect cannot communicate to the daemons
+located on boot2.  Check by ps, as below.  If you don't see the
+processes, you'll need to start the daemons.  /opt/bfu/bin/ then
+bfudaemon start. You need to be obs@boot2
+
+If the sonata packetizers are missing, spkdaemon start from the same
+place.
+
+FYI should see 3 packetizers, 3 master servers, 15 user servers.
+-billy
+
+
+obs@boot2 /<1>bfu/bin % ps -ef | grep Beam
+obs      15401     1  0 Sep24 ?        00:00:04
+SonATA_Packetizer_Beamformer_Server_BF1 obs      15405     1  0 Sep24 ?        00:00:02
+SonATA_Packetizer_Beamformer_Server_BF2 obs      15407     1  0 Sep24 ?        00:00:02
+SonATA_Packetizer_Beamformer_Server_BF3 obs      25338     1  2 14:11 ?        00:00:00
+b01_Beamformer_User_Server_bfa obs      25341     1  2 14:11 ?        00:00:00
+b03_Beamformer_User_Server_bfa obs      25344     1  2 14:11 ?        00:00:00
+b04_Beamformer_User_Server_bfa obs      25346     1  2 14:11 ?        00:00:00
+b02_Beamformer_User_Server_bfa obs      25349     1  2 14:11 ?        00:00:00
+b05_Beamformer_User_Server_bfa obs      25354     1  2 14:11 ?        00:00:00
+b06_Beamformer_User_Server_bfa obs      25356     1  2 14:11 ?        00:00:00
+b08_Beamformer_User_Server_bfa obs      25359     1  2 14:11 ?        00:00:00
+b09_Beamformer_User_Server_bfa obs      25365     1  2 14:11 ?        00:00:00
+b10_Beamformer_User_Server_bfa obs      25366     1  2 14:11 ?        00:00:00
+b11_Beamformer_User_Server_bfa obs      25368     1  2 14:11 ?        00:00:00
+b07_Beamformer_User_Server_bfa obs      25371     1  2 14:11 ?        00:00:00
+b13_Beamformer_User_Server_bfa obs      25373     1  2 14:11 ?        00:00:00
+b12_Beamformer_User_Server_bfa obs      25376     1  2 14:11 ?        00:00:00
+b14_Beamformer_User_Server_bfa obs      25379     1  2 14:11 ?        00:00:00
+b15_Beamformer_User_Server_bfa obs      25383     1  1 14:11 ?        00:00:00
+Master_Beamformer_User_Server_BF1 obs      25387     1  1 14:11 ?        00:00:00
+Master_Beamformer_User_Server_BF3 obs      25388     1  1 14:11 ?        00:00:00
+Master_Beamformer_User_Server_BF2 

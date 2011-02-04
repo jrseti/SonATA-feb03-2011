@@ -1,0 +1,82 @@
+Configure git
+
+	$ git config --global user.name "my name"
+	$ git config --global you@yourdomain.com
+
+Initialize the git repository
+
+	$ git init
+
+Clone a repository
+
+	From GitHub:
+
+		git clone git@github.com:SETI/OpenSonATA.git
+
+	Or from a local repository:
+
+		git clone  ssh://repos.seti.org/git/OpenSonATA
+
+	Or, on the same machine (segin)
+
+		git clone /home/jane/repossonata/OpenSonATA
+
+Create a new branch
+
+	git branch work
+
+Checkout the branch
+
+	git checkout work
+
+Check which branch you are on
+
+	git branch
+
+
+
+Make changes
+Add new files or changed files to the staging area (index)
+
+	git add filename
+
+
+Commit Changes
+
+	git commit
+
+Check Status
+
+	git status
+
+
+Switch back to master branch
+
+	git checkout master
+
+Merge changes into master branch
+
+	git merge work
+
+
+
+
+
+
+Create a second repository as above and clone the work branch from the
+first repository.
+
+	git clone <repository> work
+
+
+Make changes, add, and commit
+
+
+Push changes to the work branch of first repository
+
+	git push <repository> work
+
+
+go back and check where the changes went.
+
+	

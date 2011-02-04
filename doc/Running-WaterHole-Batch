@@ -1,0 +1,32 @@
+Running the waterhole2x observations in batch mode.
+
+Either from the command line or executed by cron:
+
+> sonata-cron-begin-waterhole2x-session
+
+This script invokes:
+
+   sonata-startup-cron-wrapper -batch   # executes the env-vars file
+					# starts runsse which starts seeker
+					# and all the components 
+					# for a 3 beam dualpol Sonata System
+					# with 24 dxs per beam.
+
+
+   sonata-start-waterhole2x-obs.tcl	# Connects to telescope
+					# Defines parameters
+					# starts tasks: Calibration & 
+					# observing
+
+   
+> sonata-cron-end-obs-session
+
+This script invokes:
+
+   sonata-stop-obs.tcl			# sends stop command to seeker
+					# freeants
+					# tscope clean
+
+   sonata-shutdown-cron-wrapper		# issues shutdown all
+					# kills runsse
+

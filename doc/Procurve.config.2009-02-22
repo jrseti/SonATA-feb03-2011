@@ -1,0 +1,40 @@
+# HP Procurve 3400cl running configuration as of 0845, 2009-02-22.
+# Seems to work well, with minimal packet loss, but there is no
+# LACP between this switch and the upstream Fujitsu XG2000.
+
+# Also note that this is a very old firmware revision, and that it
+# it should be updated; the latest revision as of today is M.10.76.
+
+procurve# show running-config
+
+Running configuration:
+
+; J4905A Configuration Editor; Created on release #M.10.41
+
+hostname "procurve" 
+snmp-server contact "Scott Gever" 
+snmp-server location "CSR Sonata cabinet" 
+time timezone 8 
+mirror-port 1 
+ip default-gateway 10.1.50.1 
+no timesync 
+snmp-server community "public" Unrestricted 
+vlan 1 
+   name "DEFAULT_VLAN" 
+   untagged 1-26 
+   ip address 10.1.50.2 255.255.255.0 
+   jumbo 
+   ip igmp 
+   exit 
+fault-finder bad-driver sensitivity high 
+fault-finder bad-transceiver sensitivity high 
+fault-finder bad-cable sensitivity high 
+fault-finder too-long-cable sensitivity high 
+fault-finder over-bandwidth sensitivity high 
+fault-finder broadcast-storm sensitivity high 
+fault-finder loss-of-link sensitivity high 
+fault-finder duplex-mismatch-HDx sensitivity high 
+fault-finder duplex-mismatch-FDx sensitivity high 
+password manager
+
+

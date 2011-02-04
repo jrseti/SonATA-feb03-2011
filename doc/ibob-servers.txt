@@ -1,0 +1,5 @@
+SonATA was not working this afternoon. bfantselect was timing out. It turns out that the IBOBServerBFA was not responding. After I restarted in it on auxcntl, all worked fine.
+
+Normally you restart the servers with "ataps -c restart -p IBOBServerBFA", but there is apparently a bug in the ProcessServer that will stop a server, but not restart it, if the server is a ruby server. So, I had to kill the process with the "kill" command and the ProcessServer automatically restarted it.
+
+SonATA now appears to be running. 

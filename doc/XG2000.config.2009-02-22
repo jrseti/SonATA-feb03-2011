@@ -1,0 +1,113 @@
+# Fujitsu XG2000 running configuration as of 0845, 2009-02-22.
+# This configuration seems to work well, but there is no
+# link aggregation to the HP Procurve.
+xg# date
+2010/02/22-16:38:36
+xg# show running-config
+# "XG2000" E11L10 Z02 configuration 2010/02/22-16:38:40
+!
+management-lan domain csr.seti.org
+management-lan ip 10.1.5.3/24
+!
+bridge jumbo-frame 9216
+!
+vlan 1 description default
+spanning-tree
+!
+interface port 1
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 2
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 3
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 4
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 5
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 6
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 7
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 8
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 9
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 10
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 11
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 12
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 13
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 14
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 15
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 16
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 17
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 18
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 19
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+interface port 20
+  vlan-member allowed vlan 1 egress-untagging
+  multicast-forwarding forward-unregistered-mac
+!
+bridge mac-address-table static ffff.ffff.ffff vlan 1 port 1 2 3 4 5 6 7 8 9 10 
+11 12 13 14 15 16 17 18 19 20
+!
+ip snooping protocol igmp
+ip snooping vlan 1
+ip snooping vlan 1 fast-leave
+ip snooping vlan 1 querier ip 10.1.50.3
+!
+!
+line console
+ baud-rate 9600
+ terminal window 80 24
+!
+telnet-server
+!
+end
+

@@ -1,0 +1,28 @@
+::script::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+format object "%COO(d;A;ICRS) | %COO(d;D;ICRS) | %PM(A)| %PM(D)| %PLX(V)| %SP(S) | %FLUXLIST(B;F) | %FLUXLIST(V;F) | %IDLIST(S;HIP) | %IDLIST(S;HD) | %IDLIST(S;TYC) |  %IDLIST(S;3C) %IDLIST(1)"
+echo "RA J2000 <deg> | Dec J2000 <deg> | pm RA mas/yr | pm Dec mas/yr | parallax mas | spectralType | bMag | vMag | HIP ID | HD ID | Tycho ID | aliases"
+3c144
+3c145
+3c274
+3c292
+3c400
+3c405
+3c461
+
+::console:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+C.D.S.  -  SIMBAD4 rel 1.091  -  2008.07.14CEST21:16:32
+RA J2000 <deg> | Dec J2000 <deg> | pm RA mas/yr | pm Dec mas/yr | parallax mas | spectralType | bMag | vMag | HIP ID | HD ID | Tycho ID | aliases
+total execution time: 21.797 secs
+simbatch done
+
+::data::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+083.63321 | +22.01447 | ~ | ~ | 7 | F |  |  |  |  |  |  3C 144.0 V* CM Tau
+083.8221 | -05.3911 | ~ | ~ | ~ | ~ |  | 5 |  |  |  |  3C 145 M  42
+187.7059308 | +12.3911233 | ~ | ~ | ~ | ~ | 10.4 | 12.86 |  |  |  |  3C 274 M  87
+207.57 | +64.65 | ~ | ~ | ~ | ~ |  |  |  |  |  |  3C 292 3C 292
+290.9250 | +14.5092 | ~ | ~ | ~ | ~ |  |  |  |  |  |  3C 400.0 SNR G049.2-00.5
+299.86815 | +40.73392 | ~ | ~ | ~ | ~ | 16.22 |  |  |  |  |  3C 405 4C 40.40
+350.850 | +58.815 | ~ | ~ | ~ | S |  |  |  |  |  |  3C 461.0 SNR G111.7-02.1

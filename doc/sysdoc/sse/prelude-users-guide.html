@@ -1,0 +1,246 @@
+<html>
+<head>
+<title>Prelude User's Guide</title>
+</head>
+<body>
+Version 1.19 2010-Jan-25 20:32:38 UTC
+<h3> Prelude User's Guide</h3>
+
+<ul>
+<li> Starting one or more automated, sequential tasks.
+<pre>
+There are a variety of automated tasks that can be run under 
+scheduler control:
+<ul>
+<li>autoselectants
+    Automatically select ants for primary and synth beam lists
+    based on ant availability and recent ant quality checks.
+<li>prepants
+    Prepare antennas:
+     - allocate (fxconf reassign selected ants from 'none' to 'bfa')
+     - turn on lnas
+     - set pams
+     - set feed focus for nominal band being observed
+<li>freeants
+    Restore ants to nominal configuration:
+     - move ants to azel 225 30
+     - set feed focus to 1420
+     - deallocate (fxconf reassign ants from bfa to none)
+<li>bfreset
+    Reset beamformer ibobs (sky, walsh, rearm, dacinit)
+<li>bfautoatten
+    Set beamformer attemplifiers
+      - point ants at dark sky (az: 330 el: 30)
+      - set tunings to 1420 MHz
+      - bfibob autoatten
+<li>bfinit
+    Initialize beamformers with selected ants
+<li>bfxxx (TBD)
+    Check for low ant levels (bftrackephem --calalarms...)
+<li>caldelay
+    Delay calibration.
+<li>calphase
+    Phase calibration.
+<li>calphase8ghz (TBD)
+    Phase calibration conducted at 8 GHz for spacecraft checks.
+<li>calfreq
+    Run a series of frequency calibrations.
+<li>calcp (TBD)
+    Circular pol calibration.
+<li>obs 
+    Run observing program using configured parameters.  In
+    addition to SETI observing, this includes "IF" tests,
+    RF tests, birdie scans, etc.  This is the default task.
+<li>testsig (TBD)
+    System check using baseband test signal.
+<li>testgeobeacon (TBD)
+    System check using a geostationary satellite beacon,
+    such as amc7.  This uses a single antenna. (More TBD).
+<li>testdeepspace (TBD)
+    System check using a deep space probe (voyager1, etc.).
+    Note: requires previous 8 GHz phase calibration.
+</ul>
+
+There are two ways to specify the list of tasks:
+<ol>
+<li>Set the 'tasks' scheduler parameter and issue a
+'start tasks' command.  For example:
+
+seeker>> sched set tasks caldelay,calphase,obs
+seeker>> start tasks
+
+<li>Alternately, specify the tasks as a comma separated list of 
+arguments to 'start'.  This overrides the values set in 'tasks'. 
+For example:
+
+seeker>> start caldelay,calphase,obs
+</ol>
+<li>Example uses:
+<ol>
+<!-- -------------------------------------- -->
+<li>Prepare antennas and beamformers, do delay and phase cals, 
+and start observing.  Stop observing sometime later, and release
+the ants:
+
+seeker>> tscope connect
+seeker>> sched set tasks prepants,bfreset,bfautoatten,bfinit,\
+  caldelay,calphase,obs
+seeker>> start tasks 
+...
+seeker>> stop
+seeker>> freeants
+seeker>> tscope disconnect
+
+Note that 'freeants' is an alias for 'start freeants'.
+
+Or, equivalently:
+seeker>> tscope connect
+seeker>> start prepants,bfreset,bfautoatten,bfinit,caldelay,\
+  calphase,obs
+...
+seeker>> stop
+seeker>> freeants
+seeker>> tscope disconnect
+
+<!-- -------------------------------------- -->
+<li>Run a suite of system checks, calibrate, then observe:
+
+seeker>> tscope connect
+seeker>> start testsig,testgeobeacon,autoselectants,prepants,\
+  bfreset,bfautoatten,bfinit,caldelay,calphase,calfreq,calcp,obs
+...
+
+<!-- -------------------------------------- -->
+<li>Calibrate, run a spacecraft test at 8 GHz, then observe in 
+another band
+
+seeker>> sched set tasks prepants,bfreset,bfautoatten,bfinit,\
+   caldelay,calphase8ghz,testdeepspace,calphase,obs
+seeker>> start tasks 
+
+
+<!-- -------------------------------------- -->
+<li> Fully automated observing, wide freq band:
+
+Normally you'd source a parameter file first:
+
+seeker>> source obs-params.tcl
+
+These parameters, among others, would be set in that file:
+
+seeker>> sched set target auto
+seeker>> act set type target
+seeker>> tscope set antlistsource antgroup
+
+seeker>> sched set tasks autoselectants,prepants,bfreset,bfautoatten,\
+  bfinit,caldelay,calphase,calfreq,obs 
+
+Connect to the telescope:
+
+seeker>> tscope setup
+
+Start the sequence of tasks:
+
+seeker>> start tasks
+...
+seeker>> stop
+seeker>> freeants
+seeker>> tscope cleanup
+
+</ol>
+
+Notes:
+<ul>
+<li>If a stop command is issued, the sequence terminates at that point.
+If you are using the tasks list to specify the tasks,
+then saying 'start tasks' again will cause it to begin
+again with the first task on the list.
+
+<li>It's important to remember to issue the 'freeants' command to 
+free up ATA resources when the observing session is complete.
+'freeants' can be run directly as a standalone command, or as a scheduler
+task, e.g., 'start freeants'.
+
+<li>'tscope setup' is an alias for 'tscope connect'
+
+<li>'tscope cleanup' is an alias for 'tscope disconnect'
+
+<li>Some tasks that run in a fully automatic way can also be run
+"semi-manually" by specifying the 'obs' task directly with appropriate
+parameters.  Be careful to distinguish between the two:
+
+For example, if you wanted to run a fully automated delay calibration,
+where the system picks the target and integration time for you,
+you would say:
+
+seeker>> start caldelay
+
+or equivalently:
+
+seeker>> sched set tasks caldelay
+seeker>> start tasks
+
+If you wanted to specify the target (casA = ID 406) and 
+integration time (30s) yourself, you would say:
+
+seeker>> act set targetbeam1 406
+... [set target on other beams]
+seeker>> act set type cal
+seeker>> tscope set caltype delay
+seeker>> tscope set caltime 30
+... [set other params as needed]
+
+Then run an 'obs' task by doing either:
+
+seeker>> sched set tasks obs
+seeker>> start tasks
+
+or
+
+seeker>> start obs
+
+This will run the calibration activity with the settings you've
+provided.
+
+</ul>
+
+<hr>
+<li><b>Selecting ants</b>:
+
+Ants to be used can be specified in these ways:
+
+   1. Use the tscope parameters (manual settings).  
+ 
+        tscope set antlistsource param
+        tscope set antsxpol 1a,1b
+        tscope set antsypol 1b,1c
+        tscope set antsprimary 1a,1b,1c,1d
+
+   2. Use the backend server 'antgroup':
+
+      First:
+       
+        tscope set antlistsource antgroup
+
+      Then:
+
+        Tell the backend server to automatically select ants based on
+        ATA information (fxconf, arrayhealth) etc., putting them 
+        into the appropriate antgroups.
+
+        This can be initiated with the seeker 'autoselectants' strategy,
+        or run manually with this tscope immediate command:
+
+          tscope autoselectants
+
+        TBD: At some point there should be an option that says whether 
+        prelude should take all the available ants and point them as 
+        part of its observing (for the benefit of commensal observers)
+        or whether it should leave the ants it doesn't need on the free
+        list.  Initially it will take and point all the ants.
+
+</ul>
+</pre>
+
+</body>
+</html>

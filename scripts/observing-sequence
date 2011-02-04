@@ -1,0 +1,64 @@
+in /home/sonata/OpenSonATA/scripts:
+
+
+> source 3beam-xpol-800KHz-72dx-env-vars #  for single pol
+
+or
+
+> source 3beam-dualpol-800KHz-72dx-env-vars # for dual pol
+
+>switchConfigFile-3beam-800KHz-72dxs
+
+> runsse
+
+For Single Antenna, 4L:
+
+seeker> tscope setup
+
+seeker> source tscope-setup-3beam-4l.tcl
+
+seeker> start tasks
+
+seeker> source rosetta-3beam-20MHz.tcl
+
+seeker> start obs
+
+ . . .
+
+To finish:
+
+seeker> tscope point 4l azel 0.0 41.0
+
+seeker> tscope cleanup
+
+===============================================
+
+For the full Array use:
+
+seeker> tscope setup
+
+seeker> source tscope-setup-3beam-800KHz-1410-1450MHz.tcl # for autotarget
+
+seeker> start tasks
+
+seeker> source 3beam-autotarget-20MHz-1410-1450MHz.tcl # for autotarget
+ 
+seeker> start obs
+
+or 
+
+seeker> tscope setup
+
+seeker> source tscope-setup-3beam-800KHz.tcl # for rosetta
+
+seeker> start tasks
+
+seeker> source rosetta-3beam-20MHz.tcl # for rosetta
+
+seeker> start obs
+
+To finish:
+
+seeker> freeants
+
+seeker> tscope cleanup

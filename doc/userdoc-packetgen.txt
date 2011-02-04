@@ -1,0 +1,80 @@
+packetgen
+
+packetgen generates dual polarization ATADataPackets as either
+multicast packets over the network or a disk file.  
+The data are gaussian noise with optional continuous wave signals 
+drifting in frequency.
+
+There are two modes. The default mode is channel data, simulating the
+output from the channelizer. The other mode is beam data, simulating
+data from the beamformer.
+
+For channel mode, the default IP address is 239.1.1.1 and the port is 10000. 
+For beam mode, the default IP address is 226.0.0.1 and the port is 9999.
+
+The default polarization is X and Y Linear. The same data is sent to both
+polarizations.
+The default number of packets is 10000.
+The default wake up interval is 0, so that the packets are sent as fast as possible.
+The default noise power is 1.0.
+The default bandwidth is 104.8576 MHz which is appropriate for beam mode.
+There is no default signal description ( snr, drift, frequency).
+There can be multiple signals. The frequency parameter defines a new signal
+with whichever snr and drift was last specified.
+
+> packetgen --help
+packetgen [-# seed] [-a ipAddr] [-p port] [-x] [-y] [-f packetFilename]
+			[-c channel] [-s source] [-C ] [-b] [-l]
+ 			[-n numberOfPackets] [-i wakeupInterval]
+			[-z packetBurst]
+ 			[-P noise power] [-B bandwidth]
+ 			{[-S snr] [-D drift] [-F freq]}
+
+   -#	seed	seed for the random number generator that creates the
+		gaussian noise.
+
+   -a	ipAddr	IP Address for the multicast packets
+
+   -p	port	Port for multicast packets
+
+   -x		Set polarization to XLINEAR and switch to single pol mode
+
+   -y		Set polarization to YLINEAR and switch to single pol mode
+
+   -f	packetFilename	Filename for disk output. No network packets.
+
+   -c channel	Channel number (if in channel mode)
+
+   -s source	Type of packet format ( Channel=1 or Beam=0 ) 
+
+   -C		Set polarization to Left and right circular 
+
+   -b		Generate beam packets
+
+   -l		Use lazy mode for marshalling data (default: false)
+
+   -n	numberOfPackets	Number of packets to generate (default: 10000)
+
+   -i 	wakeupInterval	Wait time between packets in microseconds (default: 0)
+
+   -P	noisePower	Mean power if gaussian noise.
+
+   -B	Bandwidth	Bandwidth of data stream (default:
+
+   -S	snr		Signal to noise ratio of a signal
+
+   -D   drift		Drift rate hz/sec of a signal
+
+   -F 	freq		Frequency of a signal. -bw/2 <= freq <= bw/2
+
+   -z   packetBurst	Number of packets to send after waking up
+
+
+For channelizer:
+./packetgen -a 226.0.0.1 -b -p 9999 -x -n 4000000 -P 200 -S 20 -B 3.276800 -D -0.10 -F 0.000010 -l -i 500 -z 10
+
+
+For the dx:
+./packetgen -x -p 10000 -a 239.1.1.1 -n 4000000 -P 200 -S 20 -B 0.546333333 -D -0.10 -F 0.000010 -l -i 100 -z 10
+
+

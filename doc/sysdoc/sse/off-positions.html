@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="">
+   <TITLE>Determining multibeam OFF positions in Prelude</TITLE>
+</HEAD>
+<BODY>
+<H3>Determining multibeam OFF positions in Prelude</H3>
+<pre>
+Version 1.3 2010-Jan-25 20:32:11 UTC
+
+Requirements:
+
+1. Assume a minimum pointing separation, e.g., 2 synthesized 
+beamwidths.
+
+2. All of the ON positions must be avoided by the minimum separation.
+
+3. All of the OFF positions must be at least the minimum separation
+apart.
+
+4. None of the OFFs may go outside the primary FOV (3 dB down).
+
+5. Very low or high declination targets must not be allowed to 
+overlap in RA.
+
+
+Preference order for choosing OFF positions:
+
+1. The first choice for the OFF position is to use the time since the 
+previous observation, along with the earth's sidereal rotation rate,
+to determine the RA that would put the beam back in the orientation
+it had during the previous ON observation (i.e., move east, toward
+increasing RA, from the original pointing position).
+
+Note that the rotational angular velocity of the earth
+is ~ 0.25 degrees per minute, so it won't take long to
+move outside the primary FOV. 
+
+2. If the first choice fails any of the requirements,
+try these directions, in this order:
+
+  a. south (decreasing dec).
+  b. north (increasing dec).
+  c. west (decreasing RA).
+  d. east (increasing RA).
+  e. any open position in the primary FOV that meets all the
+     requirements.
+
+</pre>
+
+</BODY>
+</HTML>

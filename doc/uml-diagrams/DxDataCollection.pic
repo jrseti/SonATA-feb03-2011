@@ -1,0 +1,206 @@
+# DxDataCollection.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# DX-Activity Startup messages
+
+.PS
+
+
+copy "sequence.pic";
+
+spacing = 2.0;
+# doc version
+move right;
+move right 40;
+move down 2;
+"DxDataCollection.pic v2.0 2010-Jan-06 18:31:50 UTC"
+move left 40;
+# vertical spacing between messages
+arrowhead = 7;
+arrowwid = 0.5;
+arrowht = 1.0;
+
+step();
+# title
+step();
+move down;
+move down; move right; move right; 
+"DX Activity Data Collection Messages" ljust
+move down;
+move down;
+move down;
+move down;
+step();
+step();
+move right;
+
+# move objects apart horizontally
+movewid = 3.5;
+
+#define the objects
+boxht = 3.0;
+
+# SseInputTask
+#boxwid = 7.0;
+#object(SseInput,"Sse");
+
+# CmdTask
+boxwid = 7.0;
+object(Cmd,"Cmd");
+
+# ControlTask
+boxwid = 9.0;
+object(Control,"Control");
+
+# CollectionTask
+boxwid = 13.0;
+object(Collect,"Collection");
+
+# Receiver
+boxwid = 12.0;
+object(Receiver,"Receiver");
+
+# Channel
+boxwid = 11.0;
+object(Channel,"Channel");
+
+# Spectrometry
+boxwid = 17.0;
+object(Spectrometry,"Spectrometry");
+
+boxwid = 11.0;
+object(Activity, "Activity");
+
+move down;
+step();
+step();
+step();
+
+awid = 1.0;
+active(Control);
+active(Cmd);
+active(Collect);
+active(Activity);
+active(Channel);
+active(Spectrometry);
+active(Receiver);
+# message sequences
+
+message(Cmd, Control, "Activity Parameters");
+step();
+message(Control,Activity,"Set State INIT");
+step();
+message(Control,Collect,"Tune Dx");
+message(Collect,Receiver,"Tune Dx");
+step();
+message(Control,Activity,"Set State PENDNG BASELINE ACCUMULATION");
+step();
+message(Cmd,Control,"Start Time");
+message(Control,Collect, "Start Time");
+message(Collect,Channel, "Start Time");
+step();
+message(Collect,Receiver, "Read Packets");
+step();
+message(Receiver, Channel, "Data Packets");
+step();
+message(Channel,Collect,"Baseline Accumulation Started ");
+step();
+message(Collect,Control, "Baseline Accumulation Started ");
+step();
+message(Control,Activity,"Set State RUNNING BASELINE ACCUMULATION");
+step();
+step();
+lconstraint(Channel, "Subchannelization: ");
+step();
+lconstraint(Channel, "   Convert to Floating Point");
+step();
+lconstraint(Channel, "   DFB");
+step();
+lconstraint(Channel, "   FFT");
+step();
+lconstraint(Channel, "   Corner Turn");
+step();
+lconstraint(Channel, "   Accumulate half-frame");
+
+message(Channel,Spectrometry,"Half-Frame Ready");
+step();
+step();
+lconstraint(Spectrometry, "For N half-frames:");
+step();
+lconstraint(Spectrometry, "Compute New Baseline");
+message(Spectrometry, Channel, "Baseline Accumulation Complete");
+step();
+message(Channel,Collect,"Baseline Accumulation Complete ");
+step();
+message(Collect,Control,"Baseline Accumulation Complete ");
+step();
+message(Control,Activity,"Set State PENDING DATA COLLECTION");
+step();
+step();
+lconstraint(Control, " Data Collection");
+step();
+#message(Cmd,Control, "Start Time");
+#message(Control,Activity, "Set State PENDING DATA COLLECTON");
+#message(Control,Collect, "Start Time");
+#message(Collect,Channel, "Start Time");
+#message(Collect,Receiver, "Read Packets");
+#awid = 1.0;
+#step();
+message(Receiver, Channel, "Data Packets");
+step();
+message(Channel,Collect,"Data Collection Started ");
+step();
+message(Collect,Control, "Data Coll Started ");
+step();
+message(Control,Activity,"Set State RUNNING DATA COLLECTION");
+step();
+step();
+lconstraint(Channel, "Subchannelization: ");
+step();
+lconstraint(Channel, "   Convert to Floating Point");
+step();
+lconstraint(Channel, "   DFB");
+step();
+lconstraint(Channel, "   FFT");
+step();
+lconstraint(Channel, "   Corner Turn");
+step();
+lconstraint(Channel, "   Accumulate half-frame");
+
+message(Channel,Spectrometry,"Half-Frame Ready");
+step();
+step();
+lconstraint(Spectrometry, "Compute New Baseline");
+step();
+lconstraint(Spectrometry, "   and Apply ");
+step();
+lconstraint(Spectrometry, "For all Resoultions Compute");
+message(Spectrometry, Channel, "CD Data");
+lconstraint(Spectrometry, "   CD Data");
+message(Spectrometry, Channel, "Pulse Data");
+lconstraint(Spectrometry, "   Pulse Data");
+message(Spectrometry, Channel, "CW Data");
+lconstraint(Spectrometry, "   CW Data");
+step();
+message(Spectrometry, Channel, "Data Coll Complete");
+step();
+message(Channel,Collect,"Data Collection Complete ");
+step();
+message(Collect,Control, "Data Collection Complete ");
+step();
+message(Control,Activity,"Set State DATA COLLECTION COMPLETE");
+step();
+message(Control,Activity,"Set State PENDING SIGNAL DETECTION");
+step();
+step();
+complete(Activity);
+complete(Collect);
+complete(Control);
+complete(Channel);
+complete(Receiver);
+complete(Spectrometry);
+complete(Cmd);
+step();
+step();
+.PE

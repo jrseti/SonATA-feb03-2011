@@ -1,0 +1,6 @@
+Makefile
+Makefile.in
+fileModTimeInSecs
+currentTimeInSecs
+bintail
+systemStatusToCurses

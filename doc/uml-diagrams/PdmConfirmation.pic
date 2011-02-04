@@ -1,0 +1,178 @@
+# PdmConfirmation.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# PDM Confirmation Messages
+
+.PS
+
+
+copy "sequence.pic";
+
+spacing = 2.0;
+# doc version
+move right;
+move right 40;
+move down 2;
+"PdmConfirmation.pic v2.0 2010-Jan-06 18:32:18 UTC"
+move left 40;
+# vertical spacing between messages
+arrowhead = 7;
+arrowwid = 0.5;
+arrowht = 1.0;
+awid = 1.0;
+dashwid = 1.0;
+
+step();
+# title
+step();
+move down;
+move down; move right; move right; 
+"PDM Activity Primary Signal CWD Confirmation Messages" ljust
+move down;
+move down;
+move down;
+move down;
+step();
+step();
+move right;
+
+# move objects apart horizontally
+movewid = 3.5;
+
+#define the objects
+boxht = 4.0;
+
+# PdmControlTask
+boxwid = 12.0;
+object(Control,"Control");
+
+#PdmArchiveTask
+boxwid = 11.0;
+object(Archive,"Archive");
+
+boxwid = 11.0;
+object(Activity, "Activity");
+
+# PdmConfirmationTask
+boxwid = 14.0;
+object(Conf,"Confirmation");
+
+# PdmCWDConfirmationTask
+boxwid = 14.0;
+object(CWD,"CW Confirm");
+
+# PdmPDConfirmationTask
+boxwid = 14.0;
+object(PD,"PD Confirm");
+
+#PdmCWDConfirmationChannel
+boxwid = 11.0;
+object(Channel,"Channel");
+
+boxwid = 24.0;
+object(Class,"Signal Classifier");
+
+# PdmSseInputTask
+boxwid = 7.0;
+object(Sse,"Sse");
+
+move down;
+step();
+step();
+step();
+
+# message sequences
+active(Control);
+step();
+#message(Control,Archive,"Start Archive");
+active(Conf);
+step();
+message(Control,Conf,"Start Confirmation");
+step();
+active(CWD);
+message(Conf,CWD,"Start Confirmation");
+step();
+message(Conf,PD,"Start Confirmaton");
+step();
+message(Conf,Sse,"Begin Sending Coherent Signals");
+step();
+step();
+lconstraint(Conf,"For each CW Candidate");
+message(Conf,Activity,"Get Next Candidate");
+rmessage(Activity,Conf);
+active(PD);
+message(Conf,PD,"Confirm Pulse Candidate");
+active(Channel);
+step();
+message(PD,Channel,"   Compute Channel Parameters ");
+rmessage(Channel,PD);
+inactive(Channel);
+message(PD,Conf,"Pulse Signal Confirmation Complete");
+step();
+message(Conf,Archive,"Pulse Signal Confirmation Complete");
+step();
+inactive(PD);
+active(CWD);
+message(Conf,CWD,"Confirm CW Candidate");
+step();
+active(Channel);
+message(CWD,Channel,"Compute Channel Parameters");
+rmessage(Channel,CWD);
+step();
+step();
+message(CWD,Channel,"Read CDData from Disk");
+step();
+step();
+lconstraint(CWD,"16 Subbands");
+lconstraint(Channel,"Corner Turn");
+step();
+lconstraint(Channel,"Inverse FFT");
+step();
+lconstraint(Channel,"16K Channels");
+step();
+lconstraint(Channel,"Dedrift");
+rmessage(Channel,CWD);
+lconstraint(Channel,"Heterodyne");
+inactive(Channel);
+step();
+step();
+message(CWD,Channel,"PowerDetection");
+rmessage(Channel,CWD);
+step();
+step();
+message(CWD,CWD,"Coherent Detection");
+step();
+step();
+lconstraint(CWD,"Dedrift");
+step();
+lconstraint(CWD,"Coherent Search");
+step();
+step();
+active(Class);
+message(CWD,Class,"Classify Signal");
+rmessage(Class,CWD);
+step();
+inactive(Class);
+message(CWD,Sse,"Coherent Results");
+step();
+message(CWD,Conf,"CW Signal Confirmation Complete");
+step();
+message(Conf,Archive,"CW Signal Confirmation Complete");
+step();
+step();
+step();
+lconstraint(Conf,"When All Candidates Done");
+message(Conf,Sse,"Done Sending Coherent Signals");
+step();
+message(Conf,Control,"Confirmation Complete");
+complete(Activity);
+complete(Control);
+complete(Conf);
+complete(CWD);
+complete(PD);
+complete(Sse);
+complete(Class);
+complete(Channel);
+complete(Archive);
+.PE

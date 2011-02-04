@@ -1,0 +1,17 @@
+Command=40003
+activityId=0
+Command=40010
+activityId=100
+ObsLen=25
+ifcSkyFreq=4
+pdmSkyFreq=4
+assignedBandwidth=2560
+baselineDelay=0
+operationsFlag=17
+daddResolution=0
+pulseThreshold=1212
+maxPulsesPerHalfFrame=5000
+maxPulsesPerSubbandPerHalfFrame=10
+daddThreshold=7
+Command=40013
+activityId=100

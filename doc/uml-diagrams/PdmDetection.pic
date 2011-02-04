@@ -1,0 +1,247 @@
+# PdmDetection.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# PDM Detction Messages
+
+.PS
+
+
+copy "sequence.pic";
+
+spacing = 2.0;
+# doc version
+move right;
+move right 60;
+move down 2;
+"PdmDetection.pic v2.0 2010-Jan-06 18:31:26 UTC"
+move left 60;
+move down 2;
+# vertical spacing between messages
+arrowhead = 7;
+arrowwid = 0.5;
+arrowht = 1.0;
+awid = 1.0;
+dashwid = 1.0;
+
+step();
+# title
+step();
+move down;
+move down; move right; move right; 
+"PDM Activity Signal Detection Messages" ljust
+move down;
+move down;
+move down;
+move down;
+step();
+step();
+move right;
+
+# move objects apart horizontally
+movewid = 5.5;
+
+#define the objects
+boxht = 4.0;
+
+# PdmSseInputTask
+#boxwid = 7.0;
+#object(SseInput,"Sse");
+
+# PdmControlTask
+boxwid = 14.0;
+object(Control,"Control");
+
+# PdmDetectionTask
+boxwid = 19.0;
+object(Detect,"Detection");
+
+boxwid = 15.0;
+object(Activity, "Activity");
+
+# PdmCWD
+boxwid = 21.0;
+object(CWD,"CW Detect");
+
+# PdmRead
+boxwid = 11.0;
+object(Read,"Read");
+
+boxwid = 21.0;
+object(CWDClust,"CWD Clust");
+
+# PdmPD
+boxwid = 24.0;
+object(PD,"Pulse Detect");
+
+boxwid = 19.0;
+object(PDClust, "PD Clust");
+
+# PdmSuperCluster
+boxwid = 23.0;
+object(Super,"Super Clust");
+
+# PdmSignalClassifier
+boxwid = 24.0;
+object(Class,"Sig Classifier");
+
+
+move down;
+step();
+step();
+step();
+
+# message sequences
+active(Control);
+active(Activity);
+step();
+step();
+lconstraint(Control, " Set up for ");
+step();
+lconstraint(Control, " Signal Collection");
+step();
+step();
+message(Control,Activity,"Set State");
+lconstraint(Activity," PENDING");
+step();
+lconstraint(Activity," SIGNAL");
+step();
+lconstraint(Activity," DETECTION");
+message(Control,Detect,"Start SD");
+step();
+step();
+active(Detect)
+message(Detect,Control,"SD Started");
+step();
+message(Detect,Activity,"Set State");
+lconstraint(Activity," SIGNAL");
+step();
+lconstraint(Activity," DETECTION");
+active(CWD);
+message(Detect,CWD,"Start Detection");
+step();
+step();
+lconstraint(CWD," For each slice");
+step();
+lconstraint(CWD," Retreive");
+step();
+lconstraint(CWD," Left & Right");
+step();
+lconstraint(CWD," CW Data from Disk");
+active(Read);
+step();
+message(CWD,Read,"Start Read");
+step();
+step();
+message(Read,CWD,"Read Done");
+step();
+inactive(Read);
+complete(Read);
+step();
+step();
+lconstraint(CWD," Unpack Data");
+step();
+step();
+message(CWD,CWD," Perform DADD");
+step();
+active(CWDClust);
+active(Super);
+step();
+message(CWD,CWDClust,"Over threshold paths");
+message(CWDClust,Super,"CW Clusters");
+step();
+inactive(CWDClust);
+complete(CWDClust);
+inactive(CWD);
+message(CWD,Detect,"CW Detection Done");
+complete(CWD);
+step();
+step();
+step();
+message(Detect,PD,"Start Detection");
+active(PD);
+step();
+step();
+lconstraint(PD,"For each Slice");
+step();
+lconstraint(PD, " & Resolution");
+step();
+step();
+step();
+step();
+message(PD,PD,"Slice Complete");
+step();
+step();
+step();
+lconstraint(PD,"   Over ");
+step();
+lconstraint(PD,"   Threshold");
+active(PDClust);
+step();
+message(PD,PDClust,"Triplets");
+step();
+message(PDClust,Super," PD Trains");
+step();
+inactive(PDClust);
+complete(PDClust);
+step();
+step();
+step();
+message(PD,PD,"Resolution Complete");
+step();
+inactive(PD);
+message(PD,Detect,"Pulse Detection Complete");
+step();
+complete(PD);
+step();
+message(Detect,Control,"SD Complete");
+step();
+inactive(Detect);
+complete(Detect);
+step();
+step();
+message(Control,Super,"clusterSignals()");
+step();
+rmessage(Super,Control," ");
+step();
+step();
+step();
+step();
+active(Class);
+message(Control,Class,"classifySignals()");
+step();
+step();
+message(Class,Super,"Get next Super Cluster");
+step();
+step();
+rmessage(Super,Class," ");
+step();
+inactive(Super);
+complete(Super);
+step();
+lconstraint(Class,"Apply");
+step();
+step();
+message(Class,Class,"Masks");
+message(Class,Activity,"Add to Signal List");
+step();
+step();
+step();
+message(Class,Activity,"If Candidate -- Add to Candidate List");
+step();
+step();
+rmessage(Class,Control," ");
+step();
+inactive(Class);
+complete(Class);
+step();
+step();
+step();
+lconstraint(Control,"Send Candidates");
+step();
+lconstraint(Control,"Signals &");
+step();
+lconstraint(Control,"Bad Bands to SSE");
+complete(Activity);
+complete(Control);
+.PE

@@ -1,0 +1,196 @@
+<html>
+<head>
+<title> Prelude Target Selection Algorithm
+</head>
+<h3>  Prelude Target Selection Algorithm </h3>
+<pre>
+
+The Prelude SETI scheduler takes the following factors into account
+when selecting targets:
+<ul>
+Target "merit" factors (user parameter names are in parenthesis):
+
+<li> Catalog type ("catalog")
+<li> Declination ("dec")
+<li> Distance ("dist")
+<li> Position near meridian ("meridian")
+<li> Remaining time until target sets ("timeleft")
+<li> Fraction of frequency band observed ("completelyobs")
+<li> Primary beam target ID ("primaryid")
+
+Other factors:
+
+<li> Target visibility
+<li> Angular separation from Sun and Moon
+<li> Declination separation from geostationary satellite band
+
+For multitarget observations:
+
+<li> Minimum angular separation between targets 
+<li> Target visibility within primary beam
+</ul>
+
+I. Scheduling algorithm:
+
+1.  Determine how the primary beam Field of View (FOV) will be
+    selected, and load target catalogs as required:
+
+    A. As primary observer:
+
+       Load the high priority catalogs, if not already loaded.
+       These will be used to choose the targets that
+       will determine the center of the primary FOV.
+       Cull those targets that fall outside the user-selectable 
+       min/max declination limits.
+
+    B: As commensal observer:
+
+       Use the current ATA primary beam position as the primary FOV.
+       Load all "on-demand" targets that could fall within this
+       primary FOV, based on the lowest possible observing frequency.
+
+2. Eliminate targets that:
+
+   a. are not visible.
+
+   b. fall within preassigned primary-beam pointing regions that
+         are only partially visible (survey mode only).
+
+   c. fall within the user-selectable Sun & Moon avoidance angles.
+
+   d. fall within a user-selectable avoidance angle of the
+      geostationary satellite band declination for the site.
+
+3. Choose a "first" target:
+
+   a. If the current "first" target is still available and has not
+      been fully observed, then continue observing it.
+
+   b. Otherwise, of the targets that remain, assign a score to each based 
+      on the merit factors shown below.  Choose the target with the highest 
+      score.  
+
+4. Choose additional targets for multiple beams, if needed:
+
+   a. If the current additional targets are still visible, continue to 
+      observe them.  Otherwise:
+
+   b. Determine the primary beam FOV:
+
+      1. As primary observer: 
+
+           If the first target has a preassigned primary beam position 
+           associated with it (survey mode), then use that for the 
+           primary FOV.
+
+           Otherwise use the first target's coordinates as the center of the
+           primary beam FOV.
+
+      2. As commensal observer:
+
+           Use predefined primary FOV.
+
+   c. Load the "on-demand" targets from the database that roughly cover
+      this primary FOV, if not already loaded.
+
+   d. Eliminate targets that fall outside the primary beam FOV.
+
+   e. For each additional target desired:  
+
+      1. Eliminate targets that are closer than the minimum angular
+         separation to the already chosen targets
+
+      2. Pick the top scoring target
+
+
+II. Merit Factors
+
+The score is created by multiplying the merit factors, which are:
+<ul>
+<li> Catalog Type
+<li> Declination
+<li> Distance
+<li> Position near meridian
+<li> Remaining time until target sets
+<li> Fraction of frequency band observed
+<li> Primary beam target ID
+
+</ul>
+Merit factors in more detail:
+<ul>
+<li> Catalog Type:
+
+   High priority catalogs are preferred over low priority catalogs.
+   The first catalog on each list gets preference within that list.
+
+<li>Target Declination:
+
+   General rule: prefer lower declination targets, due to their lower
+   time availability.
+
+   Nominal value ranges (North Pole to South Pole): [1 : 71]
+
+<li>Target Distance:
+
+   General rule: prefer closer targets.
+
+   If max lightyears limit (user parameter) exceeded:
+      Merit = 0
+   Otherwise:
+      DREHER_DIST_CONST = 256;
+      Merit = parallaxArcSec * parallaxArcSec * DREHER_DIST_CONST
+      Nominal value ranges (1000 to 1 PC): [0.000256 : 256]
+
+   Note: minimum value is currently forced to be no less than 1
+   and max lightyears limit is ignored.
+
+<li>Target position near meridian:
+
+   General rule: prefer targets near the meridian, particularly
+   on the rise side.
+
+   Specific merit factors:
+     Within 2 hours on the rise side of meridian:  200 to 150
+     Within 1 hour on the setting side of meridian:  100 to 150
+     Otherwise:  100
+
+<li>Remaining time until target sets:
+
+   General rule: this is a gradual gradient, so that there
+   is a tendency to pick targets nearer to rising, 
+   without overpowering the merit factor that favors targets
+   at lower declinations.
+   
+   Not visible, or min time reserved for followups is not available:
+      Merit = 0
+   Otherwise:
+      Nominal value ranges: [~1.15 : 1.0]
+
+<li>Fraction of frequency band observed:
+
+   General rule: prefer targets in this order:
+      1. partially observed, in order to try to finish them
+      2. complete unobserved
+      3. fully observed 
+
+   Merit = 1/(1 - fractionObserved)  (max=10)
+   Nominal value ranges: [1.0 : 10.0]
+
+   If target has been fully observed, the observed freqs are 
+   cleared and:
+
+      Merit = Merit * 0.001
+
+<li> Primary beam target ID
+
+   Targets whose primary target ID matches that of the preferred 
+   primary target ID get a higher merit.
+
+</ul>
+
+
+</pre>
+
+<body>
+</body>
+</html>

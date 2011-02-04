@@ -1,0 +1,443 @@
+<html>
+<head>
+<title>Tape Jukebox</title>
+</head>
+<body>
+
+<h3> Tape Jukebox</h3>
+<b><pre>
+  Model: Sun StorEdge L9 Tape Autoloader
+  Tape Drive: HP Ultrium 1-SCSI (LTO - Linear Tape Open)
+  Tape capacity: 200 Gbyte (2:1 compression)
+  Number of tape slots: 9
+  Software:  Veritas NetBackup, installed in sse3:/opt/openv/netbackup
+             version: NetBackup-Solaris2.6 4.5GA
+  Notes:
+  - Has built-in web server for status & control
+
+  - Admin programs:
+      bpadm (x11)
+      jnbSA (java)
+
+  - Four types of user clients are available:  
+    jbpSA (java)
+    bp (text menus)
+    xbp (x11)
+    cmdline utilities: bparchive, bpbackup, bplist, bprestore
+
+  - /opt/openv/netbackup/MediaMgr_DeviceConfig_Guide.txt
+    describes how to install and configure new devices
+
+Notes:
+
+The netbackup software keeps a database of files written to tapes.
+This database needs to be preserved with the tapes in order to properly
+read off the files.  One of the tapes in the jukebox can
+be designated for storage of the database information.  There is also
+a mechanism for saving a second copy of the database to disk.
+
+The software keeps track of which tapes are in which jukebox slots,
+by way of the tape barcodes.  When tapes are removed or added, the
+software needs to be told to update its tape inventory information.
+
+
+Some useful tape jukebox commands:
+
+1. Identify devices:
+
+   nss@sse3% /opt/openv/volmgr/bin/sgscan all
+   complete: Command not found
+   complete: Command not found
+   complete: Command not found
+   complete: Command not found
+   complete: Command not found
+   /dev/sg/c2t0l0: Changer: "HP      C7145"
+   /dev/sg/c2t1l0: Tape (/dev/rmt/1): "HP      Ultrium 1-SCSI" 
+   /dev/sg/c3t5l0: Disk (???): "Symbios StorEDGE A1000"
+   /dev/sg/c3t5l1: Disk (???): "Symbios StorEDGE A1000"
+
+-------------------------------------------
+2. See which tapes are loaded in which slots, and whether they match 
+the tapes that are expected:
+    (-rt = robot type, -rn = robot number)
+
+   /opt/openv/volmgr/bin/vmcheckxxx -rt tld -rn 0
+
+        Robot Contents          Volume Configuration
+
+Slot    Tape  Barcode           Media ID Barcode        Mismatch Detected
+====    ====  =============     ======== =============  =================
+  1      Yes  CP6730L1          6755L1   CP6755L1       Yes
+  2      Yes  CP6731L1          6730L1   CP6730L1       Yes
+  3      Yes  CP6732L1          6731L1   CP6731L1       Yes
+  4      Yes  CP6734L1          6732L1   CP6732L1       Yes
+  5      Yes  CP6770L1          6733L1   CP6733L1       Yes
+  6       No                    6734L1   CP6734L1       Yes
+  7       No                    6744L1   CP6744L1       Yes
+  8       No                    6735L1   CP6735L1       Yes
+  9       No
+
+
+
+-----------------------------------------------
+
+3. See how much data is recorded on which tapes:
+
+nss@sse2% /opt/openv/netbackup/bin/admincmd/bpmedialist 
+
+Server Host = sse2
+
+ id     rl  images   allocated        last updated      density  kbytes restores
+           vimages   expiration       last read         <------- STATUS ------->
+--------------------------------------------------------------------------------
+6756L1   9      4   06/05/2007 17:57  06/05/2007 20:20   hcart     19840       0
+
+
+-----------------------------------------------
+4. Determine which files are on which tapes (db dump of backup history):
+
+/opt/openv/netbackup/bin/admincmd/bpdbjobs -report -all_columns
+
+-----------------------------------------------
+
+5. Designate tapes for reuse by setting the expiration date to zero:
+
+/opt/openv/netbackup/bin/admincmd/bpexpdate -d 0 -m &lt;tape-barcode-id&gt; [eg: 6756L1]
+
+-----------------------------------------------
+6. Do a commandline backup of files:
+
+/opt/openv/netbackup/bin/bpbackup -p &lt;policy&gt; &lt;filename&gt; [filename ...]
+
+-----------------------------------------------
+7. show backed up files:
+
+all files:
+
+nss@sse2% /usr/openv/netbackup/bin/bplist -R "/*"
+
+
+backed up during a specific period:
+
+nss@sse2% /usr/openv/netbackup/bin/bplist -s 07/17/2007 -e 07/18/2007 -R "/*"
+/export/home/nss/sse_archive/permlogs/systemlogs/systemlog-2007-07-03.txt
+/export/home/nss/sse_archive/permlogs/systemlogs/systemlog-2007-05-02.txt
+/export/home/nss/tomtest.tcl
+
+Note: wildcards in filename specification are very finicky.
+If no files are found, the error reported will be:
+
+   EXIT STATUS 227: no entity was found
+
+Start & end dates are mm/dd/yyyy.
+
+If you want to show the backup date & time, add the -b and -l options:
+
+nss@sse2% /usr/openv/netbackup/bin/bplist -s 07/17/2007 -e 07/18/2007 -b -l -R "/*"
+-rw-r--r-- nss       software        36409 Jul 17 15:55 /export/home/nss/sse_archive/permlogs/systemlogs/systemlog-2007-07-03.txt
+-rw-r--r-- nss       software     10264782 Jul 17 15:55 /export/home/nss/sse_archive/permlogs/systemlogs/systemlog-2007-05-02.txt
+-rw-r--r-- nss       software          118 Jul 17 15:52 /export/home/nss/tomtest.tcl
+
+-----------------------------------------------
+
+8. Inventory the media contents (tapes) of a robotic library and update the volume database:
+
+/usr/openv/volmgr/bin/vmupdate -rt tld -rn 0
+
+-----------------------------------------------
+
+9. list backup policies:
+
+sse2% /usr/openv/netbackup/bin/admincmd/bppllist
+prelude-backup
+template_normal
+template_weekend
+
+
+-----------------------------------------------
+
+10. list policy attributes:
+
+sse2% /usr/openv/netbackup/bin/admincmd/bpplinfo prelude-backup -L
+Policy Type:            Standard (0)
+Active:                 yes
+Effective:              05/31/2007 21:13:07
+Follow NFS Mounts:      no
+Cross Mount Points:     no
+Client Compress:        yes
+Collect TIR info:       no
+Policy Priority:        0
+Ext Security Info:      no
+File Restore Raw:       no
+Client Encrypt:         no
+Max Jobs/Policy:        Unlimited
+Mult. Data Stream:      no
+Frozen Image:           no
+Backup Copy:            0
+Disaster Recovery:      0
+Max Frag Size:          0 MB (unlimited)
+Residence:              -  
+Volume Pool:            NetBackup  
+
+-----------------------------------------------
+
+11. Display listings from netbackup error log
+/usr/openv/netbackup/bin/admincmd/bperror -L
+
+-----------------------------------------------
+
+12. List volume pools:
+
+sse2% /usr/openv/volmgr/bin/vmpool -listall
+===================================================================
+pool number:  0
+pool name:    None
+description:  the None pool (for anyone)
+pool host:    ANYHOST
+pool user:    ANY
+pool group:   NONE
+================================================================================
+pool number:  1
+pool name:    NetBackup
+description:  the NetBackup pool
+pool host:    ANYHOST
+pool user:    0 (root)
+pool group:   NONE
+================================================================================
+pool number:  2
+pool name:    DataStore
+description:  the DataStore pool
+pool host:    ANYHOST
+pool user:    0 (root)
+pool group:   NONE
+================================================================================
+
+-----------------------------------------------
+
+13. List tape drive status:
+
+nss@sse3% /usr/openv/volmgr/bin/tpconfig -dl
+Currently defined drives and robots are:
+
+        Drive Name              HPUltrium1-SCSI0
+        Index                   0
+        NonRewindDrivePath      /dev/rmt/1cbn
+        Type                    hcart
+        Status                  DOWN
+        Shared Access           No
+        TLD(0) Definition       DRIVE=1 
+
+Currently defined robotics are:
+  TLD(0)     robotic path = /dev/sg/c2t0l0,
+             volume database host = sse-remote
+
+-----------------------------------------------
+
+14. Set tape drive as 'up':
+
+nss@sse3% /usr/openv/volmgr/bin/tpconfig -update -drive 0 -drstatus up
+Updated drive index 0 of type hcart in configuration
+
+nss@sse3% /usr/openv/volmgr/bin/tpconfig -dl
+Currently defined drives and robots are:
+
+        Drive Name              HPUltrium1-SCSI0
+        Index                   0
+        NonRewindDrivePath      /dev/rmt/1cbn
+        Type                    hcart
+        Status                  UP
+        Shared Access           No
+        TLD(0) Definition       DRIVE=1 
+
+Currently defined robotics are:
+  TLD(0)     robotic path = /dev/sg/c2t0l0,
+             volume database host = sse-remote
+
+-----------------------------------------------
+
+15. stop/start netbackup daemons:
+
+nss@sse3% /usr/openv/netbackup/bin/goodies/netbackup stop
+stopping the NetBackup request daemon
+stopping the NetBackup database daemon
+stopping the Media Manager device daemon
+stopping the Media Manager volume daemon
+
+nss@sse3% /usr/openv/netbackup/bin/goodies/netbackup start
+Media Manager daemons started.
+NetBackup request daemon started.
+
+Note: startup script is: /etc/rc2.d/S96netbackup
+
+-----------------------------------------------
+
+16. netbackup config file:
+
+nss@sse3% cat /usr/openv/netbackup//bp.conf
+SERVER = sse3
+CLIENT_NAME = sse3
+MEDIA_SERVER = sse3
+USEMAIL = obs-nnn@seti.org
+
+
+-----------------------------------------------
+
+17. Determine which tapes are catalog backup tapes on your system:
+
+(below taken from http://seer.entsupport.symantec.com/docs/273044.htm)
+
+A single command that will return a list of catalog tapes is this:
+# /usr/openv/volmgr/bin/vmquery -a -w |awk '$28==1 {print $1}'
+
+However, for detailed verification, you could run the following command to generate a list of all tapes:
+
+# /usr/openv/volmgr/bin/vmquery -a > /tmp/vmquery.out
+
+Search for the status string "0x1" which indicates that it is a 
+catalog backup tape. 
+
+After identifying all of the catalog backup tapes, the active catalog backup tapes should be identified. To identify the currently configured tapes, run the following command:
+
+# /usr/openv/netbackup/bin/admincmd/bpsyncinfo
+
+-----------------------------------------------
+
+18. To reuse a catalog tape:
+
+
+Step 2. Unassign the tapes you wish to re-use:
+
+# /usr/openv/volmgr/bin/vmquery -deassignbyid <media_id> <pool_number> <status>
+
+Example:
+# /usr/openv/volmgr/bin/vmquery -deassignbyid 000101 1 0x1
+
+Step 3. Overwrite the tape label:
+
+NOTE: This will effectively erase any previous information on the tape.
+
+# /usr/openv/netbackup/bin/admincmd/bplabel -m <media_id> -d <density> [-o] [-p volume_pool_name] [-n drive_name | -u device_number] [-host media_server]
+
+Example for robotic volume:
+# /usr/openv/netbackup/bin/admincmd/bplabel -m 000101 -d dlt -o -p NetBackup
+
+
+-----------------------------------------------
+
+19. How to tell if a tape is write protected.
+Mount tape, check its status, unmount:
+
+
+ss@sse3% /usr/openv/volmgr/bin/tpreq -d hcart -p NetBackup -f /tmp/tape1 -m 6770L1
+
+nss@sse3% mt -f /tmp/tape1 status
+HP Ultrium LTO tape drive:
+   sense key(0x7)= Write Protected   residual= 0   retries= 0
+   file no= 0   block no= 0
+
+(sense key = "No Additional Sense" for "not write protected")
+
+nss@sse3% /usr/openv/volmgr/bin/tpunmount -f /tmp/tape1
+
+
+-----------------------------------------------------------
+
+20. To check tape status (active, available, dbbackup, frozen, etc)
+in all pools:
+
+nss@sse3% /usr/openv/netbackup/bin/goodies/available_media
+media   media   robot   robot   robot   side/   ret    size     status
+ ID     type    type      #     slot    face    level  KBytes
+----------------------------------------------------------------------------
+DataStore pool
+
+NetBackup pool
+
+6730L1  HCART    TLD      0       1      -       9     384      ACTIVE
+6731L1  HCART    TLD      0       2      -       -     -        AVAILABLE
+6732L1  HCART    TLD      0       3      -       -     -        AVAILABLE
+6770L1  HCART    TLD      0       5      -       -     -        AVAILABLE
+6734L1  HCART    TLD      0       4      -       -     -        DBBACKUP
+
+None pool
+
+-----------------------------------------------------------
+21. verify backups (compare netbackup catalog to entries on backup tape,
+this does not compare the backed up files with the source)
+
+eg, verify backups within the last 12 hours, with long listing format:
+/usr/openv/netbackup/bin/admincmd/bpverify -hoursago 12 -l
+
+
+<hr>
+<h4>A. Restoring files from NSS tape backup</h4>
+
+Last updated:  19 Feb 2004
+
+On sse1 or sse3, depending on where the desired backup data is:
+
+1) su to root
+
+1.1)  Start the backup server if not already running:
+
+   /etc/rc2.d/S77netbackup start
+
+1.2)  GUI version:  /usr/bin/netbackup
+  (should be much easier to use than the text UI)
+
+2) To use the text UI
+
+   cd /opt/openv/netbackup/bin
+
+   ./bpadm  (text ui)
+
+   u) user backup & restore
+
+   r) restore
+
+   b) restore files & dirs from backups
+
+     d) change date range
+
+        This is the date range when the backup files were created,
+	not the original data file timestamps.
+
+	Set this to the date the data was collected, and use
+	the default times to get the whole day (ie, 00:00, 23:59)
+
+      
+     c) dir depth  (set to 0 for all levels)
+
+     a) dest path
+          be careful: first prompt is for source path!
+
+     p) search path
+
+       /usr/local/tomorrow (disk original data was written on)
+
+     s) select files & directories
+
+       - select your files
+       - use spacebar to page down a screen at a time
+
+     i) initiate restore
+
+	This starts a separate process which does the extraction.
+	It will create a status log which you can tail,
+	so make note of the path it gives you.
+
+3. When you're done, stop the server if you don't want it running:
+
+   /etc/rc2.d/S77netbackup stop
+
+
+Hints -
+
+Try using bprestore for batch restores (will
+ take a file list)
+
+google bpadm for documentation
+
+</pre></b>
+</body>
+</html>

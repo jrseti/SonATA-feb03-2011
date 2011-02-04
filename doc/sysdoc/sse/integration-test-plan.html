@@ -1,0 +1,178 @@
+<html>
+<head>
+<title> Prelude Integration & Test Plan </title>
+Version 1.15 2010-Jan-25 20:29:08 UTC
+<h2> Prelude Integration & Test Plan </h2>
+</head>
+<body>
+
+<ol>
+<p><li> Test all NSS components
+<ul>
+<li> Test baseband conversion of fielded IF chain
+<li> Test operation of 3rd IF chain
+<li> Verify baselines on all pdms (look for all known failure modes)
+<li> Verify polarity on all signal paths
+<li> Check that the test signal is seen on all pdms, in both pols
+<li> Verify that there is no test-signal cross-talk 
+<li> Test X-Y to L-R (circular) polarity conversion
+<li> Verify that all UPSs are operational
+<li> Confirm that all pdms have the correct software version
+<li> Verify that all Prelude computers have good NTP time reference
+<li> Verify that there is only one 'pps' program running on each pdm network.
+</ul>
+
+<p><li> Test ATA backend ASCII control interface
+<ul>
+<li> Verify all commands
+<li> Try all pointing coordinate systems, verify min/max coordinate limits
+<li> Check that all fields in status reports are within range and reasonable
+<li> Check error handling for invalid commands
+</ul>
+
+<p><li> Test Tunings
+<ul>
+<li> Does Prelude need to invert (flip) the frequency band in the PDM or IFC (N/A to baseband system?)
+<li> Verify that the full receiver frequency range can be accessed (0.5-11.2 GHz)
+<li> Look at Hydrogen, various satellites & probes
+<li> Ask Hat Creek to radiate signals at various precise frequencies, and
+confirm that they are seen as expected.
+<li> Test that the full IFP->D/A output band can be seen (~104 MHz wide?) (Is this possible?  Is Prelude IF at a fixed offset in the D/A band?)
+<ul>
+<li> Step pdms along the entire bandwidth
+</ul>
+</ul>
+
+<p><li> Test synthesized beams
+<ul>
+<li> Verify that all beams have the same sensitivity
+<li> Point 2 beams at the same point source, verify they see both it.
+<li> Move one beam away from the source in increments, measure how the signal gain falls off.
+<li> Determine minimum target separation needed to separate 2 beams for the maximum expected potential ET signal strength.
+<li> Point a beam far outside the primary FOV
+<li> Test pointings with 3 beams.
+<li> Verify that Prelude is computing the correct beam sizes for the primary and synthesized beams.
+
+</ul>
+
+<p> <li> Verify signal gain provided by using the collecting area of multiple telescopes
+<ul> 
+<li> reobserve spacecraft & satellites already detected with single dish
+<li> attempt to observe spacecraft too weak to detect with a single dish
+<li> natural masers
+</ul>
+
+<p><li> Verify Prelude Configuration
+<ul>
+<li> Antenna Hour Angle Limits (database table)
+<ul>
+<li> Try pointing the telescopes to the extreme elevation limits at various azimuths.
+<li> check target visibility (rise/set) (ATA vs Prelude) for various positions
+</ul>
+<li> Verify ATA site long, lat, altitude (database table)
+<li> Check validity of target catalog positions (gal survey, habcat)
+<li> Determine Prelude IF attn offset tables, based on frequency
+</ul>
+
+<p><li> Validate Tape Backup System
+<ul>
+<li> Save some files to tape, recover them, do bit compare
+<li> Verify that all appropriate files are being saved:
+<ul>
+<li> system & error logs
+<li> signal files
+<li> full database (signals, obs history, etc) (TBD: hot backup? or system downtime scheduled?)
+</ul>
+</ul>
+
+<p><li> Validate Archive Disk Rotation
+
+<p><li> Validate recent RFI, permanent RFI, and birdie masks
+<ul>
+<li> Make sure they are being created and applied correctly
+<li> For recent RFI, verify that the mask elements age off correctly
+<li> Also verify that all targets that fall inside the synthesized beam
+are excluded from the recent RFI mask.
+</ul>
+
+<p><li> Birdie Scans
+<ul>
+<li> Prelude Baseband 
+<li> ATA IF1
+<li> Where possible, track down birdie source and eliminate
+</ul>
+
+<p><li> Permanent RFI scans
+
+<p><li> Determine signal detection thresholds for observing
+<ul>
+<li> Pulse
+<li> Cw Power
+<li> CW coherent (primary & secondary)
+</ul>
+
+<p><li> Determine minimum multibeam pointing separation needed for "Offs"
+to have desired sensitivity falloff for expected signal strengths.
+
+<p><li>Test remote console & power cycle control 
+<ul>
+</ul>
+
+<p><li> Determine how effective multibeam observing is, in eliminating RFI.
+<ul>
+<li> What percentage of the RFI is eliminated?
+<li> Are separate OFF observations required?
+</ul>
+
+<p><li> Test Multibeam candidate followup sequences
+<ul>
+<li> Point one beam on sky target, one beam off, make sure candidate signal continues to be tracked through entire followup sequence.
+<li> Test that the followup sequence is followed correctly if signal is detected or not detected at each step
+<li> Verify that single beam mode (with full followup sequences) still works
+</ul>
+
+<p><li> Verify automated observing. Check that:
+<ul>
+<li> Prelude starts up and shuts down at the correct times.
+<li> The overall system watchdog restarts Prelude if the latter fails.
+<li> The daily report is being sent at the appropriate time. Check contents for validity.
+<li> Automated email is sent when the system cannot continue observing.
+<li> Automated email is sent if an "interesting" signal is being observed.
+<li> Tape backups & archive disk rotations do not interfere with observing,
+and that observing does not adversely affect (e.g., corrupt) backups.
+<li> Candidate signals are being archived as expected.
+</ul>
+
+<p><li> Scheduling.  Verify that:
+<ul>
+<li> Sun, Moon avoidance angles are being enforced
+<li> Reasonable targets are being selected
+<li> Target merit factors are being applied correctly
+<li> Target catalogs are set up such that there is always at least one target in the primary FOV for each beam for every observation
+<li> Verify target frequency coverage is reasonable.
+</ul>
+
+<p><li> Remote monitor & control interface.  Verify that:
+<ul>
+<li> All needed commands can be sent
+<li> All needed data products can be accessed
+</ul>
+
+<p><li> Verify sufficient system resources are available on sse machines as Prelude runs
+<ul>
+<li> memory
+<li> disk space (archive files, database files, ...)
+<li> network bandwidth internal to HC
+<li> network bandwidth from HC to offsite observers at MV, etc.
+</ul>
+
+<p><li> Review Post Detection protocol
+<ul>
+<li> Test as many of the steps as possible
+<li> Verify that all needed resources are identified (equipment, contact info, etc).
+</ul>
+
+</ol>
+</body>
+</html>
+

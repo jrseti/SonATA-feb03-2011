@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.1  (Linux)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGEDBY" CONTENT="Ken Smolek">
+	<META NAME="CHANGED" CONTENT="20100402;7580600">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in }
+		PRE { font-family: "DejaVu Sans Mono" }
+		A:link { so-language: zxx }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<PRE>&lt;header&gt;
+&lt;title&gt;Sonata Packet Details&lt;/title&gt;
+&lt;/header&gt;
+&lt;body&gt;
+&lt;pre&gt;
+Version: 1.8
+Updated: 2010-Mar-30 15:00 PDT
+
+Sonata Packet Header Fields Description 
+----------------------------------------
+
+Name:        packet group (ATA,Casper,...)
+Size bytes:  1
+Data type:   unsigned int (used as enum)
+Values:      0 -&gt; 255 (0 = ATA/Sonata)
+Default:     0 
+
+Name:        packet version
+Size bytes:  1
+Data type:   unsigned int
+Values:      0 -&gt; 255  (0 = first version)
+Default:     0
+Note:        Incremented by 1 for each header change
+
+Name:        bits per sample
+Size bytes:  1
+Data type:   unsigned int
+Values:      8 or 16
+Default:     8
+Note:        For complex values, this refers to only 1/2 of the sample.
+             E.g., a &quot;16 bit complex sample&quot; occupies 32 bits of space.
+
+Name:        binary point position
+Size bytes:  1
+Data type:   unsigned int
+Values:      0 -&gt; 255
+Default:     0
+
+Name:        endian magic number
+Size bytes:  4
+Data type:   unsigned int
+Values:      0xaabbccdd 
+Default:     same
+
+Name:        packet type (payload data type)
+Size bytes:  1
+Data type:   bit mask
+Values:      Bit 0: (0=integer / 1=float)
+             Bit 1: (0=unsigned / 1=signed)
+             Bit 2: (0=real / 1=complex)
+             Other fields TBD.
+Default:     0x06 (integer, signed, complex)
+
+Name:        number of streams
+Size bytes:  1
+Data type:   unsigned int
+Values:      1 -&gt; 255
+Default:     1
+
+Name:        polarization code
+Size bytes:  1
+Data type:   unsigned int (used as enum)
+Values:      0 = LCIRC, 1 = RCIRC, 2 = XLINEAR, 3 = YLINEAR
+Default:     2
+
+Name:        header length
+Size bytes:  1
+Data type:   unsigned int
+Values:      0 - 255
+Default:     sizeof(header)
+
+Name:        data source
+Size bytes:  4
+Data type:   unsigned int (used as enum)
+Values:      0 = beamformer, 1 = channelizer, other values TBD
+Default:     0
+
+Name:        channel number
+Size bytes:  4
+Data type:   unsigned int
+Values:      0 - 255
+Default:     0
+
+Name:        sequence number 
+Size bytes:  4
+Data type:   unsigned int
+Values:      0 -&gt; max unsigned int
+Default:     0
+
+Name:        frequency
+Size bytes:  8
+Data type:   double
+Values:      0 -&gt; max double
+Default:     0
+Note:        Center frequency in MHz
+
+Name:        sampling rate
+Size bytes:  8
+Data type:   double
+Values:      0 -&gt; max double
+Default:     bf=104.8576 MHz, other=0
+Note:        Sampling rate in MSamples/second
+
+Name:        fraction of usable bandwidth
+Size bytes:  4
+Data type:   float
+Values:      0 -&gt; 1.0
+Default:     beamformer=0.6875, other=0
+Note:        Usable bandwidth as a fraction of total sampling rate
+
+Name:        Reserved for future use (alignment padding for 8 byte boundary)
+Size bytes:  4
+Data type:   float
+Values:      0
+Default:     0
+
+Name:        time (32-bit seconds part and a 32-bit fractional second part).
+Size bytes:  8
+Data type:   unsigned int
+Values:      0 -&gt; max unsigned int
+Default:     current time 
+Note:        UNIX time (seconds since Jan 1, 1970).
+             Applies to first sample in packet.
+
+Name:        Status flags
+Size bytes:  4
+Data type:   bit flags
+Values:      Bit 0: (1 = good data, 0 = bad)
+             Other bits: TBD
+Default:     0x0001
+
+Name:        data length (samples)
+Size bytes:  4
+Data type:   unsigned int
+Values:      0 -&gt; max unsigned int
+Default:     Beamformer: 2048
+             Channelizer: 1024
+Notes:       If packet type is complex, total payload size in 
+             bytes = [data length in samples] * ([bits per sample]/8) * 2
+             E.g., 1024 complex samples * (16 bitspersample/8) * 2 = 4096 bytes
+
+
+Total header size: 64 bytes
+
+[data payload follows ... nominal payload size is 4096 bytes]
+
+----------------------------------------------------------
+
+Notes:
+
+1. Total header size must be a multiple of 8 bytes.
+2. All header fields must be aligned on at least a 4 byte boundary
+
+&lt;/pre&gt;
+&lt;/body&gt;</PRE>
+</BODY>
+</HTML>

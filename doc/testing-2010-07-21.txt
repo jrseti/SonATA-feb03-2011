@@ -1,0 +1,95 @@
+
+
+	testing-2010-07-21.txt
+
+
+	============================
+	2 beam dual pol testing
+	============================
+
+	ssh -X mozart -l sonata
+
+	~/scr
+
+	~/OpenSonATA/scripts> switchConfigFile-2beam-800KHz-48dxs
+
+	~/OpenSonATA/scripts> source 2beam-dualpol-800KHz-48dx-env-vars
+
+	~/OpenSonATA/scripts> runsse
+
+	seeker> tscope setup
+
+	seeker> source tscope-setup-2beam-800KHz.tcl
+
+	seeker> start tasks
+
+	seeker> source deep-impact-2beam-20MHz.tcl   #  6:15-14:23
+	seeker> start obs
+	seeker> start obs
+	seeker> start obs
+        ...
+
+	seeker> source rosetta-2beam-20MHz.tcl		# 12:05 - 21:44
+	seeker> start obs
+	seeker> start obs
+	seeker> start obs
+        ...
+
+	seeker> source kepler-2beam-20MHz.tcl		# 15:29 - 23:07
+	seeker> start obs
+	seeker> start obs
+	seeker> start obs
+        ...
+
+	seeker> source 2beam-autotarget-20MHz.tcl
+	seeker> start obs			# will run forever
+        ...
+
+        ...
+
+	========================
+	Temporary Shutdown
+	========================
+
+	seeker> tscope cleanup
+
+	<CR> in startup window
+
+
+	========================
+	switching control to Ken
+	========================
+
+	As Above:
+
+
+	~/OpenSonATA/scripts> switchConfigFile-2beam-800KHz-48dxs
+
+	~/OpenSonATA/scripts> source 2beam-dualpol-800KHz-48dx-env-vars
+
+	~/OpenSonATA/scripts> runsse
+
+	seeker> tscope setup
+
+	seeker> source tscope-setup-2beam-800KHz.tcl
+
+	# DO NOT run 'start tasks' again
+
+        seeker> source rosetta-2beam-20MHz.tcl          # 12:05 - 21:44
+        seeker> start obs
+
+        seeker> source kepler-2beam-20MHz.tcl           # 15:29 - 23:07
+        seeker> start obs
+
+        seeker> source 2beam-autotarget-20MHz.tcl
+        seeker> start obs
+
+	=========================
+	Final Shutdown
+	=========================
+
+	seeker> freeants
+
+	seeker> tscope cleanup
+
+	<CR> in startup window

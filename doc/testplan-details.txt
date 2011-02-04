@@ -1,0 +1,191 @@
+Test Plan Details
+2010-05-10 jj
+
+1. Running RFI scans with one antenna, 4L, x-pol only
+
+
+        ssh -X mozart -l sonata
+
+	~/OpenSonATA/scripts> switchConfigFile-36dxs
+	~/OpenSonATA/scripts> source  handel-36dx-env-vars-xpol
+	~/OpenSonATA/scripts> runsse-test -sonata
+
+	seeker> source rfiscan-4l-xpol-1200-1750.tcl
+
+	seeker> tscope setup
+	seeker> start tasks
+
+	seeker> tscope point 4l azel 180 45
+
+	seeker> start obs 
+
+ 	...
+
+        seeker> tscope cleanup
+
+	carriage return in startup window
+
+	~/OpenSonATA/scripts> restoreStandardConfigFile
+
+1a. Running in parallel with Prelude
+
+	ssh -X sse3 -l nss
+
+	runsse -ifc1only -notsig3
+
+	seeker> source rfiscan-test.tcl 
+
+	seeker> tscope setup
+
+	seeker> start tasks
+
+	seeker> start obs
+
+        ...
+
+        seeker> tscope cleanup
+
+	carriage return in startup window
+
+	
+
+
+
+
+2. Signal Detection Thresholds
+
+3. Signal Gain over multiple antennas
+
+	On tumulus:
+	fxconf.rb satake bfa <antlist>
+
+        ssh -X mozart -l sonata
+
+	~/OpenSonATA/scripts> source  handel-startup-env-vars
+	~/OpenSonATA/scripts> runsse-test -sonata
+
+	seeker> source kepler-4ants.tcl
+
+	seeker> tscope setup
+	seeker> start tasks
+
+	seeker> start obs 
+
+On Tumulus:
+	atalnaoff <ant1>
+
+	seeker> start obs
+
+On Tumulus:
+	atalnaoff <ant2>
+
+	seeker> start obs
+
+On Tumulus:
+	atalnaoff <ant3>
+
+	seeker> start obs
+
+ 	...
+        seeker> tscope cleanup
+
+	carriage return in startup window
+
+
+
+
+4. Single Antenna with Prelude and SonATA on same beam (beam2)
+	 Pulse Statistics on Quiet sky
+	
+
+        ssh -X mozart -l sonata
+
+	~/OpenSonATA/scripts> switchConfigFile-36dxs-beam2
+	~/OpenSonATA/scripts> source  handel-36dx-env-vars-xpol-beam2
+	~/OpenSonATA/scripts> runsse-test -sonata
+
+	seeker> source quiet-sky-4l-xpol-beam2.tcl
+
+	seeker> start tasks
+
+	seeker> tscope point 4l azel 330 30
+
+	seeker> start obs 
+
+ 	...
+
+        seeker> tscope cleanup
+
+	carriage return in startup window
+
+	~/OpenSonATA/scripts> restoreStandardConfigFile
+
+------------------------------------------------------------
+
+	- Running Prelude in parallel (iftest)
+
+	ssh -X sse3 -l nss
+
+	runsse -ifc1only -notsig3
+
+	seeker> source quiet-sky-beam2.tcl
+
+	seeker> start obs
+
+        ...
+
+
+	carriage return in startup window
+
+	
+5. Single Antenna with Prelude and SonATA on same beam (beam2)
+	 Pointing slightly off AMC7
+	
+	Use same environment setup as 4. above
+
+	seeker> source amc7-4l-xpol-beam2.tcl
+
+	seeker> tscope point 4l azel 203.0 40.2
+
+	seeker> start obs 
+
+ 	...
+
+
+------------------------------------------------------------
+
+	- Running Prelude in parallel (iftest)
+
+	seeker> sched set beginfreq 3695.0
+	seeker> sched set endfreq 3710.0
+
+	seeker> start obs
+
+        ...
+
+
+6. Single Antenna with Prelude and SonATA on same beam (beam2)
+	 Kepler
+	
+	Use same environment setup as 4. above
+
+	seeker> source kepler-4l-xpol-beam2.tcl
+
+
+	seeker> start obs 
+
+ 	...
+
+
+------------------------------------------------------------
+
+	- Running Prelude in parallel (iftest)
+
+	seeker> sched set beginfreq 8422.5
+	seeker> sched set endfreq 8426.5
+
+	seeker> start obs
+
+        ...
+
+

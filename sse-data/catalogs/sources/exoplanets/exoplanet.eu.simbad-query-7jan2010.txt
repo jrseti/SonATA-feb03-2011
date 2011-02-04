@@ -1,0 +1,24 @@
+format object "%COO(d;A;ICRS) | %COO(d;D;ICRS) | %PM(A)| %PM(D)| %PLX(V)| %SP(S) | %FLUXLIST(B;F) | %FLUXLIST(V;F) | %IDLIST(S;HIP) | %IDLIST(S;HD) | %IDLIST(S;TYC)| %IDLIST(1)"
+
+echo "RA J2000 <deg> | Dec J2000 <deg> | pm RA mas/yr | pm Dec mas/yr | parallax mas | spectralType | bMag | vMag | HIP ID | HD ID | Tycho ID | main ID"
+
+30 Ari B		
+61 Vir		
+BD+20 1790		
+DP Leo		
+
+#gamma 1 Leo (alias)		
+gam01 Leo
+
+GJ 1214		
+Gl 649		
+HD 1461		
+HD 9446		
+Kepler-4		
+Kepler-5		
+Kepler-6		
+Kepler-7		
+Kepler-8		
+OGLE-2007-BLG-368L	
+QS Vir		
+WASP-19

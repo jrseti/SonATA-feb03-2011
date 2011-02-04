@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Tom Kilsdonk">
+   <TITLE>SonATA Data Forwarding(filesender/filereceiver)</TITLE>
+
+SonATA Data Forwarding(filesender/filereceiver)
+
+</HEAD>
+<BODY>
+
+<pre>
+
+The SonATA filesender/filereceiver programs can be used to forward
+baseline and waterfall (complex amplitude) data from a remote system
+to a local display in real-time.  This avoids the overhead of trying
+to send the baseline and waterfall program graphics directly.
+
+Example use:
+
+Say the SonATA system is running on the remote host mozart,
+and you want to forward the waterfall and baseline data for 
+dxs 1005 and 1007 to a local host, fusion.
+
+
+1. First log on to the receiving host (fusion in this case) as sonata
+and cd into the directory used by the SonATA system to store
+the baseline and waterfall files as they are collected:
+
+  % cd sse_archive/confirmdata
+
+2. Start the filereceiver program:
+
+  % filereceiver
+
+It will wait for connections from the file sender program.
+
+3. Now log onto the host running the SonATA system (in this case, mozart),
+as the sonata user, and again change to the appropriate archive directory:
+
+  % ssh mozart -l sonata
+  % cd sse_archive/confirmdata
+
+4. Start the filesender program, specifying which files you
+want to start sending.  For example, to send the baseline and
+waterfall (complex amplitude) files for dx1005's left
+pol, and both pols of dx1007, you would say:
+
+  % filesender --host fusion  dx1005-L* dx1007*
+
+5. Back on the receiving host, start the waterfall and baseline
+programs as usual.  Select the desired dxs in the gui
+in the usual way.  
+  
+   % startssedd dx1005 dx1007
+
+If this is the first time that data for
+a dx is being forwarded, you'll have to wait until some data
+actually arrives before these programs will let you select
+that dx.
+
+6. Start the (remote) SonATA system.  The data should be forwarded 
+automatically to the receiving host and displayed in the baseline and
+waterfall programs as it's collected by the SSE.
+
+7. When you're done, use control-C on each of the filesender and
+filereceiver programs to terminate them.  
+
+8. If the filesender loses it's connections for any reason
+(error messages will appear), you can just control-C it and
+rerun it.  It should re-establish connections with the
+filereceiver.
+
+
+</pre>
+
+</BODY>
+</HTML>

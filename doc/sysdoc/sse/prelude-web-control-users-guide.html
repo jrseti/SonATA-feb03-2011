@@ -1,0 +1,174 @@
+<html>
+<head>
+<title>Prelude Web Control Interface User's Guide</title>
+</head>
+<body>
+Version 1.3 2010-Jan-25 20:31:32 UTC
+<h3> Prelude Web Control Interface User's Guide</h3>
+
+Overview:
+<pre><b>
+The Prelude SETI observing system can be controlled and
+monitored by use of a web server application running on
+port 8080 of the primary observing host.
+The access URL is:
+
+   http://[prelude host]:/8080
+
+Currently the primary host is sse3, so this would become
+
+   http://sse3:/8080
+
+The web interface allows for system startup and shutdown,
+status displays of currently running observations (aka
+activities), displays of observing data products as
+waterfalls and baseline plots, database queries of activity
+history and signal detections, and so on.
+
+The web site pages are outlined and described below.
+
+Note:
+You'll need to have javascript enabled on your browser to
+make use of most of the features described.
+
+
+</b></pre>
+
+<h4>Site Map:</h4>
+
+<ol>
+<li>Main Menu Bar Links (appear at top of all pages)
+<ul>
+<li> <a href="#mainPage">Home (Main Page)</a>
+<li> <a href="#status">Status</a>
+<li> StatusDetail 
+<li> Candidates
+<li> ObsHist
+<li> Logs
+<li> Archive
+<li> DbQueries
+<li> PointMap
+<li> <a href="#seekerCmd">SeekerCmd</a>
+<li> SysCntl 
+</ul>
+
+<br>
+<li>Home (Main) Page
+<br>
+<ul>
+<li> Main Menu Bar
+<li> Links to other information
+<ul>
+<li> Prelude docs
+<li> Observing aids (JPL Horizons, spacecraft targets, visibility charts etc.)
+<li> Hat Creek site information
+</ul>
+</ul>
+
+<br>
+<li> Status (summary, auto-refresh)
+<ul>
+<li> Currently running activities
+<li> Recently observed targets
+<li> Recent observation history
+<li> System log tail
+<li> Error log tail
+</ul>
+
+<br>
+<li> Status Detail
+<ul>
+<li> Running activities
+<li> Individual component status
+</ul>
+
+<br>
+<li> Candidates
+<ul>
+<li> Table of candidates from last 50 activities (freq, power, drift, etc).
+</ul>
+
+<br>
+<li> ObsHist (observation history)
+<ul>
+<li> Last 50 activities (Act #, signal count totals, etc).
+</ul>
+
+<br>
+<li> Logs (current version; auto-refresh)
+<ul>
+<li> System | Error | Debug | Components 
+</ul>
+
+<br>
+<li> Archive (waterfalls, baselines, activity summaries)
+<ul>
+<li> daily data products in YYYY-MM-DD directories
+<li> confirmation data (most recent activity)
+<li> all logs (system, error, templogs)
+</ul>
+
+<br>
+<li> DbQueries (database queries)
+<ul>
+<li> Form for selecting query type and parameters
+</ul>
+
+<br>
+<li> PointMap
+<ul>
+<li> RA/Dec map of current beam pointings
+</ul>
+
+<br>
+<li> SeekerCmd
+<ul>
+<li> Command extry form and response log
+<li> System & error log tails
+</ul>
+
+<br>
+<li> SysCntl
+<ul>
+<li> System startup & shutdown command forms
+</ul>
+
+
+
+</ol>
+
+  
+
+<pre>
+Misc:
+- runs under tomcat 
+- auto page refreshes, which pages, turning refresh on & off
+- status indicators (green & red bars) etc.
+- allow time for startup & shutdown 
+</pre>
+
+<h3> Details of each control page </h3>
+
+
+<a name="mainPage">
+<h4> Home (Main Page) </h4>
+<a href="prelude-web-ui-main-page.gif">Screen snapshot</a>
+
+<a name="status">
+<h4> Status </h4>
+<a href="prelude-web-ui-status-no-acts-running.gif">Screen snapshot</a>
+
+<a name="seekerCmd">
+<h4> Seeker Command </h4>
+Example of starting pdms:
+<a href="prelude-web-ui-seeker-cmd-start-pdms.gif">Screen snapshot</a>
+
+
+
+
+
+
+
+
+</body>
+</html>

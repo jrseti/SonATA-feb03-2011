@@ -1,0 +1,236 @@
+# PdmInitialization.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# PDM Confirmation Messages
+
+.PS
+
+
+copy "sequence.pic";
+
+spacing = 1.0;
+# doc version
+move right;
+move right 40;
+move down 2;
+"PdmInitialization.pic v2.0 2010-Jan-06 18:22:50 UTC"
+move left 40;
+# vertical spacing between messages
+arrowhead = 7;
+arrowwid = 0.5;
+arrowht = 1.0;
+awid = 1.0;
+dashwid = 1.0;
+
+step();
+# title
+step();
+move down;
+move down; move right; move right; 
+"PDM Startup and Initialization" ljust
+move down;
+move down;
+move down;
+move down;
+step();
+step();
+step();
+step();
+step();
+step();
+move right;
+
+# move objects apart horizontally
+movewid = 3.5;
+
+#define the objects
+boxht = 4.0;
+
+#PdmInittab
+boxwid = 18.0;
+object(Inittab,"PdmInittab");
+
+#PdmInitTask
+boxwid = 18.0;
+object(Init,"PdmInit");
+
+#PdmBWSDsp
+pobject(Dsp);
+
+#PdmBWSIntDspTask
+pobject(IntDsp);
+
+#PdmTask
+pobject(Task);
+#PdmQTask
+pobject(QTask);
+#PdmSuperClusterer
+pobject(Super);
+
+
+move down;
+step();
+step();
+step();
+step();
+step();
+step();
+step();
+lconstraint(Inittab,"GLOBAL ");
+step();
+lconstraint(Inittab,"MEMORY");
+step();
+lconstraint(Inittab,"INTERFACE");
+step();
+message(Init,Inittab,"Store Addresses");
+lconstraint(Init, "Create small buffers for messages");
+step();
+lconstraint(Inittab,"Message Buffers");
+lconstraint(Init, "Create large buffers for processing");
+lconstraint(Inittab,"Processing Buffers");
+step();
+lconstraint(Init, "Create disk serialization locks");
+lconstraint(Inittab,"Disk Locks");
+step();
+lconstraint(Init, "Create and initialize connections");
+step();
+lconstraint(Init, "Create Initialize logs");
+step();
+lconstraint(Init, "Initialize the DSP boards");
+step();
+cmessage(Init,Dsp,"PdmBWSDsp");
+step();
+step();
+boxwid = 22.0;
+cmessage(Dsp,IntDsp,"PdmBWSIntTask");
+step();
+step();
+message(Dsp,IntDsp,"Start");
+step();
+lconstraint(IntDsp,"Create a new Thread");
+lconstraint(Init, "Start all tasks");
+step();
+boxwid = 26.0;
+cmessage(Init,Super,"PdmSuperClusterer");
+step();
+message(Init,Inittab,"SuperClusterer Address");
+step();
+boxwid = 13.0;
+cmessage(Init,Task,"PdmTask");
+step();
+message(Init,Inittab,"Task Address");
+step();
+message(Init,Task,"Start");
+step();
+step();
+lconstraint(Task,"pdmSseInputTask");
+step();
+lconstraint(Task,"pdmArchiverInputTask");
+message(Task,Inittab,"Get Task Parameters");
+step();
+rmessage(Inittab,Task);
+step();
+step();
+lconstraint(Task,"Create a new Thread");
+step();
+step();
+step();
+boxwid = 16.0;
+cmessage(Init,QTask,"PdmQTask");
+step();
+message(Init,Inittab,"QTask Address");
+step();
+step();
+lconstraint(QTask,"pdmSseBroadcastTask  ");
+step();
+lconstraint(QTask,"pdmArchiverConnectionTask");
+message(Init,QTask,"Get Queue Address");
+lconstraint(QTask,"pdmCmdTask           ");
+rmessage(QTask,Init);
+message(Init,Inittab,"QTask Queue Address");
+lconstraint(QTask,"pdmSseOutputTask     ");
+step();
+lconstraint(QTask,"pdmControlTask");
+step();
+lconstraint(QTask,"pdmCollectionTask");
+step();
+lconstraint(QTask,"pdmLDspInputTask");
+step();
+lconstraint(QTask,"pdmRDspInputTask");
+step();
+lconstraint(QTask,"pdmLDspCmdTask");
+step();
+lconstraint(QTask,"pdmRDspCmdTask");
+step();
+lconstraint(QTask,"pdmLCDInputTask");
+step();
+lconstraint(QTask,"pdmRCDInputTask");
+step();
+lconstraint(QTask,"pdmLCDWriteTask");
+step();
+lconstraint(QTask,"pdmRCDWriteTask");
+step();
+lconstraint(QTask,"pdmLCWDInputTask");
+step();
+lconstraint(QTask,"pdmRCWDInputTask");
+step();
+lconstraint(QTask,"pdmLCWDWriteTask");
+step();
+lconstraint(QTask,"pdmRCWDWriteTask");
+step();
+lconstraint(QTask,"pdmLPDInputTask");
+step();
+lconstraint(QTask,"pdmRPDInputTask");
+step();
+lconstraint(QTask,"pdmLPDWriteTask");
+step();
+lconstraint(QTask,"pdmRPDWriteTask");
+step();
+lconstraint(QTask,"pdmLBaselineInputTask");
+step();
+lconstraint(QTask,"pdmRBaselineInputTask");
+step();
+lconstraint(QTask,"pdmLBaselineWriteTask");
+step();
+lconstraint(QTask,"pdmRBaselineWriteTask");
+step();
+lconstraint(QTask,"pdmDetectionTask");
+step();
+lconstraint(QTask,"pdmCWDTask");
+step();
+lconstraint(QTask,"pdmCWDReadTask");
+step();
+lconstraint(QTask,"pdmPDTask");
+step();
+lconstraint(QTask,"pdmConfirmationTask");
+step();
+lconstraint(QTask,"pdmCWDConfirmationTask");
+step();
+lconstraint(QTask,"pdmPDConfirmationTask");
+step();
+lconstraint(QTask,"pdmArchiverCmdTask");
+step();
+lconstraint(QTask,"pdmArchiverOutputTask");
+step();
+lconstraint(QTask,"pdmArchiveTask");
+step();
+message(Init,QTask,"Start");
+step();
+lconstraint(QTask,"pdmArchiverOutputTask");
+message(QTask,Inittab,"Get Task Parameters");
+lconstraint(QTask,"pdmLSpectrometryTask");
+rmessage(Inittab,QTask);
+lconstraint(QTask,"pdmRSpectrometryTask");
+step();
+step();
+step();
+lconstraint(QTask,"Create a new Thread");
+# message sequences
+complete(QTask);
+complete(Init);
+complete(Inittab);
+complete(Task);
+complete(Dsp);
+complete(IntDsp);
+.PE

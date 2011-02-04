@@ -1,0 +1,62 @@
+SonATA Team Meeting
+September 14, 2009
+
+Attendees: John Ross, Tom Kilsdonk, Peter Backus, Ken Smolek, 
+	Jill Tarter, Jane Jordan
+
+Several computers in the Astronomy Lab
+at UC Berkeley were compromised. As a result, IT has asked that
+we change the passwords for all accounts on all machines at
+Whisman and in the field. Individuals should change their account
+passwords. Jane will ask Tucker for additional time to change all
+the system accounts. We need to create new passwords for root,
+nss, sse, and sonata.
+
+Jane reported that Infosys has not resolved the Github access
+problem. Their team has been updating from Github at home which
+may raise security issues. Infosys is still having difficulties
+getting the build to complete. The latest problem was that they
+were missing a java library. They had reported compiler warnings
+in ACE library. These are due to the fact that the version of
+ACE that works with our code is out of sync with the compiler we are using.
+They also reported warnings from loading the database schema.
+This has been corrected.
+
+Jill asked about the code evaluation that Google had offered
+to do with Black Duck. Jane will check with Tucker on the status.
+
+Ken did testing to verify that that Handel can handle a dual
+polarization limited bandwidth (~6.5 MHz) Channelizer. He continues to debug
+the confirmation code. The Linux kernel does not handle multicast
+packets correctly for multiple streams on the same host. 
+If the same port is used with different IP addresses,
+each of the IP addresses receives all the data for all addresses.
+The channelizer code will be changed to use a different port
+number for each stream with the same IP adddress.
+Ken will be travelling to Hat Creek on Sunday, 9/20 and work there
+on Monday, 9/21. He will be in Petaluma Tuesday through Thursday
+and be at SETI on Friday, 9/25, and part of the next week.
+
+We already have enough hardware for the minimum configuration 
+for testing SonATA at Hat Creek.
+Beam 1: Left and Right Polarization channnelizer on Handel
+Beam 2: Left Polarization channelizer on Brahms
+	Right Polarization channelizer on Liszt
+SSE: mozart
+DX: Schubert, Chopin, Haydn (about 4 MHz total capability)
+
+Testing in parallel with Prelude may require physically 
+repatching the cables, since we are currently running in a 2 beam
+single polarization configuration.
+Different beamformers should be used for SonATA and Prelude, since 
+Prelude needs to set the offset for the DAC.
+Peter will request 3 4-hour sessions in the 4th quarter this year
+for testing SonATA in parallel with Prelude, looking at a speccraft.
+
+John Ross asked if the shipping boxes in the lab are needed any longer.
+He will ask Michelle to dispose of them.
+
+Jill is working on hiring a manager for the TED wish and
+pursuing donations for a cluster.
+
+Next SonATA Meeting, October 5, 2009, 1 PM.

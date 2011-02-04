@@ -1,0 +1,449 @@
+<html>
+<head>
+<title>ATA backend control interface </title>
+</head>
+<body>
+
+Version: 1.42  Updated: 2009-Oct-23 23:01:32 UTC
+
+<br><br>
+ATA backend ASCII control & monitor interface.<br><br>
+
+Two ASCII TCP/IP connections are used, one for control
+and the other for monitor.<br>
+Default ports:<br>
+control: 1081<br>
+monitor: 1082<br>
+<h4>Commands (backend to ATA, sent on control connection):</h4>
+
+<!-- --------------------------------------------- -->
+<hr>
+Antgroup commands:<br><br>
+
+For those commands that take antennas as arguments, the<br>
+antennas can be specified in one of two ways: either directly using<br>
+a comma separated list, or indirectly using the 'antgroup' argument.<br>
+The latter refers to one of three previously assigned ant groups,<br>
+namely: "primary", "xpol", and "ypol". The group used depends on the context.<br>
+This preassignment can be done in an automated fashion, or the groups<br>
+can be set explicitly:<br><br>
+
+ANTGROUP AUTOSELECT SEFD &lt;maxJy&gt; FREQ &lt;maxObsMHz&gt;<br>
+<i>
+  &nbsp;&nbsp;&nbsp;&nbsp;Automatically select 'good' ants from all those available, based on<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;ATA antenna status information, and the specified maximum <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;antenna SEFD and observing frequency. The primary group will be a<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;superset of the xpol & ypol groups.  All or none of the collision<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;ants will be included in the primary group.<br><br>
+</i>
+ANTGROUP SET &lt;primary | xpol | ypol | all&gt; antNN[,antNN,...]<br>
+<i>
+  &nbsp;&nbsp;&nbsp;&nbsp;Assign the ants to the specified group(s).<br><br>
+</i>
+ANTGROUP CLEAR &lt;primary | xpol | ypol | all&gt;<br>
+<i>
+  &nbsp;&nbsp;&nbsp;&nbsp;Clear the specified group(s).<br><br>
+</i>
+ANTGROUP LIST &lt;primary | xpol | ypol | all&gt;<br>
+<i>
+  &nbsp;&nbsp;&nbsp;&nbsp;List the ants in the specified group(s).<br><br>
+</i>
+
+<!-- --------------------------------------------- -->
+<hr>
+Antenna commands:<br><br>
+
+POINT &lt;ANTGROUP | antNN[,antNN...]&gt; AZEL &lt;azDeg&gt; &lt;elDeg&gt;<br>
+POINT &lt;ANTGROUP | antNN[,antNN...]&gt; J2000 &lt;raHr&gt; &lt;decDeg&gt;<br>
+POINT &lt;ANTGROUP | antNN[,antNN...]&gt; GAL &lt;longDeg&gt; &lt;latDeg&gt;<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Point antennas in various coordinate systems.</i><br><br>
+
+STOP &lt;ANTGROUP | antNN[,antNN...]&gt;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<i>Stop specified antennas.</i><br><br>
+
+STOW &lt;ANTGROUP | antNN[,antNN...]&gt;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<i>Stow specified antennas.</i><br><br>
+
+WRAP &lt;ANTGROUP | antNN[,antNN...]&gt; &lt;-1,0,1&gt;(?)<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Set antenna wrap for the antennas.</i><br><br>
+
+ZFOCUS &lt;ANTGROUP | antNN[,antNN...]&gt; &lt;skyfreq-MHz&gt;<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Set the Z (feed) focus on the antennas.
+</i><br><br>
+
+LNAON &lt;ANTGROUP | antNN[,antNN...]&gt;<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Turn on the LNAs for the antennas.</i><br><br>
+
+PAMSET &lt;ANTGROUP | antNN[,antNN...]&gt;<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Set the PAMs to nominal values for the 
+antennas.</i><br><br>
+
+ALLOCATE &lt;ANTGROUP | antNN[,antNN...]&gt;<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Allocate the given antennas for use.
+</i><br><br>
+
+DEALLOCATE &lt;ANTGROUP | antNN[,antNN...]&gt;<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Release the given antennas.
+</i><br><br>
+
+<!-- --------------------------------------------- -->
+<hr>
+Misc. commands:<br><br>
+
+LOCK_REQUEST &lt;CHANGE-PRIMARY-POINTING | USE-PRIMARY-POINTING&gt;<br>
+LOCK_RELEASE &lt;CHANGE-PRIMARY-POINTING | USE-PRIMARY-POINTING&gt;<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Request & release pointing locks.</i><br><br>
+
+MONITOR &lt;reporting-period-secs&gt;<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Set the reporting interval for monitor port data.</i><br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>10s is the default, 0s means no status reports.</i><br><br>
+
+TUNE &lt;{A-D}&gt; &lt;skyfreq-MHz&gt;<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Tune the specified LO1.</i><br>
+
+<!-- --------------------------------------------- -->
+<hr>
+Beamformer: misc.: <br><br>
+
+BF SET ATTN BEAMxxx&lt;attn-db&gt;<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Set the beamformer attenuation level 
+for the given beam.<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;Default level is 0dB (maximum beamformer output).<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;Value is applied only during calibrations.<br><br>
+</i>
+
+BF LIST ATTN &lt;BEAMxxx|ALL&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>
+List beamformer attenuation level for the given beam or all beams.</i><br><br>
+
+BF SET OBSLEN &lt;secs&gt;<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Set observation length for beamformer,
+ default is 600s.</i><br><br>
+
+BF LIST OBSLEN<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>List observation length for beamformer.</i><br><br>
+
+BF LIST CONFIG<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>List beamformer configuration information (how many beamformers are enabled, <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;which beams are associated with them, etc.).</i><br><br>
+
+BF RESET<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<i>Reset beamformer ibobs to known state 
+(sky, walsh, rearm).  Requires subsequent recalibration.</i><br><br>
+
+BF STOP<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<i>Stop currently running beamformer 
+command.</i><br><br>
+
+BF AUTOATTEN<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;Automatically set attemplifiers.
+
+<!-- --------------------------------------------- -->
+<hr>
+Beamformer: assign ants to beams & initialize:<br><br>
+
+BF CLEAR ANTS &lt;BEAMxxx|ALL&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>Clear antenna assignments for a beam or all beams.</i><br>
+<br>
+
+BF SET ANTS BEAMxxx &lt;ANTGROUP | antNN[,antNN,...]&gt;  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>Assign antennas to a beam.</i><br>
+<br>
+
+BF LIST ANTS &lt;BEAMxxx|ALL&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>List antenna assignments for a beam or all beams.</i><br>
+<br>
+
+BF INIT<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>Initialize beamformer with all antennas
+previously assigned to beams.</i><br>
+<br>
+
+<!-- --------------------------------------------- -->
+<hr>
+Beamformer: assign target coordinates to beams:<br><br>
+
+BF CLEAR COORDS &lt;BEAMxxx|ALL&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>
+Clear previously assigned coords for given beam or all beams.</i><br>
+<br>
+
+BF SET COORDS BEAMxxx AZEL &lt;azDeg&gt; &lt;elDeg&gt;<br>
+BF SET COORDS BEAMxxx J2000 &lt;raHr&gt; &lt;decDeg&gt;<br>
+BF SET COORDS BEAMxxx GAL &lt;longDeg&gt; &lt;latDeg&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>Assign coordinates to beams.</i><br>
+
+<br>
+BF LIST COORDS &lt;BEAMxxx|ALL&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>
+List previously assigned coords for given beam or all beams.</i><br>
+<br>
+
+
+<!-- --------------------------------------------- -->
+<hr>
+Beamformer:  use null beams:<br><br>
+
+BF SET NULLTYPE &lt;AXIAL | PROJECTION | NONE&gt;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;AXIAL -
+<i>for each beam in use, put a null on the assigned coordinates.<br></i>
+&nbsp;&nbsp;&nbsp;&nbsp;PROJECTION - 
+<i>add non-axial null(s) to beams.  See BF SET NULLS.
+</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;NONE - 
+<i>don't use any nulls.<br></i>
+<br>
+BF LIST NULLTYPE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>Echo the NULLTYPE.</i>
+<br><br>
+<i>For PROJECTION nulls</i>:<br><br>
+
+BF CLEAR NULLS &lt;BEAMxxx|ALL&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>Clear projection null assignments for a beam or all beams.</i><br>
+<br>
+
+BF ADD NULL BEAMxxx AZEL &lt;azDeg&gt; &lt;elDeg&gt;<br>
+BF ADD NULL BEAMxxx J2000 &lt;raHr&gt; &lt;decDeg&gt;<br>
+BF ADD NULL BEAMxxx GAL &lt;longDeg&gt; &lt;latDeg&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>Add a projection null to the specified beam using 
+the given coordinates.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Multiple nulls can be added per beam.<br>
+</i>
+<br>
+
+BF LIST NULLS &lt;BEAMxxx|ALL&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>List the projection nulls for a beam
+or all beams.</i><br>
+<br>
+<!-- --------------------------------------------- -->
+<hr>
+Beamformer: calibrate & point:
+<br><br>
+
+BF CAL &lt;DELAY | PHASE | FREQ&gt; INTEGRATE &lt;secs&gt; CYCLES &lt;count&gt;<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Perform a beamformer calibration of
+the requested type, <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;using previously assigned beam coordinates,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for INTEGRATE seconds, repeated CYCLES times.<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;Uses latest TUNE freq, OBSLEN, and ATTN settings.</i><br><br>
+
+BF POINT<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;<i>Point all beams that were previously
+assigned coordinates.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;[Note: the command is 'backgrounded', i.e., 
+   control is returned to the <br>
+&nbsp;&nbsp;&nbsp;&nbsp;operating system as soon as the pointing is
+   valid, but the beamformer<br>
+&nbsp;&nbsp;&nbsp;&nbsp;continues to run.]<br>
+</i><br>
+
+<br>
+<!-- --------------------------------------------- -->
+<hr>
+<h4>Messages (ATA to backend, sent on control connection):</h4>
+
+REQUEST_LOCK_RELEASE &lt;USE-PRIMARY-POINTING&gt;<br>
+PRIMARY_POINTING_CHANGE_ABOUT_TO_OCCUR<br>
+LOCK_GRANT &lt;CHANGE-PRIMARY-POINTING | USE-PRIMARY-POINTING&gt;<br>
+OK_TO_REQUEST_LOCK &lt;USE-PRIMARY-POINTING&gt;<br>
+<br>
+
+<!-- --------------------------------------------- -->
+<hr>
+<h3>Notes: </h3>
+<ul>
+<pre>
+<li>antNN[,antNN...] is a list of antennas that make up a subarray, 
+  e.g. ant3d,ant3e (dropping the 'ant' prefix is also acceptable,
+  e.g.: 3d,3e)
+<li>BEAMxxx names a beam, i.e., BEAM{polarity=X|Y}{tuning=A-D}{number=1-4},
+  e.g. BEAMXA1
+<li>If a pointing is issued on a beam before a subarray has been assigned
+  to that beam, then a warning will be returned.
+<li>All commands are newline terminated.
+<li>All commands are sent on the control connection,
+  no commands sent on the monitor connection.
+<li>Replies/messages on the control connection are one of:
+  OK
+  INFO: &lt;info-text&gt;
+  WARNING: &lt;warning-text&gt;
+  ERROR: &lt;error-text&gt;
+  READY: &lt;ready-text&gt;
+  &lt;"list" command results&gt;
+</pre>
+</ul>
+<!-- --------------------------------------------- -->
+<hr>
+<h4>
+Example command sequence:</h4>
+<pre>
+bf reset
+
+bf set obslen 500
+
+# assign ants (2 beams, dual pol, separate ant lists)
+
+bf clear ants all
+
+bf set ants beamxc1 5a,5b,5c
+bf set ants beamyc1 5a,5b,5c
+bf set ants beamxc2 3a,3b,3c
+bf set ants beamyc2 3a,3b,3c
+
+bf list ants all
+   beamxc1 5a,5b,5c
+   beamyc1 5a,5b,5c
+   beamxc2 3a,3b,3c
+   beamyc2 3a,3b,3c
+
+bf init 
+
+# assign target position to beams & do cal
+# 3c84 ra,dec = 3.33,41.51
+
+# point antennas
+point 5a,5b,5c j2000 3.33 41.51
+point 3a,3b,3c j2000 3.33 41.51
+
+# wait for ants to reach requested position
+# before issuing next commands
+
+bf set coords beamxc1 j2000 3.33 41.51
+bf set coords beamyc1 j2000 3.33 41.51
+bf set coords beamxc2 j2000 3.33 41.51
+bf set coords beamyc2 j2000 3.33 41.51
+
+tune c 1420
+
+bf cal delay integrate 10 cycles 3
+# wait for cal to complete
+
+bf cal phase integrate 20 cycles 3
+# wait for cal to complete
+
+# point antennas at observing targets
+point 5a,5b,5c j2000 4 -25
+point 3a,3b,3c azel 180 20
+
+# wait for ants to reach requested position
+# before issuing next commands
+
+# assign beam positions 
+bf clear coords all
+
+bf set coords beamxc1 j2000 4 -25
+bf set coords beamyc1 j2000 4 -25
+bf set coords beamxc2 azel 180 20
+bf set coords beamyc2 azel 180 20
+
+# point beams
+bf point
+
+[backend can start taking data at this point]
+
+# use null beams in place of targets (on-axis null)
+bf set nulltype axial
+
+bf point
+
+# point at targets, but add nulls into the beams
+
+bf set nulltype projection
+bf clear nulls all
+
+# set up two beams so that they act as nulls
+# for each other
+bf set nulls beamyc1 beamyc2
+bf set nulls beamyc2 beamyc1
+
+bf point
+
+
+</pre>
+
+<!-- --------------------------------------------- -->
+<hr>
+<h4>
+Monitor Status Format:</h4>
+Generically:<br>
+<br>
+
+ARRAY: &lt;time&gt;<br>
+<i>For each beam (32 total):</i><br>
+BEAMxxx: SUBARRAY: &lt;dish summary counts&gt; &lt;wrap&gt; &lt;zfocus&gt; &lt;gcerror&gt;<br>
+BEAMxxx: PRIMARY: &lt;commanded-coord-sys&gt; &lt;az el&gt; &lt;ra dec&gt; &lt;glong glat&gt; <br>
+BEAMxxx: SYNTH: &lt;commanded-coord-sys&gt; &lt;az el&gt; &lt;ra dec&gt; &lt;glong glat&gt; <br>
+BEAMxxx: IF: &lt;skyfreq&gt; &lt;attn&gt;<br>
+<i>For each tuning (4 total):</i><br>
+TUNING{&lt;tuning&gt;} : &lt;skyfreq&gt; <br>
+END
+<br>
+<br>
+&nbsp;&nbsp;Where:<br>
+&nbsp;&nbsp; BEAMxxx is BEAM{&lt;polarity&gt; &lt;tuning&gt;&lt;number&gt;}, e.g. BEAMXA1<br>
+&nbsp;&nbsp; SUBARRAY is the status of the subarray associated with this beam<br>
+&nbsp;&nbsp; PRIMARY is the primary beam pointing position<br>
+&nbsp;&nbsp; SYNTH is the synthesized beam pointing position<br>
+<br>
+
+With keywords:
+<br><br>
+ARRAY: &lt;HH:MM:SS UTC&gt; <br>
+<i>For each beam (32 total):</i><br>
+BEAMxxx: SUBARRAY: 
+NANTS xx NSHAREDPOINTING xx NTRACK xx NSLEW xx NSTOP xx NOFFLINE xx NERROR xx
+ WRAP &lt;0 | 1&gt; ZFOCUS xxxx.x MHz GCERROR xxx deg<br>
+BEAMxxx: PRIMARY: &lt;AZEL | J2000 | GAL&gt; AZ xxx deg EL xxx deg RA xxx hr DEC xxx deg GLONG xxx deg GLAT xxx deg <br>
+BEAMxxx: SYNTH: &lt;AZEL | J2000 | GAL&gt; AZ xxx deg EL xxx deg RA xxx hr DEC xxx deg GLONG xxx deg GLAT xxx deg <br>
+BEAMxxx: IF:  SKYFREQ xxxxx.xxxxxx MHz ATTN xx.x DB <br>
+<i>For each tuning (4 total):</i><br>
+TUNING{A-D}: SKYFREQ xxxxx.xxxxxx MHz<br>
+END<br>
+<br>
+
+&nbsp;&nbsp;[where<br>
+&nbsp;&nbsp;NANTS=number of ants that are included in the subarray<br>
+&nbsp;&nbsp;NSHAREDPOINTING=number of ants that share the pointing shown in the PRIMARY line<br>
+&nbsp;&nbsp;GCERROR=max great circle error for all working dishes in the subarray
+]<br><br>
+
+Example: <br>
+
+
+ARRAY: 22:46:36 UTC<br>
+BEAMXA1: SUBARRAY: NANTS 1 NSHAREDPOINTING 1 NTRACK 0 NSLEW 0 NSTOP 0 NOFFLINE 1 NERROR 0 WRAP 0 ZFOCUS .000000 MHz GCERROR .000000 deg <br>
+BEAMXA1: PRIMARY: AZEL AZ .000000 deg EL .000000 deg RA .000000 hr DEC .000000 deg GLONG .000000 deg GLAT .000000 deg <br>
+BEAMXA1: SYNTH: AZEL AZ .000000 deg EL .000000 deg RA .000000 hr DEC .000000 deg GLONG .000000 deg GLAT .000000 deg <br>
+BEAMXA1: IF: SKYFREQ -15229.145600 MHz ATTN 0.0 DB<br>
+BEAMYA1: SUBARRAY: NANTS 1 NSHAREDPOINTING 1 NTRACK 0 NSLEW 0 NSTOP 0 NOFFLINE 1 NERROR 0 WRAP 0 ZFOCUS .000000 MHz GCERROR .000000 deg <br>
+BEAMYA1: PRIMARY: AZEL AZ .000000 deg EL .000000 deg RA .000000 hr DEC .000000 deg GLONG .000000 deg GLAT .000000 deg <br>
+BEAMYA1: SYNTH: AZEL AZ .000000 deg EL .000000 deg RA .000000 hr DEC .000000 deg GLONG .000000 deg GLAT .000000 deg <br>
+BEAMYA1: IF: SKYFREQ -15229.145600 MHz ATTN 0.0 DB<br> 
+...<br>
+BEAMYD4: SUBARRAY: NANTS 42 NSHAREDPOINTING 39 NTRACK 39 NSLEW 0 NSTOP 0 NOFFLINE 3 NERROR 0 WRAP 0 ZFOCUS .000000 MHz GCERROR .000000 deg <br>
+BEAMYD4: PRIMARY: AZEL AZ 10.000000 deg EL 50.000000 deg RA 2.108369 hr DEC 78.433181 deg GLONG 126.782079 deg GLAT 16.126437 deg <br>
+BEAMYD4: SYNTH: AZEL AZ .000000 deg EL .000000 deg RA .000000 hr DEC .000000 deg GLONG .000000 deg GLAT .000000 deg <br>
+BEAMYD4: IF: SKYFREQ 1420.000000 MHz ATTN 0.0 DB<br>
+TUNINGA: SKYFREQ 1520.000000 MHz<br>
+TUNINGB: SKYFREQ 1520.000000 MHz<br>
+TUNINGC: SKYFREQ 1420.000000 MHz<br>
+TUNINGD: SKYFREQ 1420.000000 MHz<br>
+END
+
+<h3>Notes:</h3>
+<ul>
+<pre>
+<li>Each line of the message is terminated by a 'return' and a 'newline'
+(i.e., \r\n). 
+<li>For each synthesized beam (32 total):
+  Name is BEAM&lt;pol&gt;&lt;tuning&gt;&lt;number&gt;,
+  but sort order is: tuning={A-D}, number={1-4}, pol={X,Y}
+  i.e., BEAMXA1, BEAMYA1, BEAMXA2, BEAMYA2, ... BEAMXD4, BEAMYD4
+<li>GCERROR = Great Circle Error (current primary position minus
+     requested position)
+</pre>
+</ul>
+</body>
+</html>

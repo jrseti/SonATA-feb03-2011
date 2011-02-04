@@ -1,0 +1,32 @@
+=============================================== 
+Start and synchronize all channelizers
+
+seeker>> channel start 4 8400. all
+
+===============================================
+
+To check target visibility in PST
+
+findtargets -dbhost mozart -dbname sonatadb -tzoffset -8
+
+seeker>> channel help
+  Command: "channel"
+    Parameters:    
+    Parameter Commands:
+      default - set all parameters to their default values
+      help - print this help info
+      isvalid - verify that all parameters are valid
+      save <filename> - save parameters to file
+      set <parameter> <value> [<current, default, min, max>=current]
+      show [<parameter>=all] [<current, default, min, max>=current]
+    Immediate Commands:
+      intrin [<chanName>='all'] - display channelizer intrinsics 
+      names - list all connected channelizers
+      reqstat [<chanName>='all'] - request channelizer status update 
+      resetsocket <chanName | 'all'> - reset socket on channelizer(s)
+      restart <chanName | 'all'> - restart channelizer(s)
+      start <delay secs> <freq MHz> <chanName | 'all'> - start channelizer(s) in delay secs, tuned to freq MHz
+      shutdown <chanName | 'all'> - shutdown channelizers(s) 
+      status [<chanName>='all'] - display channelizer status  
+      stop <chanName>='all'> - issue stop command 
+

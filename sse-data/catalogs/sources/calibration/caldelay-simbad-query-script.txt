@@ -1,0 +1,19 @@
+# 
+# Simbad query script to get beamformer calibration targets
+
+format object "%COO(d;A;ICRS) | %COO(d;D;ICRS) | %PM(A)| %PM(D)| %PLX(V)| %SP(S) | %FLUXLIST(B;F) | %FLUXLIST(V;F) | %IDLIST(S;HIP) | %IDLIST(S;HD) | %IDLIST(S;TYC) |  %IDLIST(S;3C) %IDLIST(1)"
+
+echo "RA J2000 <deg> | Dec J2000 <deg> | pm RA mas/yr | pm Dec mas/yr | parallax mas | spectralType | bMag | vMag | HIP ID | HD ID | Tycho ID | aliases"
+
+# delay cal
+
+3c144
+3c145
+3c274
+3c292
+3c400
+3c405
+3c461
+
+
+

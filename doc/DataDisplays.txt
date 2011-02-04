@@ -1,0 +1,14 @@
+
+The bandwidth of the ATA receiver is 104.8576 MHz.
+The SonATA channelizer filters and fourier transforms that bandwidth 
+into 256 400 KHz channels.
+The SonATA detector module, the DX, filters and transforms the channel
+into 678 Hz subchannels and further to .678 Hz bins.
+
+There are 2 types of SonATA data displays.
+1) The baseline display shows the average power in each subchannel over
+channel bandwidth. The baseline is averaged over time and is reported
+every 15 or so seconds.
+2) The waterfall display show the power for each bin in a subchannel.
+The power values are reported every .75 seconds. The brighter the 
+dot, the stronger the power. 

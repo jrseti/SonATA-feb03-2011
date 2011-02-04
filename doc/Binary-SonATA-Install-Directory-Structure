@@ -1,0 +1,92 @@
+Directory Structure for SonATA Binary OS Release
+2010-05-20 jj
+
+~/OpenSonATA/sonata_install/bin	
+	Selected Files from ~/sse_install/bin and 
+	~/OpenSonATA/sigproc-pkg/sigproc_install/bin
+
+~/OpenSonATA/sonata_install/setup	
+	Selected Files from ~/sse_install/setup 
+
+~/OpenSonATA/sonata_install/filters 
+	Selected Files from ~/OpenSonATA/sigproc-pkg/filters
+
+~/OpenSonATA/sonata_install/scripts	
+	Selected Files from ~/OpenSonATA/scripts
+
+~/OpenSonATA/sonata_install/data	
+	Selected data files 
+
+I don't believe we need to release the lib and include subdirectories
+
+~/OpenSonATA/sonata_install/lib	
+	Selected Files from ~/sse_install/lib and 
+	~/OpenSonATA/sigproc-pkg/sigproc_install/lib
+
+~/OpenSonATA/sonata_install/include	
+	Selected Files from ~/sse_install/include and 
+	~/OpenSonATA/sigproc-pkg/sigproc_install/include
+
+~/sse_install/bin
+
+baselineDisplay*
+BaselineDisplay.jar*
+controlcomponents-test*
+ifc*
+pdmArchiver*
+runsse-test*
+seeker*
+seekerlib.tcl*
+startssedd*
+systemStatusToCurses*
+testsig*
+tscope*
+waterfallDisplay*
+WaterfallDisplay.jar*
+
+
+
+~/OpenSonATA/sigproc-pkg/sigproc_install/bin
+
+channelizer
+dx
+packetgen
+packetread
+packetrelay
+packetsend
+
+
+
+
+
+~/sse_install/setup
+
+birdieMaskIfc1.tcl
+birdieMaskIfc2.tcl
+birdieMaskIfc3.tcl
+expectedSonATAComponents.cfg
+permRfiMask.tcl
+rcvrBirdieMask.tcl
+simulator_ifc1.cfg
+simulator_ifc2.cfg
+simulator_ifc3.cfg
+simulator_tsig1.cfg
+simulator_tsig2.cfg
+simulator_tsig3.cfg
+
+
+
+~/OpenSonATA/sigproc-pkg/filters
+
+LS256c10f25o70d
+
+~/OpenSonATA/scripts
+
+runpacketgen-chanx-8*
+runpacketgen-dx-xonly*
+runpacketsend-chanx-8*
+runpacketsend-dx-xonly*
+
+sonata-startup-env-vars
+sonata-demo.tcl
+

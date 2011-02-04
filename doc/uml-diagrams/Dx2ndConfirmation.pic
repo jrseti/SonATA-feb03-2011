@@ -1,0 +1,194 @@
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# DX Secondary Confirmation Messages
+
+.PS
+
+
+copy "sequence.pic";
+
+spacing = 2.0;
+# doc version
+move right;
+move right 40;
+move down 2;
+"Dx2ndConfirmation.pic v2.0 2010-Jan-12 00:13:40 UTC"
+move left 40;
+# vertical spacing between messages
+arrowhead = 7;
+arrowwid = 0.5;
+arrowht = 1.0;
+awid = 1.0;
+dashwid = 1.0;
+
+step();
+# title
+step();
+move down;
+move down; move right; move right; 
+"DX Activity Secondary Signal Confirmation Messages" ljust
+move down;
+move down;
+move down;
+move down;
+step();
+step();
+move right;
+
+# move objects apart horizontally
+movewid = 3.5;
+
+#define the objects
+boxht = 4.0;
+
+# ControlTask
+boxwid = 12.0;
+object(Control,"Control");
+
+#ArchiveTask
+boxwid = 11.0;
+object(Archive,"Archiver");
+
+boxwid = 11.0;
+object(Activity, "Activity");
+
+# ConfirmationTask
+boxwid = 18.0;
+object(Conf,"Confirmation");
+
+# CWDConfirmationTask
+boxwid = 18.0;
+object(CWD,"CW Confirm");
+
+#CWDConfirmationChannel
+boxwid = 11.0;
+object(Channel,"Channel");
+
+boxwid = 14.0;
+object(PD,"PD Confirm");
+
+#boxwid = 20.0;
+#object(Class,"Signal Classifier");
+
+# SseInputTask
+boxwid = 7.0;
+object(Sse,"Sse");
+
+move down;
+step();
+step();
+step();
+
+# message sequences
+active(Sse);
+active(Control);
+message(Sse,Control,"Begin Sending Candidates");
+step();
+message(Control,Sse,"Begin Sending Secondary Results");
+step();
+message(Sse,Control,"Send CW Power Candidate");
+step();
+message(Control,Activity,"Add Secondary CW Candidate");
+step();
+message(Sse,Control,"Send Pulse Candidate");
+step();
+message(Control,Activity,"Add Secondary Pulse Candidate");
+step();
+message(Sse,Control,"Done Sending Candidates");
+step();
+step();
+message(Sse,Control,"Begin Sending Coherent CW Candidates");
+step();
+message(Sse,Control,"Send CW Coherent Candidate");
+step();
+message(Sse,Control,"Done Sending CW Coherent Candidates");
+inactive(Sse);
+step();
+step();
+active(Conf);
+step();
+lconstraint(Control,"For each Pulse Candidate");
+message(Control,Conf,"Confirm Secondary Pulse Candidate");
+active(PD);
+message(Conf,PD,"Confirm Secondary Pulse Candidate");
+step();
+message(PD,Channel,"Compute Signal Channel");
+rmessage(Channel,PD);
+step();
+step();
+message(PD,Channel,"Read CDData");
+rmessage(Channel,PD);
+step();
+message(PD,PD,"Sum Power in Pulse Positions");
+step();
+step();
+message(PD,PD,"Classify Signal");
+step();
+message(PD,Sse,"Pulse Candidate Results");
+message(PD,Conf,"Pulse Candidate Results");
+step();
+message(Conf,Archive,"PD Signal Confirmation Complete");
+step();
+step();
+lconstraint(Control,"For each Coherent CW Candidate");
+active(CWD);
+message(Control,Conf,"Confirm Secondary CW Candidate");
+step();
+message(Conf,CWD,"Confirm Secondary CW Candidate");
+step();
+step();
+active(Channel);
+message(CWD,CWD,"Create Signal Channel");
+step();
+message(CWD,Channel,"Compute Channel Parameters");
+rmessage(Channel,CWD);
+step();
+step();
+message(CWD,Channel,"Read CDData, 16 Subbands");
+rmessage(Channel,CWD);
+inactive(Channel);
+step();
+step();
+lconstraint(CWD,"Corner Turn");
+step();
+lconstraint(CWD,"Inverse FFT");
+step();
+lconstraint(CWD,"16K Channels");
+step();
+lconstraint(CWD,"Dedrift and Heterodyne");
+step();
+step();
+message(CWD,CWD,"Coherent Detection");
+step();
+step();
+lconstraint(CWD,"Dedrift");
+step();
+lconstraint(CWD,"Coherent Search");
+step();
+lconstraint(CWD,"Classify Signal");
+step();
+message(CWD,Sse,"Coherent Results");
+step();
+message(CWD,Conf,"CW Signal Confirmation Complete");
+step();
+message(Conf,Archive,"CW Signal Confirmation Complete");
+step();
+step();
+step();
+lconstraint(Conf,"When All Candidates Done");
+message(Conf,Sse,"Done Sending Secondary Results");
+message(Conf,Control,"Confirmation Complete");
+step();
+complete(Activity);
+complete(Control);
+complete(Conf);
+complete(CWD);
+complete(PD);
+complete(Sse);
+#complete(Class);
+complete(Channel);
+complete(Archive);
+step();
+step();
+.PE

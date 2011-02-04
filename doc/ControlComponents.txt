@@ -1,0 +1,100 @@
+Automatic Starting of SonATA Components
+2010-03-04 jj
+
+The Expected SonATA Components must be specified in two separate
+places. 
+
+First, in ~/OpenSonATA/sse-pkg/setup/expectedSonATAComponents.cfg
+all the components are assigned to a beam.
+I am using the convention that all the dxs on beam 1 are named dx1nnn
+and those on beam 2 are named dx2nnn.
+
+TBD: Add Channelizer to Configuration File, NssComponentsTree, etc.
+
+------------------------------------------------
+nss expected components v1.6
+
+# SonATA Components Configuration File
+# config file for simulated components
+
+Site Main IfcList ifc1 ifc2 ifc3
+Ifc ifc1 BeamList beam1 beam2
+Ifc ifc2 BeamList beam3
+Ifc ifc3 BeamList beam4
+
+Beam beam1 PdmList dx1000 dx1001 dx1002 dx1003 dx1004 dx1005 dx1006
+Beam beam2 PdmList dx2000 dx2001 dx2002 dx2003 dx2004 dx2005 dx2006
+
+Beam beam3 PdmList dx3000
+
+Beam beam4 PdmList dx4000
+
+# associate prelude beams with ata synth beams 
+BeamToAtaBeams beam1 beamxc1 beamyc1
+BeamToAtaBeams beam2 beamxd1 beamyd1
+#BeamToAtaBeams beam3 beamxa3 beamya3
+#BeamToAtaBeams beam4 beamxb4 beamyb4
+------------------------------------------
+
+
+The second way that components are specified is by environmental
+variables. This applies only to the dxhosts and dxs and the
+channelizer hosts and channelizers.
+Eventually, I would like to have a naming convention for the dx and
+channelizer hosts, i.e. dxhost1,...dxhost24 and chanhost1x, ... chanhost3y.
+(Or we can start with zero). The following variables must be defined.
+
+setenv RUNSSE_DX_HOSTS  "dxhost1 dxhost2"
+setenv DXHOST1 "haydn"
+setenv DXHOST2 "chopin"
+setenv DXHOST1_DX_NAMES "dx1001 dx1002 dx1003 dx1004 dx1005 dx1006"
+setenv DXHOST2_DX_NAMES "dx2001 dx2002 dx2003 dx2004 dx2005 dx2006"
+
+setenv RUNSSE_CHAN_HOSTS "chanhost1x chanhost1y chanhost2x chanhost2y"
+setenv CHANHOST1X "handel"
+setenv CHANHOST1X_NAME "chan1x"
+setenv CHANHOST1Y "handel"
+setenv CHANHOST1Y_NAME "chan1y"
+setenv CHANHOST2X "brahms"
+setenv CHANHOST2X_NAME "chan2x"
+setenv CHANHOST2Y "liszt"
+setenv CHANHOST2Y_NAME "chan2y"
+setenv CHANOPTS "-C 256 -c 176 -N 10 -O 0.25 -B 104.8576 -d ../../filters/LS256c10f25o  -w 1 -F 1420.0 -n"
+setenv CHANHOST1X_OPTS "-P X  -i 50000 -j 51000"
+setenv CHANHOST1Y_OPTS "-P Y  -i 50001 -j 51000"
+setenv CHANHOST2X_OPTS "-P X  -i 50002 -j 52000"
+setenv CHANHOST2Y_OPTS "-P Y  -i 50003 -j 52000"
+setenv CHANHOST3X_OPTS "-P X  -i 50004 -j 53000"
+setenv CHANHOST3Y_OPTS "-P Y  -i 50005 -j 53000"
+
+See ~/OpenSonATA/scripts/sonata-startup-env-vars
+
+
+The runsse-test script picks the dx host names from RUNSSE_DX_HOSTS
+and adds them to a list of components to be started automatically .
+The list is sent to the controlcomponents-test script.
+
+controlcomponents-test starts each component in the list.
+For the dxhostN components, the script retrieves the actual host name 
+and the list of dx names from the environmental variables.
+
+The individual dxs can be restarted from the seeker command line.
+
+control restart dxnnnn
+
+The dxs are automatically restarted if they fall over.
+
+The runsse-test script picks up the channelizer host names 
+from RUNSSE_CHAN_HOSTS and adds them to the list of components to be
+started automatically. In the controlcomponents-test script, the actual
+channelizer host name and channelizer name are read from the environment 
+variables.  There are 2 sets of options. One for all channelizers and 
+another for the specific beam and polarization of each channelizer.
+
+Also, you need to set up authorized_keys in your ~/.ssh directory
+authorized_keys == id_dsa.pub.
+
+and set your sudo to NOPASSWD: (sudo visudo)
+
+jane    ALL=(ALL) NOPASSWD: ALL
+

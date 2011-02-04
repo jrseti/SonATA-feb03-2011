@@ -1,0 +1,176 @@
+---------------
+Running SonATA
+---------------
+-------------------------------------------------------
+STEP ONE - Taking over the Array 
+-------------------------------------------------------
+
+Send out an email to atauser@seti.org stating your intention
+to allocate the antennas, beamformers, and LO Tunings C and D.
+
+-------------------------------------------------------
+STEP TWO - Setting Environmental variables
+-------------------------------------------------------
+
+The system configuration needs to be specified in two ways.
+
+First, the expectedSonATAComponents.cfg file in ~OpenSonATA/sse-pkg/setup
+must be overwritten with the desired configuration. This file has no
+effect on the channel size or the polarization (the 800KHz can be ignored).
+The important thing is the number of beams and the number of dxs.
+
+switchConfigFile-2beam-800KHz-48dxs	2 beams, 24 dxs per beam
+switchConfigFile-3beam-800KHz-72dxs	3 beams, 24 dxs per beam
+
+   mozart: cd ~/OpenSonATA/scripts
+   mozart:OpenSonATA/scripts> <switchConfigFile>
+
+Second, in the OpenSonATA/scripts directory there are a number of 
+startup files which will set the environmental variables
+for the configuration that you want to run. Filename: *env-vars* 
+The configuration must match the one in the expectedSonATAComponents.cfg.
+
+The env-vars-file specifys the system configuration
+using environmental variables:
+	Number of beams 
+	Number of polarizations
+	Number of input channels (defines Channel width)
+	Number of output channels
+	Channelizer Hosts assigned to beams and polarizations
+	Dx Hosts assigned to beams
+	Dx Names assigned to Dx Hosts
+
+Examples:
+
+2beam-dualpol-400KHz-48dx-env-vars	2 Beams, dual polarization
+					400 KHz channels, 256 in, 48 out
+					Chan1x and Chan1y on Handel
+					Chan2x on Brahms
+					Chan2y on Liszt
+					8 dxs per hosts
+					6 Dx Hosts seti000-1 to seti001-2
+					~10 MHz bandwidth
+					(The dx hosts can probably handle
+					16 dxs with 400 KHz channels, so
+					a new file could test that)
+
+2beam-dualpol-800KHz-48dx-env-vars	2 beams, dual polarization
+					800 KHz channels, 128 in, 24 out
+					Chan1x and Chan1y on Handel
+					Chan2x on Brahms
+					Chan2y on Liszt
+					8 dxs per hosts
+					6 Dx Hosts seti000-1 to seti001-2
+					~19 MHz bandwidth
+
+3beam-xpol-800KHz-72dx-env-vars		3 beams, x-only polarization
+					800 KHz channels, 128 in, 24 out
+					Chan1x on Handel
+					Chan2x on Brahms
+					Chan3x on Liszt
+					8 dxs per hosts
+					9 Dx Hosts seti000-1 to seti002-1
+					~19 MHz bandwidth
+
+   mozart:~/OpenSonATA/scripts> source <env-vars-file>
+
+
+-------------------------------------------------------
+STEP THREE -- Checking Spacecraft Visibility
+-------------------------------------------------------
+
+   mozart:~/OpenSonATA/scripts> gettargets
+
+(Edited for our targets)
+  Id           Name	RaHours		DecDeg		Rise	Set
+  131       Voyager1	17.109103	12.387281	16:38	03:09	PST	
+  160        Rosetta	11.790347	3.902256	11:48	21:21
+  166     DeepImpact	5.130249	-6.247614	05:47	14:03
+  173         Kepler	14.371900	-12.458225	15:30	22:49
+
+-------------------------------------------------------
+STEP FOUR -- Starting the SSE
+-------------------------------------------------------
+
+In the window where the 'env-vars' script was run:
+
+>> runsse
+
+This will start up the channelizers and dxs as
+specified by the environmental variables.
+
+
+-------------------------------------------------------
+STEP FIVE -- Initializing paramters and Configuring Tscope and Beamformers
+-------------------------------------------------------
+
+There are a number of parameters files in the OpenSonATA/scripts directory 
+to configure the telescope and beamformers. The main points are that the
+beam to be used are set on and the others are set off, and the SCHED BEGINFREQ
+AND ENDFREQ SHOULD BE SET TO THE CORRECT FREQUENCY RANGE FOR THE CAL FREQ.
+The normal task list is: 
+autoselectants,prepants,bfreset,bfautoatten,bfinit,caldelay,calphase,calfreq
+
+
+tscope-setup-2beam-400KHz.tcl	
+tscope-setup-2beam-800KHz.tcl	
+tscope-setup-3beam-800KHz.tcl
+
+
+   seeker>> source <tscope-setup-file.tcl>
+   seeker>> tscope setup
+   seeker>> start tasks
+
+
+----------------------------------------------------------
+STEP SIX  -- Observing Spacecraft
+----------------------------------------------------------
+
+There are many tcl files for running observations.
+The selected beam must match the tscope-setup configuration.
+The frequency range should match the dxs available.
+
+Examples:
+
+rosetta-3beam-20MHz.tcl
+rosetta-2beam-20MHz.tcl
+kepler-2beam-20MHz.tcl
+deep-impact-3beam.tcli
+deep-impact-2beam-20MHz.tcl
+
+   seeker>> source <parameterfile.tcl>
+   seeker>> start obs
+
+----------------------------------------------------------
+STEP SEVEN  -- Multitarget Observing
+----------------------------------------------------------
+
+Examples:
+
+2beam-autotarget-20MHz.tcl
+3beam-autotarget-20MHz.tcl
+
+   seeker>> source <parameterfile.tcl>
+   seeker>> start obs
+
+----------------------------------------------------------
+STEP SEVEN  -- Changing Frequency Range 
+----------------------------------------------------------
+
+   seeker>> source <parameterfile.tcl>
+   seeker>> sched set tasks calphase,calfreq
+   seeker>> start tasks
+   seeker>> start obs
+
+-------------------------------------------------------
+LAST STEP -- Freeing the antennas and disconnect 
+-------------------------------------------------------
+
+# release ant array resources
+   seeker>> freeants
+
+
+# disconnect from telescope array
+   seeker>> tscope cleanup
+
+2010-07-27 jj

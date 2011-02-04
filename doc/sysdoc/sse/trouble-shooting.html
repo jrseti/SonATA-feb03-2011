@@ -1,0 +1,309 @@
+<html>
+<head>
+<title> Prelude Troubleshooting </title>
+Version 1.28 2010-Jan-25 20:30:31 UTC
+<h2> Prelude Troubleshooting </h2>
+</head>
+
+<body>
+
+
+<ol>
+<li> "eth0 has no resources"
+
+<pre>
+When a pdm or ifc (linux machine) is rebooted, it shows 
+an "eth0 has no resources" error on its console. 
+The machine also can't be contacted over its
+net connection (ping, ssh, etc fail).
+
+<b>Solution: </b>
+
+Log in as root and type 
+
+  ifconfig eth0 down 
+  ifconfig eth0 up 
+
+</pre>
+
+
+</li>
+
+<li> "NMI received...dazed and confused"
+<pre>
+When a pdm or ifc (linux machine) is rebooted, it shows 
+this error:
+
+  NMI received for unknown reason.
+  Dazed and confused, but trying to continue.
+  Do you have a strange power saving mode enabled?
+
+On a pdm, trying to run the pdm software when the
+machine is in this state may cause that software
+to hang.
+
+<b>Solution: </b> Reboot the machine.
+</pre>
+</li>
+
+<li> DDC shows shifted test signal/subbands.
+
+<pre>
+A pdm sometimes reports a shifted test signal/subbands.
+The pdm baseline may also periodically show odd undulations.
+
+<b>Solution: </b> Replace the DDC.
+
+</pre>
+
+
+<li> Hardware DADD reports too many signals (~100) in IF tests
+
+<pre>
+A pdm running the hardware DADD during IF tests reports
+on the order of 100 signals, when other pdms are only reporting
+the test signal plus maybe a few RFI signals.
+
+<b>Possible Diagnostics/Solutions: </b>
+<ul>
+<li> Check the signal path, make sure DDCs are connected
+<li> See if the pdm works in software dadd mode.
+<li> Replace the Hardware DADD.
+</ul>
+
+</pre>
+
+
+<li> Bluewave burnin fails with: "SIGALRM indicated by 8E00"
+<pre>
+The pdm burnin code consistently fails with this error:
+
+***  Exit code from start PDM: 0x8e00
+***  Check /tmp/ObsOP/board1/pdm_output for clues.
+***
+***  SIGALRM indicated by 8E00 (142)
+***  (0x##00 indicates a signal; less than 0x100 indicates an exit call)
+***  Try running standalong pdm code without burn-in
+
+***FatalError***  Abort Burn-in. 
+        Error occured in stand alone PDM.
+
+When the pdm software is run, it gets stuck in baseline accumulation.
+
+<b>Solution: </b> It looks like this was caused by recompiling the kernel
+on the xeon machines, in an attempt to send boot messages to the
+remote console.
+
+</pre>
+
+<li> Pdm software fails with error "disk transfer rate mismatch".
+
+<pre>
+<b>Solution: </b> Replace the drive with one that has the correct transfer rate.
+</pre>
+
+<li>  Indications of pdm disk drive failure (24 Oct 2005)
+
+<ul>
+
+<li> *** Fatal Error *** 2 devices expected in '/proc/scsi/scsi' Only
+1 found in '/proc/scsi/aic79xx/0'
+<li> host buffer full:PdmInputTask.cpp
+<li> No corresponding msg:PdmDiskIO.cpp:146[WriteDisk](0): count = -1, should be 131072
+<li>No corresponding msg:PdmWriteTask.cpp:58[handleMsg](0): writing buffer
+</ul>
+
+<pre>
+<b>Solution: </b> Replace the drive.
+</pre>
+
+<li> pdm won't complete boot, last console message is "smbios init"<br>
+<br><b> Possible solutions: </b> 
+<br> If a DADD board is present, try removing it
+or replacing it.
+
+<br><br>
+<li> pdm power cycles on and off every few seconds <br>
+<br> <b>Possible Solutions: </b>
+<ul>
+<li> Make sure the power cord is completely plugged in.
+<li> Replace power supply.
+</ul>
+
+
+<br>
+<li> Alarm lights are lit on the RF Dist and/or Pulse Dist amps
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Verify that the 10 MHz reference and 1 PPS input signals are valid.
+</ul>
+
+<br>
+<li> F2Cu shows bad status (RxRdy light is off, GLID light is on)
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Verify that all cables are connected properly
+<li> Verify that all needed equipment is powered up
+<li> Check that there are no alarm lights on the RF Dist and Pulse Dist amps
+<li> Power cycle the CDB (clock distribution board). <br>
+     Make sure 1 pps light is flashing (should go out for a <br>
+     fraction of a second with each 1pps).
+<li> Restart the stx
+<li> Power cycle the IFC
+</ul>
+
+<br>
+<li> STX reports bad status 
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Restart the stx
+<li> Power cycle the IFC
+<li> Check the F2Cu Status (see above)
+<li> Reseat the stx board
+<li> Check/reseat the fiber optic connectors going to the stx board
+<li> Check/reseat the fiber optic connectors coming out of the A/D
+<li> Replace fiber optic cables
+</ul>
+
+<br>
+<li> PDM reports DSP data overruns
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Reseat bluewave and ddc boards
+<li> Replace bluewave
+</ul>
+
+<br>
+<li> PDM gets stuck in baseline accumulation
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Check the signal path, make sure DDCs have signal
+<li> Reseat bluewave and ddc boards
+<li> Replace bluewave
+</ul>
+
+<br>
+<li> PDM gets pulse flood errors from the test chassis.
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Check the signal path, make sure DDCs are connected
+</ul>
+
+<br>
+<li> Can reach (ping, ssh) Hat Creek PDMs by IP address, but not by name.
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Check that the DHCP server is running on sse4.
+<br>
+<pre>
+sse1: 10.1.10.10 
+sse2: 10.1.10.15 
+sse3: 10.1.5.11
+sse4: 10.1.5.14
+
+To test for this failure, on sse4 you can do a
+
+    $ ps -elf | grep dhcpd
+
+If there is nothing but your grep in the output, then you can start the 
+dhcp server with this command (as root):
+
+    # /usr/sbin/dhcpd
+</pre>
+
+</ul>
+<br>
+<li> PDM's IP address does not match its name.
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Verify that the PDM is listed in the dhcp lookup table (sse4:/etc/dhcpd.conf), and that its MAC address is correct (i.e., no typos).
+<li> If the pdm has an IP address from the dynamic pool rather than its proper static IP address, verify that dchp is running correctly, then reboot the pdm.  It may take several reboots or even power cycles to get the pdm to pick up the proper address.  Use the pdm 'ifconfig' command to determine which IP address it has.
+</ul>
+
+
+<br>
+<li> Can't remotely access PDMs at all (ping, ssh, etc.)
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Power cycle PDM
+<li> Check network cable
+<li> Make sure dhcpd is running on sse4 (see above for instructions).
+
+</ul>
+
+<br>
+<li> Cannot complete login to sse console:  Error is "DT Messaging system could not be started"
+
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Verify that the sse machine is correctly determining its hostname.
+<pre> Make sure that [host] and [host].csr.seti.org are both in the
+/etc/hosts file.
+Eg:
+  sse2:/home/nss> cat /etc/hosts                                                                  
+  127.0.0.1 localhost
+  10.1.10.10 sse1 sse1.csr.seti.org 
+  10.1.10.15 sse2 sse2.csr.seti.org
+</pre>
+</ul>
+
+<li> Pdm fails to complete bootup.  The last message printed on the
+console is "L 99 99 99 99..."
+<br>
+This is an error from LILO (linux loader).
+
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Correct the Master Boot Record (MBR) by <a href="master-boot-record-lilo-fix.html">restoring LILO</a>
+<li> Reimage the pdm
+</ul>
+<br>
+
+<li> SSE will not boot all the way into the windowing system.
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Verify network cabling & connection.  X Windows requires
+network access to start up.
+</ul>
+
+<br>
+<li> Input levels (STX variances) go to near zero.
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Check the ATA antenna PAM levels, and reissue the PAM commands to force the desired values, since status can be unreliable.
+<li> Check that the antenna LNAs are not off, and turn them on if they are.
+<li> Reissue RPA attenuator commands; status can be invalid because it is cached in the server.
+<li> Check ATA LO 2 & 3 settings.
+<li> Restart the stx.
+<li> Restart the ifc.
+<li> Restart the sse.
+</ul>
+
+<br>
+<li> pdm software fails with "START OBS error 1"
+<br><br>
+
+This error is generated by the Blue Wave, and indicates that it got a
+START_OBS before the previous observation was finished processing.  It
+could be a timing thing -- there's a certain amount of time involved in
+flushing everything out after an abort -- or it could be a bug where the
+ABORT doesn't work under certain circumstances.
+
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Restart pdm software.
+</ul>
+
+<br> 
+<li> pdm software fails with "*** Fatal Error *** Can not reset board 1."
+<br><br> <b>Possible Solutions: </b><br>
+<ul>
+<li> Reseat bluewave boards
+</ul>
+
+
+
+</ol>
+
+</body>
+</html>

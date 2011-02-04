@@ -1,0 +1,148 @@
+# beamformerCalAct.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# Calibration activity using beamformers
+
+.PS
+
+
+# ---- setup & title ---
+
+copy "sequence.pic";
+
+# doc version
+move right;
+"beamformerCalAct.pic v2.0 2010-Jan-06 18:36:22 UTC" ljust
+
+# title
+move down; move right; move right; 
+"Calibration Activity with Beamformers" ljust
+move down;
+
+# vertical spacing between messages
+spacing = 0.30;
+
+# move objects apart horizontally
+#movewid = 3.5;
+movewid = 4.0;
+
+#define the objects
+# calibration activity
+boxwid = 2.5;
+object(ACT,"SSE: CalAct");
+
+boxwid = 1.5;
+object(TSCOPE,"Tscope");
+
+boxwid = 2.8;
+# backend server
+object(BACK,"ATA Backend");
+
+boxwid = 2.8;
+# beamformer
+object(BF,"Beamformers");
+
+step();
+
+# ----  message sequences -----
+
+step();
+step();
+
+active(ACT);
+message(ACT,TSCOPE,"beginSendingCmdSeq()");
+step();
+
+step(); step();
+lconstraint(ACT,"[for each tuning]");
+
+message(ACT,TSCOPE,"tune()");
+message(TSCOPE,BACK,"tune()");
+lconstraint(BACK,"[remember tuning]")
+step();
+
+step();
+message(ACT,TSCOPE,"clearBeamCoords()");
+message(TSCOPE,BACK,"clearBeamCoords()");
+lconstraint(BACK,"[forget old coords]")
+
+step(); step();
+lconstraint(ACT,"[for each beam]");
+
+step();
+message(ACT,TSCOPE,"setBeamCoords(beamxxx)");
+message(TSCOPE,BACK,"setBeamCoords(beamxxx)");
+lconstraint(BACK,"[remember coords]")
+
+step();
+message(ACT,TSCOPE,"pointSubarray()");
+message(TSCOPE,BACK,"pointSubarray()");
+
+active(BACK);
+step();step();
+lconstraint(BACK,"[point ants]")
+inactive(BACK);
+
+message(ACT,TSCOPE,"calibrate()");
+step();
+lconstraint(TSCOPE,"[remember cal command]");
+
+message(ACT,TSCOPE,"doneSendingCmdSeq()");
+step();
+step();
+
+inactive(ACT);
+step();
+
+active(BACK);
+active(TSCOPE);
+step();
+lconstraint(TSCOPE,"[Monitor Status]");
+lconstraint(BACK,"[watch ants, update status]");
+message(BACK,TSCOPE,"status()");
+inactive(BACK);
+
+step(); step(); step();
+lconstraint(TSCOPE,"[When subarray on target]");
+message(TSCOPE,BACK,"calibrate()");
+inactive(TSCOPE);
+active(BACK);
+message(BACK,BF,"calibrate(tuning,coords)");
+active(BF);
+step(); step();
+lconstraint(BACK,"[Update beam coords");
+lconstraint(BACK,"in status]");
+inactive(BACK);
+
+inactive(TSCOPE);
+step();
+step();
+lconstraint(BF,"[Run cal, wait");
+lconstraint(BF,"for complete]");
+active(BACK);
+step();
+lconstraint(BACK,"[Accum done calls");
+lconstraint(BACK,"from all BFs]");
+message(BF,BACK,"done callback()");
+inactive(BF);
+message(BACK,TSCOPE,"ready()");
+inactive(BACK);
+message(TSCOPE,ACT,"tscopeReady()");
+
+step(); step(); step();
+lconstraint(ACT,"[Act Done]");
+
+step();
+step();
+
+complete(ACT);
+complete(TSCOPE);
+complete(BACK);
+complete(BF);
+
+# activity is complete
+delete(ACT);
+
+.PE
+

@@ -1,0 +1,228 @@
+<html>
+<head>
+<title>Prelude Mysql configurations</title>
+</head>
+
+<body>
+<pre>
+Version 1.3  2010-Jan-25 20:28:36 UTC
+
+Prelude Mysql configuration notes:
+=================================
+
+The primary observing host is sse3 at Hat Creek,
+which runs the master mysql server.
+A mirror copy of the mysql data is kept on a slave
+server on sse2 at Mountain View, via the
+mysql replication mechanism.
+  
+The mysql code is installed in /usr/local/mysql.
+Boot startup file is /etc/rc2.d/S99mysql, which is
+a link to /etc/init.d/mysql.server.
+
+Mysql configuration information is stored in /etc/my.cnf.
+
+my.cnf file on sse3:
+-------------------
+sse3% cat /etc/my.cnf
+# mysql configuration file
+
+# Uncomment to use the mysqlmanager instead of mysqld_safe to start up daemons
+# Note: If using the mysqlmanager, set the log-error explicitly
+# in each mysqldX instance, otherwise the logs won't update
+#[mysql.server]
+#use-manager
+
+# set the timezone, this doesn't work with the mysql.server, only mysqld_safe
+[mysqld_safe]
+timezone = UTC
+
+# mysql primary instance: standard data directory, default port
+# set up as mysql master server:
+#   turn on binary logging
+#   expire binary logs regularly
+#   set server id
+[mysqld]
+datadir=/usr/local/data/mysql-master
+log-error=/usr/local/data/mysql-master/errorlog.err
+log-bin=binlog
+expire_logs_days=10
+server-id=11
+skip-innodb
+
+
+my.cnf file on sse2:
+-------------------
+
+# mysql configuration file
+
+# use the mysqlmanager instead of mysqld_safe to start up daemons
+# Note: use using the mysqlmanager, set the log-error explicitly
+# in each mysqldX instance, otherwise the logs won't update.
+
+[mysql.server]
+use-manager
+
+# set the timezone, this doesn't work with the mysql.server, only mysqld_safe
+[mysqld_safe]
+timezone = UTC
+
+# mysql primary instance: standard data directory, default port
+# don't need innodb tables so disable them to keep logs from growing
+[mysqld]
+datadir=/usr/data
+log-error=/usr/data/errorlog.err
+skip-innodb
+
+
+# slave server for prelude operations
+[mysqld1]
+datadir=/usr/local/data/mysql-slave
+relay-log=/usr/local/data/mysql-slave/slave-relay-bin
+log-error=/usr/local/data/mysql-slave/errorlog.err
+pid-file=/usr/local/data/mysql-slave/slave.pid
+port=3308
+socket=/tmp/mysql-slave-socket
+skip-innodb
+server-id=15
+master-host=sse3
+master-user="nss-slave"
+master-port=3306
+
+# only allow slave thread to update tables (no users)
+read-only 
+
+# don't copy the master's user accounts, keep local versions
+# that have all write permissions turned off
+binlog-ignore-db=mysql
+
+--------------------------------------------------------
+
+Note: if you want to debug the my.cnf file,
+you need to run the mysqlmanager program directly
+in order to to see the error reports.
+The S99mysql auto-startup script sends all errors to /dev/null.
+
+eg,
+
+mysqlmanager --user=mysql --pid-file=/tmp/mysqlmanager-test.pid
+070629 21:29:18 loaded user root
+070629 21:29:18 IM pid file: '/tmp/mysqlmanager-test.pid'; PID: 5146.
+070629 21:29:18 accepting connections on ip socket (port: 2273)
+070629 21:29:18 accepting connections on unix socket '/tmp/mysqlmanager.sock'
+...
+
+---------------------------------------------
+
+
+Mysql binary log files on sse3 are flushed (rotated) daily
+via a 'mysqladmin flush-logs' cron job on sse3.  This
+allows the files to be aged off in the interval specified
+in the my.cnf file:
+
+10 0 * * * /usr/local/mysql/bin/mysqladmin flush-logs
+
+
+---------------------------------------------
+To set up account on master for slave to access
+
+grant replication slave on *.* to 'nss-slave'@'%';
+
+--------------------------------------------
+The mysql slave server on sse2 is set up so that
+ordinary users have read-only permissions.  This helps
+prevent accidental changes to the mysql data which could
+make the master and slave servers go out of sync.
+
+
+
+make slave readonly:
+  a. tell slave mysqld to ignore mysql table for replication
+  b. turn off write permissions for all accounts except for root account
+    ie, grant only these privileges for all other users
+       show databases 
+       processes
+       select
+
+    grant process, select, show databases on *.* to 'nss'@'localhost'
+    grant process, select, show databases on *.* to 'nss'@'%'
+
+---------------------------------------
+Checking that master & slave are in sync:
+
+On master, use 'show full processlist' and 'check master status':
+
+
+mysql> show full processlist;
++----+-----------+------------------+------+-------------+------+----------------------------------------------------------------+-----------------------+
+| Id | User      | Host             | db   | Command     | Time | State                                                          | Info                  |
++----+-----------+------------------+------+-------------+------+----------------------------------------------------------------+-----------------------+
+| 29 | nss-slave | 10.1.10.15:50862 | NULL | Binlog Dump | 2907 | Has sent all binlog to slave; waiting for binlog to be updated | NULL                  | 
+| 32 | <user>  | localhost        | NULL | Query       |    0 | NULL                                                           | show full processlist | 
++----+-----------+------------------+------+-------------+------+----------------------------------------------------------------+-----------------------+
+2 rows in set (0.01 sec)
+
+mysql> show master status;
++---------------+----------+--------------+------------------+
+| File          | Position | Binlog_Do_DB | Binlog_Ignore_DB |
++---------------+----------+--------------+------------------+
+| binlog.000003 |       98 |              |                  | 
++---------------+----------+--------------+------------------+
+1 row in set (0.00 sec)
+
+
+On slave server, 'show full processlist' and 'show slave status':
+(later requires root permissions):
+
+
+
+sse2% mysql -h 127.0.0.1 --user=root --port=3308
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3255
+Server version: 5.0.41 MySQL Community Server (GPL)
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql> show full processlist;
++------+-------------+-----------------+------+---------+-------+-----------------------------------------------------------------------+-----------------------+
+| Id   | User        | Host            | db   | Command | Time  | State                                                                 | Info                  |
++------+-------------+-----------------+------+---------+-------+-----------------------------------------------------------------------+-----------------------+
+|    1 | system user |                 | NULL | Connect | 64982 | Waiting for master to send event                                      | NULL                  | 
+|    2 | system user |                 | NULL | Connect | 64222 | Has read all relay log; waiting for the slave I/O thread to update it | NULL                  | 
+| 3255 | root        | localhost:51020 | NULL | Query   |     0 | NULL                                                                  | show full processlist | 
++------+-------------+-----------------+------+---------+-------+-----------------------------------------------------------------------+-----------------------+
+3 rows in set (0.00 sec)
+
+mysql> show slave status;
++----------------------------------+-------------+-------------+-------------+---------------+-----------------+---------------------+------------------------+---------------+-----------------------+------------------+-------------------+-----------------+---------------------+--------------------+------------------------+-------------------------+-----------------------------+------------+------------+--------------+---------------------+-----------------+-----------------+----------------+---------------+--------------------+--------------------+--------------------+-----------------+-------------------+----------------+-----------------------+
+| Slave_IO_State                   | Master_Host | Master_User | Master_Port | Connect_Retry | Master_Log_File | Read_Master_Log_Pos | Relay_Log_File         | Relay_Log_Pos | Relay_Master_Log_File | Slave_IO_Running | Slave_SQL_Running | Replicate_Do_DB | Replicate_Ignore_DB | Replicate_Do_Table | Replicate_Ignore_Table | Replicate_Wild_Do_Table | Replicate_Wild_Ignore_Table | Last_Errno | Last_Error | Skip_Counter | Exec_Master_Log_Pos | Relay_Log_Space | Until_Condition | Until_Log_File | Until_Log_Pos | Master_SSL_Allowed | Master_SSL_CA_File | Master_SSL_CA_Path | Master_SSL_Cert | Master_SSL_Cipher | Master_SSL_Key | Seconds_Behind_Master |
++----------------------------------+-------------+-------------+-------------+---------------+-----------------+---------------------+------------------------+---------------+-----------------------+------------------+-------------------+-----------------+---------------------+--------------------+------------------------+-------------------------+-----------------------------+------------+------------+--------------+---------------------+-----------------+-----------------+----------------+---------------+--------------------+--------------------+--------------------+-----------------+-------------------+----------------+-----------------------+
+| Waiting for master to send event | sse3        | nss-slave   |        3306 |            60 | binlog.000003   |                  98 | slave-relay-bin.000024 |           232 | binlog.000003         | Yes              | Yes               |                 |                     |                    |                        |                         |                             |          0 |            |            0 |                  98 |             232 | None            |                |             0 | No                 |                    |                    |                 |                   |                |                     0 | 
++----------------------------------+-------------+-------------+-------------+---------------+-----------------+---------------------+------------------------+---------------+-----------------------+------------------+-------------------+-----------------+---------------------+--------------------+------------------------+-------------------------+-----------------------------+------------+------------+--------------+---------------------+-----------------+-----------------+----------------+---------------+--------------------+--------------------+--------------------+-----------------+-------------------+----------------+-----------------------+
+1 row in set (0.00 sec)
+
+
+
+Can also use 'mysql checksum table <tablename>' to verify that 
+tables on the same on master & slave
+--TBD: put example here
+
+--------------------
+
+Note on accessing multiple mysql servers on one machine:
+
+When using mysql or other client programs on the mysql server host,
+you must specify the host name as '127.0.0.1', not 'localhost'.
+The latter uses a local socket and not TCP to make the connection,
+in which case the --port option is ignored.
+
+eg,
+   mysql -h 127.0.0.1  --port=3308 
+
+Alternately, you can use the --protocol=TCP option:
+
+   mysql --protocol=TCP --port=3308 
+
+</pre>
+</body>
+</html>

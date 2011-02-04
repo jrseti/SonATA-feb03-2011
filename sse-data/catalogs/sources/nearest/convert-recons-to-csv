@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Read recons "nearest stars" input file, convert selected fields to csv
+
+infile="$1"
+
+# define start-end column indexes in data file
+catIdCols="6-18"
+raCols="33-42"
+decCols="44-52"
+pmMagCols="57-62"
+pmAngleCols="64-68"
+parallaxCols="74-80"
+spectypeCols="97-105"
+vmagCols="108-113"
+
+#not all targets have common names
+#commonNameCols="153-"
+
+# use gnu version of cut to get output delimiter option
+gnucut=/home/kilsdonk/gnu-core-utils/install/bin/cut
+
+echo "#catId,ra2000hms,dec2000dms,pmMagArcsecYr,pmAngleDeg,parallaxArcsec,spectype,vmag"
+
+# use awk to trim out blank lines
+
+cat $infile | awk 'NF > 1'|\
+$gnucut --output-delimiter="," \
+-c $catIdCols,$raCols,$decCols,$pmMagCols,$pmAngleCols,\
+$parallaxCols,$spectypeCols,$vmagCols
+ 
+

@@ -1,0 +1,47 @@
+> channelizer --help
+channelizer [-?] [-b] [-B bw] [-c channels] [-C channels] [-D decimation] \
+ [-d filter file] [-f file] [-h port] [-H host] [-i port] [-I host] \
+ [-j port] [-J host] [-m] [-N foldings] [-O oversampling] [-o] \
+ [-P polarization] [-S src] [-w workers]
+	-?: print usage and exit
+	-b: initialize buffers during allocation (false)
+	-B bw: bandwidth bw (MHz) (104.858)
+	-C channels: total channels (256)
+	-c channels: usable channels (230)
+	-D decimation: # of input samples to add to make buffer sample (1)
+	-d file: read filter specification from file (NULL)
+	-F freq: center frequency freq (MHz)
+	-f file: read parameters from configuration file (channelizer.cfg)
+	-H addr: sse name or ip address (sse-main)
+	-h port: sse port (32000)
+	-I addr: use input address addr (226.0.0.1)
+	-i port: use input port port (9999)
+	-J addr: use output address addr (239.1.1.1)
+	-j port: use output port port (10000)
+	-m: log all messages from SSE (false)
+	-N foldings: # of foldings in filter bank (7)
+	-n: don't swap real and imaginary input values (false)
+	-O oversampling: % of oversampling (0.203125)
+	-o: print output channel statistics (false)
+	-P polarization: polarization (X or Y) (2)
+	-S src: beam source (uint32, input packets) (0)
+	-s src: channel source (uint32_t, output packets) (1)
+	-V: print version and exit
+	-w workers: number of worker tasks (1)
+
+Example:
+
+The channelizer will receive a 3.2768 MHz input stream from packetgen
+and will create 8 channels. The default input and output IP addresses
+and ports are specified. The polarization is X and the center sky frequency
+is 1420 MHz. Only one worker task (thread) is specified. If there are multiple
+processors on your host, the worker tasks may be increased.
+The Digital Filter Bank will have 10 foldings and 25 % overlap.
+Statistics for the data will be printed every 10 seconds.
+The real and imaginary input values will not be swapped.
+
+sudo ./channelizer -C 8 -c 8 -N 10 -O 0.25 -B 3.276800 \
+ -d ../../filters/LS256c10f25o -I 226.0.0.1 -i 9999 -J 239.1.1.1 \
+ -j 10000 -P X -w 1 -F 1420.0 -o -n
+
+

@@ -1,0 +1,434 @@
+PdmBWSDsp.cpp(444)[sendCommand]: Can't open DDC bit image file: ../data/ddc_cclk.bit errno: 2 board: /dev/pcic6600/node0
+PdmBWSDsp.cpp(444)[sendCommand]: Can't open DDC bit image file: ../data/ddc_cclk.bit errno: 2 board: /dev/pcic6600/node3
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 0, base 0x42601200, hostBufOfs = 0x0
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 1, base 0x42601200, hostBufOfs = 0x0
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 0, base 0x44603200, hostBufOfs = 0x0
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 1, base 0x44603200, hostBufOfs = 0x0
+PdmCWDInputTask.cpp(116)[setXferLayout]: cpu 0, base 0x46605200, hostBufOfs = 0x0
+PdmCWDInputTask.cpp(116)[setXferLayout]: cpu 1, base 0x46605200, hostBufOfs = 0x0
+PdmCWDInputTask.cpp(116)[setXferLayout]: cpu 0, base 0x48607200, hostBufOfs = 0x0
+PdmCWDInputTask.cpp(116)[setXferLayout]: cpu 1, base 0x48607200, hostBufOfs = 0x0
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 0, base 0x80f8600, hostBufOfs = 0x0
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 1, base 0x80fa600, hostBufOfs = 0x2000
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 0, base 0x8100c00, hostBufOfs = 0x0
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 1, base 0x8102c00, hostBufOfs = 0x2000
+PdmSseInputTask.cpp(121)[processIpFromFile]: 1/Standalone Config File Version: 2 , name SseInput 2HZ: 1 1Hz: 0
+PdmSseInputTask.cpp(141)[processIpFromFile]: 2/Standalone Config File Version: 2 hdr.code 40003
+PdmSseInputTask.cpp(343)[processIpFromFile]: next hdr.code id: 40010
+PdmSseInputTask.cpp(141)[processIpFromFile]: 2/Standalone Config File Version: 2 hdr.code 40010
+PdmSseInputTask.cpp(209)[processIpFromFile]: processIpFromFile: optParams = 3 <CD ONLY 1 CD+CW 17 PULSE 8>  PULSE_DETECTION/enum 3
+PdmSseInputTask.cpp(210)[processIpFromFile]: Either mode can be used with -s (simulated data)
+CD_ONLY mode can be used with -z (DDC)
+PdmSseInputTask.cpp(235)[processIpFromFile]: Got resolution of 0 from input file
+PdmSseInputTask.cpp(257)[processIpFromFile]: Using: maxPulsesPerHalfFrame = 5000 maxPulsesPerSubbandPerHalfFrame = 10
+PdmSseInputTask.cpp(304)[processIpFromFile]: processIpFromFile/SEND_PDM_ACTIVITY_PARAMETERS: actId: 100, obsLen: 32 params->scienceDataRequest.sendComplexAmplitudes: 0, ifcSkyFreq: 4
+PdmSseInputTask.cpp(343)[processIpFromFile]: next hdr.code id: 40013
+PdmControlTask.cpp(299)[defineActivity]: frames = 20, not a power of two, using 16 frames
+PdmSseInputTask.cpp(141)[processIpFromFile]: 2/Standalone Config File Version: 2 hdr.code 40013
+PdmSseInputTask.cpp(310)[processIpFromFile]: processIpFromFile/START_TIME
+PdmSseInputTask.cpp(343)[processIpFromFile]: next hdr.code id: 40013
+PdmSseInputTask.cpp(352)[processIpFromFile]: Start Alarm on stand alone version: 140 seconds. 32 frames 0 baseline delay
+
+PdmCollectionTask.cpp(364)[startTimer]: activity 100, current time = 1075502840.458761, start time = -1.000000
+PdmCollectionTask.cpp(929)[startDsp]: startDsp: nFrames 16
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 0, base 0x42c01200, hostBufOfs = 0x600000
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 1, base 0x42e01200, hostBufOfs = 0x800000
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 0, base 0x44c03200, hostBufOfs = 0x600000
+PdmCDInputTask.cpp(124)[setXferLayout]: cpu 1, base 0x44e03200, hostBufOfs = 0x800000
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 0, base 0x80f8600, hostBufOfs = 0x0
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 1, base 0x80fa600, hostBufOfs = 0x2000
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 0, base 0x8100c00, hostBufOfs = 0x0
+PdmBaselineInputTask.cpp(107)[setXferLayout]: cpu 1, base 0x8102c00, hostBufOfs = 0x2000
+PdmBWSDsp.cpp(444)[sendCommand]: Can't open DDC bit image file: ../data/ddc_cclk.bit errno: 2 board: /dev/pcic6600/node0
+PdmBWSDsp.cpp(444)[sendCommand]: Can't open DDC bit image file: ../data/ddc_cclk.bit errno: 2 board: /dev/pcic6600/node3
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:0:LSpectrometry:timeofday:secs 1075502841:usecs 230440:time outside doSpec:230440
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 0.000000, delta 712.000000, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:1:LSpectrometry:timeofday:secs 1075502841:usecs 262715:time inside doSpec :32275
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:0:RSpectrometry:timeofday:secs 1075502841:usecs 262911:time outside doSpec:262911
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 0.000000, delta 712.000000, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:1:RSpectrometry:timeofday:secs 1075502841:usecs 295479:time inside doSpec :32568
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40016 for SSE 
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:1:LSpectrometry:timeofday:secs 1075502841:usecs 910404:time outside doSpec:647689
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 840.750977, delta 712.500977, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:2:LSpectrometry:timeofday:secs 1075502841:usecs 976222:time inside doSpec :65818
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:1:RSpectrometry:timeofday:secs 1075502841:usecs 976261:time outside doSpec:680782
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 840.750977, delta 712.500977, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:2:RSpectrometry:timeofday:secs 1075502842:usecs 40945:time inside doSpec :64684
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:2:LSpectrometry:timeofday:secs 1075502842:usecs 491951:time outside doSpec:515729
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 914.502930, delta 713.001953, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:3:LSpectrometry:timeofday:secs 1075502842:usecs 558270:time inside doSpec :66319
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:2:RSpectrometry:timeofday:secs 1075502842:usecs 558309:time outside doSpec:517364
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 914.502930, delta 713.001953, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:3:RSpectrometry:timeofday:secs 1075502842:usecs 622891:time inside doSpec :64582
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:3:LSpectrometry:timeofday:secs 1075502843:usecs 111299:time outside doSpec:553029
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 221.255859, delta 713.502930, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:4:LSpectrometry:timeofday:secs 1075502843:usecs 177434:time inside doSpec :66135
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:3:RSpectrometry:timeofday:secs 1075502843:usecs 177473:time outside doSpec:554582
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 221.255859, delta 713.502930, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:4:RSpectrometry:timeofday:secs 1075502843:usecs 242076:time inside doSpec :64603
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:4:LSpectrometry:timeofday:secs 1075502843:usecs 711898:time outside doSpec:534464
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 809.009766, delta 714.003906, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:5:LSpectrometry:timeofday:secs 1075502843:usecs 778671:time inside doSpec :66773
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:4:RSpectrometry:timeofday:secs 1075502843:usecs 809995:time outside doSpec:567919
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 809.009766, delta 714.003906, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:5:RSpectrometry:timeofday:secs 1075502843:usecs 874639:time inside doSpec :64644
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:5:LSpectrometry:timeofday:secs 1075502844:usecs 331870:time outside doSpec:553199
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 629.764648, delta 714.504883, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:6:LSpectrometry:timeofday:secs 1075502844:usecs 397442:time inside doSpec :65572
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:5:RSpectrometry:timeofday:secs 1075502844:usecs 397625:time outside doSpec:522986
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 629.764648, delta 714.504883, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:6:RSpectrometry:timeofday:secs 1075502844:usecs 462393:time inside doSpec :64768
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:6:LSpectrometry:timeofday:secs 1075502844:usecs 970177:time outside doSpec:572735
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 707.520508, delta 715.005859, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:7:LSpectrometry:timeofday:secs 1075502845:usecs 35887:time inside doSpec :65710
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:6:RSpectrometry:timeofday:secs 1075502845:usecs 35926:time outside doSpec:573533
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 707.520508, delta 715.005859, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:7:RSpectrometry:timeofday:secs 1075502845:usecs 100482:time inside doSpec :64556
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:7:LSpectrometry:timeofday:secs 1075502845:usecs 570357:time outside doSpec:534470
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 18.277344, delta 715.506836, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x42e01200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LCD.0: write 16777216 bytes to base:ofs 0x0:0x0 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f838c: ../xxx.LCD.0 write 16777216 bytes to 0x0:0x0 from 0x0:0x42601200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:8:LSpectrometry:timeofday:secs 1075502845:usecs 730624:time inside doSpec :160267
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:7:RSpectrometry:timeofday:secs 1075502845:usecs 730659:time outside doSpec:630177
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 18.277344, delta 715.506836, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x44e03200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RCD.0: write 16777216 bytes to base:ofs 0x0:0x0 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f83dc: ../xxx.RCD.0 write 16777216 bytes to 0x0:0x0 from 0x0:0x44603200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:8:RSpectrometry:timeofday:secs 1075502845:usecs 887737:time inside doSpec :157078
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:8:LSpectrometry:timeofday:secs 1075502846:usecs 161301:time outside doSpec:430677
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 610.035156, delta 716.007812, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:9:LSpectrometry:timeofday:secs 1075502846:usecs 235422:time inside doSpec :74121
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:8:RSpectrometry:timeofday:secs 1075502846:usecs 235463:time outside doSpec:347726
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 610.035156, delta 716.007812, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:9:RSpectrometry:timeofday:secs 1075502846:usecs 308059:time inside doSpec :72596
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:9:LSpectrometry:timeofday:secs 1075502846:usecs 800251:time outside doSpec:564829
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 434.793945, delta 716.508789, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:10:LSpectrometry:timeofday:secs 1075502846:usecs 865921:time inside doSpec :65670
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:9:RSpectrometry:timeofday:secs 1075502846:usecs 865960:time outside doSpec:557901
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 434.793945, delta 716.508789, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:10:RSpectrometry:timeofday:secs 1075502846:usecs 930578:time inside doSpec :64618
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:10:LSpectrometry:timeofday:secs 1075502847:usecs 381961:time outside doSpec:516040
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 516.553711, delta 717.009766, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:11:LSpectrometry:timeofday:secs 1075502847:usecs 448835:time inside doSpec :66874
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:10:RSpectrometry:timeofday:secs 1075502847:usecs 479996:time outside doSpec:549418
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 516.553711, delta 717.009766, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:11:RSpectrometry:timeofday:secs 1075502847:usecs 544559:time inside doSpec :64563
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:11:LSpectrometry:timeofday:secs 1075502848:usecs 1298:time outside doSpec:552463
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 855.314453, delta 717.510742, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:12:LSpectrometry:timeofday:secs 1075502848:usecs 67431:time inside doSpec :66133
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:11:RSpectrometry:timeofday:secs 1075502848:usecs 67470:time outside doSpec:522911
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 855.314453, delta 717.510742, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:12:RSpectrometry:timeofday:secs 1075502848:usecs 131995:time inside doSpec :64525
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:12:LSpectrometry:timeofday:secs 1075502848:usecs 639902:time outside doSpec:572471
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 427.076172, delta 718.011719, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:13:LSpectrometry:timeofday:secs 1075502848:usecs 706057:time inside doSpec :66155
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:12:RSpectrometry:timeofday:secs 1075502848:usecs 706096:time outside doSpec:574101
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 427.076172, delta 718.011719, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:13:RSpectrometry:timeofday:secs 1075502848:usecs 770748:time inside doSpec :64652
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:13:LSpectrometry:timeofday:secs 1075502849:usecs 221857:time outside doSpec:515800
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 255.838867, delta 718.512695, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:14:LSpectrometry:timeofday:secs 1075502849:usecs 287467:time inside doSpec :65610
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:13:RSpectrometry:timeofday:secs 1075502849:usecs 287651:time outside doSpec:516903
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 255.838867, delta 718.512695, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:14:RSpectrometry:timeofday:secs 1075502849:usecs 352421:time inside doSpec :64770
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:14:LSpectrometry:timeofday:secs 1075502849:usecs 841599:time outside doSpec:554132
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 341.602539, delta 719.013672, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:15:LSpectrometry:timeofday:secs 1075502849:usecs 907807:time inside doSpec :66208
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:14:RSpectrometry:timeofday:secs 1075502849:usecs 907845:time outside doSpec:555424
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 341.602539, delta 719.013672, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:15:RSpectrometry:timeofday:secs 1075502849:usecs 972401:time inside doSpec :64556
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:15:RSpectrometry:timeofday:secs 1075502850:usecs 441343:time outside doSpec:468942
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 684.367188, delta 719.514648, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x45e04200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RCD.0: write 16777216 bytes to base:ofs 0x0:0x1000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f8400: ../xxx.RCD.0 write 16777216 bytes to 0x0:0x1000000 from 0x0:0x45604200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:16:RSpectrometry:timeofday:secs 1075502850:usecs 599224:time inside doSpec :157881
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:15:LSpectrometry:timeofday:secs 1075502850:usecs 599260:time outside doSpec:691453
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 684.367188, delta 719.514648, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x43e02200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LCD.0: write 16777216 bytes to base:ofs 0x0:0x1000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f83b0: ../xxx.LCD.0 write 16777216 bytes to 0x0:0x1000000 from 0x0:0x43602200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:16:LSpectrometry:timeofday:secs 1075502850:usecs 760785:time inside doSpec :161525
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:16:LSpectrometry:timeofday:secs 1075502851:usecs 61574:time outside doSpec:300789
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 260.132812, delta 720.015625, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:17:LSpectrometry:timeofday:secs 1075502851:usecs 127885:time inside doSpec :66311
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:16:RSpectrometry:timeofday:secs 1075502851:usecs 127925:time outside doSpec:528701
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 260.132812, delta 720.015625, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:17:RSpectrometry:timeofday:secs 1075502851:usecs 192578:time inside doSpec :64653
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:17:LSpectrometry:timeofday:secs 1075502851:usecs 679901:time outside doSpec:552016
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 92.899414, delta 720.516602, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:18:LSpectrometry:timeofday:secs 1075502851:usecs 746171:time inside doSpec :66270
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:17:RSpectrometry:timeofday:secs 1075502851:usecs 746209:time outside doSpec:553631
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 92.899414, delta 720.516602, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:18:RSpectrometry:timeofday:secs 1075502851:usecs 810840:time inside doSpec :64631
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:18:RSpectrometry:timeofday:secs 1075502852:usecs 281342:time outside doSpec:470502
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 182.666992, delta 721.017578, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:19:RSpectrometry:timeofday:secs 1075502852:usecs 346553:time inside doSpec :65211
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:18:LSpectrometry:timeofday:secs 1075502852:usecs 346590:time outside doSpec:600419
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 182.666992, delta 721.017578, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:19:LSpectrometry:timeofday:secs 1075502852:usecs 412183:time inside doSpec :65593
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:19:RSpectrometry:timeofday:secs 1075502852:usecs 901340:time outside doSpec:554787
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 529.435547, delta 721.518555, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:20:RSpectrometry:timeofday:secs 1075502852:usecs 966547:time inside doSpec :65207
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:19:LSpectrometry:timeofday:secs 1075502852:usecs 966586:time outside doSpec:554403
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 529.435547, delta 721.518555, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:20:LSpectrometry:timeofday:secs 1075502853:usecs 32092:time inside doSpec :65506
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:20:LSpectrometry:timeofday:secs 1075502853:usecs 520265:time outside doSpec:488173
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 109.205078, delta 722.019531, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:21:LSpectrometry:timeofday:secs 1075502853:usecs 585875:time inside doSpec :65610
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:20:RSpectrometry:timeofday:secs 1075502853:usecs 585976:time outside doSpec:619429
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 109.205078, delta 722.019531, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:21:RSpectrometry:timeofday:secs 1075502853:usecs 650659:time inside doSpec :64683
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:21:RSpectrometry:timeofday:secs 1075502854:usecs 121347:time outside doSpec:470688
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 969.975586, delta 722.520508, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:22:RSpectrometry:timeofday:secs 1075502854:usecs 186712:time inside doSpec :65365
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:21:LSpectrometry:timeofday:secs 1075502854:usecs 186750:time outside doSpec:600875
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 969.975586, delta 722.520508, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:22:LSpectrometry:timeofday:secs 1075502854:usecs 252414:time inside doSpec :65664
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:22:LSpectrometry:timeofday:secs 1075502854:usecs 740347:time outside doSpec:487933
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 39.747070, delta 723.021484, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:23:LSpectrometry:timeofday:secs 1075502854:usecs 805917:time inside doSpec :65570
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:22:RSpectrometry:timeofday:secs 1075502854:usecs 805955:time outside doSpec:619243
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 39.747070, delta 723.021484, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:23:RSpectrometry:timeofday:secs 1075502854:usecs 870520:time inside doSpec :64565
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:23:LSpectrometry:timeofday:secs 1075502855:usecs 360252:time outside doSpec:554335
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 390.519531, delta 723.522461, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x42e01200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LCD.0: write 16777216 bytes to base:ofs 0x0:0x2000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f838c: ../xxx.LCD.0 write 16777216 bytes to 0x0:0x2000000 from 0x0:0x42601200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:24:LSpectrometry:timeofday:secs 1075502855:usecs 517720:time inside doSpec :157468
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:23:RSpectrometry:timeofday:secs 1075502855:usecs 517754:time outside doSpec:647234
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 390.519531, delta 723.522461, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x44e03200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RCD.0: write 16777216 bytes to base:ofs 0x0:0x2000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f83dc: ../xxx.RCD.0 write 16777216 bytes to 0x0:0x2000000 from 0x0:0x44603200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:24:RSpectrometry:timeofday:secs 1075502855:usecs 671641:time inside doSpec :153887
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:24:LSpectrometry:timeofday:secs 1075502855:usecs 951562:time outside doSpec:433842
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 998.292969, delta 724.023438, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:25:LSpectrometry:timeofday:secs 1075502856:usecs 17876:time inside doSpec :66314
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:24:RSpectrometry:timeofday:secs 1075502856:usecs 17915:time outside doSpec:346274
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 998.292969, delta 724.023438, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:25:RSpectrometry:timeofday:secs 1075502856:usecs 82576:time inside doSpec :64661
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:25:LSpectrometry:timeofday:secs 1075502856:usecs 590357:time outside doSpec:572481
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 839.067383, delta 724.524414, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:26:LSpectrometry:timeofday:secs 1075502856:usecs 656061:time inside doSpec :65704
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:25:RSpectrometry:timeofday:secs 1075502856:usecs 656101:time outside doSpec:573525
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 839.067383, delta 724.524414, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:26:RSpectrometry:timeofday:secs 1075502856:usecs 720751:time inside doSpec :64650
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:26:RSpectrometry:timeofday:secs 1075502857:usecs 171340:time outside doSpec:450589
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 936.842773, delta 725.025391, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:27:RSpectrometry:timeofday:secs 1075502857:usecs 236539:time inside doSpec :65199
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:26:LSpectrometry:timeofday:secs 1075502857:usecs 236578:time outside doSpec:580517
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 936.842773, delta 725.025391, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:27:LSpectrometry:timeofday:secs 1075502857:usecs 302161:time inside doSpec :65583
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:27:LSpectrometry:timeofday:secs 1075502857:usecs 791573:time outside doSpec:489412
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 267.619141, delta 725.526367, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:28:LSpectrometry:timeofday:secs 1075502857:usecs 857791:time inside doSpec :66218
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:27:RSpectrometry:timeofday:secs 1075502857:usecs 857830:time outside doSpec:621291
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 267.619141, delta 725.526367, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:28:RSpectrometry:timeofday:secs 1075502857:usecs 922343:time inside doSpec :64513
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:28:LSpectrometry:timeofday:secs 1075502858:usecs 410264:time outside doSpec:552473
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 879.396484, delta 726.027344, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:29:LSpectrometry:timeofday:secs 1075502858:usecs 475897:time inside doSpec :65633
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:28:RSpectrometry:timeofday:secs 1075502858:usecs 475935:time outside doSpec:553592
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 879.396484, delta 726.027344, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:29:RSpectrometry:timeofday:secs 1075502858:usecs 540587:time inside doSpec :64652
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:29:RSpectrometry:timeofday:secs 1075502859:usecs 11341:time outside doSpec:470754
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 724.174805, delta 726.528320, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:30:RSpectrometry:timeofday:secs 1075502859:usecs 76619:time inside doSpec :65278
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:29:LSpectrometry:timeofday:secs 1075502859:usecs 76657:time outside doSpec:600760
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 724.174805, delta 726.528320, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:30:LSpectrometry:timeofday:secs 1075502859:usecs 142304:time inside doSpec :65647
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:30:LSpectrometry:timeofday:secs 1075502859:usecs 650174:time outside doSpec:507870
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 825.954102, delta 727.029297, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:31:LSpectrometry:timeofday:secs 1075502859:usecs 715848:time inside doSpec :65674
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:30:RSpectrometry:timeofday:secs 1075502859:usecs 715886:time outside doSpec:639267
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 825.954102, delta 727.029297, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:31:RSpectrometry:timeofday:secs 1075502859:usecs 780496:time inside doSpec :64610
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:31:LSpectrometry:timeofday:secs 1075502860:usecs 250261:time outside doSpec:534413
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 160.734375, delta 727.530273, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x43e02200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LCD.0: write 16777216 bytes to base:ofs 0x0:0x3000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f83b0: ../xxx.LCD.0 write 16777216 bytes to 0x0:0x3000000 from 0x0:0x43602200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fe800, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:32:LSpectrometry:timeofday:secs 1075502860:usecs 408381:time inside doSpec :158120
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:31:RSpectrometry:timeofday:secs 1075502860:usecs 408417:time outside doSpec:627921
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 160.734375, delta 727.530273, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x45e04200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RCD.0: write 16777216 bytes to base:ofs 0x0:0x3000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f8400: ../xxx.RCD.0 write 16777216 bytes to 0x0:0x3000000 from 0x0:0x45604200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RCD.0: done writing, err = 0
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8106e00, ofs = 0x2000
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:32:RSpectrometry:timeofday:secs 1075502860:usecs 561723:time inside doSpec :153306
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:32:LSpectrometry:timeofday:secs 1075502860:usecs 841560:time outside doSpec:433179
+PdmInputTask.cpp(543)[testHostBufWrite]: LCDInput: dspBuf = 66, dspBufs = 66
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 776.515625, delta 728.031250, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x42e01200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.LCD.0: write 16777216 bytes to base:ofs 0x0:0x4000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f838c: ../xxx.LCD.0 write 16777216 bytes to 0x0:0x4000000 from 0x0:0x42601200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.LCD.0: done writing, err = 0
+PdmInputTask.cpp(543)[testHostBufWrite]: LCDInput: dspBuf = 66, dspBufs = 66
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 16. Modified stop mask: 0000030b
+PdmInputTask.cpp(543)[testHostBufWrite]: LBaselineInput: dspBuf = 33, dspBufs = 33
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x80fa600, ofs = 0x2000
+PdmInputTask.cpp(543)[testHostBufWrite]: LBaselineInput: dspBuf = 33, dspBufs = 33
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 22. Modified stop mask: 0000020b
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:33:LSpectrometry:timeofday:secs 1075502861:usecs 254:time inside doSpec :158694
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: LSpectrometry
+PdmSpectrometryTask.cpp(205)[doSpectrometry]: --> :Enter doSpec:hf:32:RSpectrometry:timeofday:secs 1075502861:usecs 289:time outside doSpec:438566
+PdmInputTask.cpp(543)[testHostBufWrite]: RCDInput: dspBuf = 66, dspBufs = 66
+PdmSpectrometryTask.cpp(391)[processSubband]: inject subband 2202, idx 776.515625, delta 728.031250, drift 0.000977
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x44e03200, ofs = 0x800000
+PdmWriteTask.cpp(140)[writeBuf]: ../xxx.RCD.0: write 16777216 bytes to base:ofs 0x0:0x4000000 from 0x0:0x0
+PdmDiskIO.cpp(119)[WriteDisk]: 0x80f83dc: ../xxx.RCD.0 write 16777216 bytes to 0x0:0x4000000 from 0x0:0x44603200
+PdmWriteTask.cpp(143)[writeBuf]: ../xxx.RCD.0: done writing, err = 0
+PdmInputTask.cpp(543)[testHostBufWrite]: RCDInput: dspBuf = 66, dspBufs = 66
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 17. Modified stop mask: 00000203
+PdmInputTask.cpp(543)[testHostBufWrite]: RBaselineInput: dspBuf = 33, dspBufs = 33
+PdmInputTask.cpp(528)[testHostBufWrite]: cpu 1: base = 0x8102c00, ofs = 0x2000
+PdmInputTask.cpp(543)[testHostBufWrite]: RBaselineInput: dspBuf = 33, dspBufs = 33
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 23. Modified stop mask: 00000003
+PdmSpectrometryTask.cpp(262)[doSpectrometry]: --> :Leave doSpec:hf:33:RSpectrometry:timeofday:secs 1075502861:usecs 154192:time inside doSpec :153903
+PdmSpectrometryTask.cpp(263)[doSpectrometry]: --> timeofday: RSpectrometry
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 14. Modified stop mask: 00000002
+PdmCollectionTask.cpp(738)[setCollectionStopped]:  Collection received msg for unit 15. Modified stop mask: 00000000
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40017 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40018 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40024 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40027 for SSE 
+PdmSseOutputTask.cpp(64)[handleMsg]: message 40028 for SSE 
+PdmConfirmationTask.cpp(255)[startActivity]: start activity, cwCount = 0, pdCount = 0

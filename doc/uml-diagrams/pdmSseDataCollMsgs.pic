@@ -1,0 +1,100 @@
+# pdmSseDataCollMsgs.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# PDM-SSE data collection messages
+
+.PS
+
+
+copy "sequence.pic";
+
+# doc version
+move right;
+"pdmSseDataCollMsgs.pic v2.0 2010-Jan-06 18:22:28 UTC" ljust
+
+# title
+move down; move right; move right; 
+"PDM - SSE Data Collection Messages" ljust
+move down;
+
+# vertical spacing between messages
+spacing = 0.30;
+
+# move objects apart horizontally
+movewid = 3.5;
+
+#define the objects
+# SSE
+boxwid = 1.2;
+object(SSE,"SSE: ActUnit");
+
+# PDM
+boxwid = 0.75;
+object(PDM,"PDM");
+
+step();
+
+# message sequences
+
+message(SSE,PDM,"sendPdmActivityParameters(PdmActivityParameters)");
+message(PDM,SSE,"pdmTuned()");
+
+message(SSE,PDM,"recentRfiMask(RecentRfiMaskHeader, FrequencyBand[ ])");
+lconstraint(PDM,"[If required by activity type]");
+
+message(SSE,PDM,"beginSendingFollowupSignals(Count)");
+active(SSE);
+active(PDM);
+lconstraint(PDM,"[If this is a followup activity]");
+
+message(SSE,PDM,"" "sendFollowupCwSignal(FollowUpCwSignal)" "OR sendFollowupPulseSignal(FollowupPulseSignal)");
+step();
+message(SSE,PDM,"doneSendingFollowupSignals()");
+
+inactive(SSE);
+inactive(PDM);
+
+step();
+message(SSE,PDM,"startTime(StartActivity)");
+step();
+
+active(PDM);
+message(PDM,SSE,"baselineInitAccumStarted()");
+lconstraint(PDM,"[Baseline Initial Accum]");
+message(PDM,SSE,"baselineInitAccumComplete()");
+inactive(PDM);
+
+step();
+active(PDM);
+message(PDM,SSE,"dataCollectionStarted()");
+lconstraint(PDM,"[Data Collection]");
+
+message(PDM,SSE,"sendBaseline(BaselineHeader, BaselineValue[ ])");
+lconstraint(PDM,"[1 per pol for every Nth 1/2 frame]");
+
+message(PDM,SSE,"sendBaselineStatistics(BaselineStatistics)");
+lconstraint(PDM,"[1 per baseline]");
+
+message(PDM,SSE,"" "baselineWarningLimitsExceeded(" "BaselineLimitsExceededDetails)");
+lconstraint(PDM,"[check baseline statistics]");
+step();
+message(PDM,SSE,"" "baselineErrorLimitsExceeded(" "BaselineLimitsExceededDetails)");
+step();
+
+# multiple args for multiline text
+message(PDM,SSE,"" "sendComplexAmplitudes(ComplexAmplitudeHeader,"  "SubbandCoef1KHz[ ])");
+lconstraint(PDM,"[1 per pol for each 1/2 frame]");
+
+step();
+message(PDM,SSE,"dataCollectionComplete()");
+inactive(PDM);
+
+step();
+
+
+complete(SSE);
+complete(PDM);
+
+.PE
+

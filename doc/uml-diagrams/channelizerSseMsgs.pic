@@ -1,0 +1,77 @@
+# channelizerSseMsgs.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+.PS
+
+copy "sequence.pic";
+
+# doc version
+move right;
+"channelizerSseMsgs.pic v1.0 2010-Jan-06 20:42:16 UTC" ljust
+
+# title
+move down; move right; move right; move right; 
+"Channelizer - SSE Messages" ljust
+move down;
+
+# vertical spacing between messages
+spacing = 0.30;
+
+# move objects apart horizontally
+movewid = 3.5;
+
+#define the objects
+boxwid = 1.2;
+object(SSE,"SSE");
+
+boxwid = 1.4;
+object(CHANZER,"CHANNELIZER");
+
+step();
+
+# message sequences
+
+message(CHANZER,SSE,"<connect>");
+step();
+
+message(SSE,CHANZER,"requestIntrinsics( )");
+active(CHANZER);
+message(CHANZER,SSE,"sendIntrinsics(Intrinsics)");
+inactive(CHANZER);
+step();
+
+message(SSE,CHANZER,"requestStatus( )");
+active(CHANZER);
+message(CHANZER,SSE,"sendStatus(Status)");
+inactive(CHANZER);
+step();
+
+message(SSE,CHANZER,"start(Start)"); 
+active(CHANZER);
+lconstraint(CHANZER,"[retune, wait for time sync]");
+message(CHANZER,SSE,"started(Started)");
+inactive(CHANZER);
+step();
+
+message(CHANZER,SSE,"sendMessage(NssMessage)");
+lconstraint(CHANZER,"[errors, warnings, etc.]");
+
+message(CHANZER,SSE,"<multicast>(Statistics)");
+lconstraint(CHANZER,"[periodically]");
+
+message(SSE,CHANZER,"stop( )");
+step();
+
+message(SSE,CHANZER,"shutdown( )");
+active(CHANZER)
+message(CHANZER,SSE,"<disconnect>");
+inactive(CHANZER)
+step();
+
+
+complete(SSE);
+complete(CHANZER);
+
+.PE
+

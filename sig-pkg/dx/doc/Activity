@@ -1,0 +1,26 @@
+			PDM Activity Class
+
+3/6/01 kes
+
+1.	Each activity has a set of parameters which are unique
+	to it; these must be attached to the activity itself.
+2.	Many of the data items are very small, and are an inherent
+	part of the activity: center frequency, start time,
+	data collection time, etc.
+3.	Others are less closely linked, and may be associated with
+	several observations.  Some of these are session parameters.
+4.	Others are data produced by the system itself and may
+	be very large, such as RFI and birdie masks.
+5.	For the latter data types, it makes more sense to attach
+	a pointer to the data.  In addition, more than one version
+	of the data may be active in the system at a time.
+6.	If we create a class for each of these types
+	(PdmPermanentRFI, PdmBirdies, PdmRecentRFI) we can allocate
+	them when the SSE sends the data, and attach a use count,
+	which is initially set to 1.  When an activity is defined
+	while the mask is active, the data is attached (via a
+	pointer) to the activity, and the use count is incremented.
+7.	When a subsequent mask is defined or the activity is resolved
+	(either completed or stopped), the use count is decremented.
+	If it then becomes zero, the mask wil be deleted.
+

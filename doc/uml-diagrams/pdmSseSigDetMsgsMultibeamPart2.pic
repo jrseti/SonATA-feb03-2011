@@ -1,0 +1,148 @@
+# pdmSseSigDetMsgsMultibeamPart2.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# PDM-SSE signal detection messages
+
+.PS
+
+
+# ---- setup & title ---
+
+copy "sequence.pic";
+
+# doc version
+move right;
+"pdmSseSigDetMsgsMultibeamPart2.pic v2.0 2010-Jan-06 18:21:43 UTC" ljust
+
+# title
+move down; move right; move right; 
+"PDM - SSE Signal Detection Messages - Multibeam Part2 " ljust
+move down;
+
+# vertical spacing between messages
+spacing = 0.30;
+
+# move objects apart horizontally
+#movewid = 3.5;
+movewid = 4.5;
+
+#define the objects
+# SSE
+boxwid = 1.2;
+object(SSE,"SSE: ActUnit");
+
+# PDM
+boxwid = 0.75;
+object(PDM,"PDM");
+
+step();
+
+# ----  message sequences -----
+
+step();
+active(SSE);
+step();
+lconstraint(SSE,"[Wait for signal reports from all pdms]");
+inactive(SSE);
+step();
+
+
+# --- CW Power, Pulse from SSE to Pdm
+# (combined list from counterpart pdms on other beams) -----
+
+message(SSE,PDM,"beginSendingCandidates(Count)");
+active(SSE);
+lconstraint(PDM,"[Forward CW Power, Pulse signals from");
+lconstraint(PDM,"counterpart PDMs on other beam(s)]");
+
+message(SSE,PDM,"" "sendCandidateCwPowerSignal(CwPowerSignal)" "OR sendCandidatePulseSignal(PulseSignalHeader, Pulse[ ])");
+step();
+
+step();
+message(SSE,PDM,"doneSendingCandidates()");
+
+inactive(SSE);
+
+step();
+
+# --- CW coherent from SSE to PDM ---
+# (combined list from counterpart pdms on other beams) -----
+
+step();
+
+
+message(SSE,PDM,"beginSendingCwCoherentSignals(Count)");
+active(SSE);
+lconstraint(PDM,"[Forward CW Coherent Signals from ");
+lconstraint(PDM,"counterpart PDMs on other beam(s)");
+
+
+message(SSE,PDM,"sendCwCoherentSignal(CwCoherentSignal)");
+step();
+
+message(SSE,PDM,"doneSendingCwCoherentSignals()");
+
+inactive(SSE)
+step();
+
+
+
+# --- candidate results for counterpart pdms  ---
+
+step();
+message(PDM,SSE,"beginSendingCandidateResults(Count)");
+active(PDM);
+lconstraint(PDM,"[Signal detection of");
+lconstraint(PDM,"counterpart PDM signals]");
+
+step();
+message(PDM,SSE,"" "sendPulseCandidateResult(PulseSignalHeader, Pulse[ ])" "OR sendCwCoherentCandidateResult(CwCoherentSignal)");
+
+step();
+message(PDM,SSE,"doneSendingCandidateResults()");
+
+inactive(SSE);
+inactive(PDM);
+
+# --- archive data for local signal list & counterpart signals 
+step();
+
+active(SSE);
+active(PDM);
+
+message(SSE,PDM,"" "requestArchiveData(ArchiveRequest)" "OR discardArchiveData(ArchiveRequest)");
+lconstraint(PDM,"[For each local candidate signal,");
+lconstraint(PDM,"and for each counterpart signal,");
+lconstraint(PDM,"if requested, send archive data to pdmArchiver]");
+
+lconstraint(PDM,"(SSE compares counterpart PDM results");
+lconstraint(PDM," to determine RFI)");
+
+step();
+
+inactive(SSE);
+inactive(PDM);
+
+step();
+
+# -- wrap up ---
+
+active(PDM)
+message(PDM,SSE,"archiveComplete()");
+lconstraint(PDM,"[Activity wrapup]");
+message(PDM,SSE,"signalDetectionComplete()");
+message(PDM,SSE,"pdmActivityComplete(ActivityStatus)");
+
+inactive(PDM);
+step();
+
+inactive(SSE);
+
+step();
+
+complete(SSE);
+complete(PDM);
+
+.PE
+

@@ -1,0 +1,16 @@
+sonata git account
+2010/01/05
+
+Today Tucker set up an account for sonata on repos.
+
+I created public and private ssh keys for sonata 
+on handel in the ~/.ssh directory. I copied the keys to 
+mozart, chopin, brahms, schubert, and liszt.
+
+I created repositories on each the hosts with the command
+
+git clone git@repos.seti.org:/git/OpenSonATA.git
+
+Further updates can be accomplished with pull and push.
+
+Jane 

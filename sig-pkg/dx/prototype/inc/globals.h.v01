@@ -1,0 +1,216 @@
+/*
+#
+# File:    globals.h.v01
+# Project: OpenSonATA
+# Authors: The OpenSonATA code is the result of many programmers
+#          over many years
+#
+# Copyright 2011 The SETI Institute
+#
+# OpenSonATA is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# OpenSonATA is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with OpenSonATA.  If not, see<http://www.gnu.org/licenses/>.
+# 
+# Implementers of this code are requested to include the caption
+# "Licensed through SETI" with a link to setiQuest.org.
+# 
+# For alternate licensing arrangements, please contact
+# The SETI Institute at www.seti.org or setiquest.org. 
+#
+*/
+
+/**********************************************************************
+** $Source: /home/cvs/nss/sonata-pkg/dx/prototype/inc/globals.h.v01,v $
+**
+** global variable definitions
+**
+** $Header: /home/cvs/nss/sonata-pkg/dx/prototype/inc/globals.h.v01,v 1.1.1.1 2006/08/02 05:29:54 kes Exp $
+** $Log: globals.h.v01,v $
+** Revision 1.1.1.1  2006/08/02 05:29:54  kes
+** pdm-1_59
+**
+** Revision 1.1  2001/11/09 04:32:34  kes
+** *** empty log message ***
+**
+ * Revision 1.16  96/12/17  16:25:29  kes
+ * Pretty good version, about to change PID coefficients.
+ * 
+ * Revision 1.15  96/11/10  14:23:43  kes
+ * Changes to convert from FUDD to TC.
+ * 
+**********************************************************************/
+
+#ifndef _GLOBALS_H
+#define _GLOBALS_H
+
+#include "tc.h"
+#include "command.h"
+#include "drive.h"
+#include "init.h"
+#include "plc.h"
+#include "signals.h"
+#include "siemens.h"
+#include "state.h"
+#include "sysparms.h"
+
+task_t CommandTask(void *);				/* command processor task */
+
+extern cmd_proc_t Commands[];			/* array of valid commands */
+extern cmd_proc_t PLCCommands[];		/* array of valid commands */
+extern queue_spec_t Queues[];			/* array of system queues */
+extern connection_t *Connections[];		/* array of connections */
+extern client_t *Clients[];				/* array of clients */
+extern task_spec_t Tasks[];				/* array of system tasks */
+extern sig_spec_t Handlers[];			/* array of signal handlers */
+
+#ifdef GLOBAL_VARS
+
+queue_t *CommandQ;						/* command processor queue */
+queue_t *PLCQ;							/* PLC queue */
+State State;							/* system state */
+SysParms SysParms;						/* system configuration parameters */
+PLC PLC;								/* PLC */
+Drive AzMaster(AzDrive, AZ_MASTER_ADR);		/* azimuth master drive */
+Drive ElMaster(ElDrive, EL_MASTER_ADR);		/* elevation master drive */
+Encoder AzimuthEncoder(Az, 33);			/* azimuth encoder */
+Encoder ElevationEncoder(El, 33);		/* elevation encoder */
+PID AzPID(Az, 5);						/* azimuth PID */
+PID ElPID(El, 5);						/* elevation PID */
+
+encoder_spec_t DefaultAzEncoder = {
+	Az,									/* azimuth */
+	-1,									/* counts down as angle increases */
+	65536,								/* total # of counts */
+	35533,								/* encoder count at az = 0 */
+	TWOPI / 65536.0						/* radians/count */
+};
+
+encoder_spec_t DefaultElEncoder = {
+	El,									/* elevation */
+	1,									/* counts up as angle increases */
+	65536,								/* total # of counts */
+	56661,								/* encoder count at el = 0 */
+	TWOPI / 65536.0						/* radians/count */
+};
+
+/* site location as determined by GPS system */
+location_t DefaultLocation = {
+	32.937108055 * DEG_TO_RAD,			/* latitude (radians) */
+	-84.538911111 * DEG_TO_RAD,			/* longitude (radians) */
+	265.04								/* height (meters above MSL) */
+};
+
+/*
+** gear ratios in revolutions/radian; we want these to be as accurate
+** as reasonably possible so that the feedforward velocity calculations
+** as accurate, but absolute precision is not essential.  They were
+** determined by running the telescope at a known frequency for an
+** extended period, then computing the number of encoder pulses
+** traversed and converting the value to degrees, then radians.
+*/
+axis_pair_t DefaultGearRatio = {
+#ifdef notdef
+	38402.45776,						/* azimuth */
+	14168.31964							/* elevation */
+#else
+	670.2493288 * DEG_PER_RAD,			/* azimuth (rev/deg) */
+	247.2838271 * DEG_PER_RAD,			/* elevation (rev/deg) */
+#endif
+};
+
+#ifdef notdef
+pid_coeff_t DefaultAzPID = { 0.5, .005, 0.0, .000581776 };
+pid_coeff_t DefaultElPID = { 0.5, .005, 0.0, .000581776 };
+#else
+pid_coeff_t DefaultAzPID = { 0.5, 0.01, 0.42, .000581776 };
+pid_coeff_t DefaultElPID = { 0.5, 0.01, 0.42, .000581776 };
+#endif
+
+axis_pair_t DefaultStowPosition = {
+	3.141592654,								/* nominally due south */
+	1.279926469
+};
+
+limit_t DefaultAzLimit = {
+	{ -74.0 * DEG_TO_RAD, 284.0 * DEG_TO_RAD }, /* soft (tracking/wrap) limits */
+	{ -91.5 * DEG_TO_RAD, 297.5 * DEG_TO_RAD }, /* prelimits */
+	{ -92.0 * DEG_TO_RAD, 298.0 * DEG_TO_RAD }, /* hard limits */
+#ifdef notdef
+	{ -120.0, 120.0 }							/* velocity limits */
+#else
+	{ -60.0, 60.0 }								/* velocity limits */
+#endif
+};
+
+limit_t DefaultElLimit = {
+	{ 22 * DEG_TO_RAD, 87.0 * DEG_TO_RAD },	/* soft (tracking) limits */
+	{ 21.5 * DEG_TO_RAD, 87.5 * DEG_TO_RAD },	/* prelimits */
+	{ 20.1 * DEG_TO_RAD, 88.0 * DEG_TO_RAD }, /* hard limits */
+#ifdef notdef
+	{ -50.0, 50.0 }							/* velocity limits */
+#else
+	{ -30.0, 30.0 }							/* velocity limits */
+#endif
+};
+
+/* allow up to 2 arcminutes of position error for tracking/pointing */
+axis_pair_t DefaultMaxPositionErr = {
+	2 * MIN_TO_RAD,							/* max az position error, rad */
+	2 * MIN_TO_RAD							/* max el position error, rad */
+};
+
+/* allow up to 1 arcminute/sec of velocity error for tracking/pointing */
+axis_pair_t DefaultMaxVelocityErr = {
+	1 * MIN_TO_RAD,							/* max az velocity error, rad/sec */
+	1 * MIN_TO_RAD							/* max el velocity error, rad/sec */
+};
+
+drive_control_t DefaultDriveControl = {
+	SV_CONTROL_WORD,
+	0
+};
+
+pointing_model_t DefaultRadioModel;
+pointing_model_t DefaultOpticalModel;
+
+#else
+
+extern queue_t *CommandQ;				/* command processor queue */
+extern queue_t *PLCQ;					/* PLC queue */
+extern State State;
+extern SysParms SysParms;
+extern PLC PLC;
+extern Drive AzMaster;
+extern Drive ElMaster;
+extern Encoder AzimuthEncoder;
+extern Encoder ElevationEncoder;
+extern PID AzPID;
+extern PID ElPID;
+
+extern encoder_spec_t DefaultAzEncoder;
+extern encoder_spec_t DefaultElEncoder;
+extern location_t DefaultLocation;
+extern axis_pair_t DefaultGearRatio;
+extern pid_coeff_t DefaultAzPID;
+extern pid_coeff_t DefaultElPID;
+extern axis_pair_t DefaultStowPosition;
+extern limit_t DefaultAzLimit;
+extern limit_t DefaultElLimit;
+extern axis_pair_t DefaultMaxPositionErr;
+extern axis_pair_t DefaultMaxVelocityErr;
+extern drive_control_t DefaultDriveControl;
+extern pointing_model_t DefaultRadioModel;
+extern pointing_model_t DefaultOpticalModel;
+
+#endif /* GLOBAL_VARS */
+
+#endif /* _GLOBALS_H */

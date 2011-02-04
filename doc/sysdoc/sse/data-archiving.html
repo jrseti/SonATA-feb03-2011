@@ -1,0 +1,222 @@
+<html>
+<head>
+<title>Prelude Data Archiving</title>
+</head>
+<body>
+
+<h3> Prelude Data Archiving</h3>
+
+<pre>
+<b>
+Synopsis:
+
+The NSS/Prelude data products are stored in one or more
+MYSQL databases (one per observing program), as well as
+in the /home/nss/sse_archive directory on sse3 at Hat Creek (HC).
+
+The sse_archive directory contains symbolic links (named as YYYY-MM-DD) 
+which point to disks in an array, each of which contains one
+day's worth of data.  The disks are rotated daily, removing the oldest
+data products to make room for new observations.
+
+Once a day a backup of the previous day's observing data is
+made to a tape jukebox at HC.  This data includes:
+
+- All observing data products files on the appropriate day's disk.
+- The system and error logs for that day.
+- A backup file of the previous day's data from each observing
+database in use.
+- The tape jukebox database, needed to retrieve the rest
+of the files from tape.
+
+A full mirror copy of the observing databases are kept on a host
+in Mountain View (MV), updated via the mysql replication mechanism. 
+Once a day, an archive copy of the data is backed up to disk
+as insurance against accidental file damage or loss.
+
+There will be periodic validation of the backups to verify that
+the expected data is being archived, and that it can be retrieved from
+the backup media.
+
+Backups of the cvs repository on sol are also described below.
+
+
+Sequence of archiving events:
+-----------------------------
+
+I. At Hat Creek:
+
+ A. Mysql replication continuously copies the HC observing databases
+    to MV.
+  
+ B. Once daily, after the UT day rollover:
+
+   1. Wait long enough for all of the previous day's activities
+      to finish (30 minutes would be plenty), so that all the database
+      entries are complete and the archive disk is idle.
+
+   2. 'Select' the previous day's data from the observing
+      database and store it in a 'daily snapshot' tar file on local disk.
+
+      Specifically, a 'mysql select' is done on each table in the database,
+      choosing those rows whose timestamp value falls in the previous day.
+      The data in each table is stored in a separate file, and all these
+      files are bundled into a single tar file.
+
+   3. Run the tape jukebox backup which includes:
+
+      a. database snapshot file(s) for previous day
+
+      b. system & error logs for previous day
+  
+      c. data products archive disk for previous day
+
+      d. tape jukebox database (for locating files on tape)
+
+   4. Delete daily snapshot files older than 7 days.
+
+   5. Rotate data products archive disks: clear oldest date disk,
+      prepare disk for 'tomorrow'.
+
+   6. Rotate mysql replication master binary logs.
+
+   7. Report success or failure of backups to an appropriate 
+      prelude-related mailing list.
+
+II. At Mountain View:
+
+  A. Daily
+
+   1. Backup full databases at MV to disk.
+      The mysql slave server updating is turned off while this takes place.
+
+   2. Report success or failure of backups to an appropriate 
+      prelude-related mailing list.
+
+-----------------------------
+
+Possible variations:
+
+We may find that storing all of the signals in one table at HC results
+in recent RFI queries that take too long to run.  One remedy
+would be to split the table in two:  one part holding the
+most recent 7-10 days worth of signals, and the other containing
+all of the signals to date.
+
+---------------------------------------------
+
+Location of prelude data and archive files:
+
+On sse3 at Hat Creek:
+
+ /home/nss/sse_archive
+   Links to daily archive disks (YYYY-MM-DD)
+   System and Error logs   
+
+ /usr/local/prelude_archive/disks/mount-points
+   Mount points for archive disks
+
+ /usr/local/prelude_archive/disks/date-links/
+   Symbolic links to disks for each day's archive products
+
+ /usr/local/prelude_archive/dbbackups
+   Daily database backups in tar format, one file per database
+
+ /usr/local/data/mysql-master
+   Mysql database binary data files
+
+
+On sse2 at Mountain View:
+
+ /usr/local/data/mysql-slave
+   Mirror (slave replication) copy of observing system database binary data files
+
+ /usr/local/backup/mysql/obs-db-rdiff-backup
+   Archived versions of observing databases. 
+
+-----------------------------------
+More information on:<br>
+<a href="tape-jukebox.html">Tape Jukebox</a>
+<a href="disk-array.html">Disk Array</a>
+
+
+-------------------------------------------------------------
+crontab entries related to backups and archiving:
+
+sse3:
+====
+
+nss:
+---
+# database snapshots
+30 00 * * * /home/nss/sse_release/bin/run-nss-prog-under-cron backup-db-by-date -dbhost localhost -outdir /usr/local/prelude_archive/dbbackups -date yesterday
+
+# write observing data to tape
+00 01 * * * /home/nss/sse_release/bin/run-nss-prog-under-cron backup-prelude-files-to-tape
+
+# delete old db backup files from disk
+30 03 * * * /home/nss/sse_release/bin/run-nss-prog-under-cron delete-old-backup-db-by-date-files -dir /usr/local/prelude_archive/dbbackups -agedays 7 -delete
+
+
+root:
+----
+# rotate mysql binary logs
+10 00 * * * /usr/local/mysql/bin/mysqladmin flush-logs
+
+# verify tape backups (note results go to stderr)
+
+00 02 * * * /usr/openv/netbackup/bin/admincmd/bpverify -hoursago 24 2>&1| mailx -s "results from netbackup tape verify" obs-nnn@seti.org
+
+# rotate archive disks
+15 03 * * * /sse_release/bin/run-nss-prog-under-cron rotate-archive-disks
+
+
+sse2:
+====
+nss:
+----
+# verify that mysql slave is following master
+30 13 * * * /usr/local/mysql/bin/mysql --host 127.0.0.1 -e 'select now(); \p; show full processlist' --port=3308 | mailx -s"sse2: prelude mysql mirror status" obs-nnn@seti.org
+
+root:
+----
+# archive mysql slave data to disk
+30 06 * * * /sse_release/bin/run-nss-prog-under-cron backup-slave-db 2>&1 | mailx -s"sse2: obs slave db rdiff backup report" obs-nnn@seti.org
+
+# archival copy of cvs repository
+30 07 * * * /bin/env LD_LIBRARY_PATH=/usr/local/lib /usr/local/bin/rdiff-backup --print-statistics /usr/local/backup/cvs/rsync-mirror /usr/local/backup/cvs/rdiff-backup-archive 2>&1 | mailx -s"sse2: cvs rdiff backup report for /usr/local/backup/cvs" obs-nnn@seti.org
+
+
+sol
+===
+nss:
+----
+# daily dump of all databases on sol for inclusion on daily bacula backup
+0 23 * * * /home/nss/bin/dump-all-mysqldb /data/mysql-backups/mysql-all.sql.gz 2>&1 | mailx -s"sol: mysql alldb dump" obs-nnn@seti.org
+
+root:
+-----
+# cvs respository mirror backups to sse4 at Hat Creek and sse2 at Mountain View
+# including checksum comparisons to verify that backups are working
+20 0,5,12,18 * * * rsync -var --delete /home/cvs/ root@sse4.csr.seti.org:/export/home/cvs
+40 0 * * * /sse_release/bin/compare-dir-checksums sol /home/cvs sse4 /export/home/cvs 2>&1 | mailx -s "sol: sse4 cvs backup verify checksum" obs-nnn@seti.org
+
+30 22 * * * rsync -qa --delete /home/cvs/ root@sse2.csr.seti.org:/usr/local/backup/cvs/rsync-mirror/
+50 22 * * * /sse_release/bin/compare-dir-checksums sol /home/cvs sse2 /usr/local/backup/cvs/rsync-mirror 2>&1 | mailx -s "sol: sse2 cvs backup verify checksum" obs-nnn@seti.org
+
+# backup sol:/usr/local to sse2
+15 1 * * * /usr/local/bin/rdiff-backup --print-statistics  --force /usr/local/ sse2::/usr/local/sol_usrlocal_archive 2>&1 | mailx -s "sol: rdiff-backup /usr/local to sse2:/usr/local/sol_usrlocal_archive" obs-nnn@seti.org
+
+
+-----------------------------------------------------------
+
+TBD:
+- outline the procedure & estimated schedule for swapping tapes in and out of the jukebox
+   
+
+</b>
+</ol>
+
+</pre>
+</body>
+</html>

@@ -1,0 +1,16 @@
+Restarting the SonATA Backend Server
+
+ssh to auxcntl:
+
+> ssh auxcntl -l atasys
+
+> ataps -c restart -p SonATABackendServer
+
+To check if it's running:
+ > ps -ef | grep SonATABackendServer
+
+Planning ahead we need 308 more antennas to reach 350 in the array.
+
+atasys@auxcntl:/var/log/atasys/> less SonATABackendServer.log
+
+

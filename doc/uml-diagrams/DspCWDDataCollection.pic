@@ -1,0 +1,191 @@
+# DspCWDDataCollection.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# PDM-DataCollection messages
+
+.PS
+
+
+copy "sequence.pic";
+
+maxpswid = 8.5;
+maxpsht = 11;
+# vertical spacing between messages
+spacing = 1.0;
+# doc version
+move right;
+move right 25;
+"DspCWDDataCollection.pic v2.0 2010-Jan-06 18:34:38 UTC"
+move left 25;
+# arrow head dimensions
+arrowhead = 7;
+arrowwid = 0.5;
+arrowht = 1.0;
+
+step();
+# title
+step();
+move down;
+move down; move right; move right; 
+"DSP CWD Data Collection Messages for One Polarization" ljust
+move down;
+move down;
+move down;
+move down;
+step();
+step();
+move right;
+
+# move objects apart horizontally
+movewid = 3.5;
+boxht = 2.0;
+
+#define the objects
+# BlueWave
+boxwid = 7.0;
+object(BW,"BlueWave");
+
+# PdmDspInputTask
+boxwid = 12.0;
+object(DspInput,"PdmDspInputTask");
+
+# CDInputTask
+#boxwid = 9.5;
+#object(CDInput,"CDInputTask");
+
+# CWDInputTask
+boxwid = 9.5;
+object(CWDInput,"CWDInputTask");
+
+# PlsInputTask
+#boxwid = 9.5;
+#object(PlsInput,"PlsInputTask");
+
+# BaselineInputTask
+#boxwid = 9.5;
+#object(BslInput,"BslInputTask");
+
+# CDWriteTask
+#boxwid = 9.5;
+#object(CDWrite,"CDWriteTask");
+
+# CWDWriteTask
+boxwid = 9.5;
+object(CWDWrite,"CWDWriteTask");
+
+# PlsWriteTask
+#boxwid = 9.5;
+#object(PlsWrite,"PlsWriteTask");
+
+# BaselineWriteTask
+#boxwid = 9.5;
+#object(BslWrite,"BslWriteTask");
+
+# PdmCollectionTask
+boxwid = 13.0;
+object(Collect,"PdmCollectionTask");
+
+spacing = 1.0;
+move down;
+step();
+step();
+step();
+
+# message sequences
+
+step();
+awid = 1.0;
+message(Collect,CWDInput, "Start Time");
+step();
+message(CWDInput, CWDWrite, "Start Time");
+active(BW);
+lconstraint(BW, "Every Half-Frame");
+#message(BW,DspInput,"CD Data Ready");
+message(BW,DspInput,"CWD Data Ready");
+#message(BW,DspInput,"Pls Data Ready");
+#message(BW,DspInput,"Baseline Data Ready");
+active(DspInput);
+step();
+#message(DspInput, CDInput, "CD Data Ready");
+message(DspInput, CWDInput, "CWD Data Ready");
+#message(DspInput, PlsInput, "Pulse Data Ready");
+#message(DspInput, BslInput, "Baseline Data Ready");
+#active(CDInput);
+active(CWDInput);
+#active(PlsInput);
+#active(BslInput);
+message(CWDInput,Collect,"Data Collection Started");
+step();
+step();
+#lconstraint(CDInput, "Every 8 Half-Frames");
+lconstraint(CWDInput, "Every 32 Half-Frames");
+#lconstraint(PlsInput, "Every 8 Half-Frames");
+#lconstraint(BslInput, "Every 8 Half-Frames");
+#message(CDInput, CDWrite, "Buffer Full");
+message(CWDInput, CWDWrite, "Buffer Full");
+#message(PlsInput, PlsWrite, "Buffer Full");
+#message(BslInput, BslWrite, "Buffer Full");
+
+#active(CDWrite);
+active(CWDWrite);
+#active(PlsWrite);
+#active(BslWrite);
+#message(CDWrite, CDWrite, "Write to Disk");
+message(CWDWrite, CWDWrite, "Write to Disk");
+#message(PlsWrite, CDWrite, "Write to Disk");
+#message(BslWrite, CDWrite, "Write to Disk");
+step();
+#inactive(CDWrite);
+inactive(CWDWrite);
+#inactive(PlsWrite);
+#inactive(BslWrite);
+step();
+message(BW,DspInput, "Obs Complete");
+step();
+inactive(BW);
+#message(DspInput, CDInput, "Data Coll Complete");
+message(DspInput, CWDInput, "Data Coll Complete");
+#message(DspInput, PlsInput, "Data Coll Complete");
+#message(DspInput, BslInput, "Data Coll Complete");
+step();
+inactive(DspInput);
+#message(CDInput, CDWrite, "Data Coll Complete");
+message(CWDInput, CWDWrite, "Data Coll Complete");
+#message(PlsInput, PlsWrite, "Data Coll Complete");
+#message(BslInput, BslWrite, "Data Coll Complete");
+#active(CDWrite);
+active(CWDWrite);
+#active(PlsWrite);
+#active(BslWrite);
+step();
+#inactive(CDInput);
+#inactive(PlsInput);
+#inactive(BslInput);
+inactive(CWDInput);
+#message(CDWrite, CDWrite, "Write to Disk");
+message(CWDWrite, CWDWrite, "Write to Disk");
+#message(PlsWrite, CDWrite, "Write to Disk");
+#message(BslWrite, CDWrite, "Write to Disk");
+step();
+message(CWDWrite, Collect, "Data Coll Complete");
+step();
+#inactive(CDWrite);
+inactive(CWDWrite);
+#inactive(PlsWrite);
+#inactive(BslWrite);
+
+complete(DspInput);
+complete(BW);
+#complete(CDInput);
+complete(CWDInput);
+#complete(PlsInput);
+#complete(BslInput);
+#complete(CDWrite);
+complete(CWDWrite);
+#complete(PlsWrite);
+#complete(BslWrite);
+complete(Collect);
+
+.PE
+

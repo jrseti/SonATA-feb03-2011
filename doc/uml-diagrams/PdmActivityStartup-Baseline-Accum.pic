@@ -1,0 +1,253 @@
+# PdmActivityStartup-Baseline-Accum.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# PDM-Activity Startup and Baseline Accumulation messages
+
+.PS
+
+copy "sequence.pic";
+
+spacing = 2.0;
+# doc version
+move right;
+# vertical spacing between messages
+arrowhead = 7;
+arrowwid = 0.5;
+arrowht = 1.0;
+
+step();
+# title
+step();
+move down 2;
+move right 40;
+"PdmActivityStartup-Baseline-Accum.pic v2.0 2010-Jan-06 18:33:14 UTC"
+move left 40;
+move down 3;
+move down; move right; move right; 
+"PDM Activity Startup  and Baseline Accumulation Messages" ljust
+move down;
+move down;
+move down;
+move down;
+step();
+step();
+move right;
+
+# move objects apart horizontally
+movewid = 3.5;
+
+#define the objects
+boxht = 3.0;
+
+# PdmSseInputTask
+#boxwid = 7.0;
+#object(SseInput,"Sse");
+
+# PdmCmdTask
+boxwid = 7.0;
+object(Cmd,"Cmd");
+
+# PdmControlTask
+boxwid = 9.0;
+object(Control,"Control");
+
+# PdmCollectionTask
+boxwid = 11.0;
+object(Collect,"Collection");
+
+# PdmDspCmdTask
+boxwid = 10.0;
+object(DspCmd,"DspCmd");
+
+# BlueWave
+boxwid = 10.0;
+object(BW,"BlueWave");
+
+# PdmDspInputTask
+boxwid = 10.0;
+object(DspInput,"DspInput");
+
+# PdmInputTask
+boxwid = 8.0;
+object(PdmInput,"Input");
+
+boxwid = 11.0;
+pobject(Activity);
+boxwid = 15.0;
+pobject(BslAct);
+
+move down;
+step();
+step();
+step();
+
+# message sequences
+
+step();
+#message(SseInput, Cmd, "Activity Parameters");
+#step();
+message(Cmd, Control, "Activity Parameters");
+cmessage(Control,Activity, "Activity");
+step();
+message(Control,Activity,"Set State");
+lconstraint(Activity,"  INIT");
+step();
+message(Control,Collect,"Tune Pdm");
+message(Collect,DspCmd,"Tune Pdm");
+message(DspCmd, BW,"Tune Pdm");
+message(BW,DspInput, "Tune Info");
+step();
+message(DspInput, Collect, "Tune Info");
+message(Collect, Control, "Tune Info");
+step();
+step();
+#message(SseInput, Cmd, "Start Time");
+message(Cmd,Control,"Start Time");
+lconstraint(Control, " Set up Baseline ");
+step();
+lconstraint(Control, " Accumulation Activity");
+cmessage(Control,BslAct,"BaselineAct");
+step();
+lconstraint(BslAct," PENDING");
+message(Control,BslAct,"Set State");
+lconstraint(BslAct," BASELINE");
+step();
+lconstraint(BslAct," ACCUM");
+message(Control,Collect,"Start Time");
+step();
+message(Collect,DspCmd,"Load DDC Image");
+step();
+message(DspCmd, BW,"Load DDC Image");
+step();
+message(BW,DspInput,"ACK Load Image");
+step();
+step();
+message(DspInput,DspCmd,"ACK Load Image");
+step();
+step();
+message(Collect,PdmInput, "Start Time");
+step();
+step();
+message(Collect,DspCmd,"Start Obs");
+message(DspCmd, BW,"Start Obs");
+step();
+message(BW,DspInput,"ACK Start Obs");
+step();
+step();
+message(DspInput,DspCmd,"ACK Start Obs");
+#step();
+awid = 1.0;
+#active(BW);
+step();
+message(BW,DspInput,"Data Ready");
+message(DspInput, PdmInput, "Data Ready");
+step();
+message(PdmInput,Collect,"Baseline Accumulation Started ");
+step();
+lconstraint(BslAct,"RUNNING");
+message(Collect,BslAct,"Set State");
+lconstraint(BslAct,"BASELINE");
+step();
+lconstraint(BslAct,"ACCUM");
+message(Collect,Control, "Baseline Accum Started ");
+message(BW,DspInput, "Obs Complete");
+step();
+message(DspInput, PdmInput, "Data Coll Complete");
+message(DspInput, Collect, "Data Coll Complete");
+step();
+message(PdmInput,Collect,"Baseline Accumulation Complete ");
+step();
+message(Collect,Control, "Baseline Accum Complete ");
+step();
+message(Control,BslAct,"Set State");
+step();
+lconstraint(BslAct,"COMPLETE");
+complete(BslAct);
+dmessage(Control,BslAct);
+step();
+step();
+lconstraint(Control, " Set up for ");
+step();
+lconstraint(Control, " Data Collection");
+step();
+message(Control,Control, "Start Time");
+step();
+#step();
+#message(Control,Activity, "Set State");
+#lconstraint(Activity,"ACT_PEND_DC");
+#message(Control,Collect, "Start Time");
+#step();
+#message(Collect,DspCmd,"Load DDC Image");
+#step();
+#message(DspCmd, BW,"Load DDC Image");
+#step();
+#message(BW,DspInput,"ACK Load Image");
+#step();
+#step();
+#message(DspInput,DspCmd,"ACK Load Image");
+#step();
+#message(Collect,PdmInput, "Start Time");
+#step();
+#step();
+#message(Collect,DspCmd,"Start Obs");
+#message(DspCmd, BW,"Start Obs");
+#step();
+#message(BW,DspInput,"ACK Start Obs");
+#step();
+#step();
+#message(DspInput,DspCmd,"ACK Start Obs");
+#step();
+#awid = 1.0;
+###active(BW);
+#step();
+#message(BW,DspInput,"Data Ready");
+#message(DspInput, PdmInput, "Data Ready");
+#step();
+#message(PdmInput,Collect,"Data Collection Started ");
+#message(Collect,Control, "Data Coll Started ");
+#step();
+#step();
+#lconstraint(BW, "Every Half-frame");
+#step();
+#message(BW,DspInput,"Data Ready");
+#message(DspInput, PdmInput, "Data Ready");
+#step();
+#step();
+#step();
+#lconstraint(DspInput, "CD Data");
+#step();
+#step();
+#lconstraint(DspInput, "CW Data");
+#step();
+#step();
+#lconstraint(DspInput, "Pulse Data");
+#step();
+#step();
+#lconstraint(DspInput, "Baseline Data");
+#step();
+#step();
+#step();
+###inactive(BW);
+##awid = .1;
+#step();
+#message(BW,DspInput, "Obs Complete");
+#message(DspInput,Collect,"Data Collection Complete ");
+#message(DspInput, PdmInput, "Data Coll Complete");
+#step();
+#step();
+#message(PdmInput,Collect,"Data Collection Complete ");
+#message(Collect,Control, "Data Coll Complete ");
+#step();
+#step();
+#
+complete(Activity);
+complete(Collect);
+complete(Control);
+complete(DspCmd);
+complete(DspInput);
+complete(BW);
+complete(PdmInput);
+#complete(SseInput);
+complete(Cmd);
+.PE

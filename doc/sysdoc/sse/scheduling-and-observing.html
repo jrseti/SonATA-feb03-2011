@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Scheduling and Observing Modes</title>
+</head>
+<body>
+<h3>Scheduling and Observing Modes</h3>
+<pre><b>
+Determining primary beam pointing and synthesized beam
+target selections:
+
+Prelude acts as the primary observer in the user, semiauto,
+auto, and autorise target modes; i.e., Prelude points the
+primary beam.  In the commensal mode, Prelude uses the
+current ATA primary beam pointing.
+
+Target selection mode: user | semiauto | auto | autorise | commensal
+
+   user:
+      primary pointing: user act params (targetId or ra/dec)
+      synth beam targets: user act params (targetIds)
+
+   semiauto:
+      primary pointing: user act params (ra/dec only)
+      synth beam targets: autopick
+   
+   auto:
+      primary pointing: autopick
+         options:
+         1. Use primary beam position preassigned to first
+            chosen target (survey mode)
+         2. Use first chosen target's coordinates as primary beam center 
+         3. Choose primary beam position by TBD method
+
+      synth beam targets: autopick
+
+   autorise:
+      same as auto, except targets are chosen near rising
+
+   commensal:
+
+      Another ATA user selects the primary pointing, but is expected to
+      maintain that primary position for at least 1/2 hour, long
+      enough for prelude to do a full followup sequence.
+
+      primary pointing: from current tscope subarray position in 
+         telescope status.  Must wait if slew is in progress
+         (i.e., tscopes must be tracking).
+
+      synth beam targets: autopick
+
+      Prelude coordinates primary FOV change with the primary user,
+      delaying the change as needed if a candidate is being followed up.
+      It may have to abandon followups if the FOV changes
+      earlier than desired.  (This could also be a preliminary operating
+      mode before the primary beam FOV negotiation mechanism is in place).
+
+Related seeker parameters:
+
+   sched (scheduler)
+      target: method used to choose targets (user | semiauto | auto |
+         autorise | commensal) 
+
+   act (activity)
+      pointprimary: point primary beam (on | off) 
+      primarybeampos: primary beam pointing position type (targetid | coords) 
+      primarydecdeg: primary beam pointing position Dec degrees {j2000 degrees}
+      primaryrahours: primary beam pointing position RA hours {j2000 hours}
+      targetbeam[N]: SETI target id for beamN {SETI target id} {N=1,6}
+      targetprimary: target id at the primary FOV center {target id}
+
+</pre>
+</b>
+
+</body>
+</html>

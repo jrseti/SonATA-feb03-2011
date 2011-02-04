@@ -1,0 +1,110 @@
+# pdmSseSigDetMsgsMultibeamPart1.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# PDM-SSE signal detection messages
+
+.PS
+
+
+# ---- setup & title ---
+
+copy "sequence.pic";
+
+# doc version
+move right;
+"pdmSseSigDetMsgsMultibeamPart1.pic v2.0 2010-Jan-06 18:22:04 UTC" ljust
+
+# title
+move down; move right; move right; 
+"PDM - SSE Signal Detection Messages - Multibeam Part1 " ljust
+move down;
+
+# vertical spacing between messages
+spacing = 0.30;
+
+# move objects apart horizontally
+#movewid = 3.5;
+movewid = 4.0;
+
+#define the objects
+# SSE
+boxwid = 1.2;
+object(SSE,"SSE: ActUnit");
+
+# PDM
+boxwid = 0.75;
+object(PDM,"PDM");
+
+step();
+
+# ----  message sequences -----
+
+
+message(PDM,SSE,"signalDetectionStarted()");
+
+# --- CW Power, Pulse from Pdm to SSE -----
+
+active(PDM);
+message(PDM,SSE,"beginSendingCandidates(Count)");
+lconstraint(PDM,"[CW Power Detect, Pulse Detect,");
+lconstraint(PDM,"Clustering, Candidate Selection]");
+
+message(PDM,SSE,"" "sendCandidateCwPowerSignal(CwPowerSignal)" "OR sendCandidatePulseSignal(PulseSignalHeader, Pulse[ ])");
+step();
+
+step();
+message(PDM,SSE,"doneSendingCandidates()");
+
+inactive(PDM);
+step();
+
+
+# --- All signals ----
+
+message(PDM,SSE,"beginSendingSignals(DetectionStatistics)");
+active(PDM);
+lconstraint(PDM,"[Send all signals, including");
+lconstraint(PDM,"the candidates sent above]");
+
+message(PDM,SSE,"" "sendCwPowerSignal(CwPowerSignal)" "OR sendPulseSignal(PulseSignalHeader, Pulse[ ])");
+step();
+
+message(PDM,SSE,"doneSendingSignals()");
+inactive(PDM);
+step();
+
+# --- Bad Bands ------
+
+
+message(PDM,SSE,"beginSendingBadBands(Count)");
+active(PDM)
+lconstraint(PDM,"[Report Bad Bands]");
+
+message(PDM,SSE,"" "sendCwBadBand(CwBadBand)" "OR sendPulseBadBand(PulseBadBand)");
+step();
+
+message(PDM,SSE,"doneSendingBadBands()");
+inactive(PDM);
+
+# --- CW coherent from PDM to SSE---
+
+step();
+
+message(PDM,SSE,"beginSendingCwCoherentSignals(Count)");
+active(PDM);
+lconstraint(PDM,"[CW Coherent Detection]");
+message(PDM,SSE,"sendCwCoherentSignal(CwCoherentSignal)");
+step();
+
+message(PDM,SSE,"doneSendingCwCoherentSignals()");
+
+inactive(PDM)
+
+step();
+
+complete(SSE);
+complete(PDM);
+
+.PE
+

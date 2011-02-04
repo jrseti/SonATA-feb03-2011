@@ -1,0 +1,120 @@
+# observeActivity.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+.PS
+
+copy "sequence.pic";
+
+# doc version
+move right;
+"observeActivity.pic v1.0 2010-Jan-06 23:14:40 UTC" ljust
+
+# title
+move down; move right; move right; 
+"Observe Activity" ljust
+move down;
+
+# vertical spacing between messages
+spacing = 0.30;
+
+# move objects apart horizontally
+movewid = 4.5;
+
+#define the objects
+boxwid = 2.0;
+object(SCHED,"SCHEDULER");
+
+boxwid = 1.4;
+object(ACT,"Activity");
+
+boxwid = 1.4;
+object(UNIT,"ActUnit");
+
+arrowwid = arrowwid * 2;
+
+step();
+step();
+
+# message sequences
+
+active(SCHED);
+message(SCHED,ACT,"create(params, components)");
+step();
+
+message(SCHED,ACT,"start( )");
+inactive(SCHED);
+active(ACT);
+step();
+lconstraint(ACT,"[prepare non-DX components]");
+step();
+lconstraint(ACT,"For each DX:");
+message(ACT,UNIT,"create(params, dxProxy)");
+step();
+message(ACT,UNIT,"initialize()");
+inactive(ACT);
+step();
+
+message(UNIT,ACT,"activityUnitReady()");
+active(ACT);
+step();
+step();
+lconstraint(ACT,"[Accumulate actUnitReady msgs]");
+lconstraint(ACT,"[Calculate start time]");
+step();
+lconstraint(ACT,"For each ActUnit:");
+message(ACT,UNIT,"setStartTime(StartActivity)");
+inactive(ACT);
+
+step();
+message(UNIT,ACT,"dataCollectionStarted()");
+active(UNIT)
+step();
+
+message(UNIT,ACT,"dataCollectionComplete()");
+inactive(UNIT);
+message(ACT,SCHED,"dataCollectionComplete()");
+step();
+
+step();
+message(UNIT,ACT,"signalDetectionStarted()");
+active(UNIT);
+step();
+
+message(UNIT,ACT,"signalDetectionComplete()");
+inactive(UNIT);
+step();
+
+message(UNIT,ACT,"activityUnitObsSummary(ObsSummStats)");
+active(UNIT)
+step();
+message(UNIT,ACT,"activityUnitComplete()");
+inactive(UNIT);
+
+active(ACT);
+step(); step();
+lconstraint(ACT,"[Accumulate actUnitComplete msgs]");
+
+message(ACT,SCHED,"foundConfirmedCandidates()");
+lconstraint(ACT,"[If any]");
+message(ACT,SCHED,"activityComplete()");
+inactive(ACT);
+step();
+message(SCHED,ACT,"destroy()");
+active(ACT);
+message(ACT,UNIT,"<delete>");
+step(); step();
+lconstraint(ACT,"[delete self]");
+
+inactive(SCHED);
+inactive(ACT);
+inactive(UNIT);
+
+step();
+
+complete(SCHED);
+complete(ACT);
+complete(UNIT);
+
+.PE
+

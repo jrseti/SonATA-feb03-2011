@@ -1,0 +1,55 @@
+SonATA Meeting Notes
+2009-11-09
+
+Attendees: Peter Backus, Ken Smolek, Tom Kilsdonk, John Ross,
+Gerry Harp, Avinash Agrawal, and Jane Jordan
+
+Last month, Ken successfully tested the secondary confirmation
+code and the followup activity code. CW detection is now working for 
+1 Hz, 2 Hz, and 4 Hz. Pulse Detection is working for the resolutions
+from 1 Hz to 128 Hz. Resolutions 256 Hz and 512 Hz are problematic
+because of the oversampling. Hanning has been implemented for the
+CW data.  For now the archive channel will remain 16 subchannels wide. 
+An inverse transform will be required to access the data.
+
+Tom and Ken will be working on the communications between the 
+SSE and the dx, and the SSE and the channelizer. 
+
+Handel, the Dell R610 at Hat Creek is still up and running
+after John Ross reseated the cable.
+
+Jane is working on packetgen to implement different noise and test
+signals in the two polarizations.
+
+John has generated new diagrams for the System. The SSE and Archivers
+will need 10GbE connections. 
+
+In order to test the configuration of the 3 beam system, we will need
+to buy additional 10 GbE cables. John will research the cost.
+An initial estimate is $70-150 per cable.
+Also, in order to test the full capability of the R610 as a DX host,
+Handel will need more memory. Handel has 8 GB now, additional 16 GB
+costs around $760. There is tradeoff between activity length and 
+bandwidth. 24 GB of memory can probably handle 100 second observations.
+32 GB of memory would be needed for 200 second observations.
+We need to do testing with longer observations to determine
+the actual resource requirements.
+Peter requested that we plan for 3 minute observations without 
+compromising the bandwidth.
+
+Gerry will present a review of his SETI experiments on December 16
+as part of the Colloquium Series.
+
+Avinash spend the remainder of the meeting defining the projects and
+what we need to do. 
+
+From now on the Monday meeting will cover Open SETI and SonATA
+as well as Prelude.
+
+The motivation behind the Code Review was discussed. The dates of the
+review are still TBD. The proposed date of November 16 will not
+work. Ken needs more than a week notice
+to plan a trip to the Institute. Plus, Gerry who volunteered to scribe 
+for the review will be at Hat Creek for the Air Force Meeting November 16-17.
+Danese Cooper will be at the Institute next week. Avinash will consult 
+with her on scheduling the review.

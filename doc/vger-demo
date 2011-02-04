@@ -1,0 +1,59 @@
+
+	Voyager 1 demo - running on a single host
+			assuming 1 channelizer, 1 dx
+
+	~/OpenSonATA/scripts>  source spacecraft-demo-env-vars
+
+		This sets up dx1000 to receive dual polarization data.
+
+	~/OpenSonATA/scripts>  runsse
+
+	seeker> source vger-demo.tcl
+
+		This starts up packetsend in the background and
+		sends dual polarization data directly to the dx.
+		The script also does a "start obs".
+		The channelizer does nothing, but has to be there
+		to keep the SSE happy. You have to wait for 
+		packetsend to finish before running another activity.
+
+
+	=========================
+	vger-demo.tcl
+	=========================
+
+	# vger-demo.tcl
+	# runpacketsend-dx-vger -> dx1000
+
+	act set type iftest
+	act set watchdogs off
+
+	sched set pdmtune user
+	sched set beam1 on
+	sched set beam2 off
+	sched set beam3 off
+
+	dx set basewarn off
+	dx set baseerror off
+
+	dx set baseinitaccum 30
+	dx set baserep 20
+	dx load chan 0 dx1000
+	dx load skyfreq 8419.530000000 dx1000
+	dx set datareqsubband 406
+	dx set length 94
+
+	exec runpacketsend-dx-vger &
+	start obs
+
+
+	=========================
+	runpacketsend-dx-vger:
+	=========================
+
+	sudo packetsend -c -f /home/jane/vger-2010-07-14-406.pktdata \
+			 -J 227.1.1.1 -j 51000 -n 1 -i 100000 -b 100
+
+
+	You can scp the data file from my account on segin.
+	I don't want to check it in because it's so big 624 MB.

@@ -1,0 +1,181 @@
+<html>
+<body>
+<pre>
+Version: 1.7  Updated: 2009-Oct-23 23:12:03 UTC
+
+Channelizer & DX 
+Communications, Configuration, Control & Monitor
+
+0. Sonata directories
+
+   Software installation:
+   Default:
+      ~/sonata_install/
+         bin/ setup/ filters/ lib/
+
+      Can be overridden by:
+      ${SONATA_ROOT}
+
+   Data products:
+      ~/sonata_archive/
+
+1. Channelizer
+
+   Data stream input: Unicast from Sonata beamformer
+   Data stream outputs: Multicast to DX
+
+   Startup parameters from configuration file and/or
+   command line parameters (relatively static values):
+
+      - channelizer ID (name and/or number?)
+
+      - filter parameters
+          - coefficients file (includes associated number of foldings)
+                [select by full pathname (nominally $SONTATA_ROOT/filters)]
+          - number of foldings (until can be extracted from coeff file info)
+
+      - input stream related:
+          - IP address (w.x.y.z)
+          - port
+          - beam ID
+          - polarization    
+          - complex sample rate (Msamples/sec)
+
+      - output stream related:
+          - number of raw output channels 
+               (normally power of 2, default: 256)
+          - number of usable output channels 
+               (must be even, assumed symmetric, default: 176)
+          - IP address 
+          - base port
+          - oversampling (%)
+
+      - statistics (multicasted output)
+          - reporting interval
+          - IP addr 
+          - port
+
+      Note: starts generating output immediately upon startup.
+
+   Input packet header contains:
+        TBD
+
+   Output packet header (for each channel) contains:   
+        - channel ID
+        - beam ID
+        - polarization
+        - channel center freq MHz
+        - valid data bit(s)
+
+   Intrinsics (report configuration) message to SSE (& others?):
+      - number of output channels
+      - beam ID
+      - polarization
+      - bandwidth MHz per channel (usable)
+      - oversampling info 
+      (TBD: add info on all input & output parameters)
+
+   Control input (TCP from SSE)
+
+      Commands:
+      - input was retuned (new RF center freq MHz, sync at time X)
+          
+           Output stops upon receipt of command.
+           Flush packet buffers.
+           Sequence numbers restart at zero.
+           Wait for input packet on or after time X to resume output. 
+
+      - request intrinsics
+      - shutdown
+      - stop (taking data -- is this needed?)
+      - request status(?)
+
+   Monitor output (TCP)
+      health/status
+         "have started" message
+          current state/status report
+          tune freq
+      TBD: errors, warnings
+        Need to set limits for monitored values.
+        (Note: Implement this later, do stats multicast first)
+
+   Statistics (single packet, multicast at regular intervals)
+      - network stats
+         % dropped packets, missing packets, "wrong" packets, other?
+
+      - I/O stats (struct: mean,stddev,min,max)
+        (1) input
+        (1) summarized output (across all channels)
+        (NCHANS) output channels
+
+   Notes:
+
+   A. Synchronization of channelizers:
+
+     - must be sync'd at the time sample level
+     - packet sequence numbers must match on L & R pols
+     - corresponding channels must have the same bandwidth, 
+          center tune freq
+     - must send to the same IP address
+     - must use the same base port number
+
+   B. Number of channels:
+     Changing the number of channels will also change the bin
+     widths, which will alter the statistics.  Therefore we seldom
+     expect to do this.
+
+2. DX
+
+   Data stream input: Multicast from channelizer(s)
+   Data products output: TCP to SSE
+   Assume 1 channel per DX, with one or more DXs per host.
+
+   Startup parameters from configuration file and/or
+   command line parameters (relatively static values):
+
+      - dx name (default: host name)
+      - filter parameters
+          - coefficients file (includes associated number of foldings)
+          - number of foldings (until can be extracted from coeff file info)
+      - input information:
+        - IP addr
+        - base port number
+        - oversampling %
+        - usable channel bandwidth MHz
+
+   Control input (TCP from SSE)
+
+      Act params:
+
+        - channel to observe (0..NCHANS-1)
+        - center freq MHz (as assigned by channelizer)
+        - beam Id
+        - pol selection: X | Y | L | R | Both X & Y | Both L & R
+        - science data request
+            - baselines on/off
+            - compamps on/off
+                compamps subchannel selection: by freq or subchannel number
+
+        Note: actual input port computed (base port + channel number)
+
+      Other per activity parameters:               
+      - observation length (secs)
+      - birdie masks (for this beam, both "RF" and "IF")
+      - max # of candidates 
+      - singlets pulse threshold (for reporting large single pulse hits)
+      - doublets
+      (review other pdm activity parameters, expect to keep most)      
+
+
+   Monitor output (TCP to SSE)
+      TBD
+
+   Notes:
+      - Uses most existing pdm commands
+      - No more coherent segments
+      - Requested start time is start of baselining
+      - DC started message returns actual data collect start time (fractional second)
+
+</pre>
+</body>
+</html>

@@ -1,0 +1,27 @@
+raw /dev/raw1 /dev/sda5
+raw /dev/raw2 /dev/sda6
+raw /dev/raw3 /dev/sda7
+raw /dev/raw4 /dev/sda8
+raw /dev/raw5 /dev/sdb1
+raw /dev/raw6 /dev/sdb2
+raw /dev/raw7 /dev/sdb3
+raw /dev/raw8 /dev/sdb4
+
+rm -f /dev/lCWD0
+rm -f /dev/lCWD1
+rm -f /dev/rCWD0
+rm -f /dev/rCWD1
+rm -f /dev/lCD0
+rm -f /dev/lCD1
+rm -f /dev/rCD0
+rm -f /dev/rCD1
+
+ln -sf /dev/raw1 /dev/lCWD0
+ln -sf /dev/raw2 /dev/lCWD1
+ln -sf /dev/raw3 /dev/rCWD0
+ln -sf /dev/raw4 /dev/rCWD1
+ln -sf /dev/raw5 /dev/lCD0
+ln -sf /dev/raw6 /dev/lCD1
+ln -sf /dev/raw7 /dev/rCD0
+ln -sf /dev/raw8 /dev/rCD1
+

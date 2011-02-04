@@ -1,0 +1,84 @@
+# pdmSseStartupMsgs.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# PDM-SSE startup messages
+
+.PS
+
+
+copy "sequence.pic";
+
+# doc version
+move right;
+"pdmSseStartupMsgs.pic v 2.0 2010-Jan-06 18:20:50 UTC" ljust
+
+# title
+move down; move right; move right; 
+"PDM - SSE Startup & Misc Messages" ljust
+move down;
+
+# vertical spacing between messages
+spacing = 0.30;
+
+# move objects apart horizontally
+movewid = 3.5;
+
+#define the objects
+# SSE
+boxwid = 1.2;
+object(SSE,"SSE:");
+
+# PDM
+boxwid = 0.75;
+object(PDM,"PDM");
+
+step();
+
+# message sequences
+
+message(PDM,SSE,"hereIAm [UDP Broadcast] (HereIAm)");
+message(SSE,PDM,"thereYouAre [UDP] (ThereYouAre)");
+message(PDM,SSE,"<connect>");
+step();
+
+message(SSE,PDM,"requestIntrinsics( )");
+message(PDM,SSE,"sendIntrinsics(PdmIntrinsics)");
+message(SSE,PDM,"configurePdm(PdmConfiguration)");
+step();
+
+lconstraint(PDM,"[Any message past this point");
+lconstraint(PDM,"can be sent anytime]");
+
+message(SSE,PDM,"permRfiMask(FrequencyMaskHeader, FrequencyBand[ ])");
+message(SSE,PDM,"rcvrBirdieMask(FrequencyMaskHeader, FrequencyBand[ ])");
+message(SSE,PDM,"birdieMask(FrequencyMaskHeader, FrequencyBand[ ])");
+message(SSE,PDM,"testSignalMask(FrequencyMaskHeader, FrequencyBand[ ])");
+step();
+
+message(SSE,PDM,"pdmScienceDataRequest(PdmScienceDataRequest)");
+step();
+
+message(SSE,PDM,"requestPdmStatus( )");
+message(PDM,SSE,"sendPdmStatus(PdmStatus)");
+step();
+
+message(PDM,SSE,"sendPdmMessage(NssMessage)");
+step();
+
+message(SSE,PDM,"stopPdmActivity( )");
+message(PDM,SSE,"pdmActivityComplete(PdmActivityStatus)");
+lconstraint(PDM,"[stop can be sent anytime.")
+lconstraint(PDM,"actId in message header indicates");
+lconstraint(PDM,"which activity to stop]");
+step();
+
+message(SSE,PDM,"shutdownPdm( )");
+message(SSE,PDM,"restartPdm( )");
+step();
+
+complete(SSE);
+complete(PDM);
+
+.PE
+

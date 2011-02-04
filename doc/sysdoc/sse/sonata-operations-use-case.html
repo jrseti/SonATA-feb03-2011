@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="">
+   <TITLE>SONATA Operations Use Case</TITLE>
+</HEAD>
+<BODY>
+Version 1.3 2010-Jan-25 20:30:54 UTC
+<pre>
+
+Operations use-case for automated SETI observations with SONATA:
+
+1. The Sonata system runs automatically and
+  autonomously as much as is possible.  When manual
+  intervention is needed, it's done via remote access
+  whenever practical, to minimize need for on-site staff.
+
+2. The system runs targeted sky observations 24 hours per day,
+  7 days per week.  Sonata has 2 of the 4 ATA IF Processors
+  assigned to it.
+
+3. If an observation activity fails for any reason, 
+  the system tries to correct the error and automatically 
+  resume observing.  Similarly, if any single component
+  fails, like a pdm, the system tries to automatically
+  restart it.  Failing that, the system tries to continue observing
+  without the component, if possible.  The system always tries to 
+  run with as much observing bandwidth as it can.
+
+4. The system periodically runs a system diagnostic to make
+  sure everything is working correctly, taking corrective 
+  action when necessary, as described above.
+
+5. The system generates a daily observing summary, which is
+  sent by email and/or posted on an intranet web site.  The
+  summary includes activities completed, targets observed,
+  signal counts, system errors, equipment status, etc.
+
+6. The system allows for remote observer monitor & control,
+  via the Web and/or client programs.  The observer can:
+
+  - display current equipment status
+  - display waterfall & baseline data on demand
+  - review signal reports displayed in a user-friendly format
+  - power cycle/restart any piece of equipment
+  - designate any piece of equipment as operational or
+      nonoperational
+  - override daily automated startup and shutdown
+  - force system or component shutdown
+  - assume full manual control of the system
+  - run alternate observing programs, eg, targeted search of 
+      specific object(s)
+  - run diagnostics
+  - review system logs
+
+
+7. The system provides near-realtime status & data displays
+  accessible to the general public, via the Web:
+
+  - skymaps & target information for current pointings in RA/Dec,
+      Gal Lat/Long etc.
+  - progress indicators (e.g., skymaps, progress bars) showing how
+    much of and which parts of the sky have been observed.
+  - some subset of the waterfall & baseline data, ideally showing
+      detected signals whenever possible, rather than random data.
+  - webcam images of the telescopes
+
+8. The system notifies observers by email and autodialer when
+   it's tracking a "very interesting signal", i.e., one 
+   that has passed the preliminary gauntlet of tests, such
+   as three ON/OFF observations in a row.
+
+   The system continues ON/OFFs and automatic grids until the target
+   sets or an observer intervenes.
+ 
+   For discussion: 
+
+   - What series of tests defines a "very interesting signal"? 
+   - What else happens when one is found?
+
+   - Review & revise Jill's Arecibo "Post Detection Protocol at a 
+   Glance" document for use at the ATA.  Main change will be to see
+   if we can get a differential Doppler measurement across the array.
+
+   - Note: It's suggested we not use pagers in order to save money.
+
+9. The system notifies observers by email when it is in an error state
+   that it can't recover from and so cannot continue observing, or
+   when a significant percentage of the observing capability has been
+   lost.  If this occurs in the middle of the night, then someone
+   would take action on it within some reasonable time frame,
+   presumably the next day.
+
+10. An independent watchdog system sends notification by
+   email if the Sonata system is not running when it
+   should be, or if it's running but not behaving correctly.
+
+11. A simple "panic button" can be initiated on-site or remotely
+   to safely shutdown the system immediately.
+
+12. The system avoids all the artificial horizons around strong 
+  satellite sources, determined prior to each observation.
+
+13. Periodically archive tapes must be manually taken out of
+   the tape jukeboxes and new ones installed.
+
+</pre>
+</body>
+</html>
+

@@ -1,0 +1,141 @@
+	
+Prelude archive disk rotation scheme:
+=====================================
+
+The Prelude system uses multiple mounted disks for archiving data
+products.  Each day's worth of data goes on a separate disk.
+
+The archive disks are mounted on this file path:
+
+  /usr/local/prelude_archive/disks/mount-points/diskN
+
+where N is the disk number.  The disks are always mounted on the
+same point so that they are available after a reboot.
+
+A day is assigned to each disk by use of symbolic links
+located here:
+
+  /usr/local/prelude_archive/disks/date-links/yyyy-mm-dd
+
+For example, a symbolic link for 2007-07-01 would look something like:
+
+/usr/local/prelude_archive/disks/date-links/2007-07-01 ->
+  /usr/local/prelude_archive/disks/mount-points/disk3
+
+
+Every day, the oldest disk is "rotated off", that is, cleared and
+prepared for use the next day.  This rotation can take place anytime 
+after the UTC date rollover and before the next day starts.  It does not
+affect the disk being used for the current day's observing.
+
+The rotation is accomplished by
+  1. Clearing the disk pointed to by the oldest date link using a
+     umount, newfs, and a remount
+  2. Deleting the oldest date link
+  3. Assigning a new date link to that disk with "tomorrow's" date.
+  4. Making a "tomorrow" date directory on the disk.  This will help
+     identify the date when archiving the data.
+
+Finally, the links in the ~nss/sse_archive directory are updated:
+the old date symlink for the just-cleared date is removed, and a new 
+one is created that points to the date subdirectory on the
+newly cleared disk. For example, a link for 2007-07-01 would look
+like this:
+
+~nss/sse_archive/2007-07-01 -> 
+  /usr/local/prelude_archive/disks/mount-points/disk3/2007-07-01
+
+Note:
+
+If the rotation script is not run on a particular day, then the
+next day there will be no disk available for that day's observing. 
+In order to help with such a gap in the rotation schedule, the 
+rotation script always checks to see if a directory for 'today' is
+available, and 'rotates one in' if it isn't so that observing can
+begin immediately.  In other words, the standard procedure
+after a day or more of downtime would require running the rotation script
+once before observing starts.  It does no harm to run the script more
+than once a day; it will only rotate the disks as needed.
+
+--------------------------------------------------------------
+Example rotation 1 (Normal case, disk rotation has been running daily):
+
+a. Assume the current date is 2007-05-21, and the archive disks are
+set up as follows, before the rotation takes place (paths shortened for brevity):
+
+   .../date-links/2007-05-18 -> .../mount-points/disk2
+   .../date-links/2007-05-19 -> .../mount-points/disk3
+   .../date-links/2007-05-20 -> .../mount-points/disk0
+   .../date-links/2007-05-21 -> .../mount-points/disk1
+
+b. Check if current date, 2007-05-21, is already prepared. It is, so
+just continue.
+
+c. Check if tomorrow's date, 2007-05-22, is prepared. It is not, so 
+create a disk for 'tomorrow':
+
+d. Find the oldest date to be deleted and remember it:
+
+   oldest-date = 2007-05-18
+
+e. Clear the disk pointed to by the 2007-05-18 link, which in this case
+is disk2.
+
+f. Add a directory for tomorrow's date, 2007-05-22, to the cleared disk
+
+g. Remove the old link from the date-links directory, and create a new one
+with tomorrow's date, 2007-05-22:
+
+   .../date-links/2007-05-19 -> .../mount-points/disk3
+   .../date-links/2007-05-20 -> .../mount-points/disk0
+   .../date-links/2007-05-21 -> .../mount-points/disk1
+   .../date-links/2007-05-22 -> .../mount-points/disk2
+
+h. Update the date links in the ~nss/sse_archive directory:
+
+   Delete the old date's link:
+
+      remove ~nss/sse_archive/2007-05-18
+
+   Add a link for the new directory:
+
+     ~nss/sse_archive/2007-05-22 ->
+        /usr/local/prelude_archive/disks/mount-points/disk2/2007-05-22
+
+
+--------------------------------------------------------------
+Example rotation 2 (rotation has not run for several days):
+
+a. Assume the current date is 2007-06-01, and the archive disks are
+set up as follows, before the rotation takes place:
+
+   .../date-links/2007-05-18 -> .../mount-points/disk2
+   .../date-links/2007-05-19 -> .../mount-points/disk3
+   .../date-links/2007-05-20 -> .../mount-points/disk0
+   .../date-links/2007-05-21 -> .../mount-points/disk1
+
+b. Check if the current date, 2007-06-01, is already prepared.
+It is not, so prepare a disk for 'today' by rotating out the oldest
+disk (2007-05-18, disk2). The results will look like this:
+
+   .../date-links/2007-05-19 -> .../mount-points/disk3
+   .../date-links/2007-05-20 -> .../mount-points/disk0
+   .../date-links/2007-05-21 -> .../mount-points/disk1
+   .../date-links/2007-06-01 -> .../mount-points/disk2
+
+   Update the sse_archive links:
+   remove ~nss/sse_archive/2007-05-18, add 2007-06-01 
+
+c. Check if tomorrow's date, 2007-06-02, is prepared. It is not, so 
+create a disk for 'tomorrow' by rotating out the oldest disk
+(2007-05-19, disk3).  The results will be:
+
+   .../date-links/2007-05-20 -> .../mount-points/disk0
+   .../date-links/2007-05-21 -> .../mount-points/disk1
+   .../date-links/2007-06-01 -> .../mount-points/disk2
+   .../date-links/2007-06-02 -> .../mount-points/disk3
+
+   Update the sse_archive links:
+   remove ~nss/sse_archive/2007-05-19, add 2007-06-02
+
+

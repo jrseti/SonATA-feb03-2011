@@ -1,0 +1,298 @@
+SonATA Database Tables
+2009-08-04 jj
+
+Acronyms
+
+PDM	Programmable Detection Module
+SSE	Search System Executive (Control Software)
+CW	Continuous Wave Signal
+
++-----------------------------+
+| SonATA Database Tables      |
++-----------------------------+
+| Antenna                     |		Reference Tables
+| AntennaLimits               |		Initialized when the database
+| CalTargetFlux               |		is created.
+| SeekerDbVersion             |
+| Spacecraft		      |
+| TargetCat                   |
++-----------------------------+
+| PdmIntrinsics		      |		Recorded when a Pdm initially
+|                             |		connects
++-----------------------------+
+| ActParameters               |
+| BaselineErrorLimits         |
+| BaselineWarningLimits       |		Parameter Tables	
+| PdmActivityParameters       |		All user parameters are
+| PdmParameters               |		recorded for each activity.
+| PdmScienceDataRequest       |
+| SchedulerParameters 	      |
+| TScopeParameters            |
+|-----------------------------|
+| Activities                  |
+| ActivityUnits               |		Activity logging tables
+| BaselineStats		      |		Signal detections and
+| CandidateSignals            |		Candidate resolution
+| CandidateCoherentSegments   |		plus Subsystem Status.
+| CandidatePulseTrains        |
+| CwBadBands		      |
+| DetectionStats              |
+| Followup                    |
+| FollowUpSignal              |
+| PulseTrains                 |
+| PulseBadBands		      |
+| Signals           	      |
+| TscopeBeamStatus	      |
+| TscopePointReq	      |
+| TscopeSubArrayStatus	      |
+|-----------------------------|
+| TSigParameters              |		Tables used in Prelude
+| ifc1Parameters              |		that will not be used in 
+| ifc2Parameters              |		SonATA
+| ifc1Status                  |
+| ifc2Status                  |
++-----------------------------+
+33 rows in set (0.04 sec)
+
+--------------------------------------------------------------------------
+REFERENCE TABLES
+
+Antenna:
+
+This reference table contains the descriptions of the 
+various observatories that Project Phoenix used for observing 
+and/or development. It includes the longitude, latitude, altitute, 
+coordinates in an earth centered coordinate system, and contact information.
+This table will become Obsolete for SonATA.
+
+AntennaLimits:
+
+This reference table contains the limits for the field of view 
+for the various telescopes. It contains the rising and setting Hour Angle 
+as a function of Declination for each site. This table will become
+Obsolete for SonATA.
+
+CalTargetFlux:
+
+This reference tables contains the catalog of calibration sources. It 
+has the frequency and flux for each source.
+
+SeekerDbVersion:
+
+This table records the version number for the seeker.schema
+source file when the database is first created.
+
+Spacecraft:
+
+This reference table contains transmit frequencies and name of the
+ephemeris file for spacecraft.		      
+
+TargetCat:
+
+This reference table is the Target Catalog. It contains the 
+SETI star id, catalog name if available, right ascension, declination, 
+proper motion, spectral type, parallax, etc..
+
+-------------------------------------------------------------------------------
+
+INSTRINSICS TABLE
+
+PdmIntrinsics:
+
+This table records the characteristics of an individual PDM,
+the host name, maximum subbands for processing, size of the 
+subband, serial number, and interface Version Number.
+Recorded when a pdm connects to the SSE.
+
+-------------------------------------------------------------------------------
+
+PARAMETER TABLES
+
+ActParameters:
+
+This table saves the parameters that were set by the user for
+the Activity with activity number specified by the 'id' field
+These include the star id, the type of activity, the site, and time stamp,
+plus various control options for error handling and archiving.
+
+BaselineErrorLimits:
+
+This table contains the upper and lower limits on the mean Baseline
+for generating error messages.
+
+BaselineWarningLimits:
+
+This table contains the upper and lower limits on the mean Baseline
+for generating warning messages.
+
+PdmActivityParameters:
+
+This table records the parameters for an individual PDM.
+In addition to the parameters from PdmParameter table,
+the pdm and ifc tune frequencies are included.
+
+PdmParameters:
+
+This table records the user parameters that apply to all PDMs,
+observation length, thresholds for signal detection, limits for
+error detection, and scientific data requests.
+
+PdmScienceDataRequest:
+
+This table records the user settings for the Science Data Request.
+The sending of Baseline data, Baseline Statistics, and Complex
+Amplitudes can be on or off. The baseline monitoring for warning
+or error levels can be turned on or off. The Complex amplitude
+data may be requested by frequency or subband number.
+
+SchedulerParameters:
+
+This table records the user parameters for the Scheduler which control
+automatic operation of the system as well as beginning and ending sky
+frequency and limitation on the target distance.
+
+TscopeParameters:
+
+This table records the user parameters to the Telescope.
+These include the coordinate system and appropriate coordinates
+(right ascension, declination J2000 or azimuth, elevation or
+galactic longitude and latitude) plus the RF sky frequency and
+the IF sky frequency.
+
+--------------------------------------------------------------------------
+ACTIVITY LOGGING TABLES
+
+Activities:
+
+This table records the Activities' parameters in 3rd normal form
+by collecting the indexes of the combinations of parameters for
+each activity. In addition, it records the length, type of activity,
+star id, the azimuth and elevation
+of the telescope at the beginning the observation, the RF tune frequency,
+IF tune frequencies, and minimum and maximum PDM tune frequencies.
+The results summary combines the results for all ActivityUnits or PDMs.
+The ValidObservation flag is set to 'YES' if the activity completes
+normally.
+
+ActivityUnits:
+
+This table stores the operating parameters and detection results
+for an individual Programmable Detection Module (PDM).
+Besides the activity id, start time, PDM Tune frequency, 
+validObservation Flag, and the
+summary of signals detected and candidates, there are pointers
+to other PdmActivityParameters and PdmIntrinsics tables which contains the 
+user specifed parameters for all the PDMs and the description of the
+individual PDM respectively. 
+
+CandidateSignals:
+
+This table records the signal description information for each 
+Candidate. The CW incoherent power detections are recorded as 
+type CwP. Each of these has the coherent algorithm applied to it
+and there is a second entry for the same Candidate with type CwC.
+There is only one entry for the pulse Candidates. The signal
+description includes activity id, frequency, drift, width, power, 
+subband number, polarization,
+signal class (Candidate/RFI), and the reason for the classification.
+The classification reason are described elsewhere. TBD.
+The coherent CW and Pulse Candidates also have a probability of
+false alarm statistic and a signal to noise ratio. The Pulse
+Candidates have a pulse period and number of pulses.
+
+CandidateCoherentSegments:
+
+This table records the frequency, drift, power, width, probability
+of false alarm, and signal to noise ratio for each Coherent
+segment associated with CwC Candidate. For 98 second observations
+there is only one segment, so the information is the same as in
+the CandidateSignals table. For longer observations the coherent
+algorithm integrates over multiple time segment because of the curvature 
+of the signal caused by the doppler shift. In such cases, the signal 
+description in the CandidateSignals table is a composite of all the segments.
+
+CandidatePulseTrains:
+
+This table records the individual pulses in a Pulse Candidate 
+It includes the spectrum, bin, power, and polarization for each
+pulse. There is a pointer back to the entry in the CandidateSignals
+table.
+
+DetectionStats:
+
+This table records a detection summary from an individual PDM for an
+activity. It includes the left and right raw CW paths and clusters, 
+the left, right, and total pulses, total triplets as well as the
+total signals and Candidates.
+
+FollowUp:
+
+This table records a cross-reference for correlating the 
+followup activities with the original activity.
+
+FollowUpSignals:
+
+This table contains the confirmed Candidate signal descriptions
+for followup activities. It is used for communication
+between the followup activities and the original activity.
+
+PulseTrains:
+
+This table records the individual pulses in a Pulse Signal. 
+It includes the spectrum, bin, power, and polarization for each
+pulse. There is a pointer back to the entry in the MainSignals
+table.
+
+Signals:
+
+This table records the signal description information for each 
+Signal. The CW incoherent power detections are recorded as 
+type CwP. The pulse Signals are recorded as type Pul. The signal
+description includes activity id, frequency, drift, width, power, 
+subband number, polarization, signal class (Candidate/RFI), 
+and the reason for the classification.
+The classification reason are described elsewhere. TBD.
+The Pulse Candidates also have a probability of
+false alarm statistic and a signal to noise ratio as well as
+a pulse period and number of pulses.
+Only the signals in the 'star' activity type are tested against
+the RFI database. 
+
+TscopeBeamStatus:
+
+This table contains the actual pointing information for each beam for
+each activity.
+
+TscopePointReq:
+
+This table contains the requested pointing information for each beam 
+for each activity.
+
+TscopeSubArrayStatus:
+
+This table contains a summary of the array status for each activity,
+including the total number of antennas and the number of drive errors 
+for each beam, plus the feed focus and wrap.
+
+------------------------------------------------------------------------
+PRELUDE TABLES
+
+ifcNStatus:
+
+This table records the Status of the Nth IF Chain at the beginning
+of an observation. These include the mean and standard deviation of
+the variance for both the left and right polarizations and the
+status code.
+
+ifcNParameters:
+
+This table records the user parameters for the Nth IF chain,
+including the attenuator settings, rf sky frequency, if tune
+frequency, and the input source (sky|test).
+
+TSigParameters:
+
+This table records the user parameters to the Test Signal Generator.
+These include the test signal type, frequency, amplitude, and drift
+as well as the enable/disable flag.
+

@@ -1,0 +1,26 @@
+Open SonATA Installation Guide
+
+8. Install tclreadline 9.9.0 (use for command line editing in the seeker, see below)
+
+
+Install the SonATA software. 
+
+
+limit stacksize unlimited
+
+
+
+
+It is necessary to build the SSE software before the detector software.
+1.sse-pkg
+1.cd ~
+2.cd nss/sse-pkg
+3../reconfig
+4.make
+2.sonata-pkg
+1.cd ~
+2.cd nss/sonata-pkg
+3../reconfig
+4../configure
+5.make leastsquares
+6.make

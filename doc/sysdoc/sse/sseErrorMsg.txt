@@ -1,0 +1,213 @@
+
+
+      Error   Severity	Name/
+      Number		Description/
+			User Action
+
+      10001    Info	SSE_MSG_INFO
+			Information only.
+			No User Action.
+      10002    Error	SSE_MSG_DBERR
+			Error from MySQL query or invalid results set.
+			See Software Team.
+      10003    Error	SSE_MSG_INVALID_PARMS
+			Invalid parameter.
+			Change parameter value or adjust limits.
+      10004    Error	SSE_MSG_STX_INVALID_STAT
+			Invalid STX Status.
+			Reset STX or Power cycle IFC.
+      10005    Warning	SSE_MSG_STX_RVAR_WUP
+			Rgt STX Variance exceeds upper Warning limit.
+			Increase attenuator setting or variance limit.
+      10006    Warning	SSE_MSG_STX_LVAR_WUP
+			Left STX Variance exceeds upper Warning limit.
+			Increase attenuator setting or variance limit.
+      10007    Warning	SSE_MSG_STX_RVAR_WLW
+			Rgt STX Variance exceeds lower Warning limit.
+			Decrease attenuator settings or variance limits.
+      10008    Warning	SSE_MSG_STX_LVAR_WLW
+			Left STX Variance exceeds lower Warning limit.
+			Decrease attenuator settings or variance limits.
+      10009    Error	SSE_MSG_STX_RVAR_EUP
+			Rgt STX Variance exceeds upper Error limit.
+			Increase attenuator settings or variance limits.
+      10010    Error	SSE_MSG_STX_LVAR_EUP
+			Left STX Variance exceeds upper Error limit.
+			Increase attenuator settings or variance limits.
+      10011    Error	SSE_MSG_STX_RVAR_ELW
+			Rgt STX Variance exceeds lower Error limit.
+			Decrease attenuator settings or variance limits.
+      10012    Error	SSE_MSG_STX_LVAR_ELW
+			Left STX Variance exceeds lower Error limit.
+			Decrease attenuator settings or variance limits.
+      10013    Warning	SSE_MSG_BASELINE_RW
+			Rgt Baseline statistic exceeds Warning limit.
+			Adjust attenuator settings, baseline limits or 
+			Permanent RFI Mask. 
+			Inspect Blue Wave and DDC installation.
+      10014    Warning	SSE_MSG_BASELINE_LW
+			Left Baseline statistic exceeds Warning limit.
+			Adjust attenuator settings, baseline limits or 
+			Permanent RFI Mask. 
+			Inspect Blue Wave and DDC installation.
+      10015    Error	SSE_MSG_BASELINE_RE
+			Rgt Baseline statistic exceeds Error limit.
+			Adjust attenuator settings, baseline limits or 
+			Permanent RFI Mask. 
+			Inspect Blue Wave and DDC installation.
+
+
+      Error   Severity	Name/
+      Number		Description/
+			User Action
+
+      10016    Error	SSE_MSG_BASELINE_LE
+			Left Baseline statistic exceeds Error limit.
+			Adjust attenuator settings, baseline limits or 
+			Permanent RFI Mask. 
+			Inspect Blue Wave and DDC installation.
+      10017    Warning	SSE_MSG_BAD_SIG_CLASS
+			Invalid Signal Classification for FollowUp.
+			Possible Database corruption. See DA Administrator.
+      10018    Error	SSE_MSG_PDM_DISCONNECT
+			PDM closed socket connection. 
+			Kill and restart PDM from controlpdms.
+      10019    Warning	SSE_MSG_UNINIT_DB_ID
+			Uninit Database Id (Db Version mismatch).
+			Use a database with compatible schema.
+      10020    Error	SSE_MSG_PDM_TUNE_DIFF
+			Diff of Pdm Tuned vs. Requested Freq too big. 
+			See PDM Software Team.
+      10021    Error	SSE_MSG_DISK_FULL_ERR
+			Used space on Archive Disk exceeds Error Limit.
+			Check that the disk rotation succeeded.
+			 Delete unnecessary files.
+      10022    Warning	SSE_MSG_DISK_FULL_WARN
+			Used space on Archive Disk exceeds Warning Limit.
+			Check that the disk rotation succeeded.
+			 Delete unnecessary files.
+      10023    Error	SSE_MSG_INVALID_SKY_FREQ
+			Tuning Spread exceeds input bandwidth.
+			Reassign Pdm Frequencies so they all lie within 
+			IF input bandwidth. Verify that the sched frequency 
+			parameters are within the receiver range.
+      10024    Error	SSE_MSG_ACT_FAILED
+			Activity Failed.
+			See message text.
+      10025    Error	SSE_MSG_RD_TARG_EPHEM
+			Error Reading Spacecraft Ephemeris File.
+			Verify that the Spacecraft Ephemeris File exists 
+			and covers the current date/time.
+      10026    Error	SSE_MSG_RD_EARTH_EPHEM
+			Error Reading Earth Ephemeris File.
+			Verify that the Earth Ephemeris File exists and 
+			covers the current date/time.
+      10027    Error	SSE_MSG_SPACECRAFT_POS
+			Error Calculating Spacecraft Position.
+			Verify that the Ephemeris Files exist 
+			and cover the current date/time.
+			See seeker window for additional information.
+      10028    Error	SSE_MSG_OUT_OF_BAND_FREQ
+			Pdm tune freq outside IF bandwidth.
+			Reassign Pdm Frequencies so they all lie within 
+			IF input bandwidth.
+
+
+      Error   Severity	Name/
+      Number		Description/
+			User Action
+
+      10029    Error	SSE_MSG_MISSING_TSCOPE
+			No Telescopes available for actiivty.
+			Exit and Restart seeker.
+      10030    Error	SSE_MSG_MISSING_TSIG
+			No TSigs available for activity.
+			Exit and Restart the seeker.
+      10031    Error	SSE_MSG_MISSING_IFC
+			No ifcs available for activity.
+			Exit and Restart the seeker.
+      10032    Error	SSE_MSG_MISSING_PDM
+			No Pdms available for activity.
+			Start pdms with controlpdms.
+      10033    Error	SSE_MSG_MISSING_BEAM
+			No (or too few) beams available for activity.
+			Enable more beams.
+      10034    Error	SSE_MSG_NO_DB
+			Database not enabled or not available.
+			Enable database: db set usedb on. 
+			Or select different database.
+      10035    Error	SSE_MSG_EXCEPTION
+			Unexpected exception.
+			See software team.
+      10036    Warning	SSE_MSG_NO_SEC_SIG
+			No Counterpart Signals available.
+			Counterpart pdm may have disconnected.
+      10037    Error	SSE_MSG_RFI_MASK_2LONG
+			# of FreqBands > 4096.
+			See software team.
+      10038    Error	SSE_MSG_ACT_UNIT_FAILED
+			Activity Unit Failed, terminating ...
+			See previous error the caused the failure.
+      10039    Error	SSE_MSG_AUTO_TARG_FAILED
+			Automatic Target Selection Failed.
+			Enable database/Verify Star Number/Check Database.
+      10040    Error	SSE_MSG_ACT_STRAT_FAILED
+			Failure in the Strategy Active Object Code.
+			See software team.
+      10041    Error	SSE_MSG_START_ACT_FAILED
+			Failure Starting Next Activity.
+			See message text.
+      10042    Error	SSE_MSG_FILE_ERROR
+			Error Reading or Writing a disk file.
+			See software team.
+      10043    Error	SSE_MSG_IFC_PROXY_ERROR
+			Errors received from IFC.
+			See message text.
+      10044    Error	SSE_MSG_SCHED_FAILED
+			Scheduler failed to Start.
+			See software team/Restart seeker.
+
+
+      Error   Severity	Name/
+      Number		Description/
+			User Action
+
+      10045    Error	SSE_MSG_2MANY_ACT
+			Too many pdm activities.
+			Shutdown and restart the pdm in question.
+      10046    Error	SSE_MSG_INVALID_MSG
+			Invalid Message received from pdm.
+			Shutdown and restart the pdm in question.
+      10047    Error	SSE_MSG_ALREADY_ATTACH
+			Pdm Proxy already attached to ActivityUnit.
+			Shutdown and restart the pdm in question.
+      10048    Error	SSE_MSG_ERROR_DETACH
+			Error from pdmProxy detaching from ActivityUnit.
+			Shutdown and restart the pdm in question.
+      10049    Error	SSE_MSG_INTERFACE_MISMATCH
+			Mismatch between the SSE-PDM Interface versions.
+			See Software Team.
+      10050    Error	SSE_MSG_INVALID_PORT
+			Invalid Archiver Port Number.
+			See Software team. Check runsse script.
+      10051    Warning	SSE_MSG_PROXY_NOT_FOUND
+			Error releasing a Proxy.
+			Restart the component.
+      10052    Error	SSE_MSG_UNKNOWN_ERROR
+			Text Message received from Subsystem.
+			Read Text of Message.
+      10053    Error	SSE_MSG_PROXY_TIMEOUT
+			Timeout on reading Subsystem Message.
+			Restart subsystem component or seeker.
+      10054    Error	SSE_MSG_CONNECT_CLOSED
+			Socket connection is closed.
+			Restart subsystem component or seeker.
+      10055    Error	SSE_MSG_SOCKET_RESET
+			Socket error necessitates reseting the socket.
+			Restart subsystem component or seeker.
+      10056    Error	SSE_MSG_START_OBS_ERROR
+			Pdm has been shutdown because of start obs error.
+			Check time on pdm and restart.
+      10057    Error	SSE_MSG_CAND_LOOKUP_FAILED
+			Database errors looking up Followup Candidates.
+			See software team.

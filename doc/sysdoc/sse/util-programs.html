@@ -1,0 +1,342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="">
+   <TITLE>Prelude Utility Programs</TITLE>
+</HEAD>
+<BODY>
+
+<h3>Prelude Utility Programs</h3>
+
+<ul>
+<li><a href="#backup-db-by-date">backup-db-by-date</a> - backup one days worth of data from one or more databases
+<li><a href="#backup-prelude-files-to-tape">backup-prelude-files-to-tape</a> - backup prelude observing data products and logs to tape
+<li><a href="#backup-slave-db">backup-slave-db</a> - full rdiff-backup of mysql slave server
+<li><a href="#baselineDisplay">baselineDisplay</a> - display baseline data
+<li><a href="#baselineImage">baselineImage</a> - create jpeg image from baseline data
+<li><a href="#check-tape-write-protect">check-tape-write-protect</a> - check Netbackup tape write protect status
+<li><a href="#clear-archive-disk">clear-archive-disk</a> - clean off archive disk
+<li><a href="#compare-dir-checksums">compare-dir-checksums</a> - compare directories on two hosts by doing a checksum on all files.
+<li><a href="#create-observing-data-images">create-observing-data-images</a> - create baseline and waterfall images for the most recent observation in the database
+<li><a href="#create-observing-starmap">create-observing-starmap</a> - create a starmap based on most recent observing information in database
+<li><a href="#create-starmap">create-starmap</a> - create a starmap GIF image
+<li><a href="#dopplerShift">dopplerShift </a> - compute doppler shift for transmitted frequency
+<li><a href="#dumpNssBaselines">dumpNssBaselines</a> - convert NSS baseline file to ASCII
+<li><a href="#dumpNssCompAmps">dumpNssCompAmps</a> - convert NSS complex amps file to ASCII
+<li><a href="#filesenderfilereceiver">filesender/filereceiver</a> - forward waterfall and baseline data from a remote host
+<li><a href="#findNearbyTargets">findNearbyTargets</a> - list SETI targets within an arcdistance cutoff
+<li><a href="#findtargets">findtargets</a> - find positions of spacecraft or beamformer calibrators
+<li><a href="#list-prelude-files-for-backup">list-prelude-files-for-backup</a> - list prelude files to be backed up
+<li><a href="#obs-summary-report">obs-summary-report</a> - create observation summary report
+<li><a href="#rotate-archive-disks">rotate-archive-disks</a> - rotate observing archive disks
+<li><a href="#runsse">runsse</a> - start sse observing system with full windowing interface
+<li><a href="#send-obs-info-to-webserver">send-obs-info-to-webserver</a> - send observing related information to the public webserver
+<li><a href="#startssedd">startssedd</a> - start waterfall and baseline displays for pdms
+<li><a href="#waterfallDisplay">waterfallDisplay</a> - display waterfall data
+</ul>
+
+<h3>Descriptions</h3>
+
+<ul>
+
+<a name="backup-db-by-date">
+<li> backup-db-by-date -dbhost < database host > [-dbname < database name > (default=all db)]  [-date < YYYY-MM-DD, default=yesterday >]  [-outdir < dir > (default=./)] 
+<pre>
+Backup one days worth of data from one or more databases.
+Output is one file per table bundled into a single gzipped tar file per database.
+</pre>
+
+<a name="backup-prelude-files-to-tape">
+<li> backup-prelude-files-to-tape<br>
+<pre>
+Backup prelude observing files (data products and logs) to tape using the
+Netbackup software
+</pre>
+
+<a name="backup-slave-db">
+<li>backup-slave-db
+<pre>
+Full rdiff-backup binary backup of databases running under a mysql slave db,
+from /usr/local/data/mysql-slave to /usr/local/backup/mysql/obs-db-rdiff-backup.
+The slave is stopped temporarily while the backup takes place.
+</pre>
+
+
+<a name="baselineDisplay">
+<li> baselineDisplay -file < filename > -xpos < x position > -ypos < y position > -width < width > -height < height > -slow -timeavg
+<pre>
+
+Read a file containing PDM baseline data and display it as 
+a frequency vs. power XY plot.
+
+options:
+
+-file: NSS baselines filename.  File suffix is usually .baseline.
+-xpos: window x position
+-ypos: window y position
+-width: window width (default: 660)
+-height: window height (default: 400)
+-slow: display data slowly
+-timeavg: display data as a time average
+
+Example:
+
+baselineDisplay -file 2007-02-13_00-53-12_UTC.act440.iftest.unit7.pdm42.L.baseline
+
+</pre>
+
+
+<a name="baselineImage">
+<li> baselineImage -infile < baseline filename > -outfile < jpeg filename > [-title < text > (default: infile name)]
+<pre>
+Create a baseline jpeg image from a binary data file.
+</pre>
+
+<a name="check-tape-write-protect">
+<li>check-tape-write-protect < tapeId > [...< tapeId >]
+<pre>
+Check the write protect status of a Netbackup tape.
+
+Example use:
+
+% check-tape-write-protect 6770L1
+tapeId: 6770L1
+HP Ultrium LTO tape drive:
+   sense key(0x7)= Write Protected   residual= 0   retries= 0
+   file no= 0   block no= 0
+
+(Note: sense key = "No Additional Sense" for "not write protected")
+
+</pre>
+
+<a name="clear-archive-disk">
+<li>clear-archive-disk < mount point >
+<pre>
+Clear disk by doing umount, newfs, and remount.
+Disk mount point path must begin with /usr/local/prelude_archive/disks/mount-points
+</pre>
+
+<a name="compare-dir-checksums">
+<li>compare-dir-checksums < host1 > < dir1 > < host2 > < dir2 >
+<pre>
+Compare a directory on one host with a directory on another by doing
+checksums on all the files.  Files whose checksums are not the same
+will be listed in the output.
+</pre>
+
+<a name="create-observing-data-images">
+<li>create-observing-data-images -dbhost < dbhost > -dbname < dbname > [-outdir < output directory, default is '.' >] [-maxpdms < max # pdms, default=3 >] [-timeoutminutes < timeout in minutes, default=30 >] [-help]
+<pre>
+Create baseline and waterfall images for some of the pdms listed
+in the most recent observation in the database.  If the most recent
+observation is older than the timeout period, then default images
+are created that indicate this.   
+The output images are named baselineX.jpeg and waterfallX.jpeg, where
+X runs from 1 up to the max number of pdms requested.
+</pre>
+
+<a name="create-observing-starmap">
+<li>create-observing-starmap -dbhost < dbhost > -dbname < dbname > -outfile < outfile.gif > [-timeoutminutes < timeout in minutes, default=30 >] [-help]
+<pre>
+Look up the most recent observing information in the database and 
+create a starmap showing the ATA primary beam position. 
+If the most recent observation is older than the timeout period, 
+then a default starmap is created that indicates this.   
+</pre>
+
+<a name="create-starmap">
+<li>create-starmap  [-rahours < map center RA >] [-decdeg < map center Dec >] [-degpercm < map scale degrees per cm, default=2 >] [-outfile < starmap.gif >] [-help]
+<pre>
+Create a starmap GIF image, centered on the given coordinates,
+using the <a href="http://pp3.sourceforge.net/">pp3</a>, tex, and ImageMagick packages.
+</pre>
+
+<a name="dopplerShift">
+<li> dopplerShift < transmit freq MHz > < range-rate (aka 'deldot') Km/Sec >
+<pre>
+Compute expected receive freq & doppler shift for a given transmitted freq,
+where 'deldot' is a projection along the line-of-sight
+from the coordinate center and indicates direction of motion.
+A positive deldot means the target center is moving away from
+the observer (coordinate center). A negative deldot means the
+target center is moving toward the observer. Units are Km/sec.
+(See JPL Horizons website).
+
+Example use:
+
+matrix% dopplerShift 8437.895  42.7734281
+Transmit Freq MHz.....: 8437.895000
+Delta-dot Km/Sec......: 42.773428
+Expected Recv Freq MHz: 8436.691108
+Doppler Shift KHz.....: -1203.891844
+
+</pre>
+
+<a name="dumpNssBaselines">
+<li> dumpNssBaselines < filename >
+<pre>
+Dump NSS baseline file in ASCII
+</pre>
+
+<a name="dumpNssCompAmps">
+<li> dumpNssCompAmps < filename >
+<pre>
+Dump NSS Complex Amplitudes (waterfall data) file in ASCII
+</pre>
+
+<a name="filesenderfilereceiver">
+<li> <a href="data-forwarding.html">filesender and filereceiver</a> 
+are used to forward waterfall and baseline data from a remote host.
+<br><br>
+
+<a name="findNearbyTargets">
+<li>findNearbyTargets [-dbhost < host >] [-dbname < name >] [-rahours < raCenterHours >] [-decdeg < decCenterDeg >] [-distdeg < arc distance degrees >] 
+<pre>
+List SETI targets that fall within the specified arcdistance of the
+given position.
+</pre>
+
+<a name="findtargets">
+<li>findtargets -dbhost [host] -dbname [name] -dbuser [user] -timeutc [yyyy-mm-dd hh:mm:s] -tzoffset [value] -type [value] -calfreqmhz [value] -calhours [value] 
+<pre>
+Find positions of spacecraft or beamformer calibrators
+Arguments:
+  -dbhost: database host (default: localhost)
+  -dbname: database name (default: nss_iftest)
+  -dbuser: database user (default: )
+  -timeutc: obs time as 'yyyy-mm-dd hh:mm:ss' (default: current time)
+  -tzoffset: rise/set timezone offset in hours from UTC (default: 0.000000)
+  -type: target type: spacecraft | calphase | caldelay (default: spacecraft)
+  -calfreqmhz: cal freq for finding strongest source (default: 1420.000000)
+  -calhours: minimum cal uptime in hours (default: 0.500000)
+</pre>
+
+<a name="list-prelude-files-for-backup">
+<li>list-prelude-files-for-backup
+<pre>
+Create a list of "yesterday's" NSS/Prelude files (and directories)
+that need to be backed up including:
+- Logs: system-log, error-log
+- Observing database(s) snapshots
+- Observing data products directory (baselines, complex amplitudes, signal reports, etc.)
+</pre>
+
+<a name="obs-summary-report">
+<li> obs-summary-report [-dbhost < database host >] [-dbname < database name >] [-hours <reporting interval in hours, default=24>]
+<pre>
+Create an observing summary report for a given time period.
+</pre>
+
+<a name="runsse">
+<li> runsse [-sim] [-nopdm] [-lab] [-ifc1only] [-ifc2only] [-ifc3only] [-noifc1] [-noifc2] [-noifc3] [-tsig1only] [-tsig2only] [-tsig3only] [-notsig1] [-notsig2] [-notsig3] [-batch] [-debug] [-watch] [-tscopesim]
+<pre>
+Start the sse observing system, including ifcs, pdms, test signal generators, etc.
+
+Options:
+
+-sim: start simulators
+-nopdm: don't start pdms (real or simulated)
+-lab: run in lab mode (simulated tscope, all else real)
+-ifcXonly: use IF chain X only
+-noifcX: don't use IF chain X
+-tsigXonly: use Test Gen X only
+-notsigX: don't use Test Gen X
+-batch: run in non-interactive mode
+-debug: echo all commands as they are run
+-watch: let others watch/control the seeker via 'screen'
+-tscopesim: start telescope in simulator mode
+</pre>
+
+<a name="rotate-archive-disks">
+<li>rotate-archive-disks - see <a href="./disk-rotation.txt">rotation documentation</a>
+<pre>
+</pre>
+
+<a name="send-obs-info-to-webserver">
+<li>
+<pre>
+Send recent observing related information to the public webserver,
+including starmap, baselines, and waterfalls.
+</pre>
+
+<a name="startssedd">
+<li> startssedd pdmN [pdmM ...]
+<pre>
+Start two waterfall and two baseline displays for each pdm listed,
+one for each pol.
+
+Example:
+
+startssedd pdm22
+
+</pre>
+
+
+<a name="waterfallDisplay">
+<li> waterfallDisplay -file < filename > -res < 1 | 2 > -xpos < x position > -ypos < y position > -slow -repeat
+ -suboff < subband offset > -batch -outfile < outFilename >
+
+<pre>
+Read a file containing complex amplitudes and display it in a GUI
+as a waterfall (frequency on the x-axis, time on the y-axis, power
+as brightness).  The program can also be run without the GUI, sending
+the waterfall image to a jpeg file instead.
+
+Options: 
+
+-file: input filename.
+
+     The file suffix is usually .compamp or .archive-compamp.
+     The .compamp file contains a single subband.
+     The .archive-compamp file contains 16 subbands, and the 
+     signal of interest usually falls in the center, subband 8.
+
+-res: data display resolution in Hz (1 or 2)
+-xpos: window x position
+-ypos: window y position
+-slow: play slowly
+-repeat: repeatedly read data file (i.e., endless replay)
+-sonata: data file is in sonata packet format
+-suboff: subband offset to display (0-15) for .archive-compamp files
+-batch: no GUI, send waterfall image to jpeg file
+-outfile: output filename for batch mode (default: 'waterfall.jpeg')
+
+
+Example:
+
+waterfallDisplay -file 2007-03-01_00-34-36_UTC.act503.pdm15.id-2.L.archive-compamp
+
+
+A further description of the data format and waterfall generation
+process:
+
+The pdm generates "confirmation data" which is baselined 4-bit real,
+4-bit imaginary complex amplitude values at 1 KHz resolution,
+with 512 values per subband per half-frame.  A half frame is
+generated approximately every 3/4 second.  Currently the pdms have
+3072 subbands, for a total bandwidth of ~2.1 MHz.
+
+During data collection, the pdm can be asked to send a single subband's
+worth of data, for any arbitrary subband, in realtime.  The waterfall
+program FFTs two sequential half-frames of complex amplitudes to
+create a single row of "1 Hz" frequency data.  Each of the 1024 bins
+in the row actually represents ~0.67 Hz, and the entire subband is
+678.2 Hz wide.
+
+The waterfall display also has a "2 Hz" mode, where a single half-frame
+(i.e., no overlapping data) is used to create a 512 point row.
+
+At the end of signal detection, the pdm can be asked to send archive data for
+candidate signals.  This archive data consists of 16-subbands worth
+of "confirmation data" surrounding each candidate.  The waterfall program
+has an option to select any single subband out of the 16 for display. 
+
+</pre>
+
+
+</ul>
+
+
+</BODY>
+</HTML>

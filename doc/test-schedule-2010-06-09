@@ -1,0 +1,33 @@
+SonATA Test Schedule
+2010-06-09 jj
+
+
+Thursday, June 10, 13:00-17:00
+Monday, June 14, 13:00-17:00
+Thursday, June 17, 13:00-17:00
+Monday, June 21, 13:00-17:00
+Tuesday, June 22, 9:00-13:00 
+Monday, June 28, 13:00-17:00
+Thursday, July 1, 13:00-17:00
+
+Additional Test Procedures:
+
+	Vary the baseinitaccum from 1 to 20 to determine the minimum
+		accumulation required.
+
+	Determine average baseline power. Set appropriate limits for 
+		warnings and errors.
+
+	Check power coming out of the packetizers. 
+		Compare beamformers using Channelizer Statistics.
+
+	Correlate number of missed packets with system configuration.
+
+	Run RFI Scans, SonATA and Prelude, Single Antenna
+		1000 MHz to 9000 Mhz
+		Compare detection results
+
+ 	Determine signal detection thresholds for observing
+	Pulse, Triplet, CW Power, CW coherent (primary & secondary)	
+
+	Collect statistics on Multibeam RFI rejection.

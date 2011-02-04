@@ -1,0 +1,250 @@
+# --- 8 7 1 30 8 7 9 30
+35 08 07 08 * ${HOME}/.sse-cron-begin-waterhole2x-session
+++++++++++++++
+#!/bin/sh
+# start a SETI observing session
+
+# start up SSE
+${HOME}/sse_release/bin/sse-startup-cron-wrapper -batch -ifc1only -notsig3
+
+# allow enough time for all components to be ready
+sleep 60
+
+# send commands to SSE to start observing
+${HOME}/sse_release/bin/sse-seeker-command-cron-wrapper source ${HOME}/.sse-start-waterhole2x-obs.tcl
+++++++++++++++
+25 16 07 08 * ${HOME}/.sse-cron-end-obs-session
+=================
+#!/bin/sh
+# start a SETI observing session
+
+# send commands to SSE to stop observing
+${HOME}/sse_release/bin/sse-seeker-command-cron-wrapper source ${HOME}/.sse-stop-obs.tcl
+
+# wait for system to wrap up
+sleep 30
+
+# shutdown sse
+${HOME}/sse_release/bin/sse-shutdown-cron-wrapper
+
+=================
+sse-startup-cron-wrapper
+----------------------------
+#!/bin/sh
+
+# start the sse in batch mode (automated operations) from cron
+# all arguments are passed through to the runsse script
+
+GCC_ROOT=/usr/local/gcc3.3
+ACE_ROOT=/usr/local/ACE_wrappers
+MYSQL_ROOT=/usr/local/mysql
+SSE_ROOT=${HOME}/sse_release
+
+# print commands as they are executed
+#set -x
+
+PATH=${GCC_ROOT}/bin:/usr/local/sbin:/usr/local/java/bin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/cc
+s/bin:/usr/ucb:${SSE_ROOT}/bin
+export PATH
+
+# Set up the shell environment:
+# -u    Treat unset variables as an error when substituting.
+set -u
+
+LD_LIBRARY_PATH=${GCC_ROOT}/lib:/usr/local/lib:${ACE_ROOT}/ace
+export LD_LIBRARY_PATH
+
+# override the SSE startup file (use the one customized for automated mode)
+SSE_INITRC="${HOME}/.sserc-auto"
+export SSE_INITRC
+
+if [ ! -r ${SSE_INITRC} ]
+then
+    echo "*** Error: `basename $0`: required startup file not found: $SSE_INITRC"
+    exit 1
+fi
+
+# load any env var overrides
+envFile="${HOME}/.sse-startup-env-vars"
+if [ -r ${envFile} ]
+then
+   . ${envFile}
+fi
+
+runsse $* &
+
+exit 0
+-----------------------------------
+sse-seeker-command-cron-wrapper
++++++++++++++++++++++++++++
+#!/bin/sh
+
+# send the seeker commands on its tcp command port
+# all arguments are passed through
+
+GCC_ROOT=/usr/local/gcc3.3
+ACE_ROOT=/usr/local/ACE_wrappers
+MYSQL_ROOT=/usr/local/mysql
+SSE_ROOT=${HOME}/sse_release
+
+# print commands as they are executed
+#set -x
+
+PATH=${GCC_ROOT}/bin:/usr/local/sbin:/usr/local/java/bin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/cc
+s/bin:/usr/ucb:${SSE_ROOT}/bin
+export PATH
+
+# Set up the shell environment:
+# -u    Treat unset variables as an error when substituting.
+set -u
+
+LD_LIBRARY_PATH=${GCC_ROOT}/lib:${MYSQL_ROOT}/lib:/usr/local/lib:${ACE_ROOT}/ace
+export LD_LIBRARY_PATH
+
+send-seeker-command-via-telnet "$*"  > /dev/null 2>&1
+
+exit 0
++++++++++++++++++++++++++++
+
+.sse-start-waterhole2x-obs.tcl
+===============================
+# SSE seeker commands to start observing
+
+# connect to telescope array
+tscope setup
+
+# allow some setup time
+sh sleep 2
+
+# source param file for desired observing program
+# source $::env(HOME)/.sse-waterhole2x-band1-parms.tcl
+source $::env(HOME)/.sse-waterhole2x-band2-parms.tcl
+# source $::env(HOME)/.sse-waterhole2x-band3-parms.tcl
+
+# begin observing
+start tasks
+===================================
+.sse-stop-obs.tcl
+---------------------------
+# SSE seeker commands to end observing
+
+stop
+
+# allow settle down time
+sh sleep 10
+
+# release ant array resources
+freeants
+
+sh sleep 2
+
+# disconnect from telescope array
+tscope cleanup
+
+----------------------------------
+sse-shutdown-cron-wrapper
+++++++++++++++++++++++++++++++
+#!/bin/sh
+
+# shutdown the sse from cron
+
+GCC_ROOT=/usr/local/gcc3.3
+ACE_ROOT=/usr/local/ACE_wrappers
+MYSQL_ROOT=/usr/local/mysql
+SSE_ROOT=${HOME}/sse_release
+
+# print commands as they are executed
+#set -x
+
+PATH=${GCC_ROOT}/bin:/usr/local/sbin:/usr/local/java/bin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/cc
+s/bin:/usr/ucb:${SSE_ROOT}/bin
+export PATH
+
+# Set up the shell environment:
+# -u    Treat unset variables as an error when substituting.
+set -u
+
+LD_LIBRARY_PATH=${GCC_ROOT}/lib:${MYSQL_ROOT}/lib:/usr/local/lib:${ACE_ROOT}/ace
+export LD_LIBRARY_PATH
+
+
+# shutdown seeker & its components
+send-seeker-command-via-telnet shutdown > /dev/null 2>&1
+
+# give it a chance to finish
+sleep 15
+
+# kill runsse overall control script and its children
+pkill -QUIT -x runsse
+
+sleep 2
+
+pkill -KILL -x runsse
+
+# even though this is started by runsse, it
+# won't die when that's killed, so do it explicitly
+
+
+pkill -f AtaControlSim
+
+exit 0
+
+++++++++++++++++++++++++++++++
+.sse-startup-env-vars
+================================
+# sse environment variables
+
+RUNSSE_IFC1_PDMS="pdm16 pdm14 pdm17 pdm31 pdm30 pdm38 pdm42 pdm0 pdm11 pdm28 pdm29 pdm10 pdm18 pdm22 pdm21 pd
+m32 pdm36 pdm33 pdm6 pdm8 pdm15 pdm35 pdm1"
+export RUNSSE_IFC1_PDMS
+
+SSE_DEBUG_LOG_MAX_FILESIZE_MEGABYTES=200
+export SSE_DEBUG_LOG_MAX_FILESIZE_MEGABYTES
+
+CONTROL_COMPONENTS_ANT_CONTROL_HOST=tumulus.hcro.org
+#CONTROL_COMPONENTS_ANT_CONTROL_HOST=localhost
+export CONTROL_COMPONENTS_ANT_CONTROL_HOST
+
+================================
+send-seeker-command-via-telnet
+--------------------------------
+#!/usr/bin/env expect
+# -*-tcl-*- (emacs mode)
+
+
+# send command to seeker on TCP port using telnet.
+# command is given as argv.
+# Command results go to stdout.
+
+# wait a reasonable amount of time for the command to be processed
+# and any results to be returned before closing the connection.
+
+set timeout 1
+
+if [catch "spawn -noecho telnet localhost 2555" reason ] {
+    send_user "failed to spawn telnet: $reason\n"
+    exit 1
+}
+
+# if there's an error, then report it.
+# otherwise strip out the telnet greeting text.
+log_user 0
+expect {
+    -re "Escape character.*\r\n" {}
+    -re "Connection refused" { send_user "telnet connection refused\n"}
+}
+log_user 1
+
+# send the seeker command, and let the results pass through
+# (turn the argv list into a string first so that multiword command
+# arguments are interpreted properly)
+
+set cmd [join "$argv"]
+send "$cmd\n"
+
+# Use the 'expect' command to wait so that any command results
+# get printed.
+# Ask for any unexpected string and just let it timeout.
+
+expect "AnythingAtAll"
+--------------------------------

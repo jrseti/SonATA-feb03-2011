@@ -1,0 +1,59 @@
+ SonATA Database Table Relationships
+ 2009-10-27
+ jj
+
+ Activities.actParametersId = ActParameters.id
+ Activities.pdmParametersId = PdmParameters.id
+ Activities.schedParametersId = SchedulerParameters.id
+ Activities.tscopeParametersId = TscopeParameters.id
+
+ ActivityUnits.activityId = Activities.id
+ ActivityUnits.PdmActivityParametersId = PdmActivityParameters.id
+ ActivityUnits.PdmIntrinsicsId = PdmInstrinsics.id
+ ActivityUnits.targetId = TargetCat.targetId
+ ActivityUnits.targetId = Spacecraft.targetId
+ ActivityUnits.primaryTargetId = TargetCat.primaryTargetId
+
+ BaselineStats.actId = ActivityUnits.activityId
+
+ CalTargetFlux.targetId = TargetCat.targetId
+
+ CandidateSignals.activityId = Activities.id
+ CandidateSignals.activityId = ActivityUnits.activityId
+ CandidateSignals.targetId = TargetCat.targetId
+ CandidateSignals.dbActivityUnitId = ActivityUnits.id 
+ CandidateSignals.origActivityId = Activities.id
+ CandidateSignals.origActivityId = ActivityUnits.activityId
+ CandidateSignals.origSignalIdNumber = Signals.id
+
+ CandidatePulseTrains.signalTableId = CandidateSignals.id
+
+ CwBadBands.actId = Activities.id
+ CwBadBands.actId = ActivityUnits.activityId
+
+ DetectionStats.actId = Activities.id
+ DetectionStats.actUnitId = ActivityUnits.id
+
+ PdmActivityParameters.pdmScienceDataRequestId = PdmScienceDataRequest.id
+ PdmActivityParameters.baselineWarningLimitsId = BaselineWarningLimits.id
+ PdmActivityParameters.baselineErrorLimitsId = BaselineErrorLimits.id
+
+ PdmIntrinsics.id = ActivityUnits.PdmIntrinsicsId
+
+ PulseBadBands.actId = Activities.id
+ PulseBadBands.actId = ActivityUnits.activityId
+
+ PulseTrains.signalTableId = Signals.id
+
+ Signals.activityId = Activities.id
+ Signals.dbActivityUnitId = ActivityUnits.id 
+ Signals.origActivityId = Activities.id
+ Signals.origSignalNumber = Signals.id
+
+ Spacecraft.targetId = TargetCat.targetId	?
+
+ TscopePointReq.actId = Activities.id
+ TscopePointReq.actId = ActivityUnits.activityId
+ TscopeSubarrayStatus.actId = Activities.id
+ TscopeSubarrayStatus.actId = ActivityUnits.activityId
+

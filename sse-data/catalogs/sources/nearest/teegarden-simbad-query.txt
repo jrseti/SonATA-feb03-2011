@@ -1,0 +1,7 @@
+
+format object "%COO(d;A;ICRS) | %COO(d;D;ICRS) | %PM(A)| %PM(D)| %PLX(V)| %SP(S) | %FLUXLIST(B;F) | %FLUXLIST(V;F) | %IDLIST(S;HIP) | %IDLIST(S;HD) | %IDLIST(S;TYC)| %IDLIST(1)"
+
+echo "RA J2000 <deg> | Dec J2000 <deg> | pm RA mas/yr | pm Dec mas/yr | parallax mas | spectralType | bMag | vMag | HIP ID | HD ID | Tycho ID | main ID"
+
+NAME Teegarden's star
+

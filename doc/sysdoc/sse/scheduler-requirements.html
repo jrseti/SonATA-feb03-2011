@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>Scheduler Requirements
+</head>
+<body>
+<pre>
+Version 1.5 2010-Jan-25 20:31:17 UTC
+
+Scheduler automation requirements:
+
+Must be able to: 
+<ol>
+<li> Follow preassigned observing schedule
+     a. start/end sessions at specific dates & times
+     b. observe specified freq bands 
+     c. do requested obs program (gal survey, targeted, other?)
+
+<li> Determine if we're the primary or commensal observer
+     a. get from schedule?
+
+<li> Prepare beamformers and ants
+
+     a. As both primary & commensal observer
+        1. establish ATA control/monitor connections
+        2. select good ants & ant pols 
+        3. allocate ants from ATA (resource housekeeping)
+        4. assign ant pols to beamformers (initialize bfs)
+        5. reset ibobs
+
+     b. Additionally, if primary observer, 
+        prepare ants:
+
+        1. turn on lnas
+        2. set pams
+        3. set feed focus
+        4. set bf attemplifiers (requires dark sky pointing)
+
+<li> Run calibration series
+      a. delay
+      b. phase
+      c. freq (multiple cals)
+      d. circular pol
+
+      Note: in commensal mode, must be able to do cal series
+      before primary observer takes over.
+
+<li> Do end-to-end system tests using local test signals, and 
+   satellite & spacecraft sources.
+   Verify detection of expected signal.
+
+     a. local test signal (baseband test, no ants)
+     b. amc7 beacon (single ant OK)
+     c. deep space probes
+          Note: usually need full array, requires calibration
+          which may not be at the same freq band you want
+          to observe.
+
+<li> Select & run observing programs
+      a. gal survey
+      b. targeted search (primary or commensal)
+
+<li> Recal (or revalidate cal) as needed during observing program
+      a. at set intervals, or at specific times
+
+<li> Negotiate change of primary FOV.
+   
+   a. As commensal observer
+     1. point at dark sky position to set bf attemplifiers
+     2. request FOV change(s) for calibration(s)
+     3. delay FOV change when candidates need to be followed up
+
+   b. As primary observer
+     1. delay FOV change when commensal observer would like to stay
+        on target longer
+     2. handle requests for FOV change(s) for calibration(s)
+
+<li> Handle error recovery
+
+   a. telescopes not tracking
+   b. power failures
+   c. fiducial signal not found (IF test, amc7 beacon, spacecraft)
+   d. calibrations do not meet acceptance criteria
+   e. can't connect to backend server
+   f. other errors TBD
+
+<li> Release resources
+    
+    a. as primary observer, restore ants to nominal condition:
+       1. park ants
+       2. set focus to nominal value
+       3. release ants back to ATA (resource housekeeping)
+
+    b. as primary or commensal observer
+       1. release ATA control/monitor connection
+
+</pre>
+</body>
+</html>

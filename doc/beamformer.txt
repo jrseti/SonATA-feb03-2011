@@ -1,0 +1,52 @@
+Beamformer Output
+(excerpted from email from Billy Barott)
+
+The total beamformer bandwidth is 104.8576 MHz, but that the usable bandwidth from
+the current beamformer is 72 MHz. 
+
+The bandwidth is determined by two factors: 
+
+(1) The passband FIR filter in the iBobs, and 
+(2) the fine-delay FIR filter in the beamformer.  
+
+The latter has some freedom associated with it, and
+can actually be set by the user.  Larger bandwidths yield larger
+beamforming errors, smaller bandwidths are more precise beams.  At any
+rate, the default and design bandwidth is 72 MHz, or just under 70% of
+104 MHz (technically, being 0.7 of 104.8576, I think it's more like 73
+MHz, but that's getting on the shoulders of the filter).  
+
+It's certainly possible to get to the 90% level, but that requires more
+taps in the FIR filters.  Dave can talk about the old and new DDC
+filters & bandwidth, but as for the beamformer we were restricted by
+space to a 6-tap FIR filter for the fine delay.  The design point of ~
+small amplitude and bandwidth errors was 70% - take 6 taps and try to go
+to 90%, and the delay and phase errors get much larger, and we're no
+longer forming an accurate beam, and null forming abilities effectively
+vanish.
+the iBob DDC is limited to 81 MHz.
+ With 6 taps, we get 4
+degrees phase error worse-case  at a normalized bandwidth of 0.7, and a
+amplitude error of 8%.  My figure only goes to 12 taps (double our
+current size), but at that level, at 90% we'd have 10 degrees phase
+error and quite large amplitude errors (>> 10%, off page).
+
+The July 2008 Beamformer Presentation PPT file is available on
+the logbook at log.hcro.org, under backend systems/ beamformer.
+There's quite a bit of architecture info in there.  Also recommend
+reading the users guide on the logbook (under software tab of same page)
+for some more info.  Note that info in ppt ends before circular
+polarizer or packetizer, as those didn't exist at the time of the
+presentation.
+
+Comment from Mike Davis:
+But, but, but...
+
+We're only trying to -detect- (not measure) drifting
+cw tones and pulses. These are very tolerant to
+both amplitude and phase errors. I think this is
+a case of the perfect driving out good enough. Remember
+that we are accepting -3dB at the edge of the primary
+beam, so 10% amplitude and 10 degree phase errors
+(maybe ~-0.1 dB) are small by comparison.
+

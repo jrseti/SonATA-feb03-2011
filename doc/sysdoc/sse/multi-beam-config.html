@@ -1,0 +1,91 @@
+Version 1.2 2010-Jan-25 22:13:34 UTC
+<H3>Multi-beam Configuration</H3>
+<br>
+The Prelude System is designed to observe with 2 or more beams
+looking at a different target with each beam. In the multitarget
+observing mode the primary candidates from each beam are
+sent to the pdms on the other beams for verification. These
+secondary candidates are tested for coherent confirmation.
+If a candidate is seen in multiple beams, it is considered
+RFI. If not seen, it remains a candidate.
+<br><br>
+The Prelude System Configuration of resources is contained in the
+expected components file.
+The current version of the file may be found in
+<pre>
+/home/nss/sse_release/setup/expectedNssComponents.cfg
+</pre>
+A typical file shows the Whisman Lab System as beams 1 and 2,
+using ifc1 and tscope3, <br>and the Field System as beams 3 and 4, using ifc2 
+and tscope1 and tscope2. <br>The pdms are allocated to beams 
+according to which physical rack they are in.
+
+<pre>
+# $Id: multi-beam-config.html,v 1.1 2005/05/18 20:59:19 jane Exp $
+# NSS Components Configuration File
+
+# Whisman Lab: ifc1
+# Hat Creek: ifc2
+
+Site Main IfcList ifc1 ifc2
+Ifc ifc1 BeamList beam1 beam2
+Ifc ifc2 BeamList beam3 beam4
+Beam beam1 PdmList pdm19 pdm11 pdm39 pdm10
+Beam beam2 PdmList pdm1 pdm35 pdm12 pdm36
+Beam beam3 PdmList pdm32 pdm33 pdm14 pdm31 pdm17 pdm38 pdm13 pdm42
+Beam beam4 PdmList pdm15 pdm34 pdm30 pdm29 pdm22 pdm8 pdm28 pdm40
+
+TelescopeToBeam tscope1 beam3
+TelescopeToBeam tscope2 beam4
+TelescopeToBeam tscope3 beam1
+</pre>
+
+There is a utility to parse and validate this file in the event that
+changes are made.
+<pre>
+sse1:/home/nss/sse_release/setup> validateExpectedNssComponentsTree expectedNssComponents.cfg
+</pre>
+The multi-beam parameters are found in the scheduler menu.
+<pre>
+seeker> sched show
+sched parameters: 
+  Name                  Current        Default            Min            Max  Units         
+  beam1                      on             on              (on | off)                
+  beam2                     off            off              (off | on)                
+  beam3                     off            off              (off | on)                
+  beam4                     off            off              (off | on)                
+  beam5                     off            off              (off | on)                
+  beam6                     off            off              (off | on)                
+  ...
+
+  multitarget               off            off              (off | on)                
+  </pre>
+For the Whisman Lab Configuration, the system should be started
+with the following command line options:
+<pre>
+sse2:/home/nss> runsse -lab -ifc1only
+</pre>
+Beams 1 and 2 should be on
+<pre>
+seeker> sched set beam1 on
+seeker> sched set beam2 on
+</pre>
+To run in multi-beam mode where primary candidates are passed
+to pdms on the other beam as secondary candidates, turn on the 
+multitarget parameter.
+<pre>
+seeker> sched set multitarget on
+</pre>
+For the Hat Creek Field Configuration, the system should be started
+with the following command line options:
+<pre>
+sse2:/home/nss> runsse -ifc2only
+</pre>
+Beams 3 and 4 should be on
+<pre>
+seeker> sched set beam3 on
+seeker> sched set beam4 on
+seeker> sched set beam1 off
+</pre>
+
+

@@ -1,0 +1,493 @@
+Version: 1.49  Updated: 2010-Jan-25 23:59:11 UTC
+
+ATA beamformer "cheat sheet" notes:
+
+1. Prepare list of ants to use:
+
+   a.  Find ants with good sensitivity.
+       Possible sources of good ant lists:
+
+       1. atasefd -l <desired sefd>,<obs freq MHz>
+
+          E.g.,
+          % atasefd -l 20000,1420 --maxage 60
+          1ax,1ay,1cx,1cy,1dx,1dy,1ex,1ey,1fx,1gx,1gy,1hx,1hy,...
+
+          where 20000 is the max allowed SEFD at 1420 MHz, and ignoring
+          any data older than 60 days.  I'd still use 1420 even
+          if you plan to observe at another freq, since the routine
+          temperature measurements often don't cover the higher
+          freqs in the 1-10 ghz band.
+
+          You can use -d instead of -l if you want
+          to see what the individual ant SEFDs are.
+
+       2. List ant assignments (shows ants under maintenance, etc.):
+
+            % fxconf.rb sals 
+
+   b. Follow ant restrictions:
+
+       - Make sure all or none of the collision ants are used
+         when slewing:
+            3f,3g,3h
+
+   c. Create 2 ant lists:
+         ant names including pols (e.g. 1ax) for bfinit
+         ant names without pols (e.g. 1a) for ata cmds
+
+
+2. Prepare desired ants:
+
+   a. assign ants to beamformer (bfa list):
+
+         % fxconf.rb satake bfa <antlist>
+
+   b. Turn LNAs on:
+
+         % atalnaon <antlist>
+
+   c. Reset pams:
+
+         % atasetpams <antlist>
+
+   d. Check/set feed focus for desired freq:
+      (use ~1.1 times the obs freq for best results)
+
+         % atagetfocus <antlist>
+
+         % atasetfocus <antlist> <freq> [--cal if necessary]
+
+3. Prepare ibobs
+
+   a. After any BEE2 power outage the daemons should be reset:
+
+        % ssh -l obs boot2
+        % boot2: /opt/bfu/bin/bfudaemon stop
+        % boot2: /opt/bfu/bin/bfudaemon start
+
+   b. Reset ibobs to known state (including rearm to insure timing alignment):
+      (BF number is 1, 2 or 3)
+
+        % bfibob <bf#> sky
+        % bfibob <bf#> walsh
+        % bfibob <bf#> rearm
+        % bfibob <bf#> dacinit
+
+   c. Set the beamformer attemplifiers (assumes pams are set to nominal, non GPS values)
+
+      1. Point ants at dark sky
+    
+          % atasetazel <antlist> <az> <el>  (e.g., 330 30)
+  
+      2. Set tuning frequency to something other than GPS, e.g.:
+ 
+          % atasetskyfreq <tuning> 1420
+
+        where tuning is:
+          Bf#1: c
+          Bf#2, Bf#3: d
+
+      3. Set attemplifiers
+ 
+          % bfibob <bf#> autoatten
+
+          (will also automatically disable notch filter)
+
+      4. To read back attemplifier settings:
+ 
+          % bfibob <bf#> getatten 
+
+          - OR -
+
+          % getatten.rb i<NN>.bf[a|b]
+
+            [bf#1: i1.bfa - i24.bfa]
+            [bf#2: i1.bfb - i24.bfb]
+
+
+4. Use a single ant to check the amc7 beacon at 3700.5 MHz,
+   to make sure prelude can see sky, and that the walshing is
+   aligned correctly.
+ 
+   a. Slew ants to amc7:
+
+        atasetazel <antlist> 203.0 40.2
+
+   b. Init beamformer 
+ 
+        bfinit.rb -b N -a <ant>
+
+        Note: full path to bfinit.rb is /home/obs/bbarott/bfu/bfinit.rb
+
+        Note: if you get any of these errors:
+        "...druby://boot2...ECONNREFUSED: Connection refused"
+        "...druby://boot2... Connection reset by peer"
+
+        you may need to (re)start the beamformer daemons on boot2:
+                
+          % ssh -l obs boot2
+          % /opt/bfu/bin/bfudaemon stop
+          % /opt/bfu/bin/bfudaemon start
+    
+   c. Do nominal delay cal & an observation to get beamformer going:
+
+      Set the sideband to 'upper'.  This will put the upper half of the
+      beamformer 70 MHz band into the DAC 50 Mhz output band,
+      i.e., prelude will have a 70/2 = 35 Mhz usable band available.  
+      In order for prelude to have a symmetric band in which
+      to work, it will use an offset of -19 MHz when requesting
+      beamformer tuning.
+
+      For example, in this case we'd like prelude pdms to be tuned to
+      3700 MHz, in order to have the 3700.5 Mhz beacon fall into the upper
+      half of the pdm band.  So the beamformer tune freq becomes 
+      3700 - 19 = 3681 MHz. 
+
+      Run a cal to set the agc, then a short obs to set the registers:
+
+        bftrackephem.rb -b N -f 3681 -e 203.0:40.2 --caldelay -i 60 -n 1 --sideband upper --agcdb 0
+
+        bftrackephem.rb -b 1 -f 3681 -e 203:40.2 -d 30 
+
+   d. Run prelude observation.  Verify beacon is visible in both pols,
+      that there is a single central peak in the baseline, and 
+      that the carrier is narrow in the waterfall.
+
+      If the baseline shows multiple peaks, then walshing may be out 
+      of alignment.  Have the site reset the walsh generator.
+
+5. Initialize beamformer(s) with list of ants to be used for regular
+   observing:
+
+      % bfinit.rb -b N -a 1a,1b,1cy1,1dx1
+
+      Note: full path to bfinit.rb is /home/obs/bbarott/bfu/bfinit.rb
+
+6. Check for low antenna levels:
+
+      Point at dark sky:
+ 
+         atasetazel <antlist> <az> <el>  (e.g., 330 30)
+
+      Check for cal alarms:
+
+         ./bftrackephem.rb -b N -f 1420 -e 40:80 -i 5 -n 1 --write autos --calalarms amp
+
+         The ephemeris (-e <az>:<el>) doesn't matter as you'll be making
+         auto correlations.
+         "--write autos" causes the autos to be taken, "--calalarms amp" causes
+         the beamformer to report alarms as if it were calibrating amplitudes,
+         but does not actually do that.
+
+         Look for this error:
+
+            (ANTENNA): 5gx1: CAUTION: AMPLITUDE ERROR EXCEEDS 6dB!
+
+         Compare against --statusonly results, eliminate those ants.
+
+         Note: full path to bftrackephem.rb is /home/obs/bbarott/bfu/bftrackephem.rb
+
+7. Cal delay (bright source, usually casA, extended source is ok):
+
+   a. Slew ants to cal source
+
+        % ataephem casa
+        % atawrapephem casa.ephem
+        % atatrackephem 1a,1b,1c,1d casa.ephem 
+
+        Wait for ants to arrive on source.
+
+   b. Run the cal, setting the gain at the same time.
+      Agc is 'sticky', should only be set once per observing session.
+      OK to cal for delay at Lband, then observe later at a
+      different frequency.  (I.e., delay cal is not frequency sensitive).
+
+      Recommended cal integration times are 15 - 120s
+      at 1420 Mhz:
+
+        Src      ~JY    LenSecs
+        ------   -----  -------
+        CasA     2477   30
+        CygA     1500   30      
+        TauA     875    60
+        VirA     198    120
+
+        % bftrackephem.rb -b N -f 1420 -e casa.ephem --sideband upper --caldelay -i 15 -n 2 --agcdb 0
+
+      Note: for calibrations, the beamformer forces the      
+          --bctype to beamDefaultPhased (vs. one of the null beam modes).
+
+   c. Examine results for good cal.
+        
+        Delay: very near zero (samples).
+        RMS error: less than 5 - 10 degrees.
+        Overflow: zero (except maybe for first iteration)
+
+
+8. Cal phase at desired observing freq (fainter cal unresolved source,
+      eg 3c84 is fine)
+
+   a. If obs freq for phase cal is different from delay cal, then:
+
+      1. Determine desired observation freq.  When setting the
+         BF tune freq, don't forget the -19 Mhz offset.
+
+         E.g., if you want to observe 8420 Mhz, the tune request should
+         be 8401 MHz.
+
+       2. Change ant focus for desired freq.  Optimal setting
+          is obs freq * 1.1, max of 11.2 ghz.
+
+             % atasetfocus <antlist> <focus freq>
+
+       3.  Slew to dark sky position, recheck for low antenna levels
+           (see earlier in document).
+
+       4. Set attemplifiers for observing freq
+
+             % atasetskyfreq <tuning> <obs freq>
+             % bfibob <bf#> autoatten
+
+   b. Slew ants to cal source
+   
+       % ataephem 3c84
+       % atawrapephem 3c84.ephem
+       % atatrackephem 1a,1b,1c,1d 3c84.ephem
+
+       Wait for ants to arrive on source.
+
+   c. Phase cal:
+
+      % ./bftrackephem.rb -b N -e 3c84.ephem --calphase -i 120 -n 2 -f 8408
+
+      (ATA LO1 @ 8408 Mhz = Prelude band center at 8427 MHz)
+      (ATA LO1 @ 1401 Mhz = Prelude band center at 1420 MHz)
+
+      Recommended phase cal integration times are 30 - 300s+.
+      (TBD: This needs to be revised:)
+
+        Freq Cal Src  ~JY  LenSecs
+        ---- -------- ---  -------
+        1420 3c295    23   60
+        3140 3c123    30   120
+        8400 3c454.3  11   300
+        8400 3c84     22   300
+
+        Note:  If you'd like to adjust the output gain, you can
+        add "--gainadjustdb <dbValue> " to the above command.
+
+   d. Examine results for good cal.
+        
+        Phase: less than 5 (degrees)
+        One-Sigma CI (confidence interval): 5 to 15 deg? (range TBD)
+        (ZD: ) error in --stattusonly results (TBD)
+        Overflow: zero (except maybe for first iteration)
+
+9. Cal freq band (same source as phase cal)
+
+      Need to cal at least 3 additional freqs, at different offsets:
+
+      % ./bftrackephem.rb -b N -e 3c84.ephem \
+         --calfreq -i 90 -n 2 -f 8409
+
+      % ./bftrackephem.rb -b N -e 3c84.ephem \
+         --calfreq -i 90 -n 2 -f 8415
+
+      % ./bftrackephem.rb -b N -e 3c84.ephem \
+         --calfreq -i 90 -n 2 -f 8450
+
+Note from Billy Barott:
+
+Like --caldelay, (--calfreq) should only need to be done once, after
+initialization.  Future "true-up" cals should be done on
+your weak source using --calphase.  The coefficients generated with
+--calfreq are retained.  If you dramatically change your skyfreq (ie,
+go from L to X band), you'll need to redo calfreq, I think.
+
+Basically, the reason for the different intervals there is that some
+antennas have very fast derivatives (d-phi/d-freq), and can only be
+measured (and corrected) with the initial small frequency offset.  The
+larger offset allows more accurate operation over a wider range of sky
+frequencies.
+
+
+10. Start beamformer pointing at desired target
+ 
+   a. Slew ants to target (point primary beam)
+
+      % ataephem m31
+      % atawrapephem m31.ephem
+      % atatrackephem 1a,1b,1c,1d  m31.ephem
+
+   b. Run beamformer at obs freq, pointing at
+      desired target (may or may not be same as primary pointing)
+
+      % bftrackephem.rb -b N -f 8410 -d 600 -e m31.ephem \
+         --bctype beamDefaultPhased 
+
+   c. Monitor beamformer output, and restart as needed when specified
+      observing time runs out.
+
+
+   Note: to point multiple beams, the syntax is:
+
+      % bftrackephem.rb -b N --beamephem x1,target1.ephem,x2,target2.ephem
+
+   For azel:
+
+      % bftrackephem.rb -b N --beamephem x1,40:20,x2,50:60
+
+
+11. Start prelude observation(s)
+
+
+12. To verify cal is still valid:
+
+    a. Point at phase cal source, say 3c84.
+ 
+    b. Do a "write crosses" observation, and check the phase and
+       delay reports.
+
+      % ./bftrackephem.rb -b N -d 600 -e 3c84.ephem \
+         --bctype beamDefaultPhased \
+         --write crosses -i 90 -n 1 -f 8410 --calalarms phase
+
+13. Null beams:
+
+    To point a null beam at a target (on-axis null):
+
+      % bftrackephem.rb -b N -d 600 -e target1.ephem \
+        --bctype beamAxialNull
+
+    To point at a target, and include null beams for two
+    other targets:
+
+      % bftrackephem.rb -b N -d 600 -e target1.ephem \
+        --bcclear \
+        --bctype beamProjectionNull \
+        --bcephem null0=target2.ephem,null1=target3.ephem
+
+    To have separate, multiple nulls for each beam:
+
+      % bftrackephem.rb -b N -d 600 -e target1.ephem \
+        --beamephem x1,target1.ephem,y1,target2.ephem \
+        --bcclear \
+        --bctype beamProjectionNull \
+        --bcephem null0=x1null0.ephem=x1,\
+                  null0=y1null0.ephem=y1,\ 
+                  null1=x1null1.ephem=x1,\
+                  null1=y1null1.ephem=y1
+
+    Nulls are sticky, so to clear old nulls when specifying
+    new null beams be sure to include --bcclear.
+
+    Note: to switch from null beams back to regular beams,
+    be sure to set:
+        bftrackephem.rb ... --bctype beamDefaultPhased
+
+    Or just use 
+       bftrackephem.rb --bcclear ...
+    which also restores the bctype to beamDefaultPhased.
+
+14. Wrap up observing
+    - park.csh <antlist>
+    - atasetfocus <antlist> 1420
+    - fxconf.rb satake fxa <antlist>
+
+
+To run beamformer with self generated noise source:
+---------------------------------------------------
+
+1. Reset ibobs
+
+bfibob <bf#> noise    # Sets to noise generators, all ibobs
+bfibob <bf#> reseed   # Resynchs the noise generators to make sure they're coherent
+
+2. initialize 
+
+#Init any antennas you want
+
+bfinit.rb -b N -a 1a,1b,1c,1d 
+
+3. cal
+
+#Fakes azel so that steering won't change
+
+bftrackephem.rb -b N -e 40:20 -f 1420 --caldelay -i 60 -n 1 --sideband upper --agcdb 0
+
+4. Run at least once
+
+# Just reaffirm that the beam is pointing to the aligned direction. 
+It doesn't need to keep running bftrackephem, even after the script 
+ends, the registers are still active.
+
+bftrackephem.rb -b N -e 40:20 -f 1420 -d 30
+
+
+---------------------------------------------------
+Sonata packets:
+
+1. Can be generated by all 3 beamformers.
+
+2. When doing nominal cal, set 
+
+     --sideband none
+
+   to get full 104 mhz band.
+
+   Requested freq will be at the center of the 
+   band as seen by sonata.
+
+3. To change the destination host receiving the bf packets:
+
+      /home/obs/bbarott/bfu/sonataconfig.rb ip 10.1.50.42
+
+      brahms:  10.1.50.42
+      schumann: 10.1.50.44
+
+-------------------------------------------------------
+Capturing sdrt data stream:
+
+Bf#2 only.  Data stream contains both pols.
+
+1. Initialize beamformer.
+
+      Be sure to use "--sideband" none option
+ 
+2. Configure sonata packet stream:
+
+      Must be running for sdrt stream to work.
+      See above for details
+
+3. Configure sdrt packet stream:
+
+   a. login as obs@tumulus
+
+   b. cd /home/obs/bbarott/bfu
+
+   c. cmd is:
+
+     ./sdrtconfig.rb [FSKY] [FCENTER] [BANDWIDTH] [GAIN] [HOST] 
+
+     e.g.,  sdrtconfig.rb 1400 1420 0.5 20
+     Uses a sky (oscillator) frequency of 1400 MHz, recording center
+     frequency of 1420 MHz, bandwidth of 500 KHz, and gain of 20.
+
+     Gain is integer value around 10-20 or so.
+     Cmd output will report "real peaks", retry cmd with various gain values
+     until the peaks are around 500.  Also make sure overflows are zero.
+
+4. Capture sdrt data:
+
+   a. login as obs@strato
+
+   b. cd /ataarchive/scratch/bbarott
+
+   c. dump.rb <outfile filename>
+        - file is created relative to current directory
+
+   d. <cntrl-C> when you've collected as much data as you want.
+
+       - Data rate is ~ 2 gbyte/min for 3 mhz wide data stream.
+       - Formula is 6.6 gbits/s * (fractional bandwidth / 104 mhz)

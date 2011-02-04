@@ -1,0 +1,315 @@
+Open SonATA Installation Guide
+
+0. Minimum Hardware requirements
+	1. At least 2 64-bit processors with sse3 capability
+	2. 4 GB memory
+
+1.64-bit OpenSuSE 10.3 is the recommended Linux distribution. 
+  OpenSuSE 11.1 will also work for development, but 10.3 promises
+  to yield better performance for realtime operation.
+
+
+2.Linux software selection standard except:
+	1.Gnome desktop
+	2.No AppArmor
+	3.No multimedia software
+	4.No office software
+	5.No graphics software
+	6.Add XFCE
+	7.Add basic development
+	8.Add kernel development
+	9.Add C/C++ development
+
+
+3. Package dependencies
+	(SonATA is known to build with the specified versions):
+
+	These packages should be available from the Linux Distribution
+
+		gcc 4.3.2, 4.3.3
+		automake 1.8.4
+		autoconf 2.59
+		libtool 1.5.6
+		m4 1.4
+		java, javac 1.4.2, 1.5.0
+		tcl 8.3, 8.4, 8.5
+		mysql 3.23.55, 4.0.20, 4.1.7, 4.1.10, 5.0.22
+		swig 1.3.21, 1.3.31
+		expect 5.26
+		gnu readline (2.2, 5.2)  -- needed for tclreadline
+
+	These packages can be downloaded from the URL given.
+
+	ACE 5.6.1, 5.7.1	http://www.cse.wustl.edu/~schmidt/ACE.html
+	fftw 3.2.1		http://www.fftw.org/download.html
+	xtail			http://www.unicom.com/sw/xtail
+
+	The following library is available from the 
+	OpenSonATA distribution on GitHub:
+
+	tclreadline 9.9.0 (command line editing in the seeker, see below)
+
+	Optional packages:
+
+	CppUnit 1.5 (unit testing) - also available from 
+		OpenSonATA distribution on GitHub
+	doxygen 1.2.10 (creating automated documentation)
+	stlport 4.6.2 (debugging STL related problems)
+	pp3, tex, ImageMagick (for making starmaps)
+	Apache Tomcat 5.0.28 (for web control/monitor interface)
+
+
+4. Package Installations
+
+   A. Install gcc-4.3.3.
+	We strongly recommended gcc-4.3.3, because it generates noticeably 
+	faster code than older versions, and versions much older than 4.2.3 
+	will probably not support the vector instructions used. 
+
+	1.Build and install gmp-4.2.4.
+	  [./configure; make; make check; sudo make install]
+	2.Build and install mpfr-2.4.0 
+	  [./configure; make; make check; sudo make install]
+	3.Build and install gcc-4.3.3 
+	  [../gcc-4.3.3/configure --enable-threads --enable-languages=c,c++; 
+	  make bootstrap; sudo make install]
+
+   B.Build and install fftw-3.2.1 
+	Go to http://www.fftw.org/download.html
+	Download FFTW 3.2.1 as /tmp/fftw-3.2.1.tar.gz
+	cd /usr/local (as root)
+	tar -zxpf /tmp/fftw-3.2.1.tar.gz
+ 	cd fftw-3.2.1
+        ./configure --enable-threads --enable-float --enable-sse --disable-fortran; 
+	make 
+	make check 
+	sudo make install
+
+   C.Build and install ACE 5.6.1
+
+	ACE: ADAPTIVE Communication Environment
+	http://www.cse.wustl.edu/~schmidt/ACE.html
+
+	The following instructions are distilled from the 
+	ACE_wrappers/ACE-INSTALL.html file
+	section: "Using the Traditional ACE/GNU Configuration"
+
+	1. Download the lastest BFO Micro Release, ACE-5.7.1.tar.gz, 
+	from the Obtaining ACE web page: http://download.dre.vanderbilt.edu
+   	and unpack to a local directory,
+   	e.g. ~/ace
+	
+   	It should unpack an "ACE_wrappers" subdirectory.
+	
+	2. set the ACE_ROOT env var:
+	
+   	setenv ACE_ROOT ~/ace/ACE_wrappers
+
+	3. create a "config.h" link to an appropriate config file
+
+   	cd $ACE_ROOT/ace
+   	ln -s config-linux.h config.h
+
+	4. create a "platform_macros.GNU" link to an appropriate file
+
+   	cd $ACE_ROOT/include/makeinclude
+   	ln -s platform_linux.GNU platform_macros.GNU
+
+	5. Only build the subset of ace needed:
+
+   	cd $ACE_ROOT/ace
+   	make
+
+	6. Once the build completes, copy everything from
+   	$ACE_ROOT to /usr/local/ACE_Wrappers
+
+	7. Add the ACE library to your LD_LIBRARY_PATH,
+	e.g.,
+
+   	setenv ACE_ROOT /usr/local/ACE_wrappers
+  	setenv LD_LIBRARY_PATH "$ACE_ROOT/ace:$ACE_ROOT/lib:$LD_LIBRARY_PATH"
+
+   C. Build and install mysql 5.0.22
+
+    	The seeker software requires that the mysqld server run with a
+	timezone of UTC.
+
+   D. Build and install java (1.4.2, 1.5.0, or later) and javac
+
+
+5. Install the SonATA software. 
+
+     A. Download from GitHub
+
+	Set up ssh keys with ssh keygen
+	in ~/.ssh directory:
+ 	ssh-keygen -t dsa [-C comment] [-f output_keyfile]
+
+	Set up a GitHub account at http://github.com/SETI/OpenSonATA.
+	Enter your public key (output_keyfile.pub) on your account at GitHub.
+
+	On your computer, use git config to set up your name and email address.
+
+		git config --global user.name "Your Name Here"
+		git config --global user.email "you@yourdomain.example.com"
+
+	Clone the OpenSonATA package from GitHub:
+
+		mkdir <gitroot>
+		cd  <gitroot>
+		git clone git@github.com:SETI/OpenSonATA.git
+		git checkout -b <workingbranch>
+
+	The <gitroot> directory will contain the OpenSonATA directory
+	which contains:
+		CppUnit
+		sig-data
+		sig-pkg
+		sse-data
+		sse-pkg
+		tclreadline
+
+     B. Build and install CppUnit 1.5 (unit testing) - 
+	available from SETI source code server
+	From the OpenSonATA directory,
+
+		% cd CppUnit
+		% ./reconfig --prefix /usr/local/CppUnit
+		% make check
+		% sudo make install
+
+     C. Install tclreadline 9.9.0 
+	(use for command line editing in the seeker, see below)
+
+	This version of tclreadline (originally rev 2.1.0)
+	was modified to disable signal handling in the
+	underlying GNU readline, to avoid conflicts with signal
+	handling done elsewhere.
+
+	Also a tclreadline::LoopOneLine routine
+	was added to tclreadlineSetup.tcl.  This is a variation
+	on the ::Loop routine that does not allow multiline input
+	(ie, no secondary input prompts), as a way to prevent
+	users from getting trapped in a tcl input mode.
+
+	Make sure tcl & GNU readline are already installed.
+
+	tclreadline will install in /usr by default.  You may want to put
+	it elsewhere, e.g. /usr/local.  You may also need
+	to specify where the tcl files are using --with-tcl,
+	and which terminal library to use, using --with-tlib-library.
+
+	Example configuration:
+
+  	% ./reconfig --with-tcl=/usr/lib64 --with-tlib-library="-lncurses"
+		--prefix /usr/local
+
+  	% make install
+
+	Update LD_LIBRARY_PATH if needed:
+
+  	%setenv LD_LIBRARY_PATH "/usr/local/lib:$LD_LIBRARY_PATH"
+
+   D. Build the SonATA software
+
+	It is necessary to build the SSE software before the detector software.
+	From the OpenSonATA directory,
+
+		1.sse-pkg	(single host environment or sse host)
+			% cd sse-pkg
+			% ./reconfig
+			% make
+			% make install
+		1a.sse-pkg	(multihost environment, non-sse host)
+			% cd sse-pkg
+			% ./reconfig --pdmlibsonly
+			% make
+			% make install
+		2.sig-pkg
+			% cd ../sig-pkg
+			% ./reconfig
+			% make
+			% make install
+
+		 To build the sig-pkg for debugging:
+			% ./configure --enable-debug
+			% make clean
+			% make
+			% make install
+
+   E. Running SonATA
+
+	1. Install a version of the .sserc file in your home directory:
+
+		% cp <gitroot>/OpenSonATA/sse-pkg/util/example.sserc.tcl ~/.sserc
+
+	Note that you MUST specify the location of the
+	tclreadline 9.9.0 shared library in order for the seeker's tcl
+	interpreter to find it.  You can do this by uncommenting
+	appropriate line in your .sserc file:
+
+		#lappend ::auto_path /usr/lib
+		#lappend ::auto_path /usr/local/lib
+
+	2. Additions to your shell rc file
+
+	Update your LD_LIBRARY_PATH:
+
+	setenv $ACE_ROOT /usr/local/ACE_wrappers
+	setenv LD_LIBRARY_PATH "$ACE_ROOT/ace:$ACE_ROOT/lib:$LD_LIBRARY_PATH"
+	setenv LD_LIBRARY_PATH "usr/local/lib:$LD_LIBRARY_PATH"
+	setenv LD_LIBRARY_PATH "usr/lib64:$LD_LIBRARY_PATH"
+
+	Update your PATH:
+
+	setenv PATH "~/sonata_install/bin:$PATH"
+
+	In order to run SonATA, the stacksize must be changed to unlimited.
+	The following command should be added to your shell rc file.
+
+		limit stacksize unlimited
+
+	3. Use the 'runsse.sh' script to start things up,
+	e.g., to run in all-simulator mode type:
+
+		% runsse.sh 
+
+	You can also use 'runsse.sh -help' to see all
+	the startup options.
+
+	4. If you want to use the sse with the mysql database, here's
+	how to set it up:
+
+	% mysqladmin create sonata_iftest
+	% mysql sonata_iftest < sse-pkg/database/seeker.schema
+
+	5. There are several optional environment variables that can
+	be used to override the default locations for various files:
+
+	SSE_INITRC - seeker startup file.
+   	Default: ~/.sserc
+
+	SSE_SETUP - directory of config files.
+   	Default: ~/sse_install/setup
+
+	SSE_ARCHIVE - directory root for created data files.
+   	Default: ~/sse_archive
+
+	6. Other environment variables that can override program
+	configuration defaults:
+
+	SSE_DEBUG_LOG_MAX_FILESIZE_MEGABYTES
+   	Default: 25
+
+	CONTROL_COMPONENTS_TSCOPE_HOST
+   	Default: seeker host
+	
+	CONTROL_COMPONENTS_ANT_CONTROL_HOST
+   	Default: antcntl.atarray.org
+	
+	CONTROL_COMPONENTS_PDM_ARCHx_HOST
+   	Default: seeker host
+	
+	RUNSSE_FONT
+	Default: 9x15
+

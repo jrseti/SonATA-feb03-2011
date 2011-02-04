@@ -1,0 +1,9 @@
+-- $Id: seeker.caldelay.fluxes.load-data,v 1.1 2008/10/24 19:06:07 kilsdonk Exp $ --
+-- targetId,alias,freqMhz,fluxJy
+400,TauA,1400,875
+401,OriA,1400,520
+402,VirA,1400,198
+403,3C292,1400,171
+404,3C400,1400,576
+405,CygA,1400,1495
+406,CasA,1400,2477

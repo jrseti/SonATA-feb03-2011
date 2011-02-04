@@ -1,0 +1,166 @@
+# beamformerObsAct.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# Observation activity using beamformers
+
+.PS
+
+
+# ---- setup & title ---
+
+copy "sequence.pic";
+
+# doc version
+move right;
+"beamformerObsAct.pic v2.0 2010-Jan-06 18:35:53 UTC" ljust
+
+# title
+move down; move right; move right; 
+"Observation Activity with Beamformers" ljust
+move down;
+
+# vertical spacing between messages
+spacing = 0.30;
+
+# move objects apart horizontally
+#movewid = 3.5;
+movewid = 4.0;
+
+#define the objects
+# calibration activity
+boxwid = 2.5;
+object(ACT,"SSE: ObsAct");
+
+boxwid = 1.5;
+object(TSCOPE,"Tscope");
+
+boxwid = 2.8;
+# backend server
+object(BACK,"ATA Backend");
+
+boxwid = 2.8;
+# beamformer
+object(BF,"Beamformers");
+
+step();
+
+# ----  message sequences -----
+
+step();
+step();
+
+active(ACT);
+message(ACT,TSCOPE,"beginSendingCmdSeq()");
+step();
+
+step(); step();
+lconstraint(ACT,"[for each tuning]");
+
+message(ACT,TSCOPE,"tune()");
+message(TSCOPE,BACK,"tune()");
+lconstraint(BACK,"[remember tuning]")
+step();
+
+step();
+message(ACT,TSCOPE,"clearBeamCoords()");
+message(TSCOPE,BACK,"clearBeamCoords()");
+lconstraint(BACK,"[forget old coords]")
+
+step(); step();
+lconstraint(ACT,"[for each beam]");
+
+
+message(ACT,TSCOPE,"setBeamCoords(BeamCoords)");
+message(TSCOPE,BACK,"setBeamCoords(BeamCoords)");
+lconstraint(BACK,"[remember coords]")
+
+step();
+message(ACT,TSCOPE,"setNullType(NullType)");
+message(TSCOPE,BACK,"setNullType(NullType)");
+lconstraint(BACK,"[nullType:axial,projection,none]")
+
+step(); step();
+lconstraint(ACT,"[for projection nulls only:]");
+
+message(ACT,TSCOPE,"clearBeamNulls()");
+message(TSCOPE,BACK,"clearBeamNulls()");
+lconstraint(BACK,"[forget all old nulls]")
+
+message(ACT,TSCOPE,"setBeamNulls(NullList)");
+message(TSCOPE,BACK,"setBeamNulls(NullList)");
+
+
+step(); step();
+message(ACT,TSCOPE,"pointSubarray()");
+message(TSCOPE,BACK,"pointSubarray()");
+
+active(BACK);
+step();step();
+lconstraint(BACK,"[point ants]")
+inactive(BACK);
+
+message(ACT,TSCOPE,"pointBeams()");
+step();
+lconstraint(TSCOPE,"[remember point command]");
+
+message(ACT,TSCOPE,"doneSendingCmdSeq()");
+step();
+step();
+
+inactive(ACT);
+step();
+
+active(BACK);
+active(TSCOPE);
+step();
+lconstraint(TSCOPE,"[Monitor Status]");
+lconstraint(BACK,"[watch ants, update status]");
+message(BACK,TSCOPE,"status()");
+inactive(BACK);
+
+step(); step(); step();
+lconstraint(TSCOPE,"[When subarray on target]");
+message(TSCOPE,BACK,"pointBeams()");
+inactive(TSCOPE);
+active(BACK);
+message(BACK,BF,"point(tuning,coords)");
+active(BF);
+step(); step();
+lconstraint(BACK,"[Update beam coords");
+lconstraint(BACK,"in status]");
+inactive(BACK);
+
+inactive(TSCOPE);
+step();
+step();
+lconstraint(BF,"[Start pointing");
+lconstraint(BF,"beams, wait until");
+lconstraint(BF,"valid]");
+active(BACK);
+step();
+lconstraint(BACK,"[Accum done calls");
+lconstraint(BACK,"from all BFs]");
+message(BF,BACK,"done callback()");
+inactive(BF);
+message(BACK,TSCOPE,"ready()");
+inactive(BACK);
+message(TSCOPE,ACT,"tscopeReady()");
+
+step(); step(); step();
+lconstraint(ACT,"[Continue with");
+lconstraint(ACT,"Activity setup]");
+
+step();
+step();
+
+complete(ACT);
+complete(TSCOPE);
+complete(BACK);
+complete(BF);
+
+# activity is complete
+delete(ACT);
+
+.PE
+

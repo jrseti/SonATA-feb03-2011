@@ -1,0 +1,540 @@
+Version 1.27  2010-Jan-25 22:37:35 UTC
+
+NSS signal classifications & reasons.
+Organized by the messages sent between the PDM and SSE.
+
+Note: In multibeam mode, the initial pdm detections
+will be referred to as the "primary" ones, and the
+signal searches that a pdm does for its counterparts
+will be called the "secondary" signals.
+
+TBD: add bad band reclassifications?
+
+
+One Site Observing - single beam
+================================
+
+1. pdm sends candidates (cw power & pulse)
+
+     CAND/PASSED_POWER_THRESH
+
+     (for pulses, SSE changes to CAND/CONFIRM)
+
+2. pdm sends signals (cw power & pulse, for archive only)
+
+     CAND/PASSED_POWER_THRESH   (candidate repeated)
+     RFI/ZERO_DRIFT
+     RFI/RECENT_RFI_MATCH
+     RFI/DRIFT_TOO_HIGH
+
+     For remaining non-candidate, non-RFI signals:
+     If selecting candidates, then
+        UNKNOWN/TOO_MANY_CANDIDATES
+     else
+        UNKNOWN/PASSED_POWER_THRESH
+	  (SSE may change reason to RFI_SCAN or BIRDIE_SCAN)
+
+3. pdm sends Coherent CW signals
+
+     CAND/PASSED_COHERENT_DETECT
+        (SSE changes to CAND/CONFIRM)
+
+     RFI/FAILED_COHERENT_DETECT
+
+
+
+One Site Observing - multiple beams
+====================================
+
+1. pdm sends candidates (cw power & pulse)
+
+     CAND/PASSED_POWER_THRESH 
+
+     (SSE leaves unchanged)
+
+2. pdm sends signals (cw power & pulse, for archive only)
+
+     CAND/PASSED_POWER_THRESH   (candidate repeated)
+     RFI/ZERO_DRIFT
+     RFI/RECENT_RFI_MATCH
+     RFI/DRIFT_TOO_HIGH
+
+     For remaining non-candidate, non-RFI signals:
+     If selecting candidates, then
+        UNKNOWN/TOO_MANY_CANDIDATES
+     else
+        UNKNOWN/PASSED_POWER_THRESH
+	  (SSE may change reason to RFI_SCAN
+	    or BIRDIE_SCAN)
+
+3. pdm sends Coherent CW signals
+
+     CAND/PASSED_COHERENT_DETECT
+     RFI/FAILED_COHERENT_DETECT
+
+     (SSE leaves unchanged)
+
+4. sse sends candidates from counterpart pdms (from step 1
+  & step 3) to this pdm when all the pdms have reported in,
+  for "secondary" processing:
+
+     CAND/PASSED_POWER_THRESH (cw power & pulse)
+     CAND/PASSED_COHERENT_DETECT (cw)
+
+5. pdm sends Pulse Candidate Results and CW Coherent Candidate Results
+   (for counterpart candidates from step 4)
+
+   Note: The pdm will turn off zero drift rejection (which also affects
+   'drift too high' rejection)  and recent RFI rejection for these
+   signals, and so will not classify them as RFI for any of those
+   reasons.
+
+   If signal was seen, the class/reason is one of:
+
+     CAND/PASSED_POWER_THRESH (pulse)
+     CAND/PASSED_COHERENT_DETECT (cw)
+
+     (SSE changes to CAND/SECONDARY_FOUND_SIGNAL)
+
+   If signal was not seen:
+
+     RFI/FAILED_POWER_THRESH (pulse) 
+     RFI/FAILED_COHERENT_DETECT (cw)
+
+     (SSE changes to UNKN/SECONDARY_NO_SIGNAL_FOUND)
+
+6.  SSE reclassifications of original candidates:
+
+    SSE searches the candidate results across all counterpart
+    pdms for matches to the original candidates reported in 
+    steps 1 & 3.
+
+    If the SSE finds that the original candidates for this 
+    pdm were not seen in any counterpart pdms; or, if seen,
+    were reduced in strength consistent with nulls in those beams,
+    then they are reclassified as
+      CAND/CONFIRM
+    else
+      RFI/SEEN_MULTIPLE_BEAMS
+
+    (Implementation note: the SSE should only store the signal once,
+    and modify just the classification reason when it changes).
+
+
+Candidate reconfirmation
+========================
+
+Pdm steps for reobserving confirmed candidates: 
+-----------------------------------------------
+
+1) SSE first does an ON, then an OFF
+
+2) SSE gives the pdm a list of confirmed candidates from
+   the previous observation, with predicted frequencies
+   based on their drift rate and the time between observations.
+
+3) pdm does regular CW Power & Pulse detections to generate
+   new candidates, and matches them against the given
+   candidates
+
+
+Signal classifications:
+-----------------------
+
+ON observation - single beam:
+-----------------------------
+   SSE provides list of candidates for the pdm to reobserve.
+   pdm results:
+
+     CAND/PASSED_POWER_THRESH (cw)
+         (SSE leaves unchanged)
+
+     CAND/PASSED_COHERENT_DETECTION (cw)
+     CAND/PASSED_POWER_THRESH (pulse)
+        (SSE changes reason to RECONFIRM)
+
+     RFI/NO_SIGNAL_FOUND
+     RFI/ZERO_DRIFT
+     RFI/DRIFT_TOO_HIGH
+     RFI/RECENT_RFI_MATCH
+     RFI/FAILED_COHERENT_DETECT (cw)
+        (SSE leaves unchanged)
+
+
+ON observation - multiple beams:
+--------------------------------
+   SSE provides list of previous candidates for the pdm to reobserve
+   (only those for the target the pdm is observing).
+
+   In detail:    
+
+   1.  pdm sends candidates (cw power & pulse, one for each SSE candidate sent)
+       Results must be one of:
+
+       CAND/PASSED_POWER_THRESH (pulse & cw power)
+       RFI/NO_SIGNAL_FOUND
+       RFI/RECENT_RFI_MATCH
+       RFI/ZERO_DRIFT
+       RFI/DRIFT_TOO_HIGH
+
+       (SSE leaves unchanged)
+
+   2.  pdm sends signals (cw power & pulse, for archive only)
+
+	   same as before
+
+   3.  pdm sends Coherent CW signals
+	
+	   same as before
+
+   4.  sse sends candidates from counterpart pdms
+
+	   same as before
+
+   5. pdm sends Pulse Candidate Results and CW Coherent Candidate Results
+
+	   same as before
+
+   6. SSE reclassifications of followup candidates:
+
+      If SSE finds that the followup candidates for this pdm
+      were not seen in counterpart beams, or if seen, were
+      reduced in strength consistent with nulls in those beams, 
+      then they are reclassified as
+        CAND/RECONFIRM
+      else
+        RFI/SEEN_MULTIPLE_BEAMS
+
+
+OFF observation - single beam & multibeam: 
+-----------------------------------------
+   SSE provides candidates (same as ON observation)
+
+   Pdm results:
+
+     (pulse) CAND/PASSED_POWER_THRESH 
+
+        If nulls are in use, and the signal strength from the 
+        previous ON was reduced by an amount consistent with
+        the null:
+           (SSE changes to CAND/RECONFIRM)  
+
+        Otherwise:
+           (SSE changes to RFI/SEEN_OFF)
+
+     (cw) CAND/PASSED_POWER_THRESH
+
+        Wait for coherent detection report to determine candidate
+        status.
+
+     (pulse or cw) RFI/NO_SIGNAL_FOUND
+        (SSE changes to CAND/RECONFIRM)
+
+     Note: The sse disables zero drift rejection (which also affects
+     'drift too high' rejection)  and recent RFI rejection
+     for these signals, and so the pdm should not classify them as 
+     RFI for any of those reasons.  However, if those options were enabled, 
+     the results would be one of:
+
+        RFI/RECENT_RFI_MATCH
+        RFI/ZERO_DRIFT
+        RFI/DRIFT_TOO_HIGH
+
+        (SSE leaves unchanged, i.e., it's still RFI, not a candidate) 
+
+   Coherent CW detection reports:
+
+      For those CW candidates that the pdm reported as
+      PASSED_POWER_THRESH, when it sends the subsequent
+      coherent detection reports, i.e.,
+
+         CAND/PASSED_COHERENT_DETECTION
+         or RFI/FAILED_COHERENT_DETECT
+
+      We don't care whether it passed coherent detection or not.
+
+      If nulls are in use, and the signal strength from the 
+      previous ON was reduced by an amount consistent with
+      the null:
+          (SSE changes to CAND/RECONFIRM)
+
+       Otherwise:
+          (SSE changes to RFI/SEEN_OFF)
+
+   All other signals:  (TBD: will there be any other signals?)
+     UNKNOWN/PASSED_POWER_THRESH
+        (SSE changes to UNKNOWN/SEEN_OFF)
+
+     (TBD:  UNKNOWN/PASSED_COHERENT_DETECTION? )
+
+
+HPBW/GRID
+---------
+
+1. Grid related signal classifications are:
+
+     CAND/SEEN_GRID_X
+     CAND/NOT_SEEN_GRID_X
+     RFI/FAILED_COHERENT_DETECT_GRID_X
+     RFI/ZERO_DRIFT_GRID_X
+     RFI/RECENT_RFI_MATCH_GRID_X
+
+   where X is WEST, SOUTH, GRID_ON, NORTH, and EAST.
+
+   Example WEST signal classifications:
+
+     CAND/PASSED_POWER_THRESH (cw)
+         (SSE leaves unchanged)
+
+     CAND/PASSED_POWER_THRESH  (pulse)
+     CAND/PASSED_COHERENT_DETECTION (cw)
+         (SSE changes to CAND/SEEN_GRID_WEST)
+
+     RFI/NO_SIGNAL_FOUND
+        (SSE changes to CAND/NOT_SEEN_GRID_WEST)
+
+     RFI/FAILED_COHERENT_DETECT
+        (SSE changes to RFI/FAILED_COHERENT_DETECT_GRID_WEST)
+
+     RFI/ZERO_DRIFT
+        (SSE changes to RFI/ZERO_DRIFT_GRID_WEST)
+
+     RFI/RECENT_RFI_MATCH
+        (SSE changes to RFI/RECENT_RFI_MATCH_GRID_WEST)
+
+   There will also be a classification of
+
+     CAND/GRID_PREDICTION
+
+   for implementation reasons.  See details below.
+
+
+2.  a)  Observation order:  WEST, SOUTH, GRID_ON, NORTH, EAST.
+   Start with WEST since that's the first to set.  The order of
+   the other pointings is less critical but we'll use this sequence
+   by convention.
+
+   b)  It's expected that the signal power will drop by 1/2 for
+   the W,S,N,E pointings.   Use a longer observation length for the
+   grid pointings (including the GRID_ON) to compensate for
+   expected lower signal power.  Note that this will require
+   a change in thresholds.
+
+   c)  For the W,S,N,E pointings, always classify the results
+   as candidates, even if they are not detected (e.g.,
+   CANDIDATE/NOT_SEEN_GRID_WEST).  In other words, always
+   continue on with the next activity type after a W,S,N,E
+   pointing, whether a signal is detected or not. 
+
+   Moreover, always use the signal detection from the previous ON
+   for freq drift predictions in the subsequent grid pointings.
+   I.e., do not use any of the detections in the W,S,N,E
+   for predictions, since they may be less accurate, if there's
+   any detection at all.  See implementation details in (3) below.
+
+   d)  A CW signal does have to pass coherent detection 
+   to still be considered a candidate that's "SEEN"
+   (eg, CANDIDATE/SEEN_GRID_WEST) even on the W,S,N,E pointings.
+
+   e) For the center GRID_ON, terminate the grid sequence if
+   the candidate is not re-detected, or it's found to be zero drift
+   or matches the recent RFI database.
+
+     TBD: Open up the recent RFI mask region around the predicted
+     candidates, to prevent elimination of signals that drift into
+     a masked region?
+
+     TBD: Turn off zero drift rejection, to prevent elimination of 
+     signals?
+
+
+
+3. CAND/GRID_PREDICTION classification:
+   (implementation details)
+
+   In order to implement the rule of always using the signal 
+   detection from the previous ON for freq drift predictions
+   in the subsequent N,S,E,W grid pointings, the SSE will
+   do the following:
+
+   At the start of an N,S,E,or W activity, the SSE will "preload" the
+   candidate signals database table with the projected candidate
+   information, and classify it as CAND/GRID_PREDICTION.  The
+   subsequent followup activity will include this candidate type in
+   the list of candidate signal types it will accept for further
+   processing, and it will ignore any CAND/SEEN_GRID_X or
+   CAND/NOT_SEEN_GRID_X entries.  (This is similar to the way that
+   an ON activity following an OFF knows where to look for a signal
+   that was not detected by the pdm in the OFF).
+
+   Note:  It will also be necessary for the subsequent activities
+   to accept CAND/SEEN_GRID_ON candidate types for further processing.
+
+
+4. Grid sequence will be followed by user-decided action.
+   (No automated follow-on for now).
+
+
+
+More notes & TBD:
+-----------------
+1.  When SSE replaces a signal class/reason assigned by the
+PDM, it should record the old reason.
+
+2. Must be able to turn off RFI database lookup and database
+update for some activity types, and under user control from the UI.
+
+
+Table of signal class/reasons.  
+==============================
+
+Class:	Possible Reasons:
+-----	-----------------
+
+CAND
+	-- pdm assigned ------
+	PASSED_POWER_THRESH *
+	PASSED_COHERENT_DETECT	
+
+        -- sse assigned ------
+	RECONFIRM
+	SECONDARY_FOUND_SIGNAL
+	SEEN_GRID_<x>
+	NOT_SEEN_GRID_<x>
+	GRID_PREDICTION
+
+RFI
+	-- pdm assigned ------
+	ZERO_DRIFT
+        DRIFT_TOO_HIGH
+	RECENT_RFI_MATCH
+	FAILED_COHERENT_DETECT
+        FAILED_POWER_THRESH
+	NO_SIGNAL_FOUND
+	SNR_TOO_HIGH
+	SNR_TOO_LOW
+
+        -- sse assigned ------
+	SEEN_OFF *
+	SEEN_MULTIPLE_BEAMS
+	FALLS_IN_BAD_BAND
+	FAILED_COHERENT_DETECT_GRID_<x>
+	ZERO_DRIFT_GRID_<x>
+	RECENT_RFI_MATCH_GRID_<x>
+
+TEST
+        -- sse assigned ------
+	TEST_SIGNAL_MATCH
+
+UNKNOWN
+	-- pdm assigned ------
+	TOO_MANY_CANDIDATES
+	PASSED_POWER_THRESH *
+
+        -- sse assigned ------
+        SEEN_OFF *
+	BIRDIE_SCAN
+	RFI_SCAN
+        SECONDARY_NO_SIGNAL_FOUND
+
+
+* Used multiple times
+
+
+
+
+For historical reference:
+
+Two Site Observing
+==================
+
+Except where noted, all the classifications & reasons
+below are assigned by the specified pdm.
+
+1. send candidates (cw power & pulse)
+
+   From main pdm only (relayed to remote):
+     CAND/PASSED_MAIN_POWER_THRESH
+
+     (note: may need a new reason for pulses, eg PASSED_SNR?)
+
+2. send signals (cw power & pulse, for archive only)
+
+   From main pdm:
+     CAND/PASSED_MAIN_POWER_THRESH   (candidate repeated)
+     RFI/ZERO_DRIFT
+     RFI/MAIN_RECENT_RFI_MATCH
+
+     For remaining non-candidate, non-RFI signals:
+     If selecting candidates, then
+        UNKNOWN/TOO_MANY_CANDIDATES
+     else
+        UNKNOWN/PASSED_MAIN_POWER_THRESH
+
+   (Note: SSE may change the 'unknown' reasons to
+   RFI_SCAN or BIRDIE_SCAN for those activity types).
+
+   From remote pdm:
+     RFI/ZERO_DRIFT
+     RFI/REMOTE_RECENT_RFI_MATCH
+     UNKNOWN/PASSED_REMOTE_POWER_THRESH
+
+3. send Coherent CW signals
+
+   From main pdm, relayed to remote pdm:
+     CAND/PASSED_MAIN_COHERENT_DETECT
+     RFI/FAILED_MAIN_COHERENT_DETECT
+
+     (NOTE: The signal is still relayed to the
+     remote even if it's been classified as
+     RFI, so that all candidates can be accounted
+     for).
+
+
+4. send Pulse Candidate Results and CW Coherent Candidate Results
+
+   From remote PDM only:
+
+     CAND/REMOTE_CONFIRM
+     RFI/FAILED_REMOTE_THRESH
+     RFI/REMOTE_SNR_TOO_HIGH
+     RFI/REMOTE_SNR_TOO_LOW
+     RFI/REMOTE_RECENT_RFI_MATCH     (sse needs to be able to disable)
+
+     For "CW Coherent" only add:
+     RFI/FAILED_MAIN_COHERENT_DETECT (assigned by main pdm)
+
+     [Note: REMOTE_SNR_TOO_HIGH/LOW results from the main/remote
+     SNR ratio comparison.]
+
+
+
+Two Site ON observation:
+---------------
+   SSE provides list of candidates to reobserve.
+   Pdm matches the previous candidates against the new
+   candidates.  If there's a match, proceed with normal processing.
+   If not found, mark the previous candidates as RFI/NO_SIGNAL_FOUND.
+   If found but rejected for zero drift or db match reasons,
+   then pdm marks them as RFI/<reason>.
+    
+
+     (TBD: do anything with CAND/PASSED_MAIN_POWER_THRESH?)
+
+     CAND/PASSED_MAIN_COHERENT_DETECTION (cw)
+     CAND/PASSED_MAIN_POWER_THRESH (pulse)
+        (Both cases:  SSE changes reason to MAIN_RECONFIRM)
+
+     RFI/NO_SIGNAL_FOUND
+     RFI/ZERO_DRIFT
+     RFI/MAIN_RECENT_RFI_MATCH
+     RFI/FAILED_MAIN_COHERENT_DETECT (cw only)
+        (SSE leaves unchanged)
+
+   Remote pdm:  (two site only)
+     CAND/REMOTE_CONFIRM
+        (SSE changes to CAND/REMOTE_RECONFIRM)
+
+     RFI/<the usual reasons>   
+        (SSE changes to RFI/NO_REMOTE_RECONFIRM)
+

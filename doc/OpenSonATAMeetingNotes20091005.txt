@@ -1,0 +1,45 @@
+SonATA Team Meeting
+October 5,2009
+
+Attendees: Tom Kilsdonk, Ken Smolek, Peter Backus, Mike Davis,
+	and Jane Jordan
+
+Jane reported that she had added pulsed signals to packetgen,
+the beamformer simulator, in preparation for testing the
+pulse detection code in the DX.
+Also, Jane prepared estimates for hardware for a three beam SonATA system
+that processes the 72 MHz of usable bandwidth from the
+beamformer. The estimates range from $380,000 (3 racks) to
+$608,000 (6 racks) for the system, depending on the 
+processing capability of the DX host computers.
+
+Ken was at Hat Creek two weeks ago and at the SETI Institute
+last week. He checked in code for an end to end system test.
+He was able to test the system with the dual polarization
+beamformer running two channelizers on separate hosts and
+six DXs on chopin (4 processors, 8 GB memory). The next 
+effort will be to debug the pulse confirmation code and the
+secondary confirmation code. Peter is trying to schedule some
+time on a single antenna with Prelude and SonATA running
+side by side and compare the results for a strong beacon.
+
+Ken, Tom, and Jane discussed the interfaces between the SSE and
+the channelizer and the SSE and the DX. Tom has updated the
+interface memo. Ken has worked out
+a scheme to synchronize the channelizers. The channelizers are
+given a future start time and begin processing when the 
+timestamp in a beamformer packet is equal to and greater than
+the start time. It is anticipated that the channelizers will be
+restarted for each activity to ensure synchronicity.
+The DX will also be given a start time, typically on a second
+boundary. The DX will start baseline collection when the 
+time stamp in a packet from the channelizer is greater than or 
+equal to the start time. Data Collection will start immediately
+after baselining has completed. The DX will report the actual
+start time to the SSE.
+
+Mike Davis has attended several Conferences and is consulting
+on Gerry Harp's Holography Paper. Mike requested that he be
+added to the daily observing report list.
+
+The next SonATA meeting will be November 2, 2009 at 1 PM.

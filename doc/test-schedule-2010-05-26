@@ -1,0 +1,61 @@
+SonATA Test Schedule
+2010-05-26 jj
+
+
+Wednesday, May 26, 14:00 - 17:00
+
+	Test antenna selection.
+	Run bfantselect on bf1 and bf2 for 1420, 3100, 8424 Mhz
+	Run autoantselect in SonATA and compare
+	Run Cal Delay on autoantselect antlist
+	Check cal delay ouput for bad antennas
+	Check System temperatures
+	If delay aren't 0, select a list from bfantselect
+	Run Cal Delay again ...
+
+	Observe Kepler with bf1 and bf2, compare
+	Use 	multi-beam-env-vars
+		kepler-2beam.tcl
+	
+
+	
+
+Thursday, May 27 10:30-2:30 PM  (Frank's BBQ 11:30-1:30 PM)
+
+	Full Array, 2 beam, Observing
+	Use 	multi-beam-env-vars
+		Antenna Setup from 5/26
+		full-array-2beam.tcl
+		
+Tuesday, June 1, 10:00-13:00 
+Thursday, June 3, 14:00-18:00 
+Tuesday, June 8, 10:00-14:00 
+Thursday, June 10, 11:30-3:00 PM (time trade with waterhole2x possible)
+Monday, June 14, 11:00-3:00 PM (time trade with waterhole2x possible)
+Thursday, June 17, 11:00-3:00 PM (time trade with waterhole2x possible)
+Monday, June 21, 11:00-3:00 PM (time trade with waterhole2x possible)
+Tuesday, June 22, 9:00-1:00 PM
+Monday, June 28, 11:00-3:00 PM (time trade with waterhole2x possible)
+Thursday, July 1, 11:00-3:00 PM (time trade with waterhole2x possible)
+
+Additional Test Procedures:
+
+	Vary the baseinitaccum from 1 to 20 to determine the minimum
+		accumulation required.
+
+	Determine average baseline power. Set appropriate limits for 
+		warnings and errors.
+
+	Check power coming out of the packetizers. 
+		Compare beamformers using Channelizer Statistics.
+
+	Correlate number of missed packets with system configuration.
+
+	Run RFI Scans, SonATA and Prelude, Single Antenna
+		1000 MHz to 9000 Mhz
+		Compare detection results
+
+ 	Determine signal detection thresholds for observing
+	Pulse, Triplet, CW Power, CW coherent (primary & secondary)	
+
+	Collect statistics on Multibeam RFI rejection.

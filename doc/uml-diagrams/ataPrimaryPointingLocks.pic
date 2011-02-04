@@ -1,0 +1,119 @@
+# ataPrimaryPointingLocks.pic
+# umlgraph/pic2plot UML sequence diagram
+# see http://www.umlgraph.org
+
+# ATA primary pointing locks messages
+
+.PS
+
+
+copy "sequence.pic";
+
+# doc version
+move right;
+"ataPrimaryPointingLocks.pic v2.0 2010-Jan-06 18:36:49 UTC" ljust
+
+# title
+move down; move right; move right; 
+"ATA Backend Primary Pointing Locks - Primary Pointing Change" ljust
+move down;
+
+# vertical spacing between messages
+spacing = 0.30;
+
+# move objects apart horizontally
+movewid = 3.5;
+
+
+#define the objects
+boxwid = 1.2;
+object(ATA,"ATA");
+
+#define the objects
+boxwid = 1.8;
+object(PRIMARY,"Primary User");
+
+# 
+boxwid = 2.0;
+object(SECONDARY,"Secondary User");
+
+arrowwid = arrowwid * 2;
+
+step();
+step();
+
+# message sequences
+
+active(PRIMARY);
+active(SECONDARY);
+
+step();
+lconstraint(PRIMARY,"[observing, have use-pointing lock]");
+lconstraint(SECONDARY,"[observing, have use-pointing lock]");
+
+message(PRIMARY,ATA,"request change-pointing lock");
+active(ATA);
+lconstraint(PRIMARY,"[decide to change primary pointing]");
+step();
+
+
+message(ATA,PRIMARY,"request use-pointing lock release");
+message(ATA,SECONDARY,"request use-pointing lock release");
+lconstraint(SECONDARY,"[wind down & stop observing]");
+step();
+
+message(PRIMARY,ATA,"release use-pointing lock");
+lconstraint(PRIMARY,"[continue observing until last minute]");
+message(SECONDARY,ATA,"release use-pointing lock");
+inactive(SECONDARY);
+step();
+
+message(ATA,PRIMARY,"primary pointing change about to occur");
+inactive(PRIMARY);
+lconstraint(PRIMARY,"[stop observing]");
+message(ATA,SECONDARY,"primary pointing change about to occur");
+step();
+
+
+message(ATA,PRIMARY,"change-pointing lock granted");
+active(PRIMARY);
+step();
+lconstraint(PRIMARY,"[change primary pointing]");
+step();
+message(PRIMARY,ATA,"release change-pointing lock");
+inactive(PRIMARY);
+step();
+
+message(ATA,PRIMARY,"ok to request use-pointing lock");
+message(ATA,SECONDARY,"ok to request use-pointing lock");
+inactive(ATA);
+step();
+
+message(PRIMARY,ATA,"request use-pointing lock");
+message(SECONDARY,ATA,"request use-pointing lock");
+step();
+
+message(ATA,PRIMARY,"use-pointing lock granted");
+active(PRIMARY);
+message(ATA,SECONDARY,"use-pointing lock granted");
+active(SECONDARY);
+step();
+
+lconstraint(PRIMARY,"[resume observing]");
+lconstraint(SECONDARY,"[resume observing]");
+
+step();
+
+inactive(ATA);
+inactive(PRIMARY);
+inactive(SECONDARY);
+
+step();
+
+
+complete(ATA);
+complete(PRIMARY);
+complete(SECONDARY);
+
+.PE
+
